@@ -25,5 +25,4 @@ public class PerformanceTableView extends JTable {
             ((DefaultTableModel)getModel()).addRow(new Object[]{performance.getName(), performance.getVenue(), performance.getSong().getName(), performance.getDate()});
         }
     }
-
 }
