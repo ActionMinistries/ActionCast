@@ -5,9 +5,6 @@ import action_cast.model.Song;
 import action_cast.views.PerformanceTableView;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableColumnModel;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
