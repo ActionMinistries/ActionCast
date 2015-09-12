@@ -16,13 +16,15 @@ import java.util.List;
 /**
  * Created by bmichaud on 9/2/2015.
  */
-public class Main implements ActionListener {
+public class
+        Main implements ActionListener {
     private JPanel panel1;
     private JTabbedPane tabbedPane1;
-    private EditSessionForm editSessionForm1;
+    private Performances performances1;
     private JPanel Session;
     private People people1;
     private SessionSelector sessionSelector1;
+    private AddPerformance addPerformance1;
 
     private List<action_cast.model.Session> sessions = new ArrayList<>();
 
@@ -35,14 +37,15 @@ public class Main implements ActionListener {
         sessions.get(0).addPerformance(new Performance(new Song("The First Song", "It goes like this na na na, na na, na na na na"), "First Performance", "First Venue", new Date()));
         sessions.get(0).addPerson(new Person("random guy"));
 
+        addPerformance1.setData(sessions.get(0));
         sessionSelector1.setData(sessions);
         sessionSelector1.addActionListener(this);
         people1.setData(sessions.get(0));
-        editSessionForm1.setData(sessions.get(0));
+        performances1.setData(sessions.get(0));
     }
 
     public static void main(String[] args) {
-        JFrame frame = new JFrame("Main");
+        JFrame frame = new JFrame("Action Cast");
         Main main = new Main();
 
         frame.setContentPane(main.panel1);
@@ -55,8 +58,9 @@ public class Main implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == sessionSelector1) {
-            editSessionForm1.setData(sessions.get(sessionSelector1.getSelectedIndex()));
+            performances1.setData(sessions.get(sessionSelector1.getSelectedIndex()));
             people1.setData(sessions.get(sessionSelector1.getSelectedIndex()));
+            addPerformance1.setData(sessions.get(sessionSelector1.getSelectedIndex()));
         }
     }
 }

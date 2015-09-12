@@ -9,7 +9,7 @@ import javax.swing.*;
 /**
  * Created by bmichaud on 9/10/2015.
  */
-public class EditSessionForm {
+public class Performances {
     private PerformanceTableView performanceTableView1;
     private JButton button1;
     private SessionSelector sessionSelector1;
