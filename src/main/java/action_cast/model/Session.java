@@ -1,5 +1,6 @@
 package action_cast.model;
 
+import java.nio.file.attribute.UserDefinedFileAttributeView;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -11,8 +12,10 @@ public class Session {
 
     private final Date start;
     private final Date end;
+
     private List<Performance> performanceList = new ArrayList<>();
     private List<Performer> performers = new ArrayList<>();
+    private List<Person> people = new ArrayList<>();
 
     public Session(Date start, Date end) {
         this.start = start;
@@ -41,5 +44,13 @@ public class Session {
 
     public List<Performer> getPerformers() {
         return performers;
+    }
+
+    public List<Person> getPeople() {
+        return people;
+    }
+
+    public void addPerson(Person person) {
+        people.add(person);
     }
 }

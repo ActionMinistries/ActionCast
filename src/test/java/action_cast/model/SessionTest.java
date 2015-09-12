@@ -60,4 +60,18 @@ public class SessionTest {
         assertEquals(1, s.getPerformers().size());
 
     }
+
+    @Test
+    public void testPeopleList() {
+        Date start = new Date();
+        Date end = new Date();
+
+        Session s = new Session(start, end);
+
+        //List<Performer> performers = new ArrayList<>();
+        assertEquals(0, s.getPeople().size());
+        s.addPerson(new Person("SomeGuy"));
+        assertEquals(1, s.getPeople().size());
+
+    }
 }
