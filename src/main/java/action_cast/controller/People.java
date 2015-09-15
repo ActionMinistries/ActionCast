@@ -1,7 +1,7 @@
 package action_cast.controller;
 
+import action_cast.model.DataModel;
 import action_cast.model.Person;
-import action_cast.model.Session;
 import action_cast.views.PersonListView;
 
 import javax.swing.*;
@@ -17,23 +17,23 @@ public class People implements ActionListener {
     private JPanel mainPanel;
     private PersonListView personListView1;
 
-    private Session currentSession = null;
+    private DataModel model = null;
 
     public People() {
         addPersonButton.addActionListener(this);
     }
 
-    public void setData(Session session) {
-        currentSession = session;
-        personListView1.setData(session.getPeople());
+    public void setData(DataModel model) {
+        this.model = model;
+        personListView1.setData(model.getPeople());
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == addPersonButton) {
-            if (currentSession != null) {
-                currentSession.addPerson(new Person(textField1.getText()));
-                personListView1.setData(currentSession.getPeople());
+            if (model != null) {
+                model.addPerson(new Person(textField1.getText()));
+                personListView1.setData(model.getPeople());
                 textField1.setText("");
             }
         }
