@@ -2,7 +2,7 @@ package action_cast.controller;
 
 import action_cast.model.DataModel;
 import action_cast.model.Person;
-import action_cast.views.PersonListView;
+import action_cast.widgets.PersonListView;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

@@ -1,8 +1,8 @@
 package action_cast.controller;
 
 import action_cast.model.Session;
-import action_cast.views.PerformanceTableView;
-import action_cast.views.SessionSelector;
+import action_cast.widgets.PerformanceTableView;
+import action_cast.widgets.SessionSelector;
 
 import javax.swing.*;
 

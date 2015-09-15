@@ -1,8 +1,7 @@
-package action_cast.views;
+package action_cast.widgets;
 
 import action_cast.model.Performance;
 
-import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,12 +9,12 @@ import java.util.List;
 /**
  * Created by bmichaud on 9/2/2015.
  */
-public class PerformanceTableView extends JTable {
+public class PerformanceTableView extends DisplayTable {
 
     private List<Performance> performanceList = new ArrayList<>();
 
     public PerformanceTableView() {
-        super(new DefaultTableModel(new Object[]{"Name", "Venue", "Song", "Date"}, 0));
+        super(new Object[]{"Name", "Venue", "Song", "Date"});
     }
 
     public void setData(List<Performance> data) {

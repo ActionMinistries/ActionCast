@@ -3,7 +3,7 @@ package action_cast.controller;
 import action_cast.model.Performance;
 import action_cast.model.Session;
 import action_cast.model.Song;
-import action_cast.views.SongSelector;
+import action_cast.widgets.SongSelector;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

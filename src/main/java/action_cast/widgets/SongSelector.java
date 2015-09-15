@@ -1,4 +1,4 @@
-package action_cast.views;
+package action_cast.widgets;
 
 import action_cast.model.Song;
 

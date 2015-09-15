@@ -1,7 +1,7 @@
 package action_cast.controller;
 
 import action_cast.model.*;
-import action_cast.views.SessionSelector;
+import action_cast.widgets.SessionSelector;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -20,6 +20,7 @@ public class
     private People people1;
     private SessionSelector sessionSelector1;
     private AddPerformance addPerformance1;
+    private ManageSessions manageSessions1;
 
     DataModel model = new DataModel();
 
@@ -32,12 +33,12 @@ public class
         model.getSessions().get(0).addPerformance(new Performance(new Song("The First Song", "It goes like this na na na, na na, na na na na"), "First Performance", "First Venue", new Date()));
         model.getSessions().get(0).addPerson(new Person("random guy"));
 
-        addPerformance1.setData(sessions.get(0));
+        addPerformance1.setData(model.getSessions().get(0));
         sessionSelector1.setData(model.getSessions());
         sessionSelector1.addActionListener(this);
         people1.setData(model);
-        editSessionForm1.setData(model.getSessions().get(0));
-        performances1.setData(sessions.get(0));
+        manageSessions1.setData(model);
+        performances1.setData(model.getSessions().get(0));
     }
 
     public static void main(String[] args) {
@@ -54,9 +55,9 @@ public class
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == sessionSelector1) {
-            editSessionForm1.setData(model.getSessions().get(sessionSelector1.getSelectedIndex()));
+            performances1.setData(model.getSessions().get(sessionSelector1.getSelectedIndex()));
             people1.setData(model);
-            addPerformance1.setData(sessions.get(sessionSelector1.getSelectedIndex()));
+            addPerformance1.setData(model.getSessions().get(sessionSelector1.getSelectedIndex()));
         }
     }
 }

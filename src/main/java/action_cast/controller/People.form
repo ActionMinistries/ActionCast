@@ -54,7 +54,7 @@
         <properties/>
         <border type="none"/>
         <children>
-          <component id="b64ce" class="action_cast.views.PersonListView" binding="personListView1" default-binding="true">
+          <component id="b64ce" class="action_cast.widgets.PersonListView" binding="personListView1" default-binding="true">
             <constraints/>
             <properties/>
           </component>
