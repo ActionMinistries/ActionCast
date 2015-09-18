@@ -10,16 +10,25 @@ import java.util.List;
  */
 public class PersonListView extends JList{
 
+    List<Person> people;
+
     public PersonListView() {
         super(new DefaultListModel());
+        setTransferHandler(new PersonTransferHandler());
+        setDragEnabled(true);
     }
 
     public void setData(List<Person> people) {
+        this.people = people;
         if (people != null) {
             ((DefaultListModel) getModel()).clear();
             for (Person person : people) {
                 ((DefaultListModel) getModel()).addElement(person.getName());
             }
         }
+    }
+
+    public Person getSelectedPerson() {
+        return people.get(getSelectedIndex());
     }
 }
