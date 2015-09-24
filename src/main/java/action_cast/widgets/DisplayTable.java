@@ -19,10 +19,8 @@ public abstract class DisplayTable extends JTable {
     }
 
     public DisplayTable(int numRows, int numCols) {
-        super(numRows, numCols);
-        setModel(new UneditableTableModel(numRows, numCols));
-        //super(new UneditableTableModel(colNames, 0));
-        //getSelectionModel().addListSelectionListener(this);
+        super(new UneditableTableModel(numRows, numCols));
+        getSelectionModel().addListSelectionListener(this);
     }
 
     @Override

@@ -3,7 +3,6 @@ package action_cast.widgets;
 import action_cast.model.Person;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import java.util.List;
 
 /**
@@ -11,33 +10,69 @@ import java.util.List;
  */
 public class PersonDisplayGrid extends DisplayTable {
 
-    int x = 0;
-    int y = 0;
+    List<Person> people = null;
 
     public PersonDisplayGrid(){
         super(2, 2);
         setDropMode(DropMode.ON);
+        setDragEnabled(true);
+        setTransferHandler(new PersonTransferHandler());
+        setRowSelectionAllowed(false);
+        this.setCellSelectionEnabled(true);
+        this.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        this.getColumnModel().getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
 
     public void setData(List<Person> people) {
+        this.people = people;
+        updateDisplay();
+    }
 
-        for (Person person : people) {
-
-            ((DefaultTableModel)getModel()).setValueAt(person.getName(), x, y);
-            x++;
-            if (x == 2) {
-                x = 0;
-                y++;
+    public void addPerson(Person person, int row, int col) {
+        if (row < getRowCount() && col < getColumnCount()) {
+            int index = getColumnCount() * row + col;
+            if (index < people.size()) {
+                people.add(getColumnCount() * row + col, person);
             }
-            if (y == 2) {
-                break;
+            else {
+                people.add(person);
             }
+            updateDisplay();
         }
     }
 
-    public void addPerson(Person person, int xPos, int yPos) {
-        if (xPos < 2 && yPos < 2) {
-            ((DefaultTableModel)getModel()).setValueAt(person.getName(), x, y);
+    public void removeSelectedPerson() {
+        int row = getSelectedRow();
+        int col = getSelectedColumn();
+        int index = getColumnCount() * row + col;
+        if (index < people.size() && index >= 0) {
+            people.remove(index);
+        }
+        updateDisplay();
+    }
+
+    public Person getSelectedPerson() {
+        int row = getSelectedRow();
+        int col = getSelectedColumn();
+        int index = getColumnCount() * row + col;
+        if (index < people.size()) {
+            return people.get(index);
+        }
+        return null;
+    }
+
+    private void updateDisplay() {
+        for (int row = 0; row < getRowCount(); row++) {
+            for (int col = 0; col < getColumnCount(); col++) {
+                int index = getColumnCount() * row + col;
+                if (index < people.size()) {
+                    ((UneditableTableModel) getModel()).setValueAt(people.get(index).getName(), row, col);
+                }
+                else {
+                    ((UneditableTableModel) getModel()).setValueAt("", row, col);
+                }
+            }
         }
     }
 }
+

@@ -17,21 +17,22 @@ public class PersonTransferHandler extends TransferHandler {
     private final DataFlavor personFlavor;
 
     public PersonTransferHandler() {
-        //personFlavor = new ActivationDataFlavor();
         personFlavor = new DataFlavor(Person.class, "Person");
-        //personFlavor = new DataFlavor(PersonDisplayGrid.class, );
     }
 
     public int getSourceActions(JComponent c) {
         return MOVE;
     }
 
-    protected Transferable createTransferableComponent(JComponent c) {
+    protected Transferable createTransferable(JComponent c) {
         Person toMove = null;
         final DataHandler dh = new DataHandler(c, personFlavor.getMimeType());
         if (c instanceof PersonListView) {
             toMove = ((PersonListView)c).getSelectedPerson();
 
+        }
+        else if (c instanceof PersonDisplayGrid) {
+            toMove = ((PersonDisplayGrid)c).getSelectedPerson();
         }
         if (toMove == null) {
             System.out.println("null");
@@ -39,22 +40,31 @@ public class PersonTransferHandler extends TransferHandler {
             return dh;
         }
         else {
-            System.out.println("created transferable");
             return new PersonTransferable(toMove, personFlavor);//new StringSelection(c.());
         }
     }
 
     protected void exportDone(JComponent c, Transferable t, int action) {
-        if (c instanceof PersonListView) {
-
-//            Person toMove = ((PersonListView)c).getSelectedPerson();
-//            final DataHandler dh = new DataHandler(c, personFlavor.getMimeType());
-//            if (toMove == null) return dh;
+        if (action == MOVE) {
+            if (c instanceof PersonListView) {
+                PersonListView view = (PersonListView) c;
+                view.removeSelectedPerson();
+            } else if (c instanceof PersonDisplayGrid) {
+                PersonDisplayGrid view = (PersonDisplayGrid) c;
+                view.removeSelectedPerson();
+            }
         }
     }
 
     public boolean canImport(TransferSupport support) {
-        return true;
+
+        try {
+            return support.getTransferable().getTransferData(personFlavor) != null;
+        } catch (UnsupportedFlavorException e) {
+            return false;
+        } catch (IOException e) {
+            return false;
+        }
     }
 
     public boolean importData(TransferSupport support) {
@@ -64,7 +74,9 @@ public class PersonTransferHandler extends TransferHandler {
         }
         if (support.getComponent() instanceof PersonDisplayGrid) {
             try {
-                ((PersonDisplayGrid)support.getComponent()).addPerson((Person)support.getTransferable().getTransferData(personFlavor), 0,0);
+                PersonDisplayGrid grid = ((PersonDisplayGrid)support.getComponent());
+                grid.addPerson((Person) support.getTransferable().getTransferData(personFlavor), grid.getDropLocation().getRow(), grid.getDropLocation().getColumn());
+                return true;
             } catch (UnsupportedFlavorException e) {
                 e.printStackTrace();
             } catch (IOException e) {
@@ -73,10 +85,16 @@ public class PersonTransferHandler extends TransferHandler {
         }
         else if (support.getComponent() instanceof PersonListView) {
             PersonListView view = (PersonListView)support.getComponent();
-            DefaultListModel listModel = (DefaultListModel)view.getModel();
             JList.DropLocation dl = (JList.DropLocation)view.getDropLocation();
             int index = dl.getIndex();
-            boolean insert = dl.isInsert();
+            try {
+                view.addPerson(index,(Person) support.getTransferable().getTransferData(personFlavor));
+                return true;
+            } catch (UnsupportedFlavorException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         return false;
     }

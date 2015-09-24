@@ -16,7 +16,6 @@ import java.util.List;
 public class AddPeopleToSessionDialog extends JDialog {
     private JPanel contentPane;
     private JButton buttonOK;
-    private JButton buttonCancel;
     private PersonListView personListView1;
     private PersonDisplayGrid personDisplayGrid1;
 
@@ -29,14 +28,7 @@ public class AddPeopleToSessionDialog extends JDialog {
         this.session = session;
 
         personListView1.setData(model.getPeople());
-        personDisplayGrid1.setDragEnabled(true);
-
-        List<Person> people = new ArrayList<>();
-        people.add(new Person("one"));
-        people.add(new Person("two"));
-        people.add(new Person("three"));
-        people.add(new Person("four"));
-        personDisplayGrid1.setData(people);
+        personDisplayGrid1.setData(session.getPeople());
 
         setContentPane(contentPane);
         setModal(true);
@@ -48,35 +40,23 @@ public class AddPeopleToSessionDialog extends JDialog {
             }
         });
 
-        buttonCancel.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onCancel();
-            }
-        });
-
 // call onCancel() when cross is clicked
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
-                onCancel();
+                onOK();
             }
         });
 
-// call onCancel() on ESCAPE
+// call onOK() on ESCAPE
         contentPane.registerKeyboardAction(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                onCancel();
+                onOK();
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
     }
 
     private void onOK() {
-// add your code here
-        dispose();
-    }
-
-    private void onCancel() {
-// add your code here if necessary
         dispose();
     }
 
