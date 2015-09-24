@@ -11,6 +11,10 @@ class UneditableTableModel extends DefaultTableModel {
         super(colNames, rowCount);
     }
 
+    public UneditableTableModel(int numRows, int numCols) {
+        super(numRows, numCols );
+    }
+
     public boolean isCellEditable(int row, int col) {
         return false;
     }

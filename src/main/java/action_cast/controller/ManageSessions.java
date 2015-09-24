@@ -1,6 +1,7 @@
 package action_cast.controller;
 
 import action_cast.model.DataModel;
+import action_cast.model.Session;
 import action_cast.widgets.RowSelectedEvent;
 import action_cast.widgets.RowSelectedListener;
 import action_cast.widgets.SessionTableView;
@@ -47,10 +48,17 @@ public class ManageSessions implements RowSelectedListener, ActionListener {
             //TODO edit
         }
         else if(e.getSource() == assignPeopleButton) {
-            //TODO assign people
+            AddPeopleToSessionDialog peopleToSessionDialog = new AddPeopleToSessionDialog(model, model.getSessions().get(sessionTableView1.getSelectedRow()));
+            peopleToSessionDialog.pack();
+            peopleToSessionDialog.setVisible(true);
         }
         else if(e.getSource() == newButton) {
-            //TODO create session
+            CreateSessionDialog sessionDialog = new CreateSessionDialog();
+            Session newSession = sessionDialog.showDialog();
+            if (newSession != null) {
+                model.addSession(newSession);
+            }
+            sessionTableView1.setData(model.getSessions());
         }
     }
 }

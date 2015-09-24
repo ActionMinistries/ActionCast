@@ -33,6 +33,8 @@ public class
         model.getSessions().get(0).addPerformance(new Performance(new Song("The First Song", "It goes like this na na na, na na, na na na na"), "First Performance", "First Venue", new Date()));
         model.getSessions().get(0).addPerson(new Person("random guy"));
 
+        model.addPerson(new Person("Random Guy"));
+
         addPerformance1.setData(model.getSessions().get(0));
         sessionSelector1.setData(model.getSessions());
         sessionSelector1.addActionListener(this);

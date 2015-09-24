@@ -18,6 +18,11 @@ public abstract class DisplayTable extends JTable {
         getSelectionModel().addListSelectionListener(this);
     }
 
+    public DisplayTable(int numRows, int numCols) {
+        super(new UneditableTableModel(numRows, numCols));
+        getSelectionModel().addListSelectionListener(this);
+    }
+
     @Override
     public void valueChanged(ListSelectionEvent e) {
         super.valueChanged(e);
