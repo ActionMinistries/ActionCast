@@ -81,9 +81,6 @@ public class CreateSessionDialog extends JDialog {
     }
 
     private void createUIComponents() {
-        startDatePanel = new JDatePanelImpl(new UtilDateModel(), new Properties());
-        endDatePanel = new JDatePanelImpl(new UtilDateModel(), new Properties());
-        startDate = new JDatePickerImpl(startDatePanel, new DateComponentFormatter());
-        endDate = new JDatePickerImpl(endDatePanel, new DateComponentFormatter());
+
     }
 }

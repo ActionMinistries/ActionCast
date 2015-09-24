@@ -9,16 +9,21 @@ import java.util.List;
 public class DataModel {
 
     private final List<Person> people = new ArrayList<>();
-    private final List<Session> sessions = new ArrayList<>();
+    //private final List<Session> sessions = new ArrayList<>();
 
+    private Session currentSession;
 
-    public void addSession(Session session) {
+    public DataModel(Session s) {
+        currentSession = s;
+    }
+
+   /* public void addSession(Session session) {
         sessions.add(session);
-    }
+    }*/
 
-    public List<Session> getSessions() {
+   /* public List<Session> getSessions() {
         return sessions;
-    }
+    }*/
 
     public List<Person> getPeople() {
         return people;
@@ -26,5 +31,9 @@ public class DataModel {
 
     public void addPerson(Person person) {
         people.add(person);
+    }
+
+    public Session getCurrentSession() {
+        return currentSession;
     }
 }
