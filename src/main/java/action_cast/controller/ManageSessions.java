@@ -19,17 +19,18 @@ import java.util.Properties;
  */
 public class ManageSessions implements ActionListener {
     private JPanel mainPanel;
-    private JButton editButton;
+    private JButton saveButton;
     private JButton assignPeopleButton;
     private JDatePickerImpl startDate;
     private JDatePickerImpl endDate;
-//    private JDatePanelImpl startDatePanel = null;
+    private JTextField nameTextField;
+    //    private JDatePanelImpl startDatePanel = null;
 //    private JDatePanelImpl endDatePanel = null;
 
     private DataModel model;
 
     public ManageSessions() {
-        editButton.addActionListener(this);
+        saveButton.addActionListener(this);
         assignPeopleButton.addActionListener(this);
     }
 
@@ -37,20 +38,25 @@ public class ManageSessions implements ActionListener {
         model = currentModel;
         List<Session> sessionList = new ArrayList<>();
         sessionList.add(model.getCurrentSession());
+        ((UtilDateModel)startDate.getModel()).setValue(model.getCurrentSession().getStartDate());
+        ((UtilDateModel)endDate.getModel()).setValue(model.getCurrentSession().getEndDate());
+        nameTextField.setText(model.getCurrentSession().getName());
     }
 
 //    @Override
 //    public void rowSelected(RowSelectedEvent e) {
 //        if (e.getSource() == sessionTableView1) {
-//            editButton.setEnabled(true);
+//            saveButton.setEnabled(true);
 //            assignPeopleButton.setEnabled(true);
 //        }
 //    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == editButton) {
-            //TODO edit
+        if (e.getSource() == saveButton) {
+            model.getCurrentSession().setName(nameTextField.getText());
+            model.getCurrentSession().setStart(((UtilDateModel)startDate.getModel()).getValue());
+            model.getCurrentSession().setEnd(((UtilDateModel)startDate.getModel()).getValue());
         }
         else if(e.getSource() == assignPeopleButton) {
             AddPeopleToSessionDialog peopleToSessionDialog = new AddPeopleToSessionDialog(model, model.getCurrentSession());
@@ -69,11 +75,12 @@ public class ManageSessions implements ActionListener {
 
     private void createUIComponents() {
         //if (model != null && model.getCurrentSession() != null) {
-            JDatePanelImpl startDatePanel = new JDatePanelImpl(new UtilDateModel(), new Properties());
-            JDatePanelImpl endDatePanel = new JDatePanelImpl(new UtilDateModel(), new Properties());
-            startDate = new JDatePickerImpl(startDatePanel, new DateComponentFormatter());
-            endDate = new JDatePickerImpl(endDatePanel, new DateComponentFormatter());
-       // }
+        JDatePanelImpl startDatePanel = new JDatePanelImpl(new UtilDateModel(), new Properties());
+        JDatePanelImpl endDatePanel = new JDatePanelImpl(new UtilDateModel(), new Properties());
+        startDate = new JDatePickerImpl(startDatePanel, new DateComponentFormatter());
+        endDate = new JDatePickerImpl(endDatePanel, new DateComponentFormatter());
+
+        // }
 
     }
 }

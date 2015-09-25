@@ -9,14 +9,17 @@ import java.util.List;
  */
 public class Session {
 
-    private final Date start;
-    private final Date end;
+    private String name;
+
+    private Date start;
+    private Date end;
 
     private List<Performance> performanceList = new ArrayList<>();
     private List<Performer> performers = new ArrayList<>();
     private List<Person> people = new ArrayList<>();
 
-    public Session(Date start, Date end) {
+    public Session(String name, Date start, Date end) {
+        this.name = name;
         this.start = start;
         this.end = end;
     }
@@ -51,5 +54,21 @@ public class Session {
 
     public void addPerson(Person person) {
         people.add(person);
+    }
+
+    public void setEnd(Date end) {
+        this.end = end;
+    }
+
+    public void setStart(Date start) {
+        this.start = start;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

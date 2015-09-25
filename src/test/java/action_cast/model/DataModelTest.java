@@ -14,7 +14,7 @@ public class DataModelTest {
 
     @Test
     public void testCreate() {
-        Session session = new Session(new Date(), new Date());
+        Session session = new Session("some session", new Date(), new Date());
         DataModel model = new DataModel(session);
         assertNotNull(model);
         assertEquals(session, model.getCurrentSession());
@@ -44,7 +44,7 @@ public class DataModelTest {
 
     @Test
     public void addPerson() {
-        Session session = new Session(new Date(), new Date());
+        Session session = new Session("personSession", new Date(), new Date());
         DataModel model = new DataModel(session);
         List<Person> people = model.getPeople();
         assertEquals(0, people.size());

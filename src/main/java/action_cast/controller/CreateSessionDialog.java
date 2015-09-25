@@ -63,7 +63,7 @@ public class CreateSessionDialog extends JDialog {
         Date start = (Date)startDate.getModel().getValue();
         Date end = (Date)endDate.getModel().getValue();
         if (start != null && end != null) {
-            createdSession = new Session(start, end);
+            createdSession = new Session("NAME NYI!!!", start, end);
             dispose();
         }
     }

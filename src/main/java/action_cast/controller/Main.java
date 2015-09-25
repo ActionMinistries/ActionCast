@@ -26,7 +26,7 @@ public class Main {
         Long startTime = System.currentTimeMillis();
         Long endTime = System.currentTimeMillis();
         endTime += 1000000000;
-        model = new DataModel(new Session(new Date(), new Date(endTime)));
+        model = new DataModel(new Session("Fall 2015", new Date(), new Date(endTime)));
         //model.addSession(new Performances(new Date(startTime - 2 * 1000000000), new Date(startTime - 1000000000)));
         model.getCurrentSession().addPerformance(new Performance(new Song("The First Song", "It goes like this na na na, na na, na na na na"), "First Performance", "First Venue", new Date()));
         model.getCurrentSession().addPerson(new Person("random guy"));

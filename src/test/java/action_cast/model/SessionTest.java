@@ -19,7 +19,7 @@ public class SessionTest {
         Thread.sleep(5);
         Long endTime = System.currentTimeMillis();
         Date end = new Date(endTime);
-        Session s = new Session(start, end);
+        Session s = new Session("sessionName", start, end);
         assertNotNull(s);
 
         Date expectedStart = new Date(startTime);
@@ -27,6 +27,7 @@ public class SessionTest {
 
         assertEquals(expectedStart, s.getStartDate());
         assertEquals(expectedEnd, s.getEndDate());
+        assertEquals("sessionName", s.getName());
     }
 
     @Test
@@ -34,7 +35,7 @@ public class SessionTest {
         Date start = new Date();
         Date end = new Date();
 
-        Session s = new Session(start, end);
+        Session s = new Session("sessionName", start, end);
 
        // List<Performance> performances = new ArrayList<>();
         assertEquals(0, s.getPerformances().size());
@@ -52,7 +53,7 @@ public class SessionTest {
         Date start = new Date();
         Date end = new Date();
 
-        Session s = new Session(start, end);
+        Session s = new Session("theSession", start, end);
 
         //List<Performer> performers = new ArrayList<>();
         assertEquals(0, s.getPerformers().size());
@@ -66,7 +67,7 @@ public class SessionTest {
         Date start = new Date();
         Date end = new Date();
 
-        Session s = new Session(start, end);
+        Session s = new Session("someName", start, end);
 
         //List<Performer> performers = new ArrayList<>();
         assertEquals(0, s.getPeople().size());
