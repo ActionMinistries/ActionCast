@@ -4,6 +4,7 @@ import action_cast.model.Session;
 import org.jdatepicker.impl.*;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.*;
 import java.util.Date;
 import java.util.Properties;
@@ -60,8 +61,8 @@ public class CreateSessionDialog extends JDialog {
 
     private void onOK() {
 // add your code here
-        Date start = (Date)startDate.getModel().getValue();
-        Date end = (Date)endDate.getModel().getValue();
+        Date start = (Date) startDate.getModel().getValue();
+        Date end = (Date) endDate.getModel().getValue();
         if (start != null && end != null) {
             createdSession = new Session("NAME NYI!!!", start, end);
             dispose();

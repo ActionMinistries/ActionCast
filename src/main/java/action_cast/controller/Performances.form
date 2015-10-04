@@ -15,7 +15,7 @@
         <properties/>
         <border type="none"/>
         <children>
-          <component id="47116" class="action_cast.widgets.PerformanceTableView" binding="performanceTableView1" default-binding="true">
+          <component id="47116" class="action_cast.widgets.PerformanceTableView" binding="performanceTableView1" custom-create="true" default-binding="true">
             <constraints/>
             <properties/>
           </component>

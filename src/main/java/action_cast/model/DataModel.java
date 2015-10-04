@@ -13,8 +13,11 @@ public class DataModel {
 
     private Session currentSession;
 
+    public static DataModel instance = null;
+
     public DataModel(Session s) {
         currentSession = s;
+        instance = this;
     }
 
    /* public void addSession(Session session) {

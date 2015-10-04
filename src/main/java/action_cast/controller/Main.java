@@ -1,11 +1,8 @@
 package action_cast.controller;
 
 import action_cast.model.*;
-import action_cast.widgets.SessionSelector;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Date;
 
 /**
@@ -14,10 +11,7 @@ import java.util.Date;
 public class Main {
     private JPanel panel1;
     private JTabbedPane tabbedPane1;
-    private Performances performances1;
-    private JPanel Performances;
     private People people1;
-    private AddPerformance addPerformance1;
     private ManageSessions manageSessions1;
 
     DataModel model;// = new DataModel();
@@ -33,10 +27,8 @@ public class Main {
 
         model.addPerson(new Person("Random Guy"));
 
-        addPerformance1.setData(model.getCurrentSession());
         people1.setData(model);
         manageSessions1.setData(model);
-        performances1.setData(model.getCurrentSession());
     }
 
     public static void main(String[] args) {
@@ -47,6 +39,5 @@ public class Main {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
-
     }
 }

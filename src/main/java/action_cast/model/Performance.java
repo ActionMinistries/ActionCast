@@ -9,11 +9,11 @@ import java.util.Map;
  */
 public class Performance {
 
-    private final String name;
-    private final String venue;
-    private final Date date;
-    private final Song song;
-    private final Map<Performer, Role> assignments = new HashMap<>();
+    private String name;
+    private String venue;
+    private Date date;
+    private Song song;
+    private Map<Performer, Role> assignments = new HashMap<>();
     private Director director;
 
     public Performance(Song song, String name, String venue, Date date) {
@@ -53,5 +53,21 @@ public class Performance {
 
     public void setDirector(Director director) {
         this.director = director;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setVenue(String venue) {
+        this.venue = venue;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public void setSong(Song song) {
+        this.song = song;
     }
 }
