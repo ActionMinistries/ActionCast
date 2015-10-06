@@ -1,15 +1,16 @@
 package action_cast.model;
 
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by bmichaud on 9/14/2015.
  */
+@XmlRootElement
 public class DataModel {
 
     private final List<Person> people = new ArrayList<>();
-    //private final List<Session> sessions = new ArrayList<>();
 
     private Session currentSession;
 
@@ -19,14 +20,6 @@ public class DataModel {
         currentSession = s;
         instance = this;
     }
-
-   /* public void addSession(Session session) {
-        sessions.add(session);
-    }*/
-
-   /* public List<Session> getSessions() {
-        return sessions;
-    }*/
 
     public List<Person> getPeople() {
         return people;
