@@ -1,5 +1,6 @@
 package action_cast.model;
 
+import javax.xml.bind.annotation.XmlElement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,10 +8,15 @@ import java.util.List;
  * Created by bmichaud on 8/31/2015.
  */
 public class Song {
-    private final String name;
-    private final String description;
-    private final List<Performance> performances = new ArrayList<>();
+    @XmlElement
+    private String name;
+    @XmlElement
+    private String description;
     private List<Role> roles = new ArrayList<>();
+
+    public Song() {
+
+    }
 
     public Song(String name, String description) {
         this.name = name;
@@ -31,13 +37,5 @@ public class Song {
 
     public List<Role> getRoles() {
         return roles;
-    }
-
-    public void addPerformance(Performance performance) {
-        this.performances.add(performance);
-    }
-
-    public List<Performance> getPerformances() {
-        return performances;
     }
 }

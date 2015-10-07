@@ -62,7 +62,8 @@ public class AddPeopleToSessionDialog extends JDialog {
     }
 
     public static void main(String[] args) {
-        DataModel model = new DataModel(new Session("dialogCheck", new Date(), new Date()));
+        DataModel model = new DataModel();
+        model.setCurrentSession(new Session("dialogCheck", new Date(), new Date()));
         model.addPerson(new Person("me"));
         model.addPerson(new Person("myself"));
         model.addPerson(new Person("I"));

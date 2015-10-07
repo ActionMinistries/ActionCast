@@ -5,6 +5,7 @@ import action_cast.model.DataModel;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
 import java.io.File;
 
 /**
@@ -12,7 +13,11 @@ import java.io.File;
  */
 public class DataStore {
 
-    private final DataModel model;
+    private DataModel model = null;
+
+    public DataStore() {
+
+    }
 
     public DataStore(DataModel model) {
         this.model = model;
@@ -29,11 +34,27 @@ public class DataStore {
             jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
             jaxbMarshaller.marshal(model, file);
-            jaxbMarshaller.marshal(model, System.out);
 
         } catch (JAXBException e) {
             e.printStackTrace();
         }
 
+    }
+
+    public void load() {
+        try {
+
+            File file = new File("file.xml");
+            JAXBContext jaxbContext = JAXBContext.newInstance(DataModel.class);
+            Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+
+            model = (DataModel)jaxbUnmarshaller.unmarshal(file);
+        } catch (JAXBException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public DataModel getModel() {
+        return model;
     }
 }

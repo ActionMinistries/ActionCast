@@ -3,6 +3,8 @@ package action_cast.model;
 /**
  * Created by bmichaud on 9/1/2015.
  */
+
+//TODO this class is dead!!!
 public class RoleAssignment {
     private final Performer performer;
     private final Role role;

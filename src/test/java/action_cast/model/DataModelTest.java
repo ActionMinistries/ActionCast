@@ -15,7 +15,8 @@ public class DataModelTest {
     @Test
     public void testCreate() {
         Session session = new Session("some session", new Date(), new Date());
-        DataModel model = new DataModel(session);
+        DataModel model = new DataModel();
+        model.setCurrentSession(session);
         assertNotNull(model);
         assertEquals(session, model.getCurrentSession());
     }
@@ -45,7 +46,8 @@ public class DataModelTest {
     @Test
     public void addPerson() {
         Session session = new Session("personSession", new Date(), new Date());
-        DataModel model = new DataModel(session);
+        DataModel model = new DataModel();
+        model.setCurrentSession(session);
         List<Person> people = model.getPeople();
         assertEquals(0, people.size());
         model.addPerson(new Person("random guy"));
