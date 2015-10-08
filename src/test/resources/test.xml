@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<dataModel>
+    <people>
+        <name>random guy</name>
+    </people>
+    <people>
+        <name>odd job</name>
+    </people>
+    <people>
+        <name>ted</name>
+    </people>
+    <people>
+        <name>fred</name>
+    </people>
+    <currentSession>
+        <name>savedSession</name>
+        <start>2015-10-08T12:20:07.477-06:00</start>
+        <end>2015-10-08T12:20:12.477-06:00</end>
+        <people>
+            <name>blargh</name>
+        </people>
+        <people>
+            <name>someone</name>
+        </people>
+        <performanceList>
+            <assignments/>
+            <date>2015-10-08T12:20:07.481-06:00</date>
+            <name>encore</name>
+            <song>
+                <name>500 miles</name>
+                <description>500 more</description>
+            </song>
+            <venue>OTS</venue>
+        </performanceList>
+        <performanceList>
+            <assignments>
+                <entry>
+                    <key>
+                        <person>
+                            <name>random guy</name>
+                        </person>
+                    </key>
+                    <value>
+                        <name>Runner</name>
+                        <description>The guy who runs</description>
+                        <type>MAIN</type>
+                    </value>
+                </entry>
+            </assignments>
+            <date>2015-10-08T12:20:07.480-06:00</date>
+            <director>
+                <person>
+                    <name>odd job</name>
+                </person>
+            </director>
+            <name>primary</name>
+            <song>
+                <name>I just wanna run.</name>
+                <description>throw it away</description>
+                <roles>
+                    <name>Runner</name>
+                    <description>The guy who runs</description>
+                    <type>MAIN</type>
+                </roles>
+            </song>
+            <venue>OTS</venue>
+        </performanceList>
+        <performanceList>
+            <assignments/>
+            <date>2015-10-08T12:20:07.481-06:00</date>
+            <name>never</name>
+            <song>
+                <name>500 miles</name>
+                <description>500 more</description>
+            </song>
+            <venue>OTS</venue>
+        </performanceList>
+        <performers>
+            <person>
+                <name>random guy</name>
+            </person>
+        </performers>
+    </currentSession>
+</dataModel>

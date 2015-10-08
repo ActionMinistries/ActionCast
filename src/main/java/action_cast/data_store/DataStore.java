@@ -15,43 +15,34 @@ public class DataStore {
 
     private DataModel model = null;
 
-    public DataStore() {
+    private String filename;
 
+    public DataStore(String filename) {
+        this.filename = filename;
     }
 
     public DataStore(DataModel model) {
         this.model = model;
+        filename = "file.xml";
     }
 
-    public void save() {
-        try {
+    public void save() throws JAXBException {
+        File file = new File(filename);
+        JAXBContext jaxbContext = JAXBContext.newInstance(DataModel.class);
+        Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
 
-            File file = new File("file.xml");
-            JAXBContext jaxbContext = JAXBContext.newInstance(DataModel.class);
-            Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
+        // output pretty printed
+        jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
-            // output pretty printed
-            jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-
-            jaxbMarshaller.marshal(model, file);
-
-        } catch (JAXBException e) {
-            e.printStackTrace();
-        }
-
+        jaxbMarshaller.marshal(model, file);
     }
 
-    public void load() {
-        try {
-
-            File file = new File("file.xml");
+    public void load() throws JAXBException {
+            File file = new File(filename);
             JAXBContext jaxbContext = JAXBContext.newInstance(DataModel.class);
             Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
 
             model = (DataModel)jaxbUnmarshaller.unmarshal(file);
-        } catch (JAXBException e) {
-            e.printStackTrace();
-        }
     }
 
     public DataModel getModel() {

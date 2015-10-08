@@ -11,6 +11,8 @@ public class Person {
     @XmlElement
     @NotNull
     private String name;
+    @XmlElement
+    private int id;
 
     public Person() {
 
