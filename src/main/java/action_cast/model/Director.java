@@ -1,6 +1,7 @@
 package action_cast.model;
 
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlIDREF;
 
 /**
  * Created by bmichaud on 9/1/2015.
@@ -8,6 +9,7 @@ import javax.xml.bind.annotation.XmlElement;
 public class Director {
 
     @XmlElement
+    @XmlIDREF
     private Person person;
 
     public Director() {

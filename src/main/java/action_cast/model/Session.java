@@ -1,6 +1,8 @@
 package action_cast.model;
 
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlType;
 import java.util.ArrayList;
 import java.util.Date;
@@ -24,7 +26,8 @@ public class Session {
     private List<Performance> performanceList = new ArrayList<>();
     @XmlElement
     private List<Performer> performers = new ArrayList<>();
-    @XmlElement
+    @XmlElementWrapper
+    @XmlIDREF
     private List<Person> people = new ArrayList<>();
 
     public Session () {

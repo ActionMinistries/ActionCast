@@ -1,30 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <dataModel>
     <people>
-        <name>random guy</name>
-    </people>
-    <people>
-        <name>odd job</name>
-    </people>
-    <people>
-        <name>ted</name>
-    </people>
-    <people>
-        <name>fred</name>
+        <people id="A0" name="random guy"/>
+        <people id="A1" name="odd job"/>
+        <people id="A2" name="ted"/>
+        <people id="A3" name="fred"/>
     </people>
     <currentSession>
         <name>savedSession</name>
-        <start>2015-10-08T12:20:07.477-06:00</start>
-        <end>2015-10-08T12:20:12.477-06:00</end>
+        <start>2015-10-10T01:49:25.579-06:00</start>
+        <end>2015-10-10T01:49:30.579-06:00</end>
         <people>
-            <name>blargh</name>
-        </people>
-        <people>
-            <name>someone</name>
+            <people>A0</people>
+            <people>A1</people>
         </people>
         <performanceList>
             <assignments/>
-            <date>2015-10-08T12:20:07.481-06:00</date>
+            <date>2015-10-10T01:49:25.579-06:00</date>
             <name>encore</name>
             <song>
                 <name>500 miles</name>
@@ -36,9 +28,7 @@
             <assignments>
                 <entry>
                     <key>
-                        <person>
-                            <name>random guy</name>
-                        </person>
+                        <person>A0</person>
                     </key>
                     <value>
                         <name>Runner</name>
@@ -47,11 +37,9 @@
                     </value>
                 </entry>
             </assignments>
-            <date>2015-10-08T12:20:07.480-06:00</date>
+            <date>2015-10-10T01:49:25.579-06:00</date>
             <director>
-                <person>
-                    <name>odd job</name>
-                </person>
+                <person>A1</person>
             </director>
             <name>primary</name>
             <song>
@@ -67,7 +55,7 @@
         </performanceList>
         <performanceList>
             <assignments/>
-            <date>2015-10-08T12:20:07.481-06:00</date>
+            <date>2015-10-10T01:49:25.579-06:00</date>
             <name>never</name>
             <song>
                 <name>500 miles</name>
@@ -76,9 +64,7 @@
             <venue>OTS</venue>
         </performanceList>
         <performers>
-            <person>
-                <name>random guy</name>
-            </person>
+            <person>A0</person>
         </performers>
     </currentSession>
 </dataModel>

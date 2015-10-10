@@ -1,11 +1,15 @@
 package action_cast.data_store;
 
 import action_cast.model.DataModel;
+import org.xml.sax.SAXException;
 
+import javax.xml.XMLConstants;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.validation.Schema;
+import javax.xml.validation.SchemaFactory;
 import java.io.File;
 
 /**
@@ -28,6 +32,7 @@ public class DataStore {
 
     public void save() throws JAXBException {
         File file = new File(filename);
+
         JAXBContext jaxbContext = JAXBContext.newInstance(DataModel.class);
         Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
 
@@ -37,10 +42,15 @@ public class DataStore {
         jaxbMarshaller.marshal(model, file);
     }
 
-    public void load() throws JAXBException {
+    public void load() throws JAXBException, SAXException {
             File file = new File(filename);
+        SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+        Schema schema = sf.newSchema(new File("schema1.xsd"));
+
             JAXBContext jaxbContext = JAXBContext.newInstance(DataModel.class);
             Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+            jaxbUnmarshaller.setSchema(schema);
+            jaxbUnmarshaller.setEventHandler(new ValidationEventHandler());
 
             model = (DataModel)jaxbUnmarshaller.unmarshal(file);
     }

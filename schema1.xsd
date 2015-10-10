@@ -5,16 +5,21 @@
 
   <xs:complexType name="dataModel">
     <xs:sequence>
-      <xs:element name="people" type="person" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="people" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="people" type="person" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
       <xs:element name="currentSession" type="session" minOccurs="0"/>
     </xs:sequence>
   </xs:complexType>
 
   <xs:complexType name="person">
-    <xs:sequence>
-      <xs:element name="name" type="xs:string" minOccurs="0"/>
-      <xs:element name="id" type="xs:int"/>
-    </xs:sequence>
+    <xs:sequence/>
+    <xs:attribute name="id" type="xs:ID"/>
+    <xs:attribute name="name" type="xs:string"/>
   </xs:complexType>
 
   <xs:complexType name="session">
@@ -22,7 +27,13 @@
       <xs:element name="name" type="xs:string" minOccurs="0"/>
       <xs:element name="start" type="xs:dateTime" minOccurs="0"/>
       <xs:element name="end" type="xs:dateTime" minOccurs="0"/>
-      <xs:element name="people" type="person" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="people" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="people" type="xs:IDREF" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
       <xs:element name="performanceList" type="performance" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="performers" type="performer" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
@@ -54,7 +65,7 @@
 
   <xs:complexType name="performer">
     <xs:sequence>
-      <xs:element name="person" type="person" minOccurs="0"/>
+      <xs:element name="person" type="xs:IDREF" minOccurs="0"/>
     </xs:sequence>
   </xs:complexType>
 
@@ -68,7 +79,7 @@
 
   <xs:complexType name="director">
     <xs:sequence>
-      <xs:element name="person" type="person" minOccurs="0"/>
+      <xs:element name="person" type="xs:IDREF" minOccurs="0"/>
     </xs:sequence>
   </xs:complexType>
 
@@ -82,9 +93,9 @@
 
   <xs:simpleType name="roleType">
     <xs:restriction base="xs:string">
-      <xs:enumeration value="MAIN"/>
-      <xs:enumeration value="BACKGROUND"/>
       <xs:enumeration value="SUPPORT"/>
+      <xs:enumeration value="BACKGROUND"/>
+      <xs:enumeration value="MAIN"/>
     </xs:restriction>
   </xs:simpleType>
 </xs:schema>

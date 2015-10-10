@@ -1,6 +1,6 @@
 package action_cast.model;
 
-import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -14,7 +14,7 @@ public class Performance {
     private String venue;
     private Date date;
     private Song song;
-    @XmlElement
+    @XmlElementWrapper
     private Map<Performer, Role> assignments = new HashMap<>();
     private Director director;
 

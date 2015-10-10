@@ -1,6 +1,6 @@
 package action_cast.model;
 
-import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +11,7 @@ import java.util.List;
 @XmlRootElement
 public class DataModel {
 
-    @XmlElement
+    @XmlElementWrapper
     private final List<Person> people = new ArrayList<>();
 
     private Session currentSession = null;
@@ -27,7 +27,9 @@ public class DataModel {
     }
 
     public void addPerson(Person person) {
+        person.setID("A" + people.size());
         people.add(person);
+
     }
 
     public Session getCurrentSession() {
