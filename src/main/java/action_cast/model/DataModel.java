@@ -14,6 +14,9 @@ public class DataModel {
     @XmlElementWrapper
     private final List<Person> people = new ArrayList<>();
 
+    @XmlElementWrapper
+    private final List<Song> songs = new ArrayList<>();
+
     private Session currentSession = null;
 
     public static DataModel instance = null;
@@ -27,9 +30,12 @@ public class DataModel {
     }
 
     public void addPerson(Person person) {
-        person.setID("A" + people.size());
         people.add(person);
 
+    }
+
+    public void addSong(Song song) {
+        songs.add(song);
     }
 
     public Session getCurrentSession() {
@@ -38,5 +44,9 @@ public class DataModel {
 
     public void setCurrentSession(Session s) {
         currentSession = s;
+    }
+
+    public List<Song> getSongs() {
+        return songs;
     }
 }

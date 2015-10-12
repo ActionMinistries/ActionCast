@@ -1,6 +1,7 @@
 package action_cast.model;
 
 import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlIDREF;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -41,6 +42,7 @@ public class Performance {
         return date;
     }
 
+    @XmlIDREF
     public Song getSong() {
         return song;
     }

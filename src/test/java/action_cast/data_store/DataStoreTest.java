@@ -89,6 +89,17 @@ public class DataStoreTest {
         store.getModel().addPerson(new Person("ted"));
         store.getModel().addPerson(new Person("fred"));
 
+        Song fiveHundredMiles = new Song("500 miles", "500 more");
+        Song run = new Song("I just wanna run.", "throw it away");
+
+        List<Role> roles = new ArrayList<>();
+        roles.add(new Role("Runner", "The guy who runs", RoleType.MAIN));
+        run.setRoles(roles);
+
+        store.getModel().addSong(run);
+        store.getModel().addSong(fiveHundredMiles);
+
+
         long time = System.currentTimeMillis();
         Date date1 = new Date(time);
         Date date2 = new Date(time + 5000);
@@ -97,12 +108,7 @@ public class DataStoreTest {
         session.addPerson(store.getModel().getPeople().get(0));
         session.addPerson(store.getModel().getPeople().get(1));
 
-        Song fiveHundredMiles = new Song("500 miles", "500 more");
-        Song run = new Song("I just wanna run.", "throw it away");
 
-        List<Role> roles = new ArrayList<>();
-        roles.add(new Role("Runner", "The guy who runs", RoleType.MAIN));
-        run.setRoles(roles);
 
         Performance runPerformance = new Performance(run, "primary", "OTS", new Date());
         runPerformance.setDirector(new Director(store.getModel().getPeople().get(1)));
