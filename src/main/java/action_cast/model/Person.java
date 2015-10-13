@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType
 public class Person extends UniqueItem {
 
-    public Person() {
+    private Person() {
 
     }
 

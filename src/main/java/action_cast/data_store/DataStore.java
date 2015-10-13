@@ -43,16 +43,21 @@ public class DataStore {
     }
 
     public void load() throws JAXBException, SAXException {
-            File file = new File(filename);
-        SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-        Schema schema = sf.newSchema(new File("schema1.xsd"));
+        File file = new File(filename);
+        if (file.exists()) {
+            SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+            Schema schema = sf.newSchema(new File("schema1.xsd"));
 
             JAXBContext jaxbContext = JAXBContext.newInstance(DataModel.class);
             Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
             jaxbUnmarshaller.setSchema(schema);
             jaxbUnmarshaller.setEventHandler(new ValidationEventHandler());
 
-            model = (DataModel)jaxbUnmarshaller.unmarshal(file);
+            model = (DataModel) jaxbUnmarshaller.unmarshal(file);
+        }
+        else {
+            model = new DataModel();
+        }
     }
 
     public DataModel getModel() {

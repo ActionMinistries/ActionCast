@@ -16,7 +16,7 @@ public class Song extends UniqueItem {
     private String description;
     private List<Role> roles = new ArrayList<>();
 
-    public Song() {
+    private Song() {
 
     }
 

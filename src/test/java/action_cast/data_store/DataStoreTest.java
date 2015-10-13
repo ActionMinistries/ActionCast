@@ -81,6 +81,16 @@ public class DataStoreTest {
     }
 
     @Test
+    public void testLoad_DataCorrelation_Songs() {
+        DataModel dataModel = dataStore.getModel();
+        Session currentSession = dataModel.getCurrentSession();
+        assertTrue(dataModel.getSongs().get(0) == currentSession.getPerformances().get(1).getSong());
+        assertTrue(dataModel.getSongs().get(1) == currentSession.getPerformances().get(0).getSong());
+        assertTrue(dataModel.getSongs().get(1) == currentSession.getPerformances().get(2).getSong());
+    }
+
+
+    @Test
     public void testSaveSession_extended() throws JAXBException, SAXException {
         DataStore store = new DataStore(new DataModel());
 
