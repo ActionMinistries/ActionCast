@@ -11,7 +11,7 @@ public class Performer {
     @XmlIDREF
     private Person person;
 
-    public Performer() {
+    private Performer() {
 
     }
 

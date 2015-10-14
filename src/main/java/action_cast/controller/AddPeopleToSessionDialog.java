@@ -64,9 +64,9 @@ public class AddPeopleToSessionDialog extends JDialog {
     public static void main(String[] args) {
         DataModel model = new DataModel();
         model.setCurrentSession(new Session("dialogCheck", new Date(), new Date()));
-        model.addPerson(new Person("me"));
-        model.addPerson(new Person("myself"));
-        model.addPerson(new Person("I"));
+        model.addPerson("me");
+        model.addPerson("myself");
+        model.addPerson("I");
         AddPeopleToSessionDialog dialog = new AddPeopleToSessionDialog(model, model.getCurrentSession());
         dialog.pack();
         dialog.setVisible(true);

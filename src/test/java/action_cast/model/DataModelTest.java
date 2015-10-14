@@ -50,7 +50,7 @@ public class DataModelTest {
         model.setCurrentSession(session);
         List<Person> people = model.getPeople();
         assertEquals(0, people.size());
-        model.addPerson(new Person("random guy"));
+        model.addPerson("random guy");
         people = model.getPeople();
         assertEquals(1, people.size());
     }

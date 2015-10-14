@@ -19,7 +19,7 @@ public class Performance {
     private Map<Performer, Role> assignments = new HashMap<>();
     private Director director;
 
-    public Performance() {
+    private Performance() {
 
     }
 

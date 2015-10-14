@@ -12,7 +12,7 @@ public class Director {
     @XmlIDREF
     private Person person;
 
-    public Director() {
+    private Director() {
 
     }
 

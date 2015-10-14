@@ -31,7 +31,7 @@ public class Main {
         model.getCurrentSession().addPerformance(new Performance(new Song("The First Song", "It goes like this na na na, na na, na na na na"), "First Performance", "First Venue", new Date()));
         model.getCurrentSession().addPerson(new Person("random guy"));
 
-        model.addPerson(new Person("Random Guy"));
+        model.addPerson("Random Guy");
 
         people1.setData(model);
         manageSessions1.setData(model);

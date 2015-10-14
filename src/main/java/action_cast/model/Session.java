@@ -30,7 +30,7 @@ public class Session {
     @XmlIDREF
     private List<Person> people = new ArrayList<>();
 
-    public Session () {
+    private Session () {
 
     }
 

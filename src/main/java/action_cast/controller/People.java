@@ -32,7 +32,7 @@ public class People implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == addPersonButton) {
             if (model != null) {
-                model.addPerson(new Person(textField1.getText()));
+                model.addPerson(textField1.getText());
                 personListView1.updateDisplay();
                 textField1.setText("");
             }

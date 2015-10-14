@@ -94,10 +94,10 @@ public class DataStoreTest {
     public void testSaveSession_extended() throws JAXBException, SAXException {
         DataStore store = new DataStore(new DataModel());
 
-        store.getModel().addPerson(new Person("random guy"));
-        store.getModel().addPerson(new Person("odd job"));
-        store.getModel().addPerson(new Person("ted"));
-        store.getModel().addPerson(new Person("fred"));
+        store.getModel().addPerson("random guy");
+        store.getModel().addPerson("odd job");
+        store.getModel().addPerson("ted");
+        store.getModel().addPerson("fred");
 
         Song fiveHundredMiles = new Song("500 miles", "500 more");
         Song run = new Song("I just wanna run.", "throw it away");
@@ -145,9 +145,9 @@ public class DataStoreTest {
     @Test
     public void testSavePeople() throws JAXBException, SAXException {
         DataStore store = new DataStore(new DataModel());
-        store.getModel().addPerson(new Person("bob"));
-        store.getModel().addPerson(new Person("ted"));
-        store.getModel().addPerson(new Person("fred"));
+        store.getModel().addPerson("bob");
+        store.getModel().addPerson("ted");
+        store.getModel().addPerson("fred");
         store.save();
 
         DataStore store2 = new DataStore("file.xml");

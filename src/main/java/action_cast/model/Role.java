@@ -13,7 +13,7 @@ public class Role {
     @XmlElement
     private RoleType type;
 
-    public Role() {
+    private Role() {
 
     }
 

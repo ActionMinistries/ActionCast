@@ -29,9 +29,10 @@ public class DataModel {
         return people;
     }
 
-    public void addPerson(Person person) {
+    public Person addPerson(String name) {
+        Person person = new Person(name);
         people.add(person);
-
+        return person;
     }
 
     public void addSong(Song song) {
