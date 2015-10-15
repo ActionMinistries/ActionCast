@@ -86,6 +86,7 @@ public class AddPerformance extends BaseCardClass implements ActionListener {
         venueField.setText(currentPerformance.getVenue());
         dateField.setText(currentPerformance.getDate().toString());
         songSelector1.setSelectedIndex(0);
+        personListView1.setData(currentSession.getPeople());
     }
 
 
