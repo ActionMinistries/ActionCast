@@ -1,10 +1,19 @@
 package action_cast.model;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlIDREF;
+
 /**
  * Created by bmichaud on 9/1/2015.
  */
 public class Performer {
-    private final Person person;
+    @XmlElement
+    @XmlIDREF
+    private Person person;
+
+    private Performer() {
+
+    }
 
     public Performer(Person person) {
         this.person = person;

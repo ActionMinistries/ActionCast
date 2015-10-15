@@ -28,6 +28,7 @@ public class AddPeopleToSessionDialog extends JDialog {
         this.model = model;
         this.session = session;
 
+        //TODO replace the following line:
         personListView1.setData(model.getPeople());
         personDisplayGrid1.setData(session.getPeople());
 
@@ -62,10 +63,11 @@ public class AddPeopleToSessionDialog extends JDialog {
     }
 
     public static void main(String[] args) {
-        DataModel model = new DataModel(new Session("dialogCheck", new Date(), new Date()));
-        model.addPerson(new Person("me"));
-        model.addPerson(new Person("myself"));
-        model.addPerson(new Person("I"));
+        DataModel model = new DataModel();
+        model.setCurrentSession(new Session("dialogCheck", new Date(), new Date()));
+        model.addPerson("me");
+        model.addPerson("myself");
+        model.addPerson("I");
         AddPeopleToSessionDialog dialog = new AddPeopleToSessionDialog(model, model.getCurrentSession());
         dialog.pack();
         dialog.setVisible(true);

@@ -1,10 +1,20 @@
 package action_cast.model;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
+
 /**
  * Created by bmichaud on 9/1/2015.
  */
-public class Person {
-    private final String name;
+@XmlType
+public class Person extends UniqueItem {
+
+    private Person() {
+
+    }
+
+    @XmlElement
+    private String name;
 
     public Person(String name) {
         this.name = name;

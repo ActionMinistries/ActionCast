@@ -1,5 +1,11 @@
 package action_cast.model;
 
+import action_cast.data_store.DataStore;
+import action_cast.model.exceptions.InvalidIDException;
+import action_cast.model.id.SongID;
+
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlIDREF;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -13,11 +19,16 @@ public class Performance {
     private String venue;
     private Date date;
     private Song song;
+    @XmlElementWrapper
     private Map<Performer, Role> assignments = new HashMap<>();
     private Director director;
 
-    public Performance(Song song, String name, String venue, Date date) {
-        this.song = song;
+    private Performance() {
+
+    }
+
+    public Performance(SongID song, String name, String venue, Date date) throws InvalidIDException {
+        this.song = DataModel.instance.getSong(song);
         this.name = name;
         this.venue = venue;
         this.date = date;
@@ -35,6 +46,7 @@ public class Performance {
         return date;
     }
 
+    @XmlIDREF
     public Song getSong() {
         return song;
     }

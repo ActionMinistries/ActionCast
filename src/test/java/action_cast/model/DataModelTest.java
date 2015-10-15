@@ -1,5 +1,7 @@
 package action_cast.model;
 
+import action_cast.model.exceptions.InvalidIDException;
+import action_cast.model.id.PersonID;
 import org.junit.Test;
 
 import java.util.Date;
@@ -15,7 +17,8 @@ public class DataModelTest {
     @Test
     public void testCreate() {
         Session session = new Session("some session", new Date(), new Date());
-        DataModel model = new DataModel(session);
+        DataModel model = new DataModel();
+        model.setCurrentSession(session);
         assertNotNull(model);
         assertEquals(session, model.getCurrentSession());
     }
@@ -43,13 +46,14 @@ public class DataModelTest {
     }*/
 
     @Test
-    public void addPerson() {
+    public void addPerson() throws InvalidIDException {
         Session session = new Session("personSession", new Date(), new Date());
-        DataModel model = new DataModel(session);
-        List<Person> people = model.getPeople();
-        assertEquals(0, people.size());
-        model.addPerson(new Person("random guy"));
-        people = model.getPeople();
-        assertEquals(1, people.size());
+        DataModel model = new DataModel();
+        model.setCurrentSession(session);
+        //List<Person> people = model.getPeople();
+        //assertEquals(0, people.size());
+        PersonID id = model.addPerson("random guy");
+        //people = model.getPeople();
+        assertEquals("random guy", model.getPerson(id).getName());
     }
 }

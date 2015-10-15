@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<dataModel>
+    <people>
+        <people id="I-fe5355b0-9834-41a5-b580-de1192d0a605">
+            <name>random guy</name>
+        </people>
+        <people id="I-9a5f6b3c-95cd-4566-9a62-a74ec8a64794">
+            <name>odd job</name>
+        </people>
+        <people id="I-a573ce58-4863-49c3-8e43-01c9e4e13752">
+            <name>ted</name>
+        </people>
+        <people id="I-a3c6361b-ca1e-4545-8705-1d7a2967a2ab">
+            <name>fred</name>
+        </people>
+    </people>
+    <songs>
+        <songs id="I-098dc4cd-b5b6-4874-96dd-73fe713088ac">
+            <name>I just wanna run.</name>
+            <description>throw it away</description>
+            <roles>
+                <name>Runner</name>
+                <description>The guy who runs</description>
+                <type>MAIN</type>
+            </roles>
+        </songs>
+        <songs id="I-82005a76-04c4-43f2-b701-1775125ca4aa">
+            <name>500 miles</name>
+            <description>500 more</description>
+        </songs>
+    </songs>
+    <currentSession>
+        <name>savedSession</name>
+        <start>2015-10-12T17:16:44.192-06:00</start>
+        <end>2015-10-12T17:16:49.192-06:00</end>
+        <people>
+            <people>I-fe5355b0-9834-41a5-b580-de1192d0a605</people>
+            <people>I-9a5f6b3c-95cd-4566-9a62-a74ec8a64794</people>
+        </people>
+        <performanceList>
+            <assignments/>
+            <date>2015-10-12T17:16:44.192-06:00</date>
+            <name>encore</name>
+            <song>I-82005a76-04c4-43f2-b701-1775125ca4aa</song>
+            <venue>OTS</venue>
+        </performanceList>
+        <performanceList>
+            <assignments>
+                <entry>
+                    <key>
+                        <person>I-fe5355b0-9834-41a5-b580-de1192d0a605</person>
+                    </key>
+                    <value>
+                        <name>Runner</name>
+                        <description>The guy who runs</description>
+                        <type>MAIN</type>
+                    </value>
+                </entry>
+            </assignments>
+            <date>2015-10-12T17:16:44.192-06:00</date>
+            <director>
+                <person>I-9a5f6b3c-95cd-4566-9a62-a74ec8a64794</person>
+            </director>
+            <name>primary</name>
+            <song>I-098dc4cd-b5b6-4874-96dd-73fe713088ac</song>
+            <venue>OTS</venue>
+        </performanceList>
+        <performanceList>
+            <assignments/>
+            <date>2015-10-12T17:16:44.192-06:00</date>
+            <name>never</name>
+            <song>I-82005a76-04c4-43f2-b701-1775125ca4aa</song>
+            <venue>OTS</venue>
+        </performanceList>
+        <performers>
+            <person>I-fe5355b0-9834-41a5-b580-de1192d0a605</person>
+        </performers>
+    </currentSession>
+</dataModel>

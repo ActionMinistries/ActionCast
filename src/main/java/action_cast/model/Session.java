@@ -1,5 +1,12 @@
 package action_cast.model;
 
+import action_cast.model.exceptions.InvalidIDException;
+import action_cast.model.id.PersonID;
+
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlIDREF;
+import javax.xml.bind.annotation.XmlType;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -7,16 +14,28 @@ import java.util.List;
 /**
  * Created by bmichaud on 9/10/2015.
  */
+@XmlType(propOrder = {"name", "start", "end", "people", "performanceList", "performers"})
 public class Session {
 
     private String name;
 
+    @XmlElement
     private Date start;
+
+    @XmlElement
     private Date end;
 
+    @XmlElement
     private List<Performance> performanceList = new ArrayList<>();
+    @XmlElement
     private List<Performer> performers = new ArrayList<>();
+    @XmlElementWrapper
+    @XmlIDREF
     private List<Person> people = new ArrayList<>();
+
+    private Session () {
+
+    }
 
     public Session(String name, Date start, Date end) {
         this.name = name;
@@ -52,8 +71,8 @@ public class Session {
         return people;
     }
 
-    public void addPerson(Person person) {
-        people.add(person);
+    public void addPerson(PersonID person) throws InvalidIDException {
+        people.add(DataModel.instance.getPerson(person));
     }
 
     public void setEnd(Date end) {

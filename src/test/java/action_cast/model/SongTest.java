@@ -35,20 +35,4 @@ public class SongTest {
         assertNotNull(song.getRoles());
         assertEquals(1, song.getRoles().size());
     }
-
-    @Test
-    public void testPerformanceHistory() {
-        String name = "songName";
-        String description = "A well-formatted description of a song.";
-        Song song = new Song(name, description);
-
-
-        Performance performance = new Performance(song, "testPerf", "testVenue", new Date(System.currentTimeMillis()));
-
-
-        song.addPerformance(performance);
-
-        assertNotNull(song.getPerformances());
-        assertEquals(1, song.getPerformances().size());
-    }
 }

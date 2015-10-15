@@ -15,6 +15,7 @@ import java.util.List;
  */
 public class CardPanel extends JPanel implements ActionListener {
 
+    private final BaseCardClass parent;
     JToolBar breadCrumbToolbar;
 
     BreadCrumb breadCrumb;
@@ -24,19 +25,19 @@ public class CardPanel extends JPanel implements ActionListener {
     List<Component> componentList = new ArrayList<>();
     List<Object> constraintsList = new ArrayList<>();
 
-    public CardPanel() {
-        this(new BreadCrumb());
+    public CardPanel(BaseCardClass parent) {
+        this(parent, new BreadCrumb());
         breadCrumb.addComponent(this);
     }
 
-    public CardPanel(BreadCrumb breadCrumb) {
+    public CardPanel(BaseCardClass parent, BreadCrumb breadCrumb) {
         this.breadCrumb = breadCrumb;
         breadCrumb.addComponent(this);
         breadCrumbToolbar = new JToolBar();
         populateToolbar();
 
         this.add(breadCrumbToolbar, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_NORTH, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(-1, 20), null, 0, false));
-
+        this.parent = parent;
     }
 
     public void addCard(BaseCardClass card) {
@@ -55,6 +56,10 @@ public class CardPanel extends JPanel implements ActionListener {
 
     public BreadCrumb getBreadCrumb() {
         return breadCrumb;
+    }
+
+    public BaseCardClass getCardParent() {
+        return parent;
     }
 
     @Override
@@ -79,6 +84,8 @@ public class CardPanel extends JPanel implements ActionListener {
         } else {
             ((CardLayout) getParent().getLayout()).show(getParent(), ((JButton) e.getSource()).getText());
         }
+        breadCrumb.getComponents().get(selectedIndex).getCardParent().onResume();
+
         for (int i = selectedIndex+1; i < breadCrumb.getComponents().size(); ++i) {
 //            System.out.println("remove: " + breadCrumb.getCrumbs().get(i));
             (getParent()).remove(breadCrumb.getComponents().get(i));
@@ -147,14 +154,14 @@ public class CardPanel extends JPanel implements ActionListener {
             com.intellij.uiDesigner.core.GridConstraints gridConstraints = (com.intellij.uiDesigner.core.GridConstraints)constraints;
             //if (gridConstraints.getRow() == 0 && gridConstraints.getColumn() == 0) {
                 //System.out.println("adding special item");
-                com.intellij.uiDesigner.core.GridConstraints newGridConstraints = new com.intellij.uiDesigner.core.GridConstraints(gridConstraints.getRow()+1, gridConstraints.getColumn(),
-                        gridConstraints.getRowSpan(), gridConstraints.getColSpan(),
-                        gridConstraints.getAnchor(),
-                        gridConstraints.getFill(),
-                        gridConstraints.getHSizePolicy(),
-                        gridConstraints.getVSizePolicy(),
-                        gridConstraints.myMinimumSize, gridConstraints.myMaximumSize, gridConstraints.myPreferredSize, gridConstraints.getIndent(), gridConstraints.isUseParentLayout());
-                super.add(comp, newGridConstraints);
+            com.intellij.uiDesigner.core.GridConstraints newGridConstraints = new com.intellij.uiDesigner.core.GridConstraints(gridConstraints.getRow()+1, gridConstraints.getColumn(),
+                    gridConstraints.getRowSpan(), gridConstraints.getColSpan(),
+                    gridConstraints.getAnchor(),
+                    gridConstraints.getFill(),
+                    gridConstraints.getHSizePolicy(),
+                    gridConstraints.getVSizePolicy(),
+                    gridConstraints.myMinimumSize, gridConstraints.myMaximumSize, gridConstraints.myPreferredSize, gridConstraints.getIndent(), gridConstraints.isUseParentLayout());
+            super.add(comp, newGridConstraints);
 
             //}
             //else {
@@ -165,6 +172,8 @@ public class CardPanel extends JPanel implements ActionListener {
 
         }
     }
+
+
 
     private void populateToolbar() {
         java.util.List<String> crumbs = breadCrumb.getCrumbs();

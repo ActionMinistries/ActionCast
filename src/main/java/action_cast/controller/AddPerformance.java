@@ -4,6 +4,8 @@ import action_cast.model.DataModel;
 import action_cast.model.Performance;
 import action_cast.model.Session;
 import action_cast.model.Song;
+import action_cast.model.exceptions.InvalidIDException;
+import action_cast.model.id.SongID;
 import action_cast.widgets.CardPanel;
 import action_cast.widgets.PersonListView;
 import action_cast.widgets.SongSelector;
@@ -50,7 +52,11 @@ public class AddPerformance extends BaseCardClass implements ActionListener {
         if (e.getSource() == createButton) {
             if (currentSession != null) {
                 if (currentPerformance == null) {
-                    currentSession.addPerformance(new Performance(songs.get(songSelector1.getSelectedIndex()), nameField.getText(), venueField.getText(), new Date()));
+                    try {
+                        currentSession.addPerformance(new Performance(new SongID(songSelector1.getSelectedIndex()), nameField.getText(), venueField.getText(), new Date()));
+                    } catch (InvalidIDException e1) {
+                        e1.printStackTrace();
+                    }
                     nameField.setText("");
                     venueField.setText("");
                     dateField.setText("");
@@ -93,11 +99,16 @@ public class AddPerformance extends BaseCardClass implements ActionListener {
         return currentPerformance == null ? "Add performance" : currentPerformance.getName();
     }
 
+    @Override
+    public void onResume() {
+
+    }
+
     private void createUIComponents() {
         if (breadCrumb == null) {
-            mainPanel = new CardPanel();
+            mainPanel = new CardPanel(this);
         } else {
-            mainPanel = new CardPanel(breadCrumb);
+            mainPanel = new CardPanel(this, breadCrumb);
         }
         getMainPanel().setIsProtected(true);
     }
