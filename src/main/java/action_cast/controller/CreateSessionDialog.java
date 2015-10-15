@@ -1,13 +1,12 @@
 package action_cast.controller;
 
 import action_cast.model.Session;
-import org.jdatepicker.impl.*;
+import org.jdatepicker.impl.JDatePanelImpl;
+import org.jdatepicker.impl.JDatePickerImpl;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.*;
 import java.util.Date;
-import java.util.Properties;
 
 public class CreateSessionDialog extends JDialog {
     private JPanel contentPane;
