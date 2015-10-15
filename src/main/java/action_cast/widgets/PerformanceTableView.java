@@ -20,11 +20,13 @@ public class PerformanceTableView extends DisplayTable implements MouseListener 
 
     private List<Performance> performanceList = new ArrayList<>();
     private BaseCardClass card;
+    private JButton addRowButton;
 
     public PerformanceTableView(BaseCardClass card) {
         super(new Object[]{"Name", "Venue", "Song", "Date"});
         this.card = card;
         addMouseListener(this);
+        addRowButton = new JButton("Create New Performance");
     }
 
     public void setData(List<Performance> data) {
@@ -33,6 +35,7 @@ public class PerformanceTableView extends DisplayTable implements MouseListener 
         for (Performance performance : performanceList) {
             ((DefaultTableModel)getModel()).addRow(new Object[]{performance.getName(), performance.getVenue(), performance.getSong().getName(), performance.getDate()});
         }
+        ((DefaultTableModel)getModel()).addRow(new Object[]{addRowButton});
     }
 
     @Override
