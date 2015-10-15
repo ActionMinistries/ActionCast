@@ -2,8 +2,6 @@ package action_cast.controller;
 
 import action_cast.widgets.CardPanel;
 
-import java.util.Random;
-
 /**
  * Created by brian on 9/28/2015.
  */
