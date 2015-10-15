@@ -28,6 +28,12 @@ public abstract class BaseCardClass {
 
     public abstract String getName();
 
+    public void onResume() {
+        updateDisplay();
+    }
+
+    protected abstract void updateDisplay();
+
     public BreadCrumb getBreadCrumb() {
         return breadCrumb;
     }

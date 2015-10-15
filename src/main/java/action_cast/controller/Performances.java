@@ -45,4 +45,9 @@ public class Performances extends BaseCardClass {
         return null;
     }
 
+    @Override
+    protected void updateDisplay() {
+
+    }
+
 }

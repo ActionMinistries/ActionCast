@@ -1,6 +1,7 @@
 package action_cast.controller;
 
-import java.awt.*;
+import action_cast.widgets.CardPanel;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,13 +11,13 @@ import java.util.List;
 public class BreadCrumb {
 
     private List<String> crumbs = new ArrayList<>();
-    private List<Component> components = new ArrayList<>();
+    private List<CardPanel> components = new ArrayList<>();
 
     public void addCrumb(String crumb) {
         crumbs.add(crumb);
     }
 
-    public void addComponent(Component comp) {
+    public void addComponent(CardPanel comp) {
         components.add(comp);
     }
 
@@ -24,7 +25,7 @@ public class BreadCrumb {
         return crumbs;
     }
 
-    public List<Component> getComponents() {
+    public List<CardPanel> getComponents() {
         return components;
     }
 
@@ -32,7 +33,7 @@ public class BreadCrumb {
         this.crumbs = crumbs;
     }
 
-    public void setComponents(List<Component> components) {
+    public void setComponents(List<CardPanel> components) {
         this.components = components;
     }
 }

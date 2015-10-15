@@ -56,12 +56,7 @@ public class ManageSessions extends BaseCardClass implements ActionListener {
 
     public void setData(DataModel currentModel) {
         model = currentModel;
-        List<Session> sessionList = new ArrayList<>();
-        sessionList.add(model.getCurrentSession());
-        ((UtilDateModel) startDate.getModel()).setValue(model.getCurrentSession().getStartDate());
-        ((UtilDateModel) endDate.getModel()).setValue(model.getCurrentSession().getEndDate());
-        nameTextField.setText(model.getCurrentSession().getName());
-        performanceTableView1.setData(model.getCurrentSession().getPerformances());
+        updateDisplay();
     }
 
 //    @Override
@@ -71,6 +66,15 @@ public class ManageSessions extends BaseCardClass implements ActionListener {
 //            assignPeopleButton.setEnabled(true);
 //        }
 //    }
+
+    protected void updateDisplay() {
+        List<Session> sessionList = new ArrayList<>();
+        sessionList.add(model.getCurrentSession());
+        ((UtilDateModel) startDate.getModel()).setValue(model.getCurrentSession().getStartDate());
+        ((UtilDateModel) endDate.getModel()).setValue(model.getCurrentSession().getEndDate());
+        nameTextField.setText(model.getCurrentSession().getName());
+        performanceTableView1.setData(model.getCurrentSession().getPerformances());
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -95,9 +99,9 @@ public class ManageSessions extends BaseCardClass implements ActionListener {
 
     private void createUIComponents() {
         if (breadCrumb == null) {
-            mainPanel = new CardPanel();
+            mainPanel = new CardPanel(this);
         } else {
-            mainPanel = new CardPanel(breadCrumb);
+            mainPanel = new CardPanel(this, breadCrumb);
         }
         getMainPanel().setIsProtected(true);
         JDatePanelImpl startDatePanel = new JDatePanelImpl(new UtilDateModel(), new Properties());

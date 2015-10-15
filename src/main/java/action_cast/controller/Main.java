@@ -20,8 +20,6 @@ public class Main {
     private People people1;
     private ManageSessions manageSessions1;
 
-    DataModel model;// = new DataModel();
-
     public Main() throws JAXBException, SAXException, InvalidIDException {
         ClassLoader classLoader = getClass().getClassLoader();
         DataStore store = new DataStore(classLoader.getResource("main.xml").getFile());

@@ -99,11 +99,16 @@ public class AddPerformance extends BaseCardClass implements ActionListener {
         return currentPerformance == null ? "Add performance" : currentPerformance.getName();
     }
 
+    @Override
+    public void onResume() {
+
+    }
+
     private void createUIComponents() {
         if (breadCrumb == null) {
-            mainPanel = new CardPanel();
+            mainPanel = new CardPanel(this);
         } else {
-            mainPanel = new CardPanel(breadCrumb);
+            mainPanel = new CardPanel(this, breadCrumb);
         }
         getMainPanel().setIsProtected(true);
     }
