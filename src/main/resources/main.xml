@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<dataModel>
+    <people>
+        <people id="I-f86eb11c-9256-4188-b51c-880e0f5d198d">
+            <name>random guy</name>
+        </people>
+        <people id="I-c60043df-6d37-4152-9403-451970db58b3">
+            <name>Random Guy</name>
+        </people>
+    </people>
+    <songs>
+        <songs id="I-0a37d96a-c092-49d2-81d2-53561dac262c">
+            <name>The First Song</name>
+            <description>It goes like this na na na, na na, na na na na</description>
+        </songs>
+    </songs>
+    <currentSession>
+        <name>Fall 2015</name>
+        <start>2015-10-15T11:33:29.288-06:00</start>
+        <end>2015-10-27T01:20:09.288-06:00</end>
+        <people>
+            <people>I-f86eb11c-9256-4188-b51c-880e0f5d198d</people>
+        </people>
+        <performanceList>
+            <assignments/>
+            <date>2015-10-15T11:33:29.291-06:00</date>
+            <name>First Performance</name>
+            <song>I-0a37d96a-c092-49d2-81d2-53561dac262c</song>
+            <venue>First Venue</venue>
+        </performanceList>
+    </currentSession>
+</dataModel>

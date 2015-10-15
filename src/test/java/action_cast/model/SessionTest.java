@@ -1,11 +1,15 @@
 package action_cast.model;
 
+import action_cast.model.exceptions.InvalidIDException;
+import action_cast.model.id.PersonID;
+import action_cast.model.id.SongID;
 import org.junit.Test;
 
 import java.util.Date;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Created by bmichaud on 9/10/2015.
@@ -31,18 +35,21 @@ public class SessionTest {
     }
 
     @Test
-    public void testPerformanceList() {
+    public void testPerformanceList() throws InvalidIDException {
         Date start = new Date();
         Date end = new Date();
 
         Session s = new Session("sessionName", start, end);
 
        // List<Performance> performances = new ArrayList<>();
+        DataModel model = new DataModel();
+        SongID first = model.addSong("Cool song", "Na na, nanana!");
+        SongID second = model.addSong("Whatever.", "Naaaaa! :'( ");
         assertEquals(0, s.getPerformances().size());
-        s.addPerformance(new Performance(new Song("Cool song", "Na na, nanana!"), "The main event!", "Wouldn't you like to know?", new Date()));
+        s.addPerformance(new Performance(first, "The main event!", "Wouldn't you like to know?", new Date()));
         assertEquals(1, s.getPerformances().size());
 
-        s.addPerformance(new Performance(new Song("Whatever.", "Naaaaa! :'( "), "Emo time!", "it doesn't matter anyway", new Date()));
+        s.addPerformance(new Performance(second, "Emo time!", "it doesn't matter anyway", new Date()));
         //s.setPerformanceList(performances);
 
         assertEquals(2, s.getPerformances().size());
@@ -63,16 +70,39 @@ public class SessionTest {
     }
 
     @Test
-    public void testPeopleList() {
+    public void testPeopleList() throws InvalidIDException {
         Date start = new Date();
         Date end = new Date();
 
         Session s = new Session("someName", start, end);
 
         //List<Performer> performers = new ArrayList<>();
+        DataModel model = new DataModel();
+        PersonID id = model.addPerson("SomeGuy");
         assertEquals(0, s.getPeople().size());
-        s.addPerson(new Person("SomeGuy"));
+        s.addPerson(id);
         assertEquals(1, s.getPeople().size());
+
+    }
+
+    @Test
+    public void testPeopleList_NonExistentPerson()  {
+        Date start = new Date();
+        Date end = new Date();
+
+        Session s = new Session("someName", start, end);
+
+        //List<Performer> performers = new ArrayList<>();
+
+        assertEquals(0, s.getPeople().size());
+        boolean thrown = false;
+        try {
+            s.addPerson(new PersonID(345));
+        } catch (InvalidIDException e) {
+            thrown = true;
+        }
+        assertTrue(thrown);
+        assertEquals(0, s.getPeople().size());
 
     }
 }

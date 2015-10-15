@@ -1,5 +1,8 @@
 package action_cast.model;
 
+import action_cast.model.exceptions.InvalidIDException;
+import action_cast.model.id.PersonID;
+
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlIDREF;
@@ -68,8 +71,8 @@ public class Session {
         return people;
     }
 
-    public void addPerson(Person person) {
-        people.add(person);
+    public void addPerson(PersonID person) throws InvalidIDException {
+        people.add(DataModel.instance.getPerson(person));
     }
 
     public void setEnd(Date end) {

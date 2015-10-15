@@ -25,6 +25,7 @@ public class People implements ActionListener {
 
     public void setData(DataModel model) {
         this.model = model;
+        //TODO replace the following line:
         personListView1.setData(model.getPeople());
     }
 

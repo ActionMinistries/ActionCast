@@ -1,6 +1,9 @@
 package action_cast.data_store;
 
 import action_cast.model.*;
+import action_cast.model.exceptions.InvalidIDException;
+import action_cast.model.id.PersonID;
+import action_cast.model.id.SongID;
 import org.junit.Before;
 import org.junit.Test;
 import org.xml.sax.SAXException;
@@ -10,9 +13,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  * Created by bmichaud on 10/6/2015.
@@ -51,16 +52,25 @@ public class DataStoreTest {
     }
 
     @Test
-    public void testLoad() {
+    public void testLoad() throws InvalidIDException {
         DataModel dataModel = dataStore.getModel();
         assertNotNull(dataModel);
         assertNotNull(dataModel.getCurrentSession());
-        assertNotNull(dataModel.getPeople());
-        assertEquals(4, dataModel.getPeople().size());
-        assertEquals("random guy", dataModel.getPeople().get(0).getName());
-        assertEquals("odd job", dataModel.getPeople().get(1).getName());
-        assertEquals("ted", dataModel.getPeople().get(2).getName());
-        assertEquals("fred", dataModel.getPeople().get(3).getName());
+        //assertNotNull(dataModel.getPeople());
+        //assertEquals(4, dataModel.getPeople().size());
+        assertEquals("random guy", dataModel.getPerson(new PersonID(0)).getName());
+        assertEquals("odd job", dataModel.getPerson(new PersonID(1)).getName());
+        assertEquals("ted", dataModel.getPerson(new PersonID(2)).getName());
+        assertEquals("fred", dataModel.getPerson(new PersonID(3)).getName());
+        boolean thrown = false;
+        try {
+
+            dataModel.getPerson(new PersonID(4));
+        }
+        catch (Throwable t) {
+            thrown = true;
+        }
+        assertTrue(thrown);
         Session currentSession = dataModel.getCurrentSession();
         assertEquals("savedSession", currentSession.getName());
         assertEquals(2, currentSession.getPeople().size());
@@ -73,41 +83,43 @@ public class DataStoreTest {
     }
 
     @Test
-    public void testLoad_DataCorrelation() {
+    public void testLoad_DataCorrelation() throws InvalidIDException {
         DataModel dataModel = dataStore.getModel();
         Session currentSession = dataModel.getCurrentSession();
-        assertTrue(dataModel.getPeople().get(0) == currentSession.getPeople().get(0));
-        assertTrue(dataModel.getPeople().get(0).getName() == currentSession.getPeople().get(0).getName());
+        assertTrue(dataModel.getPerson(new PersonID(0)) == currentSession.getPeople().get(0));
+        assertTrue(dataModel.getPerson(new PersonID(0)).getName() == currentSession.getPeople().get(0).getName());
     }
 
     @Test
-    public void testLoad_DataCorrelation_Songs() {
+    public void testLoad_DataCorrelation_Songs() throws InvalidIDException {
         DataModel dataModel = dataStore.getModel();
         Session currentSession = dataModel.getCurrentSession();
-        assertTrue(dataModel.getSongs().get(0) == currentSession.getPerformances().get(1).getSong());
-        assertTrue(dataModel.getSongs().get(1) == currentSession.getPerformances().get(0).getSong());
-        assertTrue(dataModel.getSongs().get(1) == currentSession.getPerformances().get(2).getSong());
+        assertTrue(dataModel.getSong(new SongID(0)) == currentSession.getPerformances().get(1).getSong());
+        assertTrue(dataModel.getSong(new SongID(1)) == currentSession.getPerformances().get(0).getSong());
+        assertTrue(dataModel.getSong(new SongID(1)) == currentSession.getPerformances().get(2).getSong());
     }
 
 
     @Test
-    public void testSaveSession_extended() throws JAXBException, SAXException {
+    public void testSaveSession_extended() throws JAXBException, SAXException, InvalidIDException {
         DataStore store = new DataStore(new DataModel());
 
-        store.getModel().addPerson("random guy");
-        store.getModel().addPerson("odd job");
+        PersonID randomGuy = store.getModel().addPerson("random guy");
+        PersonID oddJob = store.getModel().addPerson("odd job");
         store.getModel().addPerson("ted");
         store.getModel().addPerson("fred");
 
-        Song fiveHundredMiles = new Song("500 miles", "500 more");
-        Song run = new Song("I just wanna run.", "throw it away");
+       // Song fiveHundredMiles = new Song();
+        //Song run = new Song("I just wanna run.", "throw it away");
 
+
+
+        SongID fiveHundredMiles = store.getModel().addSong("500 miles", "500 more");
+        SongID run = store.getModel().addSong("I just wanna run.", "throw it away");
         List<Role> roles = new ArrayList<>();
         roles.add(new Role("Runner", "The guy who runs", RoleType.MAIN));
-        run.setRoles(roles);
-
-        store.getModel().addSong(run);
-        store.getModel().addSong(fiveHundredMiles);
+        store.getModel().getSong(run).setRoles(roles);
+       // store.getModel().addSong(fiveHundredMiles);
 
 
         long time = System.currentTimeMillis();
@@ -115,13 +127,13 @@ public class DataStoreTest {
         Date date2 = new Date(time + 5000);
 
         Session session = new Session("savedSession", date1, date2);
-        session.addPerson(store.getModel().getPeople().get(0));
-        session.addPerson(store.getModel().getPeople().get(1));
+        session.addPerson(randomGuy);
+        session.addPerson(oddJob);
 
 
 
         Performance runPerformance = new Performance(run, "primary", "OTS", new Date());
-        runPerformance.setDirector(new Director(store.getModel().getPeople().get(1)));
+        runPerformance.setDirector(new Director(store.getModel().getPerson(oddJob)));
 
         session.addPerformer(new Performer(session.getPeople().get(0)));
         runPerformance.assign(session.getPerformers().get(0), roles.get(0));
@@ -143,15 +155,26 @@ public class DataStoreTest {
     }
 
     @Test
-    public void testSavePeople() throws JAXBException, SAXException {
+    public void testSavePeople() throws JAXBException, SAXException, InvalidIDException {
         DataStore store = new DataStore(new DataModel());
-        store.getModel().addPerson("bob");
-        store.getModel().addPerson("ted");
-        store.getModel().addPerson("fred");
+        PersonID bob = store.getModel().addPerson("bob");
+        PersonID ted = store.getModel().addPerson("ted");
+        PersonID fred = store.getModel().addPerson("fred");
         store.save();
 
         DataStore store2 = new DataStore("file.xml");
         store2.load();
-        assertEquals(3, store2.getModel().getPeople().size());
+        assertEquals("bob", store.getModel().getPerson(bob).getName());
+        assertEquals("ted", store.getModel().getPerson(ted).getName());
+        assertEquals("fred", store.getModel().getPerson(fred).getName());
+        boolean thrown = false;
+        try {
+            store.getModel().getPerson(new PersonID(3));
+        }
+        catch (Throwable t) {
+            thrown = true;
+        }
+        assertTrue("Exception not thrown!!!", thrown);
+        //assertEquals(3, store2.getModel().getPeople().size());
     }
 }

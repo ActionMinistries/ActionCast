@@ -1,5 +1,7 @@
 package action_cast.model;
 
+import action_cast.model.exceptions.InvalidIDException;
+import action_cast.model.id.SongID;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -14,10 +16,12 @@ import static org.junit.Assert.*;
 public class PerformanceTest {
 
     @Test
-    public void testCreate() {
+    public void testCreate() throws InvalidIDException {
+        DataModel model = new DataModel();
+
         String name = "perfName";
         String venue = "perfLocation";
-        Song song = new Song("testSong", "with a test description");
+        SongID song = model.addSong("testSong", "with a test description");
         Long time = System.currentTimeMillis();
 
         Performance performance = new Performance(song, name, venue, new Date(time));
@@ -26,31 +30,35 @@ public class PerformanceTest {
         assertEquals("perfName", performance.getName());
         assertEquals("perfLocation", performance.getVenue());
         assertEquals(new Date(time), performance.getDate());
-        assertEquals(song, performance.getSong());
+        assertEquals(model.getSong(song), performance.getSong());
     }
 
     @Test
-    public void testAssignments() {
+    public void testAssignments() throws InvalidIDException {
+        DataModel model = new DataModel();
+
         String name = "perfName";
         String venue = "perfLocation";
-        Song song = new Song("testSong", "with a test description");
+        SongID song = model.addSong("testSong", "with a test description");
         List<Role> roles = new ArrayList<>();
         roles.add(new Role("TestRole", "This is merely a test role", RoleType.SUPPORT));
-        song.setRoles(roles);
+        model.getSong(song).setRoles(roles);
         Long time = System.currentTimeMillis();
 
         Performance performance = new Performance(song, name, venue, new Date(time));
         Performer performer = new Performer(new Person("randomGuy"));
-        performance.assign(performer, song.getRoles().get(0));
+        performance.assign(performer, model.getSong(song).getRoles().get(0));
         assertTrue(performance.getAssignments().containsKey(performer));
-        assertEquals(performance.getAssignments().get(performer), song.getRoles().get(0));
+        assertEquals(performance.getAssignments().get(performer), model.getSong(song).getRoles().get(0));
     }
 
     @Test
-    public void testSetDirector() {
+    public void testSetDirector() throws InvalidIDException {
+        DataModel model = new DataModel();
+
         String name = "perfName";
         String venue = "perfLocation";
-        Song song = new Song("testSong", "with a test description");
+        SongID song = model.addSong("testSong", "with a test description");
         Long time = System.currentTimeMillis();
 
         Performance performance = new Performance(song, name, venue, new Date(time));

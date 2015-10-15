@@ -28,6 +28,7 @@ public class AddPeopleToSessionDialog extends JDialog {
         this.model = model;
         this.session = session;
 
+        //TODO replace the following line:
         personListView1.setData(model.getPeople());
         personDisplayGrid1.setData(session.getPeople());
 
