@@ -100,11 +100,6 @@ public class AddPerformance extends BaseCardClass implements ActionListener {
         return currentPerformance == null ? "Add performance" : currentPerformance.getName();
     }
 
-    @Override
-    public void onResume() {
-
-    }
-
     private void createUIComponents() {
         if (breadCrumb == null) {
             mainPanel = new CardPanel(this);

@@ -5,6 +5,7 @@ import action_cast.model.*;
 import action_cast.model.exceptions.InvalidIDException;
 import action_cast.model.id.PersonID;
 import action_cast.model.id.SongID;
+import action_cast.widgets.custom.JTileView;
 import org.xml.sax.SAXException;
 
 import javax.swing.*;
@@ -19,6 +20,7 @@ public class Main {
     private JTabbedPane tabbedPane1;
     private People people1;
     private ManageSessions manageSessions1;
+    private TileViewTest tileViewTest1;
 
     public Main() throws JAXBException, SAXException, InvalidIDException {
         ClassLoader classLoader = getClass().getClassLoader();
