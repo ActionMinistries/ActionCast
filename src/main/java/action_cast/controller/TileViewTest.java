@@ -2,6 +2,7 @@ package action_cast.controller;
 
 import action_cast.widgets.CardPanel;
 import action_cast.widgets.custom.JTileView;
+import action_cast.widgets.custom.Tile;
 
 import javax.swing.*;
 
@@ -45,5 +46,10 @@ public class TileViewTest extends BaseCardClass {
         getMainPanel().setIsProtected(true);
         JTileView1 = new JTileView(0, 0);
         button1 = new JButton();
+        JTileView1.addTile(new Tile());
+        JTileView1.addTile(new Tile());
+        JTileView1.addTile(new Tile());
+        JTileView1.addTile(new Tile());
+        JTileView1.addTile(new Tile());
     }
 }
