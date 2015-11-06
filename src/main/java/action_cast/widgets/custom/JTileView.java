@@ -14,15 +14,19 @@ public class JTileView extends JComponent {
 
     private static final int TILE_WIDTH = 64;
     private static final int TILE_HEIGHT = 64;
-    private final int rows;
-    private final int columns;
+   // private final int rows;
+   // private final int columns;
 
     private final List<Tile> tiles = new ArrayList<>();
 
-    public JTileView(int rows, int cols) {
-        this.rows = rows;
-        this.columns = cols;
+    public JTileView() {
+        super();
     }
+
+  //  public JTileView(int rows, int cols) {
+   //     this.rows = rows;
+   //     this.columns = cols;
+  //  }
 
     public void addTile(Tile tile) {
         tiles.add(tile);

@@ -2,6 +2,7 @@ package action_cast.controller;
 
 import action_cast.widgets.CardPanel;
 import action_cast.widgets.custom.JTileView;
+import action_cast.widgets.custom.TextTile;
 import action_cast.widgets.custom.Tile;
 
 import javax.swing.*;
@@ -44,12 +45,12 @@ public class TileViewTest extends BaseCardClass {
             mainPanel = new CardPanel(this, breadCrumb);
         }
         getMainPanel().setIsProtected(true);
-        JTileView1 = new JTileView(0, 0);
+        JTileView1 = new JTileView();
         button1 = new JButton();
-        JTileView1.addTile(new Tile());
-        JTileView1.addTile(new Tile());
-        JTileView1.addTile(new Tile());
-        JTileView1.addTile(new Tile());
-        JTileView1.addTile(new Tile());
+        JTileView1.addTile(new TextTile("one"));
+        JTileView1.addTile(new TextTile("two"));
+        JTileView1.addTile(new TextTile("three"));
+        JTileView1.addTile(new TextTile("four"));
+        JTileView1.addTile(new TextTile("five"));
     }
 }

@@ -7,7 +7,7 @@ import java.awt.geom.Ellipse2D;
 /**
  * Created by bmichaud on 10/29/2015.
  */
-public class Tile extends JComponent {
+public abstract class Tile extends JComponent {
 
     protected void paintComponent(Graphics g) {
         Ellipse2D ellipse = new Ellipse2D.Float(0, 0, 40, 40);
