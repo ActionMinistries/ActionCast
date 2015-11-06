@@ -1,5 +1,7 @@
 package action_cast.widgets.custom;
 
+import action_cast.widgets.PersonTransferHandler;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
@@ -21,6 +23,7 @@ public class JTileView extends JComponent {
 
     public JTileView() {
         super();
+        setTransferHandler(new PersonTransferHandler());
     }
 
   //  public JTileView(int rows, int cols) {
@@ -77,6 +80,10 @@ public class JTileView extends JComponent {
 
     public String getUIClassID() {
         return uiClassID;
+    }
+
+    public Tile getSelectedTile() {
+        return tiles.get(0);
     }
 
 }

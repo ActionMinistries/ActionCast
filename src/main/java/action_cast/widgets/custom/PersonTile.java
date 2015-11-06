@@ -18,4 +18,8 @@ public class PersonTile extends Tile {
         super.paintComponent(g.create());
         g.dispose();
     }
+
+    public Person getPerson() {
+        return person;
+    }
 }

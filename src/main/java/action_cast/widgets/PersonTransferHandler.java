@@ -1,6 +1,8 @@
 package action_cast.widgets;
 
 import action_cast.model.Person;
+import action_cast.widgets.custom.JTileView;
+import action_cast.widgets.custom.PersonTile;
 
 import javax.activation.DataHandler;
 import javax.swing.*;
@@ -33,6 +35,8 @@ public class PersonTransferHandler extends TransferHandler {
         }
         else if (c instanceof PersonDisplayGrid) {
             toMove = ((PersonDisplayGrid)c).getSelectedPerson();
+        } else if (c instanceof JTileView) {
+            toMove = ((PersonTile)((JTileView)c).getSelectedTile()).getPerson();
         }
         if (toMove == null) {
             System.out.println("null");
@@ -84,11 +88,22 @@ public class PersonTransferHandler extends TransferHandler {
             }
         }
         else if (support.getComponent() instanceof PersonListView) {
-            PersonListView view = (PersonListView)support.getComponent();
-            JList.DropLocation dl = (JList.DropLocation)view.getDropLocation();
+            PersonListView view = (PersonListView) support.getComponent();
+            JList.DropLocation dl = (JList.DropLocation) view.getDropLocation();
             int index = dl.getIndex();
             try {
-                view.addPerson(index,(Person) support.getTransferable().getTransferData(personFlavor));
+                view.addPerson(index, (Person) support.getTransferable().getTransferData(personFlavor));
+                return true;
+            } catch (UnsupportedFlavorException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        else if (support.getComponent() instanceof JTileView){
+            JTileView tileView = (JTileView) support.getComponent();
+            try {
+                tileView.addTile(new PersonTile((Person) support.getTransferable().getTransferData(personFlavor)));
                 return true;
             } catch (UnsupportedFlavorException e) {
                 e.printStackTrace();
