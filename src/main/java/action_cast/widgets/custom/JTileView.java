@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by bmichaud on 10/20/2015.
  */
-public class JTileView extends JComponent {
+public class JTileView extends JPanel {
 
     private static final String uiClassID = "TileView";
 
@@ -33,23 +33,24 @@ public class JTileView extends JComponent {
 
     public void addTile(Tile tile) {
         tiles.add(tile);
+        //repaint(0, 0, TILE_WIDTH, TILE_HEIGHT);
     }
 
-//    public void setUI(JTileViewUI ui) {
-//        super.setUI(ui);
-//    }
-//
-//    public void updateUI() {
-//        if (UIManager.get(getUIClassID()) != null) {
-//            setUI((JTileViewUI) UIManager.getUI(this));
-//        } else {
-//            setUI(new BasicJTileViewUI());
-//        }
-//    }
-//
-//    public JTileViewUI getUI() {
-//        return (JTileViewUI) ui;
-//    }
+    public void setUI(JTileViewUI ui) {
+        super.setUI(ui);
+    }
+
+    public void updateUI() {
+        if (UIManager.get(getUIClassID()) != null) {
+            setUI((JTileViewUI) UIManager.getUI(this));
+        } else {
+            setUI(new JTileViewUI());
+        }
+    }
+
+    public JTileViewUI getUI() {
+        return (JTileViewUI) ui;
+    }
 
     public Dimension getPreferredSize() {
         return new Dimension(TILE_WIDTH, TILE_HEIGHT);
