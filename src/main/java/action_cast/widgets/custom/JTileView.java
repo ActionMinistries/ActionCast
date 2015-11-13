@@ -14,8 +14,9 @@ public class JTileView extends JPanel {
 
     private static final String uiClassID = "TileView";
 
-    private static final int TILE_WIDTH = 64;
-    private static final int TILE_HEIGHT = 64;
+    public static final int TILE_WIDTH = 64;
+    public static final int TILE_HEIGHT = 64;
+    public static final int PADDING = 2;
    // private final int rows;
    // private final int columns;
 
@@ -24,6 +25,8 @@ public class JTileView extends JPanel {
     public JTileView() {
         super();
         setTransferHandler(new PersonTransferHandler());
+        setBorder(BorderFactory.createLineBorder(Color.black, 2));
+        setLayout(new TileLayoutManager());
     }
 
   //  public JTileView(int rows, int cols) {
@@ -32,8 +35,14 @@ public class JTileView extends JPanel {
   //  }
 
     public void addTile(Tile tile) {
+        if (tiles.isEmpty()) {
+            System.out.println("setting border");
+            tile.setBorder(BorderFactory.createLineBorder(Color.black,2));
+        }
+
+        this.add(tile);
         tiles.add(tile);
-        //repaint(0, 0, TILE_WIDTH, TILE_HEIGHT);
+        repaint();
     }
 
     public void setUI(JTileViewUI ui) {
@@ -53,15 +62,16 @@ public class JTileView extends JPanel {
     }
 
     public Dimension getPreferredSize() {
-        return new Dimension(TILE_WIDTH, TILE_HEIGHT);
+        return new Dimension((TILE_WIDTH+PADDING)*2, (PADDING+TILE_HEIGHT)*(tiles.size()/2));
     }
 
     public Dimension getMinimumSize() {
-        return new Dimension(TILE_WIDTH, TILE_HEIGHT);
+        return new Dimension((TILE_WIDTH+PADDING)*2, (PADDING+TILE_HEIGHT)*(tiles.size()/2));
     }
 
     protected void paintComponent(Graphics g) {
-        Graphics2D g1 = (Graphics2D) g.create();
+        super.paintComponent(g);
+/*        Graphics2D g1 = (Graphics2D) g.create();
         int posx = 0;
         int posy = 0;
 
@@ -70,13 +80,12 @@ public class JTileView extends JPanel {
         for (Tile tile : tiles) {
             if (posx + TILE_WIDTH > clipRect.getX() + clipRect.getWidth()) {
                 posx = 0;
-                posy += TILE_HEIGHT;
+                posy += TILE_HEIGHT+PADDING;
             }
-            Graphics tileGraphics = g1.create(posx, posy, TILE_WIDTH, TILE_HEIGHT);
+            Graphics tileGraphics = g1.create(posx+PADDING, posy+PADDING, TILE_WIDTH+PADDING, TILE_HEIGHT+PADDING);
             tile.paintComponent(tileGraphics);
-            posx += TILE_WIDTH;
-        }
-        g1.dispose();
+            posx += TILE_WIDTH+PADDING;
+        }*/
     }
 
     public String getUIClassID() {
