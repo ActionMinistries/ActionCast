@@ -26,7 +26,7 @@ public class JTileView extends JPanel {
         super();
         setTransferHandler(new PersonTransferHandler());
         setBorder(BorderFactory.createLineBorder(Color.black, 2));
-        setLayout(new TileLayoutManager());
+        setLayout(new TileLayoutManager(TILE_WIDTH, TILE_HEIGHT, PADDING));
     }
 
   //  public JTileView(int rows, int cols) {
