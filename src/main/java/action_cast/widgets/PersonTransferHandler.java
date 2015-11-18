@@ -3,6 +3,7 @@ package action_cast.widgets;
 import action_cast.model.Person;
 import action_cast.widgets.custom.JTileView;
 import action_cast.widgets.custom.PersonTile;
+import action_cast.widgets.custom.Tile;
 
 import javax.activation.DataHandler;
 import javax.swing.*;
@@ -35,9 +36,8 @@ public class PersonTransferHandler extends TransferHandler {
         }
         else if (c instanceof PersonDisplayGrid) {
             toMove = ((PersonDisplayGrid)c).getSelectedPerson();
-        } else if (c instanceof JTileView) {
-            toMove = ((PersonTile)((JTileView)c).getSelectedTile()).getPerson();
-        }
+        } else if (c instanceof PersonTile)
+            toMove = ((PersonTile)((PersonTile)c)).getPerson();
         if (toMove == null) {
             System.out.println("null");
 
@@ -56,7 +56,11 @@ public class PersonTransferHandler extends TransferHandler {
             } else if (c instanceof PersonDisplayGrid) {
                 PersonDisplayGrid view = (PersonDisplayGrid) c;
                 view.removeSelectedPerson();
+            } else if (c instanceof  PersonTile) {
+                PersonTile view = (PersonTile)c;
+                ((PersonTile) c).removeTile();
             }
+
         }
     }
 
@@ -103,7 +107,7 @@ public class PersonTransferHandler extends TransferHandler {
         else if (support.getComponent() instanceof JTileView){
             JTileView tileView = (JTileView) support.getComponent();
             try {
-                tileView.addTile(new PersonTile((Person) support.getTransferable().getTransferData(personFlavor)));
+                tileView.add(new PersonTile(tileView, (Person) support.getTransferable().getTransferData(personFlavor)));
                 return true;
             } catch (UnsupportedFlavorException e) {
                 e.printStackTrace();

@@ -5,7 +5,9 @@ import action_cast.model.Person;
 import action_cast.model.Session;
 import action_cast.widgets.PersonDisplayGrid;
 import action_cast.widgets.PersonListView;
+import action_cast.widgets.PersonTileView;
 import action_cast.widgets.PersonTransferHandler;
+import action_cast.widgets.custom.JTileView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,7 +20,7 @@ public class AddPeopleToSessionDialog extends JDialog {
     private JPanel contentPane;
     private JButton buttonOK;
     private PersonListView personListView1;
-    private PersonDisplayGrid personDisplayGrid1;
+    private PersonTileView personTileView1;
 
     private final DataModel model;
     private final Session session;
@@ -30,7 +32,7 @@ public class AddPeopleToSessionDialog extends JDialog {
 
         //TODO replace the following line:
         personListView1.setData(model.getPeople());
-        personDisplayGrid1.setData(session.getPeople());
+        personTileView1.setData(session.getPeople());
 
         setContentPane(contentPane);
         setModal(true);
@@ -62,13 +64,17 @@ public class AddPeopleToSessionDialog extends JDialog {
         dispose();
     }
 
+//    private void createUIComponents() {
+//        JTileView1 = new JTileView();
+//    }
+
     public static void main(String[] args) {
         DataModel model = new DataModel();
         model.setCurrentSession(new Session("dialogCheck", new Date(), new Date()));
         model.addPerson("me");
         model.addPerson("myself");
         model.addPerson("I");
-        AddPeopleToSessionDialog dialog = new AddPeopleToSessionDialog(model, model.getCurrentSession());
+        AddPeopleToSessionDialog2 dialog = new AddPeopleToSessionDialog2(model, model.getCurrentSession());
         dialog.pack();
         dialog.setVisible(true);
         System.exit(0);

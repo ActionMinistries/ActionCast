@@ -19,24 +19,24 @@ public class TileLayoutManager implements LayoutManager2 {
 
     @Override
     public void addLayoutComponent(String name, Component comp) {
-        System.out.println("addLayoutComponent(" +name + ", component)");
+       // System.out.println("addLayoutComponent(" +name + ", component)");
     }
 
     @Override
     public void removeLayoutComponent(Component comp) {
-        System.out.println("removeLayoutComponent(" +comp + ")");
+        //System.out.println("removeLayoutComponent(" +comp + ")");
 
     }
 
     @Override
     public Dimension preferredLayoutSize(Container parent) {
-        System.out.println("preferredLayoutSize(" +parent + ")");
+       // System.out.println("preferredLayoutSize(" +parent + ")");
         return null;
     }
 
     @Override
     public Dimension minimumLayoutSize(Container parent) {
-        System.out.println("minimumLayoutSize(" +parent + ")");
+        //System.out.println("minimumLayoutSize(" +parent + ")");
 
         return null;
     }
@@ -63,29 +63,29 @@ public class TileLayoutManager implements LayoutManager2 {
 
     @Override
     public void addLayoutComponent(Component comp, Object constraints) {
-        System.out.println("addLayoutComponent(" +comp +", " + constraints + ")");
+        //System.out.println("addLayoutComponent(" +comp +", " + constraints + ")");
     }
 
     @Override
     public Dimension maximumLayoutSize(Container target) {
-        System.out.println("maximumLayoutSize(" +target + ")");
+       // System.out.println("maximumLayoutSize(" +target + ")");
         return null;
     }
 
     @Override
     public float getLayoutAlignmentX(Container target) {
-        System.out.println("getLayoutAlignmentX(" +target + ")");
+       // System.out.println("getLayoutAlignmentX(" +target + ")");
         return 0;
     }
 
     @Override
     public float getLayoutAlignmentY(Container target) {
-        System.out.println("getLayoutAlignmentY(" +target + ")");
+       //System.out.println("getLayoutAlignmentY(" +target + ")");
         return 0;
     }
 
     @Override
     public void invalidateLayout(Container target) {
-        System.out.println("invalidateLayout(" +target + ")");
+        //System.out.println("invalidateLayout(" +target + ")");
     }
 }

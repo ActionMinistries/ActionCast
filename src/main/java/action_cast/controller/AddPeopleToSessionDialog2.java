@@ -29,8 +29,7 @@ public class AddPeopleToSessionDialog2 extends JDialog {
     public AddPeopleToSessionDialog2(DataModel model, Session session) {
         this.model = model;
         this.session = session;
-        PersonTile boy = new PersonTile(new Person("boy"));
-        JTileView1.addTile(boy);
+
         //TODO replace the following line:
         personListView1.setData(model.getPeople());
 

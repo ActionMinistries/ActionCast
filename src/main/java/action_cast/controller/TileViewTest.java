@@ -47,10 +47,10 @@ public class TileViewTest extends BaseCardClass {
         getMainPanel().setIsProtected(true);
         JTileView1 = new JTileView();
         button1 = new JButton();
-        JTileView1.addTile(new TextTile("one"));
-        JTileView1.addTile(new TextTile("two"));
-        JTileView1.addTile(new TextTile("three"));
-        JTileView1.addTile(new TextTile("four"));
-        JTileView1.addTile(new TextTile("five"));
+        JTileView1.add(new TextTile(JTileView1, "one"));
+        JTileView1.add(new TextTile(JTileView1, "two"));
+        JTileView1.add(new TextTile(JTileView1, "three"));
+        JTileView1.add(new TextTile(JTileView1, "four"));
+        JTileView1.add(new TextTile(JTileView1, "five"));
     }
 }

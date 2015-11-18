@@ -9,7 +9,8 @@ public class TextTile extends Tile {
 
     private final String text;
 
-    public TextTile(String text) {
+    public TextTile(JTileView parent, String text) {
+        super(parent);
         this.text = text;
     }
 

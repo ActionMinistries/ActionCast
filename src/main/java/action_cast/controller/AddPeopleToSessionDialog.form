@@ -57,7 +57,7 @@
             </constraints>
             <properties/>
           </component>
-          <component id="3dee7" class="action_cast.widgets.PersonDisplayGrid" binding="personDisplayGrid1" default-binding="true">
+          <component id="48e70" class="action_cast.widgets.PersonTileView" binding="personTileView1" default-binding="true">
             <constraints>
               <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
             </constraints>
