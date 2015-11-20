@@ -8,6 +8,7 @@ import action_cast.model.exceptions.InvalidIDException;
 import action_cast.model.id.SongID;
 import action_cast.widgets.CardPanel;
 import action_cast.widgets.PersonListView;
+import action_cast.widgets.PersonTileView;
 import action_cast.widgets.SongSelector;
 
 import javax.smartcardio.Card;
@@ -26,11 +27,11 @@ public class AddPerformance extends BaseCardClass implements ActionListener {
     private JTextField nameField;
     private JTextField venueField;
     private JTextField dateField;
-    private JTable table2;
     private JPanel mainPanel;
     private JButton createButton;
     private SongSelector songSelector1;
     private PersonListView personListView1;
+    private PersonTileView personTileView1;
 
     private Session currentSession;
     private Performance currentPerformance;
