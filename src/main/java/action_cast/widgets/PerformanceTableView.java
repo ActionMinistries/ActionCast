@@ -1,7 +1,7 @@
 package action_cast.widgets;
 
-import action_cast.controller.AddPerformance;
-import action_cast.controller.BaseCardClass;
+import action_cast.view.AddPerformance;
+import action_cast.view.BaseCardClass;
 import action_cast.model.DataModel;
 import action_cast.model.Performance;
 

@@ -1,30 +1,44 @@
-package action_cast.controller;
+package action_cast.view;
 
-import action_cast.model.Session;
-import org.jdatepicker.impl.*;
+import action_cast.widgets.TableButton;
 
 import javax.swing.*;
-import java.awt.*;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import java.awt.event.*;
-import java.util.Date;
-import java.util.Properties;
 
-public class CreateSessionDialog extends JDialog {
+public class ButtonRowTestDialog extends JDialog {
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
-    private JDatePanelImpl startDatePanel;
-    private JDatePanelImpl endDatePanel;
-    private JDatePickerImpl startDate;
-    private JDatePickerImpl endDate;
+    private JTable table1;
 
-    private Session createdSession = null;
-
-    public CreateSessionDialog() {
+    public ButtonRowTestDialog() {
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
+        if (table1 != null) {
+            String[] columnNames = {"First Name", "Last Name", ""};/*
+            Object[][] data =
+                    {
+                            {"Homer", "Simpson", "delete Homer"},
+                            {"Madge", "Simpson", "delete Madge"},
+                            {"Bart",  "Simpson", "delete Bart"},
+                            {"Lisa",  "Simpson", "delete Lisa"},
+                    };
+*/
+            DefaultTableModel model = new DefaultTableModel(columnNames, 2);
+            table1.setModel(model);
 
+            TableButton button = new TableButton("blah");
+            model.setValueAt(button, 0, 0);
+            TableColumn col = new TableColumn(1, 80);
+            col.setCellRenderer(button);
+            //col.setCellEditor(button);
+            table1.addColumn(col);
+
+            //ButtonRow buttonColumn = new ButtonRow(table1, 2);
+        }
         buttonOK.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onOK();
@@ -53,20 +67,9 @@ public class CreateSessionDialog extends JDialog {
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
     }
 
-    public Session showDialog() {
-        pack();
-        setVisible(true);
-        return createdSession;
-    }
-
     private void onOK() {
 // add your code here
-        Date start = (Date) startDate.getModel().getValue();
-        Date end = (Date) endDate.getModel().getValue();
-        if (start != null && end != null) {
-            createdSession = new Session("NAME NYI!!!", start, end);
-            dispose();
-        }
+        dispose();
     }
 
     private void onCancel() {
@@ -75,13 +78,9 @@ public class CreateSessionDialog extends JDialog {
     }
 
     public static void main(String[] args) {
-        CreateSessionDialog dialog = new CreateSessionDialog();
+        ButtonRowTestDialog dialog = new ButtonRowTestDialog();
         dialog.pack();
         dialog.setVisible(true);
         System.exit(0);
-    }
-
-    private void createUIComponents() {
-
     }
 }

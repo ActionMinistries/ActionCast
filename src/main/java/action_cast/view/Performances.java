@@ -1,13 +1,11 @@
-package action_cast.controller;
+package action_cast.view;
 
-import action_cast.model.Performance;
 import action_cast.model.Session;
 import action_cast.widgets.CardPanel;
 import action_cast.widgets.PerformanceTableView;
 import action_cast.widgets.SessionSelector;
 
 import javax.swing.*;
-import java.awt.*;
 
 /**
  * Created by bmichaud on 9/10/2015.

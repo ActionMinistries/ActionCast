@@ -1,9 +1,8 @@
-package action_cast.controller;
+package action_cast.view;
 
 import action_cast.widgets.CardPanel;
 import action_cast.widgets.custom.JTileView;
 import action_cast.widgets.custom.TextTile;
-import action_cast.widgets.custom.Tile;
 
 import javax.swing.*;
 

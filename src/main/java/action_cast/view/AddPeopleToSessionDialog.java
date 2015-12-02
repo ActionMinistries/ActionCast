@@ -1,20 +1,13 @@
-package action_cast.controller;
+package action_cast.view;
 
 import action_cast.model.DataModel;
-import action_cast.model.Person;
 import action_cast.model.Session;
-import action_cast.widgets.PersonDisplayGrid;
 import action_cast.widgets.PersonListView;
 import action_cast.widgets.PersonTileView;
-import action_cast.widgets.PersonTransferHandler;
-import action_cast.widgets.custom.JTileView;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.*;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 public class AddPeopleToSessionDialog extends JDialog {
     private JPanel contentPane;

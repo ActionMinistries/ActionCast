@@ -1,7 +1,7 @@
 package action_cast.widgets;
 
-import action_cast.controller.BaseCardClass;
-import action_cast.controller.BreadCrumb;
+import action_cast.view.BaseCardClass;
+import action_cast.view.BreadCrumb;
 
 import javax.swing.*;
 import java.awt.*;

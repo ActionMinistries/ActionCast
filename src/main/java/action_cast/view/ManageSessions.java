@@ -1,4 +1,4 @@
-package action_cast.controller;
+package action_cast.view;
 
 import action_cast.model.DataModel;
 import action_cast.model.Session;
@@ -10,7 +10,6 @@ import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;

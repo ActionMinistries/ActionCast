@@ -1,4 +1,4 @@
-package action_cast.controller;
+package action_cast.view;
 
 import action_cast.widgets.CardPanel;
 
