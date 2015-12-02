@@ -1,6 +1,5 @@
 package action_cast.model;
 
-import action_cast.data_store.DataStore;
 import action_cast.model.exceptions.InvalidIDException;
 import action_cast.model.id.SongID;
 
@@ -28,7 +27,8 @@ public class Performance {
     }
 
     public Performance(SongID song, String name, String venue, Date date) throws InvalidIDException {
-        this.song = DataModel.instance.getSong(song);
+        //TODO
+        //this.song = DataModel.instance.getSong(song);
         this.name = name;
         this.venue = venue;
         this.date = date;

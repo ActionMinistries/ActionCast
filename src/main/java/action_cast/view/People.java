@@ -1,5 +1,6 @@
 package action_cast.view;
 
+import action_cast.controller.Controller;
 import action_cast.model.DataModel;
 import action_cast.widgets.PersonListView;
 
@@ -15,24 +16,24 @@ public class People implements ActionListener {
     private JButton addPersonButton;
     private JPanel mainPanel;
     private PersonListView personListView1;
+    private Controller controller;
 
-    private DataModel model = null;
 
     public People() {
         addPersonButton.addActionListener(this);
     }
 
-    public void setData(DataModel model) {
-        this.model = model;
+    public void setController(Controller controller) {
+        this.controller = controller;
         //TODO replace the following line:
-        personListView1.setData(model.getPeople());
+        personListView1.setData(controller.getPeople());
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == addPersonButton) {
-            if (model != null) {
-                model.addPerson(textField1.getText());
+            if (controller != null) {
+                controller.addPerson(textField1.getText());
                 personListView1.updateDisplay();
                 textField1.setText("");
             }

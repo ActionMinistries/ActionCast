@@ -23,10 +23,8 @@ public class DataModel {
 
     private Session currentSession = null;
 
-    public static DataModel instance = null;
-
     public DataModel() {
-        instance = this;
+
     }
 
     public Person getPerson(PersonID id) throws InvalidIDException {

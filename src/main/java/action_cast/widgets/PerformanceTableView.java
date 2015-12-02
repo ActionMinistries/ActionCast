@@ -50,7 +50,8 @@ public class PerformanceTableView extends DisplayTable implements MouseListener 
         if (me.getClickCount() == 2) {
             if (row < performanceList.size()) {
                 AddPerformance newAddPerformance = new AddPerformance(card.getBreadCrumb());
-                newAddPerformance.setData(DataModel.instance.getCurrentSession(), DataModel.instance.getCurrentSession().getPerformances().get(row));
+                //TODO
+               // newAddPerformance.setData(DataModel.instance.getCurrentSession(), DataModel.instance.getCurrentSession().getPerformances().get(row));
                 card.addCard(newAddPerformance);
             }
         }

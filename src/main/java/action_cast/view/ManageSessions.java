@@ -47,10 +47,11 @@ public class ManageSessions extends BaseCardClass implements ActionListener {
 
     @Override
     public String getName() {
-        if (DataModel.instance == null) {
-            return "Current Session";
-        }
-        return DataModel.instance.getCurrentSession() == null ? "Current Session" : DataModel.instance.getCurrentSession().getName();
+        //TODO
+//        if (DataModel.instance == null) {
+//            return "Current Session";
+//        }
+        return "Current Session";
     }
 
     public void setData(DataModel currentModel) {

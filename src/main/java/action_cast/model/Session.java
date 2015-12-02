@@ -72,7 +72,8 @@ public class Session {
     }
 
     public void addPerson(PersonID person) throws InvalidIDException {
-        people.add(DataModel.instance.getPerson(person));
+        //TODO
+        //people.add(DataModel.instance.getPerson(person));
     }
 
     public void setEnd(Date end) {

@@ -1,6 +1,6 @@
 package action_cast.view;
 
-import action_cast.data_store.DataStore;
+import action_cast.controller.Controller;
 import action_cast.model.exceptions.InvalidIDException;
 import org.xml.sax.SAXException;
 
@@ -17,10 +17,12 @@ public class Main {
     private ManageSessions manageSessions1;
     private TileViewTest tileViewTest1;
 
+    private Controller controller;
     public Main() throws JAXBException, SAXException, InvalidIDException {
-        ClassLoader classLoader = getClass().getClassLoader();
-        DataStore store = new DataStore(classLoader.getResource("main.xml").getFile());
-        store.load();
+        controller = new Controller();
+        //ClassLoader classLoader = getClass().getClassLoader();
+       // DataStore store = new DataStore(classLoader.getResource("main.xml").getFile());
+       // store.load();
 //        Long startTime = System.currentTimeMillis();
 //        Long endTime = System.currentTimeMillis();
 //        endTime += 1000000000;
@@ -37,8 +39,8 @@ public class Main {
 //        model.addPerson("Random Guy");
 //
 //        store.save();
-        people1.setData(store.getModel());
-        manageSessions1.setData(store.getModel());
+        people1.setController(controller);//.setData(store.getModel());
+        //manageSessions1.setData(store.getModel());
     }
 
     public static void main(String[] args) throws JAXBException, SAXException, InvalidIDException {
