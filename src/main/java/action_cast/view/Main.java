@@ -40,7 +40,7 @@ public class Main {
 //
 //        store.save();
         people1.setController(controller);//.setData(store.getModel());
-        //manageSessions1.setData(store.getModel());
+        manageSessions1.setController(controller);
     }
 
     public static void main(String[] args) throws JAXBException, SAXException, InvalidIDException {

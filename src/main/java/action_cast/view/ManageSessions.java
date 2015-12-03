@@ -1,5 +1,6 @@
 package action_cast.view;
 
+import action_cast.controller.Controller;
 import action_cast.model.DataModel;
 import action_cast.model.Session;
 import action_cast.widgets.CardPanel;
@@ -28,7 +29,7 @@ public class ManageSessions extends BaseCardClass implements ActionListener {
     private JTextField nameTextField;
     private PerformanceTableView performanceTableView1;
 
-    private DataModel model;
+    private Controller controller;
 
     public ManageSessions() {
         this(new BreadCrumb());
@@ -54,8 +55,8 @@ public class ManageSessions extends BaseCardClass implements ActionListener {
         return "Current Session";
     }
 
-    public void setData(DataModel currentModel) {
-        model = currentModel;
+    public void setController(Controller controller) {
+        this.controller = controller;
         updateDisplay();
     }
 
@@ -69,21 +70,21 @@ public class ManageSessions extends BaseCardClass implements ActionListener {
 
     protected void updateDisplay() {
         List<Session> sessionList = new ArrayList<>();
-        sessionList.add(model.getCurrentSession());
-        ((UtilDateModel) startDate.getModel()).setValue(model.getCurrentSession().getStartDate());
-        ((UtilDateModel) endDate.getModel()).setValue(model.getCurrentSession().getEndDate());
-        nameTextField.setText(model.getCurrentSession().getName());
-        performanceTableView1.setData(model.getCurrentSession().getPerformances());
+        sessionList.add(controller.getCurrentSession());
+        ((UtilDateModel) startDate.getModel()).setValue(controller.getCurrentSession().getStartDate());
+        ((UtilDateModel) endDate.getModel()).setValue(controller.getCurrentSession().getEndDate());
+        nameTextField.setText(controller.getCurrentSession().getName());
+        performanceTableView1.setData(controller.getCurrentSession().getPerformances());
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == saveButton) {
-            model.getCurrentSession().setName(nameTextField.getText());
-            model.getCurrentSession().setStart(((UtilDateModel) startDate.getModel()).getValue());
-            model.getCurrentSession().setEnd(((UtilDateModel) startDate.getModel()).getValue());
+            controller.getCurrentSession().setName(nameTextField.getText());
+            controller.getCurrentSession().setStart(((UtilDateModel) startDate.getModel()).getValue());
+            controller.getCurrentSession().setEnd(((UtilDateModel) startDate.getModel()).getValue());
         } else if (e.getSource() == assignPeopleButton) {
-            AddPeopleToSessionDialog peopleToSessionDialog = new AddPeopleToSessionDialog(model, model.getCurrentSession());
+            AddPeopleToSessionDialog peopleToSessionDialog = new AddPeopleToSessionDialog(controller, controller.getCurrentSession());
             peopleToSessionDialog.pack();
             peopleToSessionDialog.setVisible(true);
         }

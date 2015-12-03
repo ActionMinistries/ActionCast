@@ -1,5 +1,6 @@
 package action_cast.view;
 
+import action_cast.controller.Controller;
 import action_cast.model.DataModel;
 import action_cast.model.Session;
 import action_cast.widgets.PersonListView;
@@ -15,16 +16,16 @@ public class AddPeopleToSessionDialog extends JDialog {
     private PersonListView personListView1;
     private PersonTileView personTileView1;
 
-    private final DataModel model;
+    private final Controller controller;
     private final Session session;
 
 
-    public AddPeopleToSessionDialog(DataModel model, Session session) {
-        this.model = model;
+    public AddPeopleToSessionDialog(Controller controller, Session session) {
+        this.controller = controller;
         this.session = session;
 
         //TODO replace the following line:
-        personListView1.setData(model.getPeople());
+        personListView1.setData(controller.getPeople());
         personTileView1.setData(session.getPeople());
 
         setContentPane(contentPane);
