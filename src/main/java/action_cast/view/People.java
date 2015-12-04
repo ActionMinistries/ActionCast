@@ -1,7 +1,6 @@
 package action_cast.view;
 
 import action_cast.controller.Controller;
-import action_cast.model.DataModel;
 import action_cast.widgets.PersonListView;
 
 import javax.swing.*;

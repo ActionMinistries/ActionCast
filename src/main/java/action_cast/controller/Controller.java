@@ -9,6 +9,7 @@ import action_cast.model.id.PersonID;
 import org.xml.sax.SAXException;
 
 import javax.xml.bind.JAXBException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,6 +22,7 @@ public class Controller {
     PeopleController peopleController;
     PerformanceController performanceController;
     PerformersController performersController;
+    SessionController sessionController;
 
     public Controller() {
         ClassLoader classLoader = getClass().getClassLoader();
@@ -47,10 +49,11 @@ public class Controller {
         model.addPerson(name);
     }
 
-    public List<Person> getPeople() {
-        //TODO THIS IS WRONG!!!
-        return model.getPeople();
+    public List<action_cast.controller.Data.Person> getPeople() {
+        List<action_cast.controller.Data.Person> results = new ArrayList<>();
+        for (Person person : model.getPeople()) {
+            results.add(new action_cast.controller.Data.Person(person.getName()));
+        }
+        return results;
     }
-
-
 }

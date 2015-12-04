@@ -17,16 +17,13 @@ public class AddPeopleToSessionDialog extends JDialog {
     private PersonTileView personTileView1;
 
     private final Controller controller;
-    private final Session session;
-
 
     public AddPeopleToSessionDialog(Controller controller, Session session) {
         this.controller = controller;
-        this.session = session;
 
         //TODO replace the following line:
         personListView1.setData(controller.getPeople());
-        personTileView1.setData(session.getPeople());
+        personTileView1.setData(controller.getCurrentSession().getPeople());
 
         setContentPane(contentPane);
         setModal(true);

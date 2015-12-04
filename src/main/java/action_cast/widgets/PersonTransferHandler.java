@@ -1,9 +1,8 @@
 package action_cast.widgets;
 
-import action_cast.model.Person;
+import action_cast.controller.Data.Person;
 import action_cast.widgets.custom.JTileView;
 import action_cast.widgets.custom.PersonTile;
-import action_cast.widgets.custom.Tile;
 
 import javax.activation.DataHandler;
 import javax.swing.*;

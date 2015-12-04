@@ -1,9 +1,8 @@
 package action_cast.widgets.custom;
 
-import action_cast.model.Person;
+import action_cast.controller.Data.Person;
 
 import java.awt.*;
-import java.awt.event.MouseEvent;
 
 /**
  * Created by bmichaud on 11/4/2015.
