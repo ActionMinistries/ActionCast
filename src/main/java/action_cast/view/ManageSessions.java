@@ -69,20 +69,20 @@ public class ManageSessions extends BaseCardClass implements ActionListener {
 //    }
 
     protected void updateDisplay() {
-        List<Session> sessionList = new ArrayList<>();
-        sessionList.add(controller.getCurrentSession());
-        ((UtilDateModel) startDate.getModel()).setValue(controller.getCurrentSession().getStartDate());
-        ((UtilDateModel) endDate.getModel()).setValue(controller.getCurrentSession().getEndDate());
-        nameTextField.setText(controller.getCurrentSession().getName());
-        performanceTableView1.setData(controller.getCurrentSession().getPerformances());
+       // List<Session> sessionList = new ArrayList<>();
+        //sessionList.add(controller.getSessionController());
+        ((UtilDateModel) startDate.getModel()).setValue(controller.getSessionController().getCurrentSessionStartDate());
+        ((UtilDateModel) endDate.getModel()).setValue(controller.getSessionController().getCurrentSessionEndDate());
+        nameTextField.setText(controller.getSessionController().getCurrentSessionName());
+        performanceTableView1.setData(controller.getSessionController().getPerformances());
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == saveButton) {
-            controller.getCurrentSession().setName(nameTextField.getText());
-            controller.getCurrentSession().setStart(((UtilDateModel) startDate.getModel()).getValue());
-            controller.getCurrentSession().setEnd(((UtilDateModel) startDate.getModel()).getValue());
+            controller.getSessionController().setName(nameTextField.getText());
+            controller.getSessionController().setStart(((UtilDateModel) startDate.getModel()).getValue());
+            controller.getSessionController().setEnd(((UtilDateModel) startDate.getModel()).getValue());
         } else if (e.getSource() == assignPeopleButton) {
             AddPeopleToSessionDialog peopleToSessionDialog = new AddPeopleToSessionDialog(controller, controller.getCurrentSession());
             peopleToSessionDialog.pack();

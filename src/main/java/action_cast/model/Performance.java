@@ -2,6 +2,7 @@ package action_cast.model;
 
 import action_cast.model.exceptions.InvalidIDException;
 import action_cast.model.id.SongID;
+import action_cast.model.modelinterface.PerformanceModel;
 
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlIDREF;
@@ -12,7 +13,7 @@ import java.util.Map;
 /**
  * Created by bmichaud on 8/31/2015.
  */
-public class Performance {
+public class Performance implements PerformanceModel {
 
     private String name;
     private String venue;
@@ -34,23 +35,28 @@ public class Performance {
         this.date = date;
     }
 
+    @Override
     public String getName() {
         return name;
     }
 
+    @Override
     public String getVenue() {
         return venue;
     }
 
+    @Override
     public Date getDate() {
         return date;
     }
 
+    @Override
     @XmlIDREF
     public Song getSong() {
         return song;
     }
 
+    @Override
     public Map<Performer, Role> getAssignments() {
         return assignments;
     }
@@ -59,6 +65,7 @@ public class Performance {
         assignments.put(performer, role);
     }
 
+    @Override
     public Director getDirector() {
         return director;
     }

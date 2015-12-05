@@ -1,6 +1,6 @@
 package action_cast.widgets;
 
-import action_cast.controller.Data.Person;
+import action_cast.model.modelinterface.PersonView;
 
 import javax.swing.*;
 import java.util.List;
@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class PersonDisplayGrid extends DisplayTable {
 
-    List<Person> people = null;
+    List<PersonView> people = null;
 
     public PersonDisplayGrid(){
         super(2, 2);
@@ -23,12 +23,12 @@ public class PersonDisplayGrid extends DisplayTable {
         this.getColumnModel().getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
 
-    public void setData(List<Person> people) {
+    public void setData(List<PersonView> people) {
         this.people = people;
         updateDisplay();
     }
 
-    public void addPerson(Person person, int row, int col) {
+    public void addPerson(PersonView person, int row, int col) {
         if (row < getRowCount() && col < getColumnCount()) {
             int index = getColumnCount() * row + col;
             if (index < people.size()) {
@@ -51,7 +51,7 @@ public class PersonDisplayGrid extends DisplayTable {
         updateDisplay();
     }
 
-    public Person getSelectedPerson() {
+    public PersonView getSelectedPerson() {
         int row = getSelectedRow();
         int col = getSelectedColumn();
         int index = getColumnCount() * row + col;

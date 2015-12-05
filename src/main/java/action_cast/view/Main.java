@@ -34,7 +34,7 @@ public class Main {
 //
 //        PersonID random_guy = model.addPerson("random guy");
 //        model.getCurrentSession().addPerson(random_guy);
-//        //model.getCurrentSession().addPerson(new Person("random guy"));
+//        //model.getCurrentSession().addPerson(new PersonView("random guy"));
 //
 //        model.addPerson("Random Guy");
 //

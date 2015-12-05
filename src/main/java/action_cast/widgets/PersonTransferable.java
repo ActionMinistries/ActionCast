@@ -1,6 +1,6 @@
 package action_cast.widgets;
 
-import action_cast.controller.Data.Person;
+import action_cast.model.modelinterface.PersonView;
 
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
@@ -12,10 +12,10 @@ import java.io.IOException;
  */
 public class PersonTransferable implements Transferable {
 
-    private final Person person;
+    private final PersonView person;
     private final DataFlavor dataFlavor;
 
-    public PersonTransferable(Person person, DataFlavor flavor) {
+    public PersonTransferable(PersonView person, DataFlavor flavor) {
         this.person = person;
         this.dataFlavor = flavor;
     }

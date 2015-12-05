@@ -1,9 +1,8 @@
 package action_cast.widgets;
 
+import action_cast.model.modelinterface.PerformanceView;
 import action_cast.view.AddPerformance;
 import action_cast.view.BaseCardClass;
-import action_cast.model.DataModel;
-import action_cast.model.Performance;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -18,7 +17,7 @@ import java.util.List;
  */
 public class PerformanceTableView extends DisplayTable implements MouseListener {
 
-    private List<Performance> performanceList = new ArrayList<>();
+    private List<PerformanceView> performanceList = new ArrayList<>();
     private BaseCardClass card;
 
     public PerformanceTableView(BaseCardClass card) {
@@ -27,10 +26,10 @@ public class PerformanceTableView extends DisplayTable implements MouseListener 
         addMouseListener(this);
     }
 
-    public void setData(List<Performance> data) {
+    public void setData(List<PerformanceView> data) {
         performanceList = data;
         ((DefaultTableModel)getModel()).setRowCount(0);
-        for (Performance performance : performanceList) {
+        for (PerformanceView performance : performanceList) {
             ((DefaultTableModel)getModel()).addRow(new Object[]{performance.getName(), performance.getVenue(), performance.getSong().getName(), performance.getDate()});
         }
     }

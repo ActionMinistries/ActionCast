@@ -2,15 +2,14 @@ package action_cast.controller;
 
 import action_cast.data_store.DataStore;
 import action_cast.model.DataModel;
-import action_cast.model.Person;
-import action_cast.model.Session;
 import action_cast.model.exceptions.InvalidIDException;
 import action_cast.model.id.PersonID;
+import action_cast.model.modelinterface.PersonView;
 import org.xml.sax.SAXException;
 
 import javax.xml.bind.JAXBException;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by bmichaud on 12/1/2015.
@@ -19,9 +18,6 @@ public class Controller {
 
     DataModel model;
 
-    PeopleController peopleController;
-    PerformanceController performanceController;
-    PerformersController performersController;
     SessionController sessionController;
 
     public Controller() {
@@ -30,15 +26,12 @@ public class Controller {
         try {
             store.load();
             model = store.getModel();
+            sessionController = new SessionController(model.getCurrentSession());
         } catch (JAXBException e) {
             e.printStackTrace();
         } catch (SAXException e) {
             e.printStackTrace();
         }
-    }
-
-    public Session getCurrentSession() {
-        return model.getCurrentSession();
     }
 
     public void assignPersonToCurrentSession(PersonID id) throws InvalidIDException {
@@ -49,11 +42,12 @@ public class Controller {
         model.addPerson(name);
     }
 
-    public List<action_cast.controller.Data.Person> getPeople() {
-        List<action_cast.controller.Data.Person> results = new ArrayList<>();
-        for (Person person : model.getPeople()) {
-            results.add(new action_cast.controller.Data.Person(person.getName()));
-        }
+    public List<PersonView> getPeople() {
+        List<PersonView> results = model.getPeople().stream().map(person -> (PersonView)(person)).collect(Collectors.toList());
         return results;
+    }
+
+    public SessionController getSessionController() {
+        return sessionController;
     }
 }

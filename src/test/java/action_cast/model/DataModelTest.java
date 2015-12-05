@@ -50,7 +50,7 @@ public class DataModelTest {
         Session session = new Session("personSession", new Date(), new Date());
         DataModel model = new DataModel();
         model.setCurrentSession(session);
-        //List<Person> people = model.getPeople();
+        //List<PersonView> people = model.getPeople();
         //assertEquals(0, people.size());
         PersonID id = model.addPerson("random guy");
         //people = model.getPeople();

@@ -1,6 +1,6 @@
 package action_cast.widgets;
 
-import action_cast.controller.Data.Person;
+import action_cast.model.modelinterface.PersonView;
 
 import javax.swing.*;
 import java.util.List;
@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class PersonListView extends JList{
 
-    List<Person> people;
+    List<PersonView> people;
 
     public PersonListView() {
         super(new DefaultListModel());
@@ -19,7 +19,7 @@ public class PersonListView extends JList{
         setDropMode(DropMode.INSERT);
     }
 
-    public void setData(List<Person> people) {
+    public void setData(List<PersonView> people) {
         this.people = people;
         updateDisplay();
     }
@@ -27,18 +27,18 @@ public class PersonListView extends JList{
     public void updateDisplay() {
         if (people != null) {
             ((DefaultListModel) getModel()).clear();
-            for (Person person : people) {
+            for (PersonView person : people) {
                 ((DefaultListModel) getModel()).addElement(person.getName());
             }
         }
     }
 
-    public void addPerson(int index, Person person) {
+    public void addPerson(int index, PersonView person) {
         people.add(index, person);
         updateDisplay();
     }
 
-    public Person getSelectedPerson() {
+    public PersonView getSelectedPerson() {
         return people.get(getSelectedIndex());
     }
 

@@ -1,6 +1,6 @@
 package action_cast.widgets;
 
-import action_cast.controller.Data.Person;
+import action_cast.model.modelinterface.PersonView;
 import action_cast.widgets.custom.JTileView;
 import action_cast.widgets.custom.PersonTile;
 
@@ -13,10 +13,10 @@ import java.util.List;
  */
 public class PersonTileView extends JTileView {
 
-    List<Person> people = new ArrayList<>();
+    List<PersonView> people = new ArrayList<>();
 
-    public void setData(List<Person> people) {
-        for(Person person : people) {
+    public void setData(List<PersonView> people) {
+        for(PersonView person : people) {
             super.add(new PersonTile(this, person));
         }
         this.people = people;

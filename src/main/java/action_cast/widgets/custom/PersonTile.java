@@ -1,6 +1,6 @@
 package action_cast.widgets.custom;
 
-import action_cast.controller.Data.Person;
+import action_cast.model.modelinterface.PersonView;
 
 import java.awt.*;
 
@@ -8,8 +8,8 @@ import java.awt.*;
  * Created by bmichaud on 11/4/2015.
  */
 public class PersonTile extends Tile {
-    Person person;
-    public PersonTile(JTileView parent, Person person) {
+    PersonView person;
+    public PersonTile(JTileView parent, PersonView person) {
         super(parent);
         this.person = person;
     }
@@ -21,7 +21,7 @@ public class PersonTile extends Tile {
 
     }
 
-    public Person getPerson() {
+    public PersonView getPerson() {
         return person;
     }
 }
