@@ -1,7 +1,8 @@
 package action_cast.view;
 
 import action_cast.model.Session;
-import org.jdatepicker.impl.*;
+import org.jdatepicker.impl.JDatePanelImpl;
+import org.jdatepicker.impl.JDatePickerImpl;
 
 import javax.swing.*;
 import java.awt.event.*;
