@@ -26,7 +26,8 @@ public class Performances extends BaseCardClass {
     }
 
     public void setData(Session session) {
-        performanceTableView1.setData(session.getPerformances());
+        //TODO
+        //performanceTableView1.setData(session.getPerformances());
     }
 
     private void createUIComponents() {

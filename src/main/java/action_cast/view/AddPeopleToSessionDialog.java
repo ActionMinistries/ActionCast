@@ -18,7 +18,7 @@ public class AddPeopleToSessionDialog extends JDialog {
 
     private final Controller controller;
 
-    public AddPeopleToSessionDialog(Controller controller, Session session) {
+    public AddPeopleToSessionDialog(Controller controller) {
         this.controller = controller;
 
         //TODO replace the following line:

@@ -1,5 +1,6 @@
 package action_cast.controller;
 
+import action_cast.controller.ClientObjects.Session;
 import action_cast.data_store.DataStore;
 import action_cast.model.DataModel;
 import action_cast.model.exceptions.InvalidIDException;
@@ -17,12 +18,13 @@ import java.util.stream.Collectors;
 public class Controller {
 
     DataModel model;
+    DataStore store;
 
     SessionController sessionController;
 
     public Controller() {
         ClassLoader classLoader = getClass().getClassLoader();
-        DataStore store = new DataStore(classLoader.getResource("main.xml").getFile());
+        store = new DataStore(classLoader.getResource("main.xml").getFile());
         try {
             store.load();
             model = store.getModel();
@@ -35,7 +37,7 @@ public class Controller {
     }
 
     public void assignPersonToCurrentSession(PersonID id) throws InvalidIDException {
-        model.getCurrentSession().addPerson(id);
+        model.getCurrentSession().addPerson(model.getPerson(id));
     }
 
     public void addPerson(String name) {
@@ -47,7 +49,26 @@ public class Controller {
         return results;
     }
 
+    public Session getCurrentSession() {
+        return new Session(model.getCurrentSession().getName(), model.getCurrentSession().getStartDate(), model.getCurrentSession().getEndDate());
+    }
+
     public SessionController getSessionController() {
         return sessionController;
+    }
+
+    public void updateCurrentSession(Session session) {
+        model.getCurrentSession().setName(session.getName());
+        model.getCurrentSession().setEnd(session.getEndDate());
+        model.getCurrentSession().setStart(session.getStartDate());
+        save();
+    }
+
+    private void save() {
+        try {
+            store.save();
+        } catch (JAXBException e) {
+            e.printStackTrace();
+        }
     }
 }

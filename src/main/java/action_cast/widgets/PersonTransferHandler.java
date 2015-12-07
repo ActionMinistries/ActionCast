@@ -1,5 +1,6 @@
 package action_cast.widgets;
 
+import action_cast.model.Person;
 import action_cast.model.modelinterface.PersonView;
 import action_cast.widgets.custom.JTileView;
 import action_cast.widgets.custom.PersonTile;

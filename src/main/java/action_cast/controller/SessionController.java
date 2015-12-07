@@ -4,7 +4,6 @@ import action_cast.model.Session;
 import action_cast.model.modelinterface.PerformanceView;
 import action_cast.model.modelinterface.PersonView;
 
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,17 +25,5 @@ public class SessionController {
 
     public List<PerformanceView> getPerformances() {
         return session.getPerformances().stream().map(performance -> ((PerformanceView)performance)).collect(Collectors.toList());
-    }
-
-    public String getCurrentSessionName() {
-        return session.getName();
-    }
-
-    public Date getCurrentSessionStartDate() {
-        return session.getStartDate();
-    }
-
-    public Date getCurrentSessionEndDate() {
-        return session.getStartDate();
     }
 }

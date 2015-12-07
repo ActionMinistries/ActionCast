@@ -127,8 +127,8 @@ public class DataStoreTest {
         Date date2 = new Date(time + 5000);
 
         Session session = new Session("savedSession", date1, date2);
-        session.addPerson(randomGuy);
-        session.addPerson(oddJob);
+        session.addPerson(store.getModel().getPerson(randomGuy));
+        session.addPerson(store.getModel().getPerson(oddJob));
 
 
 
