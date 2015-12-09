@@ -1,7 +1,7 @@
 package action_cast.model;
 
 import action_cast.model.exceptions.InvalidIDException;
-import action_cast.model.modelinterface.PerformanceModel;
+import action_cast.model.modelinterface.PerformanceView;
 
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlIDREF;
@@ -12,7 +12,7 @@ import java.util.Map;
 /**
  * Created by bmichaud on 8/31/2015.
  */
-public class Performance implements PerformanceModel {
+public class Performance implements PerformanceView {
 
     private String name;
     private String venue;

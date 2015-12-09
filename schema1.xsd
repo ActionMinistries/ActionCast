@@ -59,20 +59,24 @@
   </xs:complexType>
 
   <xs:complexType name="session">
-    <xs:sequence>
-      <xs:element name="name" type="xs:string" minOccurs="0"/>
-      <xs:element name="start" type="xs:dateTime" minOccurs="0"/>
-      <xs:element name="end" type="xs:dateTime" minOccurs="0"/>
-      <xs:element name="people" minOccurs="0">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element name="people" type="xs:IDREF" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
-      <xs:element name="performanceList" type="performance" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element name="performers" type="performer" minOccurs="0" maxOccurs="unbounded"/>
-    </xs:sequence>
+    <xs:complexContent>
+      <xs:extension base="uniqueItem">
+        <xs:sequence>
+          <xs:element name="name" type="xs:string" minOccurs="0"/>
+          <xs:element name="start" type="xs:dateTime" minOccurs="0"/>
+          <xs:element name="end" type="xs:dateTime" minOccurs="0"/>
+          <xs:element name="people" minOccurs="0">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="people" type="xs:IDREF" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="performanceList" type="performance" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="performers" type="performer" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
 
   <xs:complexType name="performance">

@@ -4,6 +4,7 @@ import action_cast.model.exceptions.InvalidIDException;
 import org.junit.Test;
 
 import java.util.Date;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -48,10 +49,10 @@ public class DataModelTest {
         Session session = new Session("personSession", new Date(), new Date());
         DataModel model = new DataModel();
         model.setCurrentSession(session);
-        //List<PersonView> people = model.getPeople();
-        //assertEquals(0, people.size());
+        List<Person> people = model.getPeople();
+        assertEquals(0, people.size());
         Person person = model.addPerson("random guy");
-        //people = model.getPeople();
+        assertEquals(1, model.getPeople().size());
         assertEquals("random guy", person.getName());
     }
 }

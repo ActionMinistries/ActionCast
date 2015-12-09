@@ -6,13 +6,15 @@ import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlType;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by bmichaud on 9/10/2015.
  */
 @XmlType(propOrder = {"name", "start", "end", "people", "performanceList", "performers"})
-public class Session {
+public class Session extends UniqueItem {
 
     private String name;
 
@@ -28,7 +30,7 @@ public class Session {
     private List<Performer> performers = new ArrayList<>();
     @XmlElementWrapper
     @XmlIDREF
-    private List<Person> people = new ArrayList<>();
+    private HashSet<Person> people = new HashSet<>();
 
     private Session () {
 
@@ -65,11 +67,19 @@ public class Session {
     }
 
     public List<Person> getPeople() {
-        return people;
+        return people.stream().collect(Collectors.toList());
     }
 
     public void addPerson(Person person) {
         people.add(person);
+    }
+
+    public boolean hasPerson(Person person) {
+        return people.contains(person);
+    }
+
+    public void clearPeople() {
+        people.clear();
     }
 
     public void setEnd(Date end) {

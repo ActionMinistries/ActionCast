@@ -1,7 +1,5 @@
 package action_cast.model;
 
-import action_cast.model.modelinterface.PersonModel;
-
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
@@ -9,7 +7,7 @@ import javax.xml.bind.annotation.XmlType;
  * Created by bmichaud on 9/1/2015.
  */
 @XmlType
-public class Person extends UniqueItem implements PersonModel{
+public class Person extends UniqueItem {
 
     private Person() {
 
@@ -23,13 +21,7 @@ public class Person extends UniqueItem implements PersonModel{
         this.id = id;
     }
 
-    @Override
     public String getName() {
         return name;
-    }
-
-    @Override
-    public int getIndex() {
-        return id;
     }
 }

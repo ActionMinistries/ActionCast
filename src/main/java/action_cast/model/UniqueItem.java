@@ -19,7 +19,9 @@ public abstract class UniqueItem {
         this.id = Integer.parseInt(id.substring(getClass().getSimpleName().length()+1));
     }
 
-    public abstract int getIndex();
+    public int getIndex() {
+        return id;
+    }
 
 
 }

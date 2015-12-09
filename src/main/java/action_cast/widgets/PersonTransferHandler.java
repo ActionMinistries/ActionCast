@@ -1,7 +1,6 @@
 package action_cast.widgets;
 
 import action_cast.controller.ClientObjects.Person;
-import action_cast.model.modelinterface.PersonView;
 import action_cast.widgets.custom.JTileView;
 import action_cast.widgets.custom.PersonTile;
 
@@ -20,7 +19,7 @@ public class PersonTransferHandler extends TransferHandler {
     private final DataFlavor personFlavor;
 
     public PersonTransferHandler() {
-        personFlavor = new DataFlavor(PersonView.class, "PersonView");
+        personFlavor = new DataFlavor(Person.class, "Person");
     }
 
     public int getSourceActions(JComponent c) {

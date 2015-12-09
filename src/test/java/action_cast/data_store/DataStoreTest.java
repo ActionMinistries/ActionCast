@@ -84,8 +84,8 @@ public class DataStoreTest {
     public void testLoad_DataCorrelation() throws InvalidIDException {
         DataModel dataModel = dataStore.getModel();
         Session currentSession = dataModel.getCurrentSession();
-        assertTrue(dataModel.getPerson(0) == currentSession.getPeople().get(0));
-        assertTrue(dataModel.getPerson(0).getName() == currentSession.getPeople().get(0).getName());
+        assertTrue(currentSession.hasPerson(dataModel.getPerson(0)));
+        assertTrue(currentSession.hasPerson(dataModel.getPerson(1)));
     }
 
     @Test

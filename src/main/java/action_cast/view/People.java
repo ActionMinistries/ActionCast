@@ -24,8 +24,7 @@ public class People implements ActionListener {
 
     public void setController(Controller controller) {
         this.controller = controller;
-        //TODO replace the following line:
-        personListView1.setData(controller.getPeople());
+        updateDisplay();
     }
 
     @Override
@@ -33,9 +32,13 @@ public class People implements ActionListener {
         if (e.getSource() == addPersonButton) {
             if (controller != null) {
                 controller.addPerson(textField1.getText());
-                personListView1.updateDisplay();
+                updateDisplay();
                 textField1.setText("");
             }
         }
+    }
+
+    public void updateDisplay() {
+        personListView1.setData(controller.getPeople());
     }
 }

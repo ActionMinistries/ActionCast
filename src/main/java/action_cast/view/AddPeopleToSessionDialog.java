@@ -3,6 +3,7 @@ package action_cast.view;
 import action_cast.controller.Controller;
 import action_cast.model.DataModel;
 import action_cast.model.Session;
+import action_cast.model.exceptions.InvalidIDException;
 import action_cast.widgets.PersonListView;
 import action_cast.widgets.PersonTileView;
 
@@ -22,7 +23,7 @@ public class AddPeopleToSessionDialog extends JDialog {
         this.controller = controller;
 
         //TODO replace the following line:
-        personListView1.setData(controller.getPeople());
+        personListView1.setData(controller.getPeopleNotInCurrentSession());
         personTileView1.setData(controller.getSessionController().getPeople());
 
         setContentPane(contentPane);
@@ -52,6 +53,11 @@ public class AddPeopleToSessionDialog extends JDialog {
     }
 
     private void onOK() {
+        try {
+            controller.getSessionController().setPeople(personTileView1.getPeople());
+        } catch (InvalidIDException e) {
+            e.printStackTrace();
+        }
         dispose();
     }
 

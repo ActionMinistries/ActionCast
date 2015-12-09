@@ -41,9 +41,4 @@ public class Song extends UniqueItem {
     public List<Role> getRoles() {
         return roles;
     }
-
-    @Override
-    public int getIndex() {
-        return id;
-    }
 }

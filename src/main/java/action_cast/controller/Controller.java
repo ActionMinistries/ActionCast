@@ -8,6 +8,7 @@ import action_cast.model.exceptions.InvalidIDException;
 import org.xml.sax.SAXException;
 
 import javax.xml.bind.JAXBException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,7 +28,7 @@ public class Controller {
         try {
             store.load();
             model = store.getModel();
-            sessionController = new SessionController(model.getCurrentSession());
+            sessionController = new SessionController(model.getCurrentSession(), this);
         } catch (JAXBException e) {
             e.printStackTrace();
         } catch (SAXException e) {
@@ -41,6 +42,12 @@ public class Controller {
 
     public void addPerson(String name) {
         model.addPerson(name);
+    }
+
+    public List<Person> getPeopleNotInCurrentSession() {
+        List<Person> results = model.getPeople().stream().filter(person -> !model.getCurrentSession().hasPerson(person)).map(person -> new Person(person.getIndex(), person.getName())).collect(Collectors.toList());
+        //= model.getPeople().stream().map(person -> new Person(person.getIndex(), person.getName())).collect(Collectors.toList());
+        return results;
     }
 
     public List<Person> getPeople() {

@@ -1,7 +1,6 @@
 package action_cast.widgets;
 
 import action_cast.controller.ClientObjects.Person;
-import action_cast.model.modelinterface.PersonView;
 
 import javax.swing.*;
 import java.util.List;
