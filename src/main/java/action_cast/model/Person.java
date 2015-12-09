@@ -18,12 +18,18 @@ public class Person extends UniqueItem implements PersonModel{
     @XmlElement
     private String name;
 
-    public Person(String name) {
+    public Person(int id, String name) {
         this.name = name;
+        this.id = id;
     }
 
     @Override
     public String getName() {
         return name;
+    }
+
+    @Override
+    public int getIndex() {
+        return id;
     }
 }

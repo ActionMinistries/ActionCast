@@ -20,9 +20,10 @@ public class Song extends UniqueItem {
 
     }
 
-    public Song(String name, String description) {
+    public Song(int id, String name, String description) {
         this.name = name;
         this.description = description;
+        this.id = id;
     }
 
     public String getName() {
@@ -39,5 +40,10 @@ public class Song extends UniqueItem {
 
     public List<Role> getRoles() {
         return roles;
+    }
+
+    @Override
+    public int getIndex() {
+        return id;
     }
 }

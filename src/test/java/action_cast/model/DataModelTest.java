@@ -1,11 +1,9 @@
 package action_cast.model;
 
 import action_cast.model.exceptions.InvalidIDException;
-import action_cast.model.id.PersonID;
 import org.junit.Test;
 
 import java.util.Date;
-import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -52,8 +50,8 @@ public class DataModelTest {
         model.setCurrentSession(session);
         //List<PersonView> people = model.getPeople();
         //assertEquals(0, people.size());
-        PersonID id = model.addPerson("random guy");
+        Person person = model.addPerson("random guy");
         //people = model.getPeople();
-        assertEquals("random guy", model.getPerson(id).getName());
+        assertEquals("random guy", person.getName());
     }
 }

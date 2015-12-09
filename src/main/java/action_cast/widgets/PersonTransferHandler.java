@@ -1,6 +1,6 @@
 package action_cast.widgets;
 
-import action_cast.model.Person;
+import action_cast.controller.ClientObjects.Person;
 import action_cast.model.modelinterface.PersonView;
 import action_cast.widgets.custom.JTileView;
 import action_cast.widgets.custom.PersonTile;
@@ -28,7 +28,7 @@ public class PersonTransferHandler extends TransferHandler {
     }
 
     protected Transferable createTransferable(JComponent c) {
-        PersonView toMove = null;
+        Person toMove = null;
         final DataHandler dh = new DataHandler(c, personFlavor.getMimeType());
         if (c instanceof PersonListView) {
             toMove = ((PersonListView)c).getSelectedPerson();
@@ -37,7 +37,7 @@ public class PersonTransferHandler extends TransferHandler {
         else if (c instanceof PersonDisplayGrid) {
             toMove = ((PersonDisplayGrid)c).getSelectedPerson();
         } else if (c instanceof PersonTile)
-            toMove = ((PersonTile)((PersonTile)c)).getPerson();
+            toMove = ((PersonTile)(c)).getPerson();
         if (toMove == null) {
             System.out.println("null");
 

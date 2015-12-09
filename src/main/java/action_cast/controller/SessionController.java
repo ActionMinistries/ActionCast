@@ -1,8 +1,8 @@
 package action_cast.controller;
 
+import action_cast.controller.ClientObjects.Person;
 import action_cast.model.Session;
 import action_cast.model.modelinterface.PerformanceView;
-import action_cast.model.modelinterface.PersonView;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,8 +18,8 @@ public class SessionController {
         this.session = session;
     }
 
-    public List<PersonView> getPeople() {
-        List<PersonView> results = session.getPeople().stream().map(person -> (PersonView)person).collect(Collectors.toList());
+    public List<Person> getPeople() {
+        List<Person> results = session.getPeople().stream().map(person -> new Person(person.getIndex(), person.getName())).collect(Collectors.toList());
         return results;
     }
 

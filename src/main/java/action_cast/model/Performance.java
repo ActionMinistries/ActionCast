@@ -1,7 +1,6 @@
 package action_cast.model;
 
 import action_cast.model.exceptions.InvalidIDException;
-import action_cast.model.id.SongID;
 import action_cast.model.modelinterface.PerformanceModel;
 
 import javax.xml.bind.annotation.XmlElementWrapper;
@@ -27,9 +26,8 @@ public class Performance implements PerformanceModel {
 
     }
 
-    public Performance(SongID song, String name, String venue, Date date) throws InvalidIDException {
-        //TODO
-        //this.song = DataModel.instance.getSong(song);
+    public Performance(Song song, String name, String venue, Date date) throws InvalidIDException {
+        this.song = song;
         this.name = name;
         this.venue = venue;
         this.date = date;

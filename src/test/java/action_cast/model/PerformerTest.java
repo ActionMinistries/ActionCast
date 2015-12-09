@@ -13,7 +13,7 @@ public class PerformerTest {
     public void testCreate() {
         String name = "randomGuy";
 
-        Person randomGuy = new Person(name);
+        Person randomGuy = new Person(-1, name);
         Performer performer = new Performer(randomGuy);
         assertEquals("randomGuy", performer.getName());
     }

@@ -1,10 +1,6 @@
 package action_cast.view;
 
-import action_cast.model.Performance;
-import action_cast.model.Session;
-import action_cast.model.Song;
-import action_cast.model.exceptions.InvalidIDException;
-import action_cast.model.id.SongID;
+import action_cast.controller.SessionController;
 import action_cast.widgets.CardPanel;
 import action_cast.widgets.PersonListView;
 import action_cast.widgets.PersonTileView;
@@ -13,9 +9,6 @@ import action_cast.widgets.SongSelector;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 /**
  * Created by brian on 9/11/2015.
@@ -30,9 +23,10 @@ public class AddPerformance extends BaseCardClass implements ActionListener {
     private PersonListView personListView1;
     private PersonTileView personTileView1;
 
-    private Session currentSession;
-    private Performance currentPerformance;
-    private List<Song> songs = new ArrayList<>();
+    private SessionController sessionController;
+    //TODO
+    //private Performance currentPerformance;
+   // private List<Song> songs = new ArrayList<>();
 
     public AddPerformance() {
         this(new BreadCrumb());
@@ -41,17 +35,19 @@ public class AddPerformance extends BaseCardClass implements ActionListener {
     public AddPerformance(BreadCrumb breadCrumb) {
         super(breadCrumb);
         createButton.addActionListener(this);
-        songs.add(new Song("500 miles", "But I would walk 500 miles..."));
-        songSelector1.setData(songs);
+        //TODO?
+        //songs.add(new Song(-1, "500 miles", "But I would walk 500 miles..."));
+        //songSelector1.setData(songs);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == createButton) {
-            if (currentSession != null) {
-                if (currentPerformance == null) {
+            if (sessionController != null) {
+                //TODO
+               /* if (currentPerformance == null) {
                     try {
-                        currentSession.addPerformance(new Performance(new SongID(songSelector1.getSelectedIndex()), nameField.getText(), venueField.getText(), new Date()));
+                        sessionController.addPerformance(new Performance(songSelector1.getSelectedIndex(), nameField.getText(), venueField.getText(), new Date()));
                     } catch (InvalidIDException e1) {
                         e1.printStackTrace();
                     }
@@ -64,28 +60,30 @@ public class AddPerformance extends BaseCardClass implements ActionListener {
                     currentPerformance.setName(nameField.getText());
                     currentPerformance.setVenue(venueField.getText());
                     currentPerformance.setSong(songs.get(songSelector1.getSelectedIndex()));
-                }
+                }*/
             }
         }
     }
 
-    public void setData(Session session) {
-        currentSession = session;
+    public void setController(SessionController session) {
+        sessionController = session;
     }
 
-    public void setData(Session session, Performance performance) {
-        currentSession = session;
+    //TODO
+    /*public void setData(SessionController session, Performance performance) {
+        sessionController = session;
         currentPerformance = performance;
         updateDisplay();
-    }
+    }*/
 
     public void updateDisplay() {
-        nameField.setText(currentPerformance.getName());
+        //TODO
+       /* nameField.setText(currentPerformance.getName());
         venueField.setText(currentPerformance.getVenue());
-        dateField.setText(currentPerformance.getDate().toString());
+        dateField.setText(currentPerformance.getDate().toString());*/
         songSelector1.setSelectedIndex(0);
         //TODO
-       // personListView1.setData(currentSession.getPeople());
+       // personListView1.setData(sessionController.getPeople());
     }
 
 
@@ -96,7 +94,9 @@ public class AddPerformance extends BaseCardClass implements ActionListener {
 
     @Override
     public String getName() {
-        return currentPerformance == null ? "Add performance" : currentPerformance.getName();
+        //TODO
+       // return currentPerformance == null ? "Add performance" : currentPerformance.getName();
+        return "Add performance";
     }
 
     private void createUIComponents() {

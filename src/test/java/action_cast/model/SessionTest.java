@@ -1,8 +1,6 @@
 package action_cast.model;
 
 import action_cast.model.exceptions.InvalidIDException;
-import action_cast.model.id.PersonID;
-import action_cast.model.id.SongID;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -42,8 +40,8 @@ public class SessionTest {
 
        // List<Performance> performances = new ArrayList<>();
         DataModel model = new DataModel();
-        SongID first = model.addSong("Cool song", "Na na, nanana!");
-        SongID second = model.addSong("Whatever.", "Naaaaa! :'( ");
+        Song first = model.addSong("Cool song", "Na na, nanana!");
+        Song second = model.addSong("Whatever.", "Naaaaa! :'( ");
         assertEquals(0, s.getPerformances().size());
         s.addPerformance(new Performance(first, "The main event!", "Wouldn't you like to know?", new Date()));
         assertEquals(1, s.getPerformances().size());
@@ -63,7 +61,7 @@ public class SessionTest {
 
         //List<Performer> performers = new ArrayList<>();
         assertEquals(0, s.getPerformers().size());
-        s.addPerformer(new Performer(new Person("SomeGuy")));
+        s.addPerformer(new Performer(new Person(-1, "SomeGuy")));
         assertEquals(1, s.getPerformers().size());
 
     }
@@ -77,9 +75,9 @@ public class SessionTest {
 
         //List<Performer> performers = new ArrayList<>();
         DataModel model = new DataModel();
-        PersonID id = model.addPerson("SomeGuy");
+        Person person = model.addPerson("SomeGuy");
         assertEquals(0, s.getPeople().size());
-        s.addPerson(model.getPerson(id));
+        s.addPerson(model.getPerson(person.getIndex()));
         assertEquals(1, s.getPeople().size());
 
     }
@@ -96,7 +94,7 @@ public class SessionTest {
 
         assertEquals(0, s.getPeople().size());
         boolean thrown = false;
-        s.addPerson(new Person("guy"));
+        s.addPerson(new Person(-1, "guy"));
 
         assertTrue(thrown);
         assertEquals(0, s.getPeople().size());

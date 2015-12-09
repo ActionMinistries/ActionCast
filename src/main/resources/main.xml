@@ -1,31 +1,31 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <dataModel>
     <people>
-        <people id="I-f86eb11c-9256-4188-b51c-880e0f5d198d">
+        <people id="Person-0">
             <name>random guy</name>
         </people>
-        <people id="I-c60043df-6d37-4152-9403-451970db58b3">
+        <people id="Person-1">
             <name>Random Guy</name>
         </people>
     </people>
     <songs>
-        <songs id="I-0a37d96a-c092-49d2-81d2-53561dac262c">
+        <songs id="Song-0">
             <name>The First Song</name>
             <description>It goes like this na na na, na na, na na na na</description>
         </songs>
     </songs>
     <currentSession>
         <name>Fall 2015</name>
-        <start>2015-10-15T11:33:29.288-06:00</start>
-        <end>2015-10-27T01:20:09.288-06:00</end>
+        <start>2015-12-08T18:45:03.630-07:00</start>
+        <end>2015-12-20T08:31:43.630-07:00</end>
         <people>
-            <people>I-f86eb11c-9256-4188-b51c-880e0f5d198d</people>
+            <people>Person-0</people>
         </people>
         <performanceList>
             <assignments/>
-            <date>2015-10-15T11:33:29.291-06:00</date>
+            <date>2015-12-08T18:45:03.633-07:00</date>
             <name>First Performance</name>
-            <song>I-0a37d96a-c092-49d2-81d2-53561dac262c</song>
+            <song>Song-0</song>
             <venue>First Venue</venue>
         </performanceList>
     </currentSession>

@@ -1,8 +1,6 @@
 package action_cast.model;
 
 import action_cast.model.exceptions.InvalidIDException;
-import action_cast.model.id.PersonID;
-import action_cast.model.id.SongID;
 
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -27,29 +25,29 @@ public class DataModel {
 
     }
 
-    public Person getPerson(PersonID id) throws InvalidIDException {
-        if (id.getIndex() < 0 || id.getIndex() >= people.size()) {
+    public Person getPerson(int id) throws InvalidIDException {
+        if (id < 0 || id >= people.size()) {
             throw new InvalidIDException();
         }
-        return people.get(id.getIndex());
+        return people.get(id);
     }
 
-    public PersonID addPerson(String name) {
-        Person person = new Person(name);
+    public Person addPerson(String name) {
+        Person person = new Person(people.size(), name);
         people.add(person);
-        return new PersonID(people.size() - 1);
+        return person;
     }
 
-    public Song getSong(SongID songID) throws InvalidIDException {
-        if (songID.getIndex() < 0 || songID.getIndex() >= songs.size()) {
+    public Song getSong(int songID) throws InvalidIDException {
+        if (songID < 0 || songID >= songs.size()) {
             throw new InvalidIDException();
         }
-        return songs.get(songID.getIndex());
+        return songs.get(songID);
     }
 
-    public SongID addSong(String name, String description) {
-        songs.add(new Song(name, description));
-        return new SongID(songs.size() - 1);
+    public Song addSong(String name, String description) {
+        songs.add(new Song(songs.size(), name, description));
+        return songs.get(songs.size() - 1);
     }
 
     public Session getCurrentSession() {
