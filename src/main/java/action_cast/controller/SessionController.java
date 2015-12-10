@@ -1,9 +1,10 @@
 package action_cast.controller;
 
+import action_cast.controller.ClientObjects.Performance;
 import action_cast.controller.ClientObjects.Person;
+import action_cast.controller.ClientObjects.Song;
 import action_cast.model.Session;
 import action_cast.model.exceptions.InvalidIDException;
-import action_cast.model.modelinterface.PerformanceView;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -33,7 +34,7 @@ public class SessionController {
         }
     }
 
-    public List<PerformanceView> getPerformances() {
-        return session.getPerformances().stream().map(performance -> ((PerformanceView)performance)).collect(Collectors.toList());
+    public List<Performance> getPerformances() {
+        return session.getPerformances().stream().map(performance -> (new Performance(performance.getName(), performance.getDirector(), new Song(performance.getSong().getName(), performance.getSong().getDescription()), performance.getVenue(), performance.getDate()))).collect(Collectors.toList());
     }
 }

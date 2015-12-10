@@ -1,7 +1,6 @@
 package action_cast.model;
 
 import action_cast.model.exceptions.InvalidIDException;
-import action_cast.model.modelinterface.PerformanceView;
 
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlIDREF;
@@ -12,15 +11,15 @@ import java.util.Map;
 /**
  * Created by bmichaud on 8/31/2015.
  */
-public class Performance implements PerformanceView {
+public class Performance {
 
     private String name;
     private String venue;
     private Date date;
     private Song song;
+    private Director director;
     @XmlElementWrapper
     private Map<Performer, Role> assignments = new HashMap<>();
-    private Director director;
 
     private Performance() {
 
@@ -33,28 +32,23 @@ public class Performance implements PerformanceView {
         this.date = date;
     }
 
-    @Override
     public String getName() {
         return name;
     }
 
-    @Override
     public String getVenue() {
         return venue;
     }
 
-    @Override
     public Date getDate() {
         return date;
     }
 
-    @Override
     @XmlIDREF
     public Song getSong() {
         return song;
     }
 
-    @Override
     public Map<Performer, Role> getAssignments() {
         return assignments;
     }
@@ -63,7 +57,6 @@ public class Performance implements PerformanceView {
         assignments.put(performer, role);
     }
 
-    @Override
     public Director getDirector() {
         return director;
     }

@@ -1,5 +1,6 @@
 package action_cast.view;
 
+import action_cast.controller.ClientObjects.Performance;
 import action_cast.controller.SessionController;
 import action_cast.widgets.CardPanel;
 import action_cast.widgets.PersonListView;
@@ -24,9 +25,10 @@ public class AddPerformance extends BaseCardClass implements ActionListener {
     private PersonTileView personTileView1;
 
     private SessionController sessionController;
+    private Performance currentPerformance;
+
     //TODO
-    //private Performance currentPerformance;
-   // private List<Song> songs = new ArrayList<>();
+    // private List<Song> songs = new ArrayList<>();
 
     public AddPerformance() {
         this(new BreadCrumb());
@@ -45,8 +47,8 @@ public class AddPerformance extends BaseCardClass implements ActionListener {
         if (e.getSource() == createButton) {
             if (sessionController != null) {
                 //TODO
-               /* if (currentPerformance == null) {
-                    try {
+                if (currentPerformance == null) {
+                    /*try {
                         sessionController.addPerformance(new Performance(songSelector1.getSelectedIndex(), nameField.getText(), venueField.getText(), new Date()));
                     } catch (InvalidIDException e1) {
                         e1.printStackTrace();
@@ -54,13 +56,13 @@ public class AddPerformance extends BaseCardClass implements ActionListener {
                     nameField.setText("");
                     venueField.setText("");
                     dateField.setText("");
-                    songSelector1.setSelectedIndex(0);
+                    songSelector1.setSelectedIndex(0);*/
                 }
                 else {
-                    currentPerformance.setName(nameField.getText());
+                 /*   currentPerformance.setName(nameField.getText());
                     currentPerformance.setVenue(venueField.getText());
-                    currentPerformance.setSong(songs.get(songSelector1.getSelectedIndex()));
-                }*/
+                    currentPerformance.setSong(songs.get(songSelector1.getSelectedIndex()));*/
+                }
             }
         }
     }
@@ -69,21 +71,18 @@ public class AddPerformance extends BaseCardClass implements ActionListener {
         sessionController = session;
     }
 
-    //TODO
-    /*public void setData(SessionController session, Performance performance) {
+    public void setData(SessionController session, Performance performance) {
         sessionController = session;
         currentPerformance = performance;
         updateDisplay();
-    }*/
+    }
 
     public void updateDisplay() {
-        //TODO
-       /* nameField.setText(currentPerformance.getName());
+        nameField.setText(currentPerformance.getName());
         venueField.setText(currentPerformance.getVenue());
-        dateField.setText(currentPerformance.getDate().toString());*/
+        dateField.setText(currentPerformance.getDate().toString());
         songSelector1.setSelectedIndex(0);
-        //TODO
-       // personListView1.setData(sessionController.getPeople());
+        personListView1.setData(sessionController.getPeople());
     }
 
 
