@@ -1,5 +1,7 @@
 package action_cast.model;
 
+import action_cast.model.exceptions.InvalidIDException;
+
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlIDREF;
@@ -13,7 +15,7 @@ import java.util.stream.Collectors;
 /**
  * Created by bmichaud on 9/10/2015.
  */
-@XmlType(propOrder = {"name", "start", "end", "people", "performanceList", "performers"})
+@XmlType(propOrder = {"name", "start", "end", "people", "performances", "performers"})
 public class Session extends UniqueItem {
 
     private String name;
@@ -24,8 +26,8 @@ public class Session extends UniqueItem {
     @XmlElement
     private Date end;
 
-    @XmlElement
-    private List<Performance> performanceList = new ArrayList<>();
+    @XmlElementWrapper
+    private List<Performance> performances = new ArrayList<>();
     @XmlElement
     private List<Performer> performers = new ArrayList<>();
     @XmlElementWrapper
@@ -54,12 +56,17 @@ public class Session extends UniqueItem {
         return performanceList;
     }
 
-    public void addPerformance(Performance performance) {
-        performanceList.add(performance);
+    public Performance addPerformance(Song song, String name, String venue, Date date) throws InvalidIDException {
+        performances.add(new Performance(performances.size(), song, name, venue, date));
+        return performances.get(performances.size() - 1);
     }
 
     public void addPerformer(Performer performer) {
         performers.add(performer);
+    }
+
+    public Performance getPerformance(int id) {
+        return performances.get(id);
     }
 
     public List<Performer> getPerformers() {

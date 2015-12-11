@@ -43,10 +43,10 @@ public class SessionTest {
         Song first = model.addSong("Cool song", "Na na, nanana!");
         Song second = model.addSong("Whatever.", "Naaaaa! :'( ");
         assertEquals(0, s.getPerformances().size());
-        s.addPerformance(new Performance(first, "The main event!", "Wouldn't you like to know?", new Date()));
+        s.addPerformance(first, "The main event!", "Wouldn't you like to know?", new Date());
         assertEquals(1, s.getPerformances().size());
 
-        s.addPerformance(new Performance(second, "Emo time!", "it doesn't matter anyway", new Date()));
+        s.addPerformance(second, "Emo time!", "it doesn't matter anyway", new Date());
         //s.setPerformanceList(performances);
 
         assertEquals(2, s.getPerformances().size());

@@ -14,19 +14,21 @@
             <description>It goes like this na na na, na na, na na na na</description>
         </songs>
     </songs>
-    <currentSession>
+    <currentSession id="Session-0">
         <name>Fall 2015</name>
-        <start>2015-12-08T18:45:03.630-07:00</start>
-        <end>2015-12-20T08:31:43.630-07:00</end>
+        <start>2015-12-11T15:32:00.210-07:00</start>
+        <end>2015-12-23T05:18:40.210-07:00</end>
         <people>
             <people>Person-0</people>
         </people>
-        <performanceList>
-            <assignments/>
-            <date>2015-12-08T18:45:03.633-07:00</date>
-            <name>First Performance</name>
-            <song>Song-0</song>
-            <venue>First Venue</venue>
-        </performanceList>
+        <performances>
+            <performances id="Performance-0">
+                <assignments/>
+                <date>2015-12-11T15:32:00.210-07:00</date>
+                <name>First Performance</name>
+                <song>Song-0</song>
+                <venue>First Venue</venue>
+            </performances>
+        </performances>
     </currentSession>
 </dataModel>

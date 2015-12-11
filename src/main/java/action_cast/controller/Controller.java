@@ -2,6 +2,7 @@ package action_cast.controller;
 
 import action_cast.controller.ClientObjects.Person;
 import action_cast.controller.ClientObjects.Session;
+import action_cast.controller.ClientObjects.Song;
 import action_cast.data_store.DataStore;
 import action_cast.model.DataModel;
 import action_cast.model.exceptions.InvalidIDException;
@@ -40,6 +41,10 @@ public class Controller {
         model.getCurrentSession().addPerson(model.getPerson(person.getId()));
     }
 
+    public void assignSongToPerformance(int performanceId, int songId) throws InvalidIDException {
+        model.getCurrentSession().getPerformance(performanceId).setSong(model.getSong(songId));
+    }
+
     public void addPerson(String name) {
         model.addPerson(name);
     }
@@ -53,6 +58,16 @@ public class Controller {
     public List<Person> getPeople() {
         List<Person> results = model.getPeople().stream().map(person -> new Person(person.getIndex(), person.getName())).collect(Collectors.toList());
         return results;
+    }
+
+    public List<Song> getSongs() {
+        List<Song> results = model.getSongs().stream().map(song -> new Song(song.getIndex(), song.getName(), song.getDescription())).collect(Collectors.toList());
+        return results;
+    }
+
+    public Song getSong(int id) throws InvalidIDException {
+        action_cast.model.Song song = model.getSong(id);
+        return new Song(song.getIndex(), song.getName(), song.getDescription());
     }
 
     public Session getCurrentSession() {

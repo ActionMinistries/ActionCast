@@ -23,7 +23,7 @@ public class PerformanceTest {
         Song song = model.addSong("testSong", "with a test description");
         Long time = System.currentTimeMillis();
 
-        Performance performance = new Performance(song, name, venue, new Date(time));
+        Performance performance = new Performance(-1, song, name, venue, new Date(time));
         assertNotNull(performance);
         assertNotNull(performance.getAssignments());
         assertEquals("perfName", performance.getName());
@@ -44,7 +44,7 @@ public class PerformanceTest {
         model.getSong(song.getIndex()).setRoles(roles);
         Long time = System.currentTimeMillis();
 
-        Performance performance = new Performance(song, name, venue, new Date(time));
+        Performance performance = new Performance(-1, song, name, venue, new Date(time));
         Performer performer = new Performer(new Person(-1, "randomGuy"));
         performance.assign(performer, model.getSong(song.getIndex()).getRoles().get(0));
         assertTrue(performance.getAssignments().containsKey(performer));
@@ -60,7 +60,7 @@ public class PerformanceTest {
         Song song = model.addSong("testSong", "with a test description");
         Long time = System.currentTimeMillis();
 
-        Performance performance = new Performance(song, name, venue, new Date(time));
+        Performance performance = new Performance(-1, song, name, venue, new Date(time));
 
         performance.setDirector(new Director(new Person(-1, "someGuy")));
         assertEquals("someGuy", performance.getDirector().getName());

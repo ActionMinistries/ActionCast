@@ -14,8 +14,10 @@ public class Performance {
     private Date date;
     private Song song;
     private Director director;
+    private int id;
 
-    public Performance(String name, Director director, Song song, String venue, Date date) {
+    public Performance(int id, String name, Director director, Song song, String venue, Date date) {
+        this.id = id;
         this.date = date;
         this.director = director;
         this.name = name;
@@ -41,5 +43,29 @@ public class Performance {
 
     public String getVenue() {
         return venue;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public void setDirector(Director director) {
+        this.director = director;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setSong(Song song) {
+        this.song = song;
+    }
+
+    public void setVenue(String venue) {
+        this.venue = venue;
+    }
+
+    public int getId() {
+        return id;
     }
 }

@@ -31,47 +31,49 @@
     </songs>
     <currentSession id="Session-0">
         <name>savedSession</name>
-        <start>2015-12-09T14:31:30.285-07:00</start>
-        <end>2015-12-09T14:31:35.285-07:00</end>
+        <start>2015-12-11T15:25:05.795-07:00</start>
+        <end>2015-12-11T15:25:10.795-07:00</end>
         <people>
             <people>Person-0</people>
             <people>Person-1</people>
         </people>
-        <performanceList>
-            <assignments/>
-            <date>2015-12-09T14:31:30.345-07:00</date>
-            <name>encore</name>
-            <song>Song-0</song>
-            <venue>OTS</venue>
-        </performanceList>
-        <performanceList>
-            <assignments>
-                <entry>
-                    <key>
-                        <person>Person-0</person>
-                    </key>
-                    <value>
-                        <name>Runner</name>
-                        <description>The guy who runs</description>
-                        <type>MAIN</type>
-                    </value>
-                </entry>
-            </assignments>
-            <date>2015-12-09T14:31:30.286-07:00</date>
-            <director>
-                <person>Person-1</person>
-            </director>
-            <name>primary</name>
-            <song>Song-1</song>
-            <venue>OTS</venue>
-        </performanceList>
-        <performanceList>
-            <assignments/>
-            <date>2015-12-09T14:31:30.345-07:00</date>
-            <name>never</name>
-            <song>Song-0</song>
-            <venue>OTS</venue>
-        </performanceList>
+        <performances>
+            <performances id="Performance-0">
+                <assignments/>
+                <date>2015-12-11T15:25:05.795-07:00</date>
+                <name>encore</name>
+                <song>Song-0</song>
+                <venue>OTS</venue>
+            </performances>
+            <performances id="Performance-1">
+                <assignments>
+                    <entry>
+                        <key>
+                            <person>Person-0</person>
+                        </key>
+                        <value>
+                            <name>Runner</name>
+                            <description>The guy who runs</description>
+                            <type>MAIN</type>
+                        </value>
+                    </entry>
+                </assignments>
+                <date>2015-12-11T15:25:05.795-07:00</date>
+                <director>
+                    <person>Person-1</person>
+                </director>
+                <name>primary</name>
+                <song>Song-1</song>
+                <venue>OTS</venue>
+            </performances>
+            <performances id="Performance-2">
+                <assignments/>
+                <date>2015-12-11T15:25:05.795-07:00</date>
+                <name>never</name>
+                <song>Song-0</song>
+                <venue>OTS</venue>
+            </performances>
+        </performances>
         <performers>
             <person>Person-0</person>
         </performers>

@@ -1,7 +1,8 @@
 package action_cast.view;
 
 import action_cast.controller.ClientObjects.Performance;
-import action_cast.controller.SessionController;
+import action_cast.controller.Controller;
+import action_cast.model.exceptions.InvalidIDException;
 import action_cast.widgets.CardPanel;
 import action_cast.widgets.PersonListView;
 import action_cast.widgets.PersonTileView;
@@ -10,6 +11,7 @@ import action_cast.widgets.SongSelector;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Date;
 
 /**
  * Created by brian on 9/11/2015.
@@ -24,7 +26,7 @@ public class AddPerformance extends BaseCardClass implements ActionListener {
     private PersonListView personListView1;
     private PersonTileView personTileView1;
 
-    private SessionController sessionController;
+    private Controller controller;
     private Performance currentPerformance;
 
     //TODO
@@ -45,34 +47,39 @@ public class AddPerformance extends BaseCardClass implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == createButton) {
-            if (sessionController != null) {
+            if (controller != null) {
                 //TODO
                 if (currentPerformance == null) {
-                    /*try {
-                        sessionController.addPerformance(new Performance(songSelector1.getSelectedIndex(), nameField.getText(), venueField.getText(), new Date()));
+                    try {
+                        controller.getSessionController().addPerformance(controller.getSong(songSelector1.getSelectedIndex()), nameField.getText(), venueField.getText(), new Date());
                     } catch (InvalidIDException e1) {
                         e1.printStackTrace();
                     }
                     nameField.setText("");
                     venueField.setText("");
                     dateField.setText("");
-                    songSelector1.setSelectedIndex(0);*/
+                    songSelector1.setSelectedIndex(0);
                 }
                 else {
-                 /*   currentPerformance.setName(nameField.getText());
+                    currentPerformance.setName(nameField.getText());
                     currentPerformance.setVenue(venueField.getText());
-                    currentPerformance.setSong(songs.get(songSelector1.getSelectedIndex()));*/
+                    currentPerformance.setSong(controller.getSongs().get(songSelector1.getSelectedIndex()));
+                    try {
+                        controller.getSessionController().updatePerformance(currentPerformance);
+                    } catch (InvalidIDException e1) {
+                        e1.printStackTrace();
+                    }
                 }
             }
         }
     }
 
-    public void setController(SessionController session) {
-        sessionController = session;
+    public void setController(Controller controller) {
+        this.controller = controller;
     }
 
-    public void setData(SessionController session, Performance performance) {
-        sessionController = session;
+    public void setData(Controller controller, Performance performance) {
+        this.controller = controller;
         currentPerformance = performance;
         updateDisplay();
     }
@@ -81,8 +88,9 @@ public class AddPerformance extends BaseCardClass implements ActionListener {
         nameField.setText(currentPerformance.getName());
         venueField.setText(currentPerformance.getVenue());
         dateField.setText(currentPerformance.getDate().toString());
+        songSelector1.setData(controller.getSongs());
         songSelector1.setSelectedIndex(0);
-        personListView1.setData(sessionController.getPeople());
+        personListView1.setData(controller.getPeople());
     }
 
 

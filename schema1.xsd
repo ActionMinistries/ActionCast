@@ -72,7 +72,13 @@
               </xs:sequence>
             </xs:complexType>
           </xs:element>
-          <xs:element name="performanceList" type="performance" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="performances" minOccurs="0">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="performances" type="performance" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
           <xs:element name="performers" type="performer" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
       </xs:extension>
@@ -80,27 +86,31 @@
   </xs:complexType>
 
   <xs:complexType name="performance">
-    <xs:sequence>
-      <xs:element name="assignments">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element name="entry" minOccurs="0" maxOccurs="unbounded">
-              <xs:complexType>
-                <xs:sequence>
-                  <xs:element name="key" minOccurs="0" type="performer"/>
-                  <xs:element name="value" minOccurs="0" type="role"/>
-                </xs:sequence>
-              </xs:complexType>
-            </xs:element>
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
-      <xs:element name="date" type="xs:dateTime" minOccurs="0"/>
-      <xs:element name="director" type="director" minOccurs="0"/>
-      <xs:element name="name" type="xs:string" minOccurs="0"/>
-      <xs:element name="song" type="xs:IDREF" minOccurs="0"/>
-      <xs:element name="venue" type="xs:string" minOccurs="0"/>
-    </xs:sequence>
+    <xs:complexContent>
+      <xs:extension base="uniqueItem">
+        <xs:sequence>
+          <xs:element name="assignments">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="entry" minOccurs="0" maxOccurs="unbounded">
+                  <xs:complexType>
+                    <xs:sequence>
+                      <xs:element name="key" minOccurs="0" type="performer"/>
+                      <xs:element name="value" minOccurs="0" type="role"/>
+                    </xs:sequence>
+                  </xs:complexType>
+                </xs:element>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="date" type="xs:dateTime" minOccurs="0"/>
+          <xs:element name="director" type="director" minOccurs="0"/>
+          <xs:element name="name" type="xs:string" minOccurs="0"/>
+          <xs:element name="song" type="xs:IDREF" minOccurs="0"/>
+          <xs:element name="venue" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
 
   <xs:complexType name="performer">

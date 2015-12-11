@@ -21,28 +21,32 @@ public class Main {
     private TileViewTest tileViewTest1;
 
     private Controller controller;
-    public Main() throws JAXBException, SAXException, InvalidIDException {
+    public Main() {
         controller = new Controller();
-//        ClassLoader classLoader = getClass().getClassLoader();
-//        DataStore store = new DataStore(new DataModel());//new DataStore(classLoader.getResource("main.xml").getFile());
-//        store.load();
-//        Long startTime = System.currentTimeMillis();
-//        Long endTime = System.currentTimeMillis();
-//        endTime += 1000000000;
-//        DataModel model = store.getModel();
-//        model.setCurrentSession(new Session("Fall 2015", new Date(), new Date(endTime)));
-//        //model.addSession(new Performances(new Date(startTime - 2 * 1000000000), new Date(startTime - 1000000000)));
-//        Song song = model.addSong("The First Song", "It goes like this na na na, na na, na na na na");
-//        model.getCurrentSession().addPerformance(new Performance(song, "First Performance", "First Venue", new Date()));
-//
-//        Person random_guy = model.addPerson("random guy");
-//        model.getCurrentSession().addPerson(random_guy);
-//
-//        model.addPerson("Random Guy");
-//
-//        store.save();
+
         people1.setController(controller);//.setData(store.getModel());
         manageSessions1.setController(controller);
+    }
+
+    public void resetData() throws JAXBException, SAXException, InvalidIDException {
+        ClassLoader classLoader = getClass().getClassLoader();
+        DataStore store = new DataStore(new DataModel());//new DataStore(classLoader.getResource("main.xml").getFile());
+        store.load();
+        Long startTime = System.currentTimeMillis();
+        Long endTime = System.currentTimeMillis();
+        endTime += 1000000000;
+        DataModel model = store.getModel();
+        model.setCurrentSession(new Session("Fall 2015", new Date(), new Date(endTime)));
+        //model.addSession(new Performances(new Date(startTime - 2 * 1000000000), new Date(startTime - 1000000000)));
+        Song song = model.addSong("The First Song", "It goes like this na na na, na na, na na na na");
+        model.getCurrentSession().addPerformance(song, "First Performance", "First Venue", new Date());
+
+        Person random_guy = model.addPerson("random guy");
+        model.getCurrentSession().addPerson(random_guy);
+
+        model.addPerson("Random Guy");
+
+        store.save();
     }
 
     public static void main(String[] args) throws JAXBException, SAXException, InvalidIDException {

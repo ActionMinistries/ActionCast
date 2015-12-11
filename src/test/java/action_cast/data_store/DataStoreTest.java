@@ -72,8 +72,8 @@ public class DataStoreTest {
         Session currentSession = dataModel.getCurrentSession();
         assertEquals("savedSession", currentSession.getName());
         assertEquals(2, currentSession.getPeople().size());
-        assertEquals("random guy", currentSession.getPeople().get(0).getName());
-        assertEquals("odd job", currentSession.getPeople().get(1).getName());
+        assertEquals(dataModel.getPerson(currentSession.getPeople().get(0).getIndex()).getName(), currentSession.getPeople().get(0).getName());
+        assertEquals(dataModel.getPerson(currentSession.getPeople().get(1).getIndex()).getName(), currentSession.getPeople().get(1).getName());
 
         assertEquals(3, currentSession.getPerformances().size());
         assertEquals(1, currentSession.getPerformers().size());
@@ -110,8 +110,6 @@ public class DataStoreTest {
        // Song fiveHundredMiles = new Song();
         //Song run = new Song("I just wanna run.", "throw it away");
 
-
-
         Song fiveHundredMiles = store.getModel().addSong("500 miles", "500 more");
         Song run = store.getModel().addSong("I just wanna run.", "throw it away");
         List<Role> roles = new ArrayList<>();
@@ -128,17 +126,16 @@ public class DataStoreTest {
         session.addPerson(store.getModel().getPerson(randomGuy.getIndex()));
         session.addPerson(store.getModel().getPerson(oddJob.getIndex()));
 
+        session.addPerformer(new Performer(randomGuy));
 
+        session.addPerformance(fiveHundredMiles, "encore", "OTS", new Date());
 
-        Performance runPerformance = new Performance(run, "primary", "OTS", new Date());
+        Performance runPerformance = session.addPerformance(run, "primary", "OTS", new Date());
         runPerformance.setDirector(new Director(store.getModel().getPerson(oddJob.getIndex())));
-
-        session.addPerformer(new Performer(session.getPeople().get(0)));
         runPerformance.assign(session.getPerformers().get(0), roles.get(0));
 
-        session.addPerformance(new Performance(fiveHundredMiles, "encore", "OTS", new Date()));
-        session.addPerformance(runPerformance);
-        session.addPerformance(new Performance(fiveHundredMiles, "never", "OTS", new Date()));
+
+        session.addPerformance(fiveHundredMiles, "never", "OTS", new Date());
 
         store.getModel().setCurrentSession(session);
         store.save();

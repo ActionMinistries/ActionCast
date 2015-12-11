@@ -71,7 +71,7 @@ public class ManageSessions extends BaseCardClass implements ActionListener {
         ((UtilDateModel) startDate.getModel()).setValue(controller.getCurrentSession().getStartDate());
         ((UtilDateModel) endDate.getModel()).setValue(controller.getCurrentSession().getEndDate());
         nameTextField.setText(controller.getCurrentSession().getName());
-        performanceTableView1.setData(controller.getSessionController(), controller.getSessionController().getPerformances());
+        performanceTableView1.setData(controller, controller.getSessionController().getPerformances());
     }
 
     @Override

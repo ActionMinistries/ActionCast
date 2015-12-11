@@ -45,6 +45,10 @@ public class DataModel {
         return songs.get(songID);
     }
 
+    public List<Song> getSongs() {
+        return songs;
+    }
+
     public Song addSong(String name, String description) {
         songs.add(new Song(songs.size(), name, description));
         return songs.get(songs.size() - 1);
