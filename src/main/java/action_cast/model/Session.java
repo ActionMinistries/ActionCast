@@ -53,7 +53,7 @@ public class Session extends UniqueItem {
     }
 
     public List<Performance> getPerformances() {
-        return performanceList;
+        return performances;
     }
 
     public Performance addPerformance(Song song, String name, String venue, Date date) throws InvalidIDException {
