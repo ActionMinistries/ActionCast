@@ -2,7 +2,7 @@ package action_cast.widgets;
 
 import action_cast.controller.ClientObjects.Person;
 import action_cast.widgets.custom.JTileView;
-import action_cast.widgets.custom.PersonTile;
+import action_cast.widgets.tiles.PersonTile;
 
 import javax.activation.DataHandler;
 import javax.swing.*;

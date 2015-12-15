@@ -2,7 +2,7 @@ package action_cast.widgets;
 
 import action_cast.controller.ClientObjects.Person;
 import action_cast.widgets.custom.JTileView;
-import action_cast.widgets.custom.PersonTile;
+import action_cast.widgets.tiles.PersonTile;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -32,6 +32,7 @@ public class PersonTileView extends JTileView {
     public void remove(Component comp) {
         super.remove(comp);
         people.remove(((PersonTile)comp).getPerson());
+        repaint();
     }
 
     public List<Person> getPeople() {

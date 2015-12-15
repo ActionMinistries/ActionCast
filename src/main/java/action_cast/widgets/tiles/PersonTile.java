@@ -1,7 +1,11 @@
-package action_cast.widgets.custom;
+package action_cast.widgets.tiles;
 
 import action_cast.controller.ClientObjects.Person;
+import action_cast.widgets.PersonTransferHandler;
+import action_cast.widgets.custom.JTileView;
+import action_cast.widgets.custom.Tile;
 
+import javax.swing.*;
 import java.awt.*;
 
 /**
@@ -12,6 +16,11 @@ public class PersonTile extends Tile {
     public PersonTile(JTileView parent, Person person) {
         super(parent);
         this.person = person;
+    }
+
+    @Override
+    protected TransferHandler getDefaultTransferHandler() {
+        return new PersonTransferHandler();
     }
 
     protected void paintComponent(Graphics g) {

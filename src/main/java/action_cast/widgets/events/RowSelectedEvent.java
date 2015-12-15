@@ -1,4 +1,4 @@
-package action_cast.widgets;
+package action_cast.widgets.events;
 
 import java.util.EventObject;
 

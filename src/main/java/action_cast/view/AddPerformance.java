@@ -3,10 +3,7 @@ package action_cast.view;
 import action_cast.controller.ClientObjects.Performance;
 import action_cast.controller.Controller;
 import action_cast.model.exceptions.InvalidIDException;
-import action_cast.widgets.CardPanel;
-import action_cast.widgets.PersonListView;
-import action_cast.widgets.PersonTileView;
-import action_cast.widgets.SongSelector;
+import action_cast.widgets.*;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -24,7 +21,7 @@ public class AddPerformance extends BaseCardClass implements ActionListener {
     private JButton createButton;
     private SongSelector songSelector1;
     private PersonListView personListView1;
-    private PersonTileView personTileView1;
+    private RoleAssignmentGrid roleAssignmentGrid1;
 
     private Controller controller;
     private Performance currentPerformance;
@@ -90,7 +87,7 @@ public class AddPerformance extends BaseCardClass implements ActionListener {
         dateField.setText(currentPerformance.getDate().toString());
         songSelector1.setData(controller.getSongs());
         songSelector1.setSelectedIndex(0);
-        personListView1.setData(controller.getPeople());
+        personListView1.setData(controller.getSessionController().getPeople());
     }
 
 

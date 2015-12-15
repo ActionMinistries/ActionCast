@@ -1,5 +1,6 @@
 package action_cast.widgets.custom;
 
+import javax.swing.*;
 import java.awt.*;
 
 /**
@@ -12,6 +13,11 @@ public class TextTile extends Tile {
     public TextTile(JTileView parent, String text) {
         super(parent);
         this.text = text;
+    }
+
+    @Override
+    protected TransferHandler getDefaultTransferHandler() {
+        return null;
     }
 
     protected void paintComponent(Graphics g) {

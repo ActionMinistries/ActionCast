@@ -22,11 +22,13 @@ public abstract class Tile extends JPanel implements MouseMotionListener {
     public Tile(JTileView parent) {
         this.parent = parent;
         this.addMouseMotionListener(this);
-        this.setTransferHandler(new PersonTransferHandler());
+        this.setTransferHandler(getDefaultTransferHandler());
         setBorder((BorderFactory.createRaisedBevelBorder()));
         setBackground(UIManager.getColor("Panel.background"));
 
     }
+
+    protected abstract TransferHandler getDefaultTransferHandler();
 
     public Dimension getPreferredSize() {
         return new Dimension(JTileView.TILE_WIDTH, JTileView.TILE_HEIGHT);
