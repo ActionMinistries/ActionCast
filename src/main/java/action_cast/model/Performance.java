@@ -19,7 +19,7 @@ public class Performance extends UniqueItem {
     private Song song;
     private Director director;
     @XmlElementWrapper
-    private Map<Performer, Role> assignments = new HashMap<>();
+    private Map<Person, Role> assignments = new HashMap<>();
 
     private Performance() {
 
@@ -50,11 +50,11 @@ public class Performance extends UniqueItem {
         return song;
     }
 
-    public Map<Performer, Role> getAssignments() {
+    public Map<Person, Role> getAssignments() {
         return assignments;
     }
 
-    public void assign(Performer performer, Role role) {
+    public void assign(Person performer, Role role) {
         assignments.put(performer, role);
     }
 

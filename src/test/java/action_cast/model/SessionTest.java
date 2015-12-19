@@ -52,19 +52,6 @@ public class SessionTest {
         assertEquals(2, s.getPerformances().size());
     }
 
-    @Test
-    public void testPerformerList() {
-        Date start = new Date();
-        Date end = new Date();
-
-        Session s = new Session("theSession", start, end);
-
-        //List<Performer> performers = new ArrayList<>();
-        assertEquals(0, s.getPerformers().size());
-        s.addPerformer(new Performer(new Person(-1, "SomeGuy")));
-        assertEquals(1, s.getPerformers().size());
-
-    }
 
     @Test
     public void testPeopleList() throws InvalidIDException {

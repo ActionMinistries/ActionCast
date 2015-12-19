@@ -45,10 +45,10 @@ public class PerformanceTest {
         Long time = System.currentTimeMillis();
 
         Performance performance = new Performance(-1, song, name, venue, new Date(time));
-        Performer performer = new Performer(new Person(-1, "randomGuy"));
-        performance.assign(performer, model.getSong(song.getIndex()).getRoles().get(0));
-        assertTrue(performance.getAssignments().containsKey(performer));
-        assertEquals(performance.getAssignments().get(performer), model.getSong(song.getIndex()).getRoles().get(0));
+        Person randomGuy = new Person(-1, "randomGuy");
+        performance.assign(randomGuy, model.getSong(song.getIndex()).getRoles().get(0));
+        assertTrue(performance.getAssignments().containsKey(randomGuy));
+        assertEquals(performance.getAssignments().get(randomGuy), model.getSong(song.getIndex()).getRoles().get(0));
     }
 
     @Test

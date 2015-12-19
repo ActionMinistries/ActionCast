@@ -1,7 +1,6 @@
 package action_cast.widgets;
 
 import action_cast.controller.ClientObjects.Person;
-import action_cast.widgets.custom.JTileView;
 import action_cast.widgets.tiles.PersonTile;
 
 import javax.activation.DataHandler;
@@ -103,8 +102,8 @@ public class PersonTransferHandler extends TransferHandler {
                 e.printStackTrace();
             }
         }
-        else if (support.getComponent() instanceof JTileView){
-            JTileView tileView = (JTileView) support.getComponent();
+        else if (support.getComponent() instanceof PersonTileView){
+            PersonTileView tileView = (PersonTileView) support.getComponent();
             try {
                 tileView.add(new PersonTile(tileView, (Person) support.getTransferable().getTransferData(personFlavor)));
                 return true;

@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 /**
  * Created by bmichaud on 9/10/2015.
  */
-@XmlType(propOrder = {"name", "start", "end", "people", "performances", "performers"})
+@XmlType(propOrder = {"name", "start", "end", "people", "performances"})
 public class Session extends UniqueItem {
 
     private String name;
@@ -28,8 +28,7 @@ public class Session extends UniqueItem {
 
     @XmlElementWrapper
     private List<Performance> performances = new ArrayList<>();
-    @XmlElement
-    private List<Performer> performers = new ArrayList<>();
+
     @XmlElementWrapper
     @XmlIDREF
     private HashSet<Person> people = new HashSet<>();
@@ -61,16 +60,8 @@ public class Session extends UniqueItem {
         return performances.get(performances.size() - 1);
     }
 
-    public void addPerformer(Performer performer) {
-        performers.add(performer);
-    }
-
     public Performance getPerformance(int id) {
         return performances.get(id);
-    }
-
-    public List<Performer> getPerformers() {
-        return performers;
     }
 
     public List<Person> getPeople() {

@@ -88,6 +88,11 @@ public class AddPerformance extends BaseCardClass implements ActionListener {
         songSelector1.setData(controller.getSongs());
         songSelector1.setSelectedIndex(0);
         personListView1.setData(controller.getSessionController().getPeople());
+        try {
+            roleAssignmentGrid1.setData(controller.getRoles(currentPerformance.getSong().getId()));
+        } catch (InvalidIDException e) {
+            e.printStackTrace();
+        }
     }
 
 

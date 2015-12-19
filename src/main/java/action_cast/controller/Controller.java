@@ -5,6 +5,7 @@ import action_cast.controller.ClientObjects.Session;
 import action_cast.controller.ClientObjects.Song;
 import action_cast.data_store.DataStore;
 import action_cast.model.DataModel;
+import action_cast.model.Role;
 import action_cast.model.exceptions.InvalidIDException;
 import org.xml.sax.SAXException;
 
@@ -68,6 +69,10 @@ public class Controller {
     public Song getSong(int id) throws InvalidIDException {
         action_cast.model.Song song = model.getSong(id);
         return new Song(song.getIndex(), song.getName(), song.getDescription());
+    }
+
+    public List<Role> getRoles(int songId) throws InvalidIDException {
+        return model.getSong(songId).getRoles();
     }
 
     public Session getCurrentSession() {
