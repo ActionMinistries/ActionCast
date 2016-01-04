@@ -21,6 +21,13 @@ public class RoleTile extends Tile {
         super(parent);
         this.person = person;
         this.role = role;
+        this.setTransferHandler(new PersonTransferHandler());
+    }
+
+    public void assignPerson(Person p) {
+        person = p;
+        System.out.println("assigned: " + p.getName());
+        repaint();
     }
 
     @Override
@@ -32,10 +39,10 @@ public class RoleTile extends Tile {
 
         super.paintComponent(g);
         ((Graphics2D) g).drawString(role.getType().name(), 12, 50);
+        ((Graphics2D) g).drawString("X", 50, 15);
 
         if (person != null) {
             ((Graphics2D) g).drawString(person.getName(), 12, 20);
         }
-
     }
 }

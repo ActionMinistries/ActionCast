@@ -1,5 +1,6 @@
 package action_cast.widgets.custom;
 
+import action_cast.controller.ClientObjects.Person;
 import action_cast.widgets.dragdrop.PersonTransferHandler;
 
 import javax.swing.*;
@@ -8,7 +9,7 @@ import java.awt.*;
 /**
  * Created by bmichaud on 10/20/2015.
  */
-public class JTileView extends JPanel {
+public class JTileView<T extends Tile> extends JPanel {
 
     private static final String uiClassID = "TileView";
 
@@ -56,5 +57,9 @@ public class JTileView extends JPanel {
     public void remove(Component comp) {
         super.remove(comp);
         repaint();
+    }
+
+    public T getTileAt(Point p) {
+        return (T)getComponentAt(p);
     }
 }

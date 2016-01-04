@@ -24,7 +24,7 @@ public class DataStoreTest {
     public void setUp() throws JAXBException, SAXException {
         ClassLoader classLoader = getClass().getClassLoader();
         dataStore = new DataStore(classLoader.getResource("test.xml").getFile());
-       // dataStore.load();
+        dataStore.load();
     }
 
     @Test

@@ -4,8 +4,10 @@ import action_cast.controller.ClientObjects.Person;
 import action_cast.widgets.PersonDisplayGrid;
 import action_cast.widgets.PersonListView;
 import action_cast.widgets.PersonTileView;
+import action_cast.widgets.RoleAssignmentGrid;
 import action_cast.widgets.dragdrop.PersonTransferable;
 import action_cast.widgets.tiles.PersonTile;
+import action_cast.widgets.tiles.RoleTile;
 
 import javax.activation.DataHandler;
 import javax.swing.*;
@@ -62,7 +64,6 @@ public class PersonTransferHandler extends TransferHandler {
                 PersonTile view = (PersonTile)c;
                 ((PersonTile) c).removeTile();
             }
-
         }
     }
 
@@ -111,6 +112,15 @@ public class PersonTransferHandler extends TransferHandler {
             try {
                 tileView.add(new PersonTile(tileView, (Person) support.getTransferable().getTransferData(personFlavor)));
                 return true;
+            } catch (UnsupportedFlavorException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else if (support.getComponent() instanceof RoleTile){
+            RoleTile tile = (RoleTile)support.getComponent();
+            try {
+                tile.assignPerson((Person)support.getTransferable().getTransferData(personFlavor));
             } catch (UnsupportedFlavorException e) {
                 e.printStackTrace();
             } catch (IOException e) {

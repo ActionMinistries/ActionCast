@@ -1,15 +1,17 @@
 package action_cast.widgets;
 
+import action_cast.controller.ClientObjects.Person;
 import action_cast.controller.ClientObjects.Role;
 import action_cast.widgets.custom.JTileView;
 import action_cast.widgets.tiles.RoleTile;
 
+import java.awt.*;
 import java.util.List;
 
 /**
  * Created by bmichaud on 12/14/2015.
  */
-public class RoleAssignmentGrid extends JTileView {
+public class RoleAssignmentGrid extends JTileView<RoleTile> {
 
     private List<Role> assignments;
 
@@ -44,4 +46,8 @@ public class RoleAssignmentGrid extends JTileView {
         }*/
     }
 
+    public void assignPerson(Person person, Point p) {
+        getTileAt(p).assignPerson(person);
+        System.out.println("tile: " + getTileAt(p).getName());
+    }
 }
