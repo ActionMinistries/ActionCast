@@ -1,8 +1,8 @@
 package action_cast.widgets.tiles;
 
 import action_cast.controller.ClientObjects.Person;
-import action_cast.model.Role;
-import action_cast.widgets.PersonTransferHandler;
+import action_cast.controller.ClientObjects.Role;
+import action_cast.widgets.dragdrop.PersonTransferHandler;
 import action_cast.widgets.custom.JTileView;
 import action_cast.widgets.custom.Tile;
 
@@ -31,7 +31,11 @@ public class RoleTile extends Tile {
     protected void paintComponent(Graphics g) {
 
         super.paintComponent(g);
-        ((Graphics2D)g).drawString(person.getName(), 12, 20);
+        ((Graphics2D) g).drawString(role.getType().name(), 12, 50);
+
+        if (person != null) {
+            ((Graphics2D) g).drawString(person.getName(), 12, 20);
+        }
 
     }
 }

@@ -1,14 +1,9 @@
 package action_cast.widgets.custom;
 
-import action_cast.widgets.PersonTransferHandler;
+import action_cast.widgets.dragdrop.PersonTransferHandler;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by bmichaud on 10/20/2015.

@@ -1,6 +1,6 @@
 package action_cast.widgets;
 
-import action_cast.model.Role;
+import action_cast.controller.ClientObjects.Role;
 import action_cast.widgets.custom.JTileView;
 import action_cast.widgets.tiles.RoleTile;
 

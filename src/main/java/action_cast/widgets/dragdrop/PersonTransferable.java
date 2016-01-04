@@ -1,4 +1,4 @@
-package action_cast.widgets;
+package action_cast.widgets.dragdrop;
 
 import action_cast.controller.ClientObjects.Person;
 

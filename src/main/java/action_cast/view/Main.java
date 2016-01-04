@@ -8,7 +8,9 @@ import org.xml.sax.SAXException;
 
 import javax.swing.*;
 import javax.xml.bind.JAXBException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by bmichaud on 9/2/2015.
@@ -31,7 +33,7 @@ public class Main {
     public void resetData() throws JAXBException, SAXException, InvalidIDException {
         ClassLoader classLoader = getClass().getClassLoader();
         DataStore store = new DataStore(new DataModel());//new DataStore(classLoader.getResource("main.xml").getFile());
-        store.load();
+        //store.load();
         Long startTime = System.currentTimeMillis();
         Long endTime = System.currentTimeMillis();
         endTime += 1000000000;
@@ -39,6 +41,10 @@ public class Main {
         model.setCurrentSession(new Session("Fall 2015", new Date(), new Date(endTime)));
         //model.addSession(new Performances(new Date(startTime - 2 * 1000000000), new Date(startTime - 1000000000)));
         Song song = model.addSong("The First Song", "It goes like this na na na, na na, na na na na");
+
+        List<Role> roles = new ArrayList<>();
+        roles.add(new Role("mane chericter", "The main character", RoleType.MAIN));
+        song.setRoles(roles);
         model.getCurrentSession().addPerformance(song, "First Performance", "First Venue", new Date());
 
         Person random_guy = model.addPerson("random guy");

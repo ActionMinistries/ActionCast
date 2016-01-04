@@ -71,8 +71,9 @@ public class Controller {
         return new Song(song.getIndex(), song.getName(), song.getDescription());
     }
 
-    public List<Role> getRoles(int songId) throws InvalidIDException {
-        return model.getSong(songId).getRoles();
+    public List<action_cast.controller.ClientObjects.Role> getRoles(int songId) throws InvalidIDException {
+
+        return model.getSong(songId).getRoles().stream().map(role -> new action_cast.controller.ClientObjects.Role(role.getName(), role.getDescription(), role.getType())).collect(Collectors.toList());
     }
 
     public Session getCurrentSession() {

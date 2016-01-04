@@ -1,7 +1,7 @@
 package action_cast.widgets.tiles;
 
 import action_cast.controller.ClientObjects.Person;
-import action_cast.widgets.PersonTransferHandler;
+import action_cast.widgets.dragdrop.PersonTransferHandler;
 import action_cast.widgets.custom.JTileView;
 import action_cast.widgets.custom.Tile;
 
