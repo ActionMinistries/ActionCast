@@ -3,8 +3,11 @@ package action_cast.view;
 import action_cast.widgets.CardPanel;
 import action_cast.widgets.custom.JTileView;
 import action_cast.widgets.custom.TextTile;
+import com.intellij.uiDesigner.core.GridConstraints;
+import com.intellij.uiDesigner.core.GridLayoutManager;
 
 import javax.swing.*;
+import java.awt.*;
 
 /**
  * Created by bmichaud on 10/29/2015.
@@ -24,7 +27,7 @@ public class TileViewTest extends BaseCardClass {
 
     @Override
     public CardPanel getMainPanel() {
-        return (CardPanel)mainPanel;
+        return (CardPanel) mainPanel;
     }
 
     @Override
@@ -52,4 +55,5 @@ public class TileViewTest extends BaseCardClass {
         JTileView1.add(new TextTile(JTileView1, "four"));
         JTileView1.add(new TextTile(JTileView1, "five"));
     }
+
 }

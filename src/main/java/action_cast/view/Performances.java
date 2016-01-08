@@ -4,8 +4,11 @@ import action_cast.model.Session;
 import action_cast.widgets.CardPanel;
 import action_cast.widgets.PerformanceTableView;
 import action_cast.widgets.SessionSelector;
+import com.intellij.uiDesigner.core.GridConstraints;
+import com.intellij.uiDesigner.core.GridLayoutManager;
 
 import javax.swing.*;
+import java.awt.*;
 
 /**
  * Created by bmichaud on 9/10/2015.

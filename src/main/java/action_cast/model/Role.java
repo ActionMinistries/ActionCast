@@ -5,7 +5,7 @@ import javax.xml.bind.annotation.XmlElement;
 /**
  * Created by bmichaud on 8/31/2015.
  */
-public class Role {
+public class Role extends UniqueItem {
     @XmlElement
     private String name;
     @XmlElement

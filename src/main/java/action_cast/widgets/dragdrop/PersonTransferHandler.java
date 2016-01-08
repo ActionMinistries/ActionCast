@@ -4,8 +4,6 @@ import action_cast.controller.ClientObjects.Person;
 import action_cast.widgets.PersonDisplayGrid;
 import action_cast.widgets.PersonListView;
 import action_cast.widgets.PersonTileView;
-import action_cast.widgets.RoleAssignmentGrid;
-import action_cast.widgets.dragdrop.PersonTransferable;
 import action_cast.widgets.tiles.PersonTile;
 import action_cast.widgets.tiles.RoleTile;
 

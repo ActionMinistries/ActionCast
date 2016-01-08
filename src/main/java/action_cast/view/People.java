@@ -2,8 +2,12 @@ package action_cast.view;
 
 import action_cast.controller.Controller;
 import action_cast.widgets.PersonListView;
+import com.intellij.uiDesigner.core.GridConstraints;
+import com.intellij.uiDesigner.core.GridLayoutManager;
+import com.intellij.uiDesigner.core.Spacer;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -41,4 +45,5 @@ public class People implements ActionListener {
     public void updateDisplay() {
         personListView1.setData(controller.getPeople());
     }
+
 }

@@ -6,8 +6,12 @@ import action_cast.model.Session;
 import action_cast.model.exceptions.InvalidIDException;
 import action_cast.widgets.PersonListView;
 import action_cast.widgets.PersonTileView;
+import com.intellij.uiDesigner.core.GridConstraints;
+import com.intellij.uiDesigner.core.GridLayoutManager;
+import com.intellij.uiDesigner.core.Spacer;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.*;
 import java.util.Date;
 
@@ -66,14 +70,15 @@ public class AddPeopleToSessionDialog extends JDialog {
 //    }
 
     public static void main(String[] args) {
-        DataModel model = new DataModel();
-        model.setCurrentSession(new Session("dialogCheck", new Date(), new Date()));
-        model.addPerson("me");
-        model.addPerson("myself");
-        model.addPerson("I");
-        AddPeopleToSessionDialog2 dialog = new AddPeopleToSessionDialog2(model, model.getCurrentSession());
+//        DataModel model = new DataModel();
+//        model.setCurrentSession(new Session("dialogCheck", new Date(), new Date()));
+//        model.addPerson("me");
+//        model.addPerson("myself");
+//        model.addPerson("I");
+        AddPeopleToSessionDialog dialog = new AddPeopleToSessionDialog(null);
         dialog.pack();
         dialog.setVisible(true);
         System.exit(0);
     }
+
 }

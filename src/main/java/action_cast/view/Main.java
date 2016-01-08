@@ -4,10 +4,13 @@ import action_cast.controller.Controller;
 import action_cast.data_store.DataStore;
 import action_cast.model.*;
 import action_cast.model.exceptions.InvalidIDException;
+import com.intellij.uiDesigner.core.GridConstraints;
+import com.intellij.uiDesigner.core.GridLayoutManager;
 import org.xml.sax.SAXException;
 
 import javax.swing.*;
 import javax.xml.bind.JAXBException;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -23,6 +26,7 @@ public class Main {
     private TileViewTest tileViewTest1;
 
     private Controller controller;
+
     public Main() {
         controller = new Controller();
 
@@ -64,4 +68,5 @@ public class Main {
         frame.pack();
         frame.setVisible(true);
     }
+
 }

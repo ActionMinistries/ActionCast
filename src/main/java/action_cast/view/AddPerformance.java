@@ -4,8 +4,11 @@ import action_cast.controller.ClientObjects.Performance;
 import action_cast.controller.Controller;
 import action_cast.model.exceptions.InvalidIDException;
 import action_cast.widgets.*;
+import com.intellij.uiDesigner.core.GridConstraints;
+import com.intellij.uiDesigner.core.GridLayoutManager;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
@@ -20,8 +23,9 @@ public class AddPerformance extends BaseCardClass implements ActionListener {
     private JPanel mainPanel;
     private JButton createButton;
     private SongSelector songSelector1;
-    private PersonListView personListView1;
-    private RoleAssignmentGrid roleAssignmentGrid1;
+    private CastingWidget castingWidget1;
+   // private PersonListView personListView1;
+   // private RoleAssignmentGrid roleAssignmentGrid1;
 
     private Controller controller;
     private Performance currentPerformance;
@@ -56,8 +60,7 @@ public class AddPerformance extends BaseCardClass implements ActionListener {
                     venueField.setText("");
                     dateField.setText("");
                     songSelector1.setSelectedIndex(0);
-                }
-                else {
+                } else {
                     currentPerformance.setName(nameField.getText());
                     currentPerformance.setVenue(venueField.getText());
                     currentPerformance.setSong(controller.getSongs().get(songSelector1.getSelectedIndex()));
@@ -87,16 +90,21 @@ public class AddPerformance extends BaseCardClass implements ActionListener {
         dateField.setText(currentPerformance.getDate().toString());
         songSelector1.setData(controller.getSongs());
         songSelector1.setSelectedIndex(0);
-        personListView1.setData(controller.getSessionController().getPeople());
         try {
-            roleAssignmentGrid1.setData(controller.getRoles(currentPerformance.getSong().getId()));
+            castingWidget1.setData(controller, controller.getSong(songSelector1.getSelectedIndex()));
         } catch (InvalidIDException e) {
             e.printStackTrace();
         }
+        //  personListView1.setData(controller.getSessionController().getPeople());
+     //   try {
+        //    roleAssignmentGrid1.setData(controller.getRoles(currentPerformance.getSong().getId()));
+      //  } catch (InvalidIDException e) {
+      //      e.printStackTrace();
+       // }
     }
 
 
-        @Override
+    @Override
     public CardPanel getMainPanel() {
         return (CardPanel) mainPanel;
     }
@@ -104,7 +112,7 @@ public class AddPerformance extends BaseCardClass implements ActionListener {
     @Override
     public String getName() {
         //TODO
-       // return currentPerformance == null ? "Add performance" : currentPerformance.getName();
+        // return currentPerformance == null ? "Add performance" : currentPerformance.getName();
         return "Add performance";
     }
 

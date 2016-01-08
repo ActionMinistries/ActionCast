@@ -5,12 +5,10 @@ import action_cast.controller.ClientObjects.Session;
 import action_cast.controller.ClientObjects.Song;
 import action_cast.data_store.DataStore;
 import action_cast.model.DataModel;
-import action_cast.model.Role;
 import action_cast.model.exceptions.InvalidIDException;
 import org.xml.sax.SAXException;
 
 import javax.xml.bind.JAXBException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
