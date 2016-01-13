@@ -44,18 +44,28 @@
         <xs:sequence>
           <xs:element name="name" type="xs:string" minOccurs="0"/>
           <xs:element name="description" type="xs:string" minOccurs="0"/>
-          <xs:element name="roles" type="role" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="roles" minOccurs="0">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="roles" type="role" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
 
   <xs:complexType name="role">
-    <xs:sequence>
-      <xs:element name="name" type="xs:string" minOccurs="0"/>
-      <xs:element name="description" type="xs:string" minOccurs="0"/>
-      <xs:element name="type" type="roleType" minOccurs="0"/>
-    </xs:sequence>
+    <xs:complexContent>
+      <xs:extension base="uniqueItem">
+        <xs:sequence>
+          <xs:element name="name" type="xs:string" minOccurs="0"/>
+          <xs:element name="description" type="xs:string" minOccurs="0"/>
+          <xs:element name="type" type="roleType" minOccurs="0"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
 
   <xs:complexType name="session">
@@ -79,7 +89,6 @@
               </xs:sequence>
             </xs:complexType>
           </xs:element>
-          <xs:element name="performers" type="performer" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -89,17 +98,10 @@
     <xs:complexContent>
       <xs:extension base="uniqueItem">
         <xs:sequence>
-          <xs:element name="assignments">
+          <xs:element name="assignments" minOccurs="0">
             <xs:complexType>
               <xs:sequence>
-                <xs:element name="entry" minOccurs="0" maxOccurs="unbounded">
-                  <xs:complexType>
-                    <xs:sequence>
-                      <xs:element name="key" minOccurs="0" type="performer"/>
-                      <xs:element name="value" minOccurs="0" type="role"/>
-                    </xs:sequence>
-                  </xs:complexType>
-                </xs:element>
+                <xs:element name="assignments" type="roleAssignment" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
               </xs:sequence>
             </xs:complexType>
           </xs:element>
@@ -113,13 +115,24 @@
     </xs:complexContent>
   </xs:complexType>
 
-  <xs:complexType name="performer">
+  <xs:complexType name="roleAssignment">
+    <xs:complexContent>
+      <xs:extension base="uniqueItem">
+        <xs:sequence>
+          <xs:element name="person" type="xs:IDREF" minOccurs="0"/>
+          <xs:element name="role" type="xs:IDREF" minOccurs="0"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="director">
     <xs:sequence>
       <xs:element name="person" type="xs:IDREF" minOccurs="0"/>
     </xs:sequence>
   </xs:complexType>
 
-  <xs:complexType name="director">
+  <xs:complexType name="performer">
     <xs:sequence>
       <xs:element name="person" type="xs:IDREF" minOccurs="0"/>
     </xs:sequence>

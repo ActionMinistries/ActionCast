@@ -1,6 +1,7 @@
 package action_cast.model;
 
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlType;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +15,8 @@ public class Song extends UniqueItem {
     private String name;
     @XmlElement
     private String description;
-    private List<Role> roles = new ArrayList<>();
+    @XmlElementWrapper
+    private final List<Role> roles = new ArrayList<>();
 
     private Song() {
 
@@ -34,8 +36,12 @@ public class Song extends UniqueItem {
         return description;
     }
 
-    public void setRoles(List<Role> roles) {
-        this.roles = roles;
+//    public void setRoles(List<Role> roles) {
+//        this.roles = roles;
+//    }
+
+    public void addRole(Role role) {
+        roles.add(role);
     }
 
     public List<Role> getRoles() {

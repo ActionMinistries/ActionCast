@@ -2,10 +2,9 @@ package action_cast.model;
 
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlIDREF;
+import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by bmichaud on 8/31/2015.
@@ -18,8 +17,12 @@ public class Performance extends UniqueItem {
     private Date date;
     private Song song;
     private Director director;
+
+    @XmlTransient
+    private Map<Person, Role> assignmentMap;
+
     @XmlElementWrapper
-    private Map<Person, Role> assignments = new HashMap<>();
+    private final List<RoleAssignment> assignments = new ArrayList<>();
 
     private Performance() {
 
@@ -50,12 +53,19 @@ public class Performance extends UniqueItem {
         return song;
     }
 
-    public Map<Person, Role> getAssignments() {
-        return assignments;
+    public Map<Person, Role> getAssignmentMap() {
+        if (assignmentMap == null) {
+            assignmentMap = new HashMap<>();
+            for (RoleAssignment assignment : assignments) {
+                assignmentMap.put(assignment.getPerson(), assignment.getRole());
+            }
+        }
+        return assignmentMap;
     }
 
     public void assign(Person performer, Role role) {
-        assignments.put(performer, role);
+        assignments.add(new RoleAssignment(performer, role));
+        getAssignmentMap().put(performer, role);
     }
 
     public Director getDirector() {

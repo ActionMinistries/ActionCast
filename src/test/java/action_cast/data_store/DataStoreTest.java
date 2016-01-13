@@ -112,9 +112,10 @@ public class DataStoreTest {
 
         Song fiveHundredMiles = store.getModel().addSong("500 miles", "500 more");
         Song run = store.getModel().addSong("I just wanna run.", "throw it away");
-        List<Role> roles = new ArrayList<>();
-        roles.add(new Role("Runner", "The guy who runs", RoleType.MAIN));
-        store.getModel().getSong(run.getIndex()).setRoles(roles);
+        //List<Role> roles = new ArrayList<>();
+        //roles.add(new Role("Runner", "The guy who runs", RoleType.MAIN));
+        run.addRole(new Role("Runner", "The guy who runs", RoleType.MAIN));
+        //store.getModel().getSong(run.getIndex()).setRoles(roles);
        // store.getModel().addSong(fiveHundredMiles);
 
 
@@ -132,7 +133,7 @@ public class DataStoreTest {
 
         Performance runPerformance = session.addPerformance(run, "primary", "OTS", new Date());
         runPerformance.setDirector(new Director(store.getModel().getPerson(oddJob.getIndex())));
-        //runPerformance.assign(session.getPerformers().get(0), roles.get(0));
+        runPerformance.assign(randomGuy, run.getRoles().get(0));
 
 
         session.addPerformance(fiveHundredMiles, "never", "OTS", new Date());

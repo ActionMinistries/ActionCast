@@ -25,7 +25,7 @@ public class PerformanceTest {
 
         Performance performance = new Performance(-1, song, name, venue, new Date(time));
         assertNotNull(performance);
-        assertNotNull(performance.getAssignments());
+        assertNotNull(performance.getAssignmentMap());
         assertEquals("perfName", performance.getName());
         assertEquals("perfLocation", performance.getVenue());
         assertEquals(new Date(time), performance.getDate());
@@ -40,15 +40,16 @@ public class PerformanceTest {
         String venue = "perfLocation";
         Song song = model.addSong("testSong", "with a test description");
         List<Role> roles = new ArrayList<>();
-        roles.add(new Role("TestRole", "This is merely a test role", RoleType.SUPPORT));
-        model.getSong(song.getIndex()).setRoles(roles);
+        //roles.add(new Role("TestRole", "This is merely a test role", RoleType.SUPPORT));
+        song.addRole(new Role("TestRole", "This is merely a test role", RoleType.SUPPORT));
+        //model.getSong(song.getIndex()).setRoles(roles);
         Long time = System.currentTimeMillis();
 
         Performance performance = new Performance(-1, song, name, venue, new Date(time));
         Person randomGuy = new Person(-1, "randomGuy");
         performance.assign(randomGuy, model.getSong(song.getIndex()).getRoles().get(0));
-        assertTrue(performance.getAssignments().containsKey(randomGuy));
-        assertEquals(performance.getAssignments().get(randomGuy), model.getSong(song.getIndex()).getRoles().get(0));
+        assertTrue(performance.getAssignmentMap().containsKey(randomGuy));
+        assertEquals(performance.getAssignmentMap().get(randomGuy), model.getSong(song.getIndex()).getRoles().get(0));
     }
 
     @Test

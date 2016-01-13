@@ -47,8 +47,9 @@ public class Main {
         Song song = model.addSong("The First Song", "It goes like this na na na, na na, na na na na");
 
         List<Role> roles = new ArrayList<>();
-        roles.add(new Role("mane chericter", "The main character", RoleType.MAIN));
-        song.setRoles(roles);
+//        roles.add(new Role("mane chericter", "The main character", RoleType.MAIN));
+        song.addRole(new Role("mane chericter", "The main character", RoleType.MAIN));
+        //song.setRoles(roles);
         model.getCurrentSession().addPerformance(song, "First Performance", "First Venue", new Date());
 
         Person random_guy = model.addPerson("random guy");
