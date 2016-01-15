@@ -1,10 +1,12 @@
 package action_cast.controller;
 
+import action_cast.controller.ClientObjects.Performance;
 import action_cast.controller.ClientObjects.Person;
+import action_cast.controller.ClientObjects.Role;
 import action_cast.controller.ClientObjects.Session;
 import action_cast.controller.ClientObjects.Song;
 import action_cast.data_store.DataStore;
-import action_cast.model.DataModel;
+import action_cast.model.*;
 import action_cast.model.exceptions.InvalidIDException;
 import org.xml.sax.SAXException;
 
@@ -44,6 +46,14 @@ public class Controller {
         model.getCurrentSession().getPerformance(performanceId).setSong(model.getSong(songId));
     }
 
+    public void assignPersonToRole(Person person, Role role, Performance performance) throws InvalidIDException {
+        if (person != null) {
+            model.getCurrentSession().getPerformance(performance.getId()).assign(model.getPerson(person.getId()), model.getSong(performance.getSong().getId()).getRole(role.getId()));
+        } else {
+            model.getCurrentSession().getPerformance(performance.getId()).assign(null, model.getSong(performance.getSong().getId()).getRole(role.getId()));
+        }
+    }
+
     public void addPerson(String name) {
         model.addPerson(name);
     }
@@ -69,9 +79,14 @@ public class Controller {
         return new Song(song.getIndex(), song.getName(), song.getDescription());
     }
 
+    public List<Role> getSongRoles(int id) throws InvalidIDException {
+        action_cast.model.Song song = model.getSong(id);
+        return song.getRoles().stream().map(role -> new Role(role.getIndex(), role.getName(), role.getDescription(), role.getType())).collect(Collectors.toList());
+    }
+
     public List<action_cast.controller.ClientObjects.Role> getRoles(int songId) throws InvalidIDException {
 
-        return model.getSong(songId).getRoles().stream().map(role -> new action_cast.controller.ClientObjects.Role(role.getName(), role.getDescription(), role.getType())).collect(Collectors.toList());
+        return model.getSong(songId).getRoles().stream().map(role -> new action_cast.controller.ClientObjects.Role(role.getIndex(), role.getName(), role.getDescription(), role.getType())).collect(Collectors.toList());
     }
 
     public Session getCurrentSession() {

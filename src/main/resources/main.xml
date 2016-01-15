@@ -13,23 +13,25 @@
             <name>The First Song</name>
             <description>It goes like this na na na, na na, na na na na</description>
             <roles>
-                <name>mane chericter</name>
-                <description>The main character</description>
-                <type>MAIN</type>
+                <roles id="Role-0">
+                    <name>mane chericter</name>
+                    <description>The main character</description>
+                    <type>MAIN</type>
+                </roles>
             </roles>
         </songs>
     </songs>
     <currentSession id="Session-0">
         <name>Fall 2015</name>
-        <start>2016-01-02T11:59:05.841-07:00</start>
-        <end>2016-01-14T01:45:45.841-07:00</end>
+        <start>2016-01-13T15:44:38.933-07:00</start>
+        <end>2016-01-25T05:31:18.932-07:00</end>
         <people>
             <people>Person-0</people>
         </people>
         <performances>
             <performances id="Performance-0">
                 <assignments/>
-                <date>2016-01-02T11:59:05.841-07:00</date>
+                <date>2016-01-13T15:44:38.937-07:00</date>
                 <name>First Performance</name>
                 <song>Song-0</song>
                 <venue>First Venue</venue>

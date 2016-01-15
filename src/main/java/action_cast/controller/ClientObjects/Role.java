@@ -6,11 +6,13 @@ import action_cast.model.RoleType;
  * Created by brian on 1/2/2016.
  */
 public class Role {
+    private final int id;
     private String name;
     private String description;
     private RoleType type;
 
-    public Role(String name, String description, RoleType type) {
+    public Role(int id, String name, String description, RoleType type) {
+        this.id = id;
         this.name = name;
         this.description = description;
         this.type = type;
@@ -26,5 +28,9 @@ public class Role {
 
     public RoleType getType() {
         return type;
+    }
+
+    public int getId() {
+        return id;
     }
 }

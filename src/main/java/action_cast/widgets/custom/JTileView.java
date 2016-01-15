@@ -1,10 +1,11 @@
 package action_cast.widgets.custom;
 
-import action_cast.controller.ClientObjects.Person;
 import action_cast.widgets.dragdrop.PersonTransferHandler;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by bmichaud on 10/20/2015.
@@ -13,8 +14,8 @@ public class JTileView<T extends Tile> extends JPanel {
 
     private static final String uiClassID = "TileView";
 
-    public static final int TILE_WIDTH = 64;
-    public static final int TILE_HEIGHT = 64;
+    public static final int TILE_WIDTH = 80;
+    public static final int TILE_HEIGHT = 80;
     public static final int PADDING = 4;
 
     public JTileView() {
@@ -61,5 +62,13 @@ public class JTileView<T extends Tile> extends JPanel {
 
     public T getTileAt(Point p) {
         return (T)getComponentAt(p);
+    }
+
+    public List<T> getTiles() {
+        List<T> tileList = new ArrayList<>();
+        for (Component component : getComponents()) {
+            tileList.add((T)component);
+        }
+        return tileList;
     }
 }

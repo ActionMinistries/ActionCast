@@ -17,6 +17,7 @@ public class Song extends UniqueItem {
     private String description;
     @XmlElementWrapper
     private final List<Role> roles = new ArrayList<>();
+    private Role role;
 
     private Song() {
 
@@ -46,5 +47,9 @@ public class Song extends UniqueItem {
 
     public List<Role> getRoles() {
         return roles;
+    }
+
+    public Role getRole(int roleID) {
+        return roles.get(roleID);
     }
 }

@@ -1,14 +1,14 @@
 package action_cast.view;
 
 import action_cast.controller.ClientObjects.Performance;
+import action_cast.controller.ClientObjects.RoleAssignment;
 import action_cast.controller.Controller;
 import action_cast.model.exceptions.InvalidIDException;
-import action_cast.widgets.*;
-import com.intellij.uiDesigner.core.GridConstraints;
-import com.intellij.uiDesigner.core.GridLayoutManager;
+import action_cast.widgets.CardPanel;
+import action_cast.widgets.CastingWidget;
+import action_cast.widgets.SongSelector;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
@@ -52,7 +52,8 @@ public class AddPerformance extends BaseCardClass implements ActionListener {
                 //TODO
                 if (currentPerformance == null) {
                     try {
-                        controller.getSessionController().addPerformance(controller.getSong(songSelector1.getSelectedIndex()), nameField.getText(), venueField.getText(), new Date());
+                        Performance performance = controller.getSessionController().addPerformance(controller.getSong(songSelector1.getSelectedIndex()), nameField.getText(), venueField.getText(), new Date());
+
                     } catch (InvalidIDException e1) {
                         e1.printStackTrace();
                     }
@@ -68,6 +69,15 @@ public class AddPerformance extends BaseCardClass implements ActionListener {
                         controller.getSessionController().updatePerformance(currentPerformance);
                     } catch (InvalidIDException e1) {
                         e1.printStackTrace();
+                    }
+
+                    for (RoleAssignment roleAssignment : castingWidget1.getAssignments()) {
+                        try {
+                            controller.assignPersonToRole(roleAssignment.getPerson(), roleAssignment.getRole(), currentPerformance);
+                        } catch (InvalidIDException e1) {
+                            //TODO popup dialog?
+                            e1.printStackTrace();
+                        }
                     }
                 }
             }
@@ -90,11 +100,8 @@ public class AddPerformance extends BaseCardClass implements ActionListener {
         dateField.setText(currentPerformance.getDate().toString());
         songSelector1.setData(controller.getSongs());
         songSelector1.setSelectedIndex(0);
-        try {
-            castingWidget1.setData(controller, controller.getSong(songSelector1.getSelectedIndex()));
-        } catch (InvalidIDException e) {
-            e.printStackTrace();
-        }
+        castingWidget1.setData(controller, currentPerformance);
+
         //  personListView1.setData(controller.getSessionController().getPeople());
      //   try {
         //    roleAssignmentGrid1.setData(controller.getRoles(currentPerformance.getSong().getId()));

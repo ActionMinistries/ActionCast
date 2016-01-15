@@ -2,10 +2,12 @@ package action_cast.widgets;
 
 import action_cast.controller.ClientObjects.Person;
 import action_cast.controller.ClientObjects.Role;
+import action_cast.controller.ClientObjects.RoleAssignment;
 import action_cast.widgets.custom.JTileView;
 import action_cast.widgets.tiles.RoleTile;
 
 import java.awt.*;
+import java.util.*;
 import java.util.List;
 
 /**
@@ -13,41 +15,34 @@ import java.util.List;
  */
 public class RoleAssignmentGrid extends JTileView<RoleTile> {
 
-    private List<Role> assignments;
+    private HashMap<Integer, Person> assignments = new HashMap<>();
+    private List<Role> roles = new ArrayList<>();
 
-    public void setData(List<Role> assignments) {
-        this.assignments = assignments;
+    public void setData(List<Role> roles, List<RoleAssignment> roleAssignments) {
+     //   this.assignments = assignments;
+        assignments.clear();
+        this.roles = roles;
+        for (RoleAssignment roleAssignment : roleAssignments) {
+            assignments.put(roleAssignment.getRole().getId(), roleAssignment.getPerson());
+        }
         updateDisplay();
     }
 
     public void updateDisplay() {
-        /*Set<Map.Entry<Person, Role>> entries = assignments.entrySet();
-        Iterator<Map.Entry<Person, Role>> iterator = entries.iterator();
-        while (iterator.hasNext()) {
-            Map.Entry<Person, Role> entry = iterator.next();
-            super.add(new RoleTile(this, entry.getKey(), entry.getValue()));
-        }*/
+        removeAll();
 
-        for(Role role : assignments) {
-            super.add(new RoleTile(this, null, role));
-        }
-        //int size = assignments.values().size();
-       // size =(int)Math.round(Math.ceil(Math.sqrt(size)));
-        /*for (int row = 0; row < size/2; row++) {
-            for (int col = 0; col < size/2; col++) {
-                int index = getColumnCount() * row + col;
-                if (index < assignments.values().size()) {
-                    ((UneditableTableModel) getModel()).setValueAt(assignments.v, row, col);
-                }
-                else {
-                    ((UneditableTableModel) getModel()).setValueAt("", row, col);
-                }
+        for(Role role : roles) {
+            RoleTile tile;
+            if (assignments.containsKey(role.getId())) {
+                tile = new RoleTile(this, assignments.get(role.getId()), role);
+            } else {
+                tile = new RoleTile(this, null, role);
             }
-        }*/
+            add(tile);
+        }
     }
 
     public void assignPerson(Person person, Point p) {
         getTileAt(p).assignPerson(person);
-        System.out.println("tile: " + getTileAt(p).getName());
     }
 }

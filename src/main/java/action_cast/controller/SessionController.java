@@ -1,13 +1,16 @@
 package action_cast.controller;
 
+import action_cast.controller.ClientObjects.*;
 import action_cast.controller.ClientObjects.Performance;
 import action_cast.controller.ClientObjects.Person;
+import action_cast.controller.ClientObjects.RoleAssignment;
 import action_cast.controller.ClientObjects.Song;
+import action_cast.model.*;
+import action_cast.model.Role;
 import action_cast.model.Session;
 import action_cast.model.exceptions.InvalidIDException;
 
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -53,4 +56,18 @@ public class SessionController {
     public List<Performance> getPerformances() {
         return session.getPerformances().stream().map(performance -> (new Performance(performance.getIndex(), performance.getName(), performance.getDirector(), new Song(performance.getSong().getIndex(), performance.getSong().getName(), performance.getSong().getDescription()), performance.getVenue(), performance.getDate()))).collect(Collectors.toList());
     }
+
+    public List<RoleAssignment> getPerformanceAssignments(Performance p) {
+        List<RoleAssignment> roleAssignments = new ArrayList<>();
+        Set<Map.Entry<action_cast.model.Person, Role>> entries = session.getPerformance(p.getId()).getAssignmentMap().entrySet();
+        for (Map.Entry<action_cast.model.Person, Role> entry : entries ) {
+            action_cast.model.Person person = entry.getKey();
+            Role role = entry.getValue();
+
+            roleAssignments.add(new RoleAssignment(new Person(person.getIndex(), person.getName()), new action_cast.controller.ClientObjects.Role(role.getIndex(), role.getName(), role.getDescription(), role.getType())));
+        }
+        return roleAssignments;
+    }
+
+
 }
