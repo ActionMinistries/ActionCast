@@ -1,11 +1,13 @@
 package action_cast.model;
 
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
 
 /**
  * Created by bmichaud on 8/31/2015.
  */
-public class Role {
+@XmlType
+public class Role extends UniqueItem {
     @XmlElement
     private String name;
     @XmlElement

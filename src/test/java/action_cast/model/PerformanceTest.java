@@ -1,7 +1,6 @@
 package action_cast.model;
 
 import action_cast.model.exceptions.InvalidIDException;
-import action_cast.model.id.SongID;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -21,16 +20,16 @@ public class PerformanceTest {
 
         String name = "perfName";
         String venue = "perfLocation";
-        SongID song = model.addSong("testSong", "with a test description");
+        Song song = model.addSong("testSong", "with a test description");
         Long time = System.currentTimeMillis();
 
-        Performance performance = new Performance(song, name, venue, new Date(time));
+        Performance performance = new Performance(-1, song, name, venue, new Date(time));
         assertNotNull(performance);
-        assertNotNull(performance.getAssignments());
+        assertNotNull(performance.getAssignmentMap());
         assertEquals("perfName", performance.getName());
         assertEquals("perfLocation", performance.getVenue());
         assertEquals(new Date(time), performance.getDate());
-        assertEquals(model.getSong(song), performance.getSong());
+        assertEquals(model.getSong(song.getIndex()), performance.getSong());
     }
 
     @Test
@@ -39,17 +38,18 @@ public class PerformanceTest {
 
         String name = "perfName";
         String venue = "perfLocation";
-        SongID song = model.addSong("testSong", "with a test description");
+        Song song = model.addSong("testSong", "with a test description");
         List<Role> roles = new ArrayList<>();
-        roles.add(new Role("TestRole", "This is merely a test role", RoleType.SUPPORT));
-        model.getSong(song).setRoles(roles);
+        //roles.add(new Role("TestRole", "This is merely a test role", RoleType.SUPPORT));
+        song.addRole(new Role("TestRole", "This is merely a test role", RoleType.SUPPORT));
+        //model.getSong(song.getIndex()).setRoles(roles);
         Long time = System.currentTimeMillis();
 
-        Performance performance = new Performance(song, name, venue, new Date(time));
-        Performer performer = new Performer(new Person("randomGuy"));
-        performance.assign(performer, model.getSong(song).getRoles().get(0));
-        assertTrue(performance.getAssignments().containsKey(performer));
-        assertEquals(performance.getAssignments().get(performer), model.getSong(song).getRoles().get(0));
+        Performance performance = new Performance(-1, song, name, venue, new Date(time));
+        Person randomGuy = new Person(-1, "randomGuy");
+        performance.assign(randomGuy, model.getSong(song.getIndex()).getRoles().get(0));
+        assertTrue(performance.getAssignmentMap().containsKey(randomGuy));
+        assertEquals(performance.getAssignmentMap().get(randomGuy), model.getSong(song.getIndex()).getRoles().get(0));
     }
 
     @Test
@@ -58,12 +58,12 @@ public class PerformanceTest {
 
         String name = "perfName";
         String venue = "perfLocation";
-        SongID song = model.addSong("testSong", "with a test description");
+        Song song = model.addSong("testSong", "with a test description");
         Long time = System.currentTimeMillis();
 
-        Performance performance = new Performance(song, name, venue, new Date(time));
+        Performance performance = new Performance(-1, song, name, venue, new Date(time));
 
-        performance.setDirector(new Director(new Person("someGuy")));
+        performance.setDirector(new Director(new Person(-1, "someGuy")));
         assertEquals("someGuy", performance.getDirector().getName());
     }
 

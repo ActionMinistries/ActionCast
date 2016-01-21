@@ -1,7 +1,6 @@
 package action_cast.model;
 
 import action_cast.model.exceptions.InvalidIDException;
-import action_cast.model.id.PersonID;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
@@ -9,13 +8,15 @@ import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlType;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by bmichaud on 9/10/2015.
  */
-@XmlType(propOrder = {"name", "start", "end", "people", "performanceList", "performers"})
-public class Session {
+@XmlType(propOrder = {"name", "start", "end", "people", "performances"})
+public class Session extends UniqueItem {
 
     private String name;
 
@@ -25,13 +26,12 @@ public class Session {
     @XmlElement
     private Date end;
 
-    @XmlElement
-    private List<Performance> performanceList = new ArrayList<>();
-    @XmlElement
-    private List<Performer> performers = new ArrayList<>();
+    @XmlElementWrapper
+    private List<Performance> performances = new ArrayList<>();
+
     @XmlElementWrapper
     @XmlIDREF
-    private List<Person> people = new ArrayList<>();
+    private HashSet<Person> people = new HashSet<>();
 
     private Session () {
 
@@ -52,27 +52,32 @@ public class Session {
     }
 
     public List<Performance> getPerformances() {
-        return performanceList;
+        return performances;
     }
 
-    public void addPerformance(Performance performance) {
-        performanceList.add(performance);
+    public Performance addPerformance(Song song, String name, String venue, Date date) throws InvalidIDException {
+        performances.add(new Performance(performances.size(), song, name, venue, date));
+        return performances.get(performances.size() - 1);
     }
 
-    public void addPerformer(Performer performer) {
-        performers.add(performer);
-    }
-
-    public List<Performer> getPerformers() {
-        return performers;
+    public Performance getPerformance(int id) {
+        return performances.get(id);
     }
 
     public List<Person> getPeople() {
-        return people;
+        return people.stream().collect(Collectors.toList());
     }
 
-    public void addPerson(PersonID person) throws InvalidIDException {
-        people.add(DataModel.instance.getPerson(person));
+    public void addPerson(Person person) {
+        people.add(person);
+    }
+
+    public boolean hasPerson(Person person) {
+        return people.contains(person);
+    }
+
+    public void clearPeople() {
+        people.clear();
     }
 
     public void setEnd(Date end) {

@@ -1,5 +1,7 @@
 package action_cast.widgets;
 
+import action_cast.widgets.events.RowSelectedEvent;
+
 import java.util.EventListener;
 
 /**
