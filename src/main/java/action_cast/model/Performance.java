@@ -19,7 +19,7 @@ public class Performance extends UniqueItem {
     private Director director;
 
     @XmlTransient
-    private Map<Person, Role> assignmentMap;
+    private Map<Role, Person> assignmentMap;
 
     @XmlElementWrapper
     private final List<RoleAssignment> assignments = new ArrayList<>();
@@ -53,19 +53,24 @@ public class Performance extends UniqueItem {
         return song;
     }
 
-    public Map<Person, Role> getAssignmentMap() {
+    public Map<Role, Person> getAssignmentMap() {
         if (assignmentMap == null) {
             assignmentMap = new HashMap<>();
             for (RoleAssignment assignment : assignments) {
-                assignmentMap.put(assignment.getPerson(), assignment.getRole());
+                assignmentMap.put(assignment.getRole(), assignment.getPerson());
             }
         }
         return assignmentMap;
     }
 
+    public List<RoleAssignment> getAssignments() {
+        return assignments;
+    }
+
     public void assign(Person performer, Role role) {
         assignments.add(new RoleAssignment(performer, role));
-        getAssignmentMap().put(performer, role);
+
+        getAssignmentMap().put(role, performer);
     }
 
     public Director getDirector() {

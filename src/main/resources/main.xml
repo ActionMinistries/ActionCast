@@ -23,15 +23,14 @@
     </songs>
     <currentSession id="Session-0">
         <name>Fall 2015</name>
-        <start>2016-01-13T15:44:38.933-07:00</start>
-        <end>2016-01-25T05:31:18.932-07:00</end>
+        <start>2016-01-21T14:58:51.058-07:00</start>
+        <end>2016-02-02T04:45:31.057-07:00</end>
         <people>
             <people>Person-0</people>
         </people>
         <performances>
             <performances id="Performance-0">
-                <assignments/>
-                <date>2016-01-13T15:44:38.937-07:00</date>
+                <date>2016-01-21T14:58:51.060-07:00</date>
                 <name>First Performance</name>
                 <song>Song-0</song>
                 <venue>First Venue</venue>

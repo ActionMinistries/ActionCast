@@ -1,11 +1,9 @@
 package action_cast.controller;
 
-import action_cast.controller.ClientObjects.*;
 import action_cast.controller.ClientObjects.Performance;
 import action_cast.controller.ClientObjects.Person;
 import action_cast.controller.ClientObjects.RoleAssignment;
 import action_cast.controller.ClientObjects.Song;
-import action_cast.model.*;
 import action_cast.model.Role;
 import action_cast.model.Session;
 import action_cast.model.exceptions.InvalidIDException;
@@ -59,15 +57,16 @@ public class SessionController {
 
     public List<RoleAssignment> getPerformanceAssignments(Performance p) {
         List<RoleAssignment> roleAssignments = new ArrayList<>();
-        Set<Map.Entry<action_cast.model.Person, Role>> entries = session.getPerformance(p.getId()).getAssignmentMap().entrySet();
-        for (Map.Entry<action_cast.model.Person, Role> entry : entries ) {
-            action_cast.model.Person person = entry.getKey();
-            Role role = entry.getValue();
-
-            roleAssignments.add(new RoleAssignment(new Person(person.getIndex(), person.getName()), new action_cast.controller.ClientObjects.Role(role.getIndex(), role.getName(), role.getDescription(), role.getType())));
+        for (action_cast.model.RoleAssignment assignment : session.getPerformance(p.getId()).getAssignments()) {
+            roleAssignments.add(new RoleAssignment(assignment.getIndex(), assignment.getPerson().getIndex(), assignment.getRole()));
         }
+//        Set<Map.Entry<Role, action_cast.model.Person>> entries = session.getPerformance(p.getId()).getAssignmentMap().entrySet();
+//        for (Map.Entry<Role, action_cast.model.Person> entry : entries ) {
+//            Role role = entry.getKey();
+//            action_cast.model.Person person = entry.getValue();
+//
+//            roleAssignments.add(new RoleAssignment(new Person(person.getIndex(), person.getName()), new action_cast.controller.ClientObjects.Role(role.getIndex(), role.getName(), role.getDescription(), role.getType())));
+//        }
         return roleAssignments;
     }
-
-
 }
