@@ -1,9 +1,11 @@
 package action_cast.widgets;
 
-import action_cast.controller.AddPerformance;
-import action_cast.controller.BaseCardClass;
-import action_cast.model.DataModel;
-import action_cast.model.Performance;
+import action_cast.controller.ClientObjects.Performance;
+import action_cast.controller.ClientObjects.Session;
+import action_cast.controller.Controller;
+import action_cast.controller.SessionController;
+import action_cast.view.AddPerformance;
+import action_cast.view.BaseCardClass;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -20,6 +22,7 @@ public class PerformanceTableView extends DisplayTable implements MouseListener 
 
     private List<Performance> performanceList = new ArrayList<>();
     private BaseCardClass card;
+    private Controller controller;
 
     public PerformanceTableView(BaseCardClass card) {
         super(new Object[]{"Name", "Venue", "Song", "Date"});
@@ -27,8 +30,9 @@ public class PerformanceTableView extends DisplayTable implements MouseListener 
         addMouseListener(this);
     }
 
-    public void setData(List<Performance> data) {
+    public void setData(Controller controller, List<Performance> data) {
         performanceList = data;
+        this.controller = controller;
         ((DefaultTableModel)getModel()).setRowCount(0);
         for (Performance performance : performanceList) {
             ((DefaultTableModel)getModel()).addRow(new Object[]{performance.getName(), performance.getVenue(), performance.getSong().getName(), performance.getDate()});
@@ -47,7 +51,7 @@ public class PerformanceTableView extends DisplayTable implements MouseListener 
         if (me.getClickCount() == 2) {
             if (row < performanceList.size()) {
                 AddPerformance newAddPerformance = new AddPerformance(card.getBreadCrumb());
-                newAddPerformance.setData(DataModel.instance.getCurrentSession(), DataModel.instance.getCurrentSession().getPerformances().get(row));
+                newAddPerformance.setData(controller, performanceList.get(row));
                 card.addCard(newAddPerformance);
             }
         }

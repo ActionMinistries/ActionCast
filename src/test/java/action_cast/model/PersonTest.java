@@ -13,7 +13,7 @@ public class PersonTest {
     public void testCreate() {
         String name = "randomGuy";
 
-        Person randomGuy = new Person(name);
+        Person randomGuy = new Person(-1, name);
         assertEquals("randomGuy", randomGuy.getName());
     }
 

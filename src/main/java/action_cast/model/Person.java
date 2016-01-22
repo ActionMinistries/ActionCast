@@ -16,8 +16,9 @@ public class Person extends UniqueItem {
     @XmlElement
     private String name;
 
-    public Person(String name) {
+    public Person(int id, String name) {
         this.name = name;
+        this.id = id;
     }
 
     public String getName() {

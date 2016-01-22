@@ -1,5 +1,7 @@
 package action_cast.widgets;
 
+import action_cast.widgets.events.RowSelectedEvent;
+
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import java.util.ArrayList;

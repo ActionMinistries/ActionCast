@@ -1,32 +1,41 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <dataModel>
     <people>
-        <people id="I-f86eb11c-9256-4188-b51c-880e0f5d198d">
+        <people id="Person-0">
             <name>random guy</name>
         </people>
-        <people id="I-c60043df-6d37-4152-9403-451970db58b3">
+        <people id="Person-1">
             <name>Random Guy</name>
         </people>
     </people>
     <songs>
-        <songs id="I-0a37d96a-c092-49d2-81d2-53561dac262c">
+        <songs id="Song-0">
             <name>The First Song</name>
             <description>It goes like this na na na, na na, na na na na</description>
+            <roles>
+                <roles id="Role-0">
+                    <name>mane chericter</name>
+                    <description>The main character</description>
+                    <type>MAIN</type>
+                </roles>
+            </roles>
         </songs>
     </songs>
-    <currentSession>
+    <currentSession id="Session-0">
         <name>Fall 2015</name>
-        <start>2015-10-15T11:33:29.288-06:00</start>
-        <end>2015-10-27T01:20:09.288-06:00</end>
+        <start>2016-01-13T15:44:38.933-07:00</start>
+        <end>2016-01-25T05:31:18.932-07:00</end>
         <people>
-            <people>I-f86eb11c-9256-4188-b51c-880e0f5d198d</people>
+            <people>Person-0</people>
         </people>
-        <performanceList>
-            <assignments/>
-            <date>2015-10-15T11:33:29.291-06:00</date>
-            <name>First Performance</name>
-            <song>I-0a37d96a-c092-49d2-81d2-53561dac262c</song>
-            <venue>First Venue</venue>
-        </performanceList>
+        <performances>
+            <performances id="Performance-0">
+                <assignments/>
+                <date>2016-01-13T15:44:38.937-07:00</date>
+                <name>First Performance</name>
+                <song>Song-0</song>
+                <venue>First Venue</venue>
+            </performances>
+        </performances>
     </currentSession>
 </dataModel>

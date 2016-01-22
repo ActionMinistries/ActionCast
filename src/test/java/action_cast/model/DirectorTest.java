@@ -13,7 +13,7 @@ public class DirectorTest {
     public void testCreate() {
         String name = "randomGuy";
 
-        Person randomGuy = new Person(name);
+        Person randomGuy = new Person(-1, name);
         Director director = new Director(randomGuy);
         assertEquals("randomGuy", director.getName());
     }

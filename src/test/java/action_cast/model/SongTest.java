@@ -18,7 +18,7 @@ public class SongTest {
     public void testCreate() {
         String name = "songName";
         String description = "A well-formatted description of a song.";
-        Song song = new Song(name, description);
+        Song song = new Song(-1, name, description);
         assertNotNull(song);
         assertEquals("songName", song.getName());
         assertEquals("A well-formatted description of a song.", song.getDescription());
@@ -28,10 +28,11 @@ public class SongTest {
     public void testRoles() {
         String name = "songName";
         String description = "A well-formatted description of a song.";
-        Song song = new Song(name, description);
+        Song song = new Song(-1, name, description);
         List<Role> roles = new ArrayList<>();
-        roles.add(new Role("SomeGuy", "A random gentleman from Colorado.", RoleType.BACKGROUND));
-        song.setRoles(roles);
+        //roles.add(new Role("SomeGuy", "A random gentleman from Colorado.", RoleType.BACKGROUND));
+        song.addRole(new Role("SomeGuy", "A random gentleman from Colorado.", RoleType.BACKGROUND));
+        //song.setRoles(roles);
         assertNotNull(song.getRoles());
         assertEquals(1, song.getRoles().size());
     }
