@@ -71,14 +71,14 @@ public class AddPerformance extends BaseCardClass implements ActionListener {
                         e1.printStackTrace();
                     }
 
-                    for (RoleAssignment roleAssignment : castingWidget1.getAssignments()) {
-                        try {
-                            controller.assignPersonToRole(roleAssignment.getPerson(), roleAssignment.getRole(), currentPerformance);
-                        } catch (InvalidIDException e1) {
-                            //TODO popup dialog?
-                            e1.printStackTrace();
-                        }
-                    }
+//                    for (RoleAssignment roleAssignment : castingWidget1.getAssignments()) {
+//                        try {
+//                            controller.assignPersonToRole(controller.getPerson(roleAssignment.getPersonId()), controller.getRole(currentPerformance.getSong().getId(), roleAssignment.getRoleId()), currentPerformance);
+//                        } catch (InvalidIDException e1) {
+//                            //TODO popup dialog?
+//                            e1.printStackTrace();
+//                        }
+//                    }
                 }
             }
         }

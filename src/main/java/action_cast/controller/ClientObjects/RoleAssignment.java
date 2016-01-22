@@ -6,19 +6,19 @@ package action_cast.controller.ClientObjects;
 public class RoleAssignment {
     private final int id;
     private final int person;
-    private Role role;
+    private final int role;
 
-    public RoleAssignment(int id, int personId, Role role) {
+    public RoleAssignment(int id, int personId, int roleId) {
         this.id = id;
         this.person = personId;
-        this.role = role;
+        this.role = roleId;
     }
 
     public int getPersonId() {
         return person;
     }
 
-    public Role getRole() {
+    public int getRoleId() {
         return role;
     }
 

@@ -36,14 +36,14 @@ public class CastingWidget extends JPanel{
         updateDisplay();
     }
 
-    public List<RoleAssignment> getAssignments() {
-        return roleAssignmentGrid1.getTiles().stream().map(tile -> new RoleAssignment(tile.getAssignedPerson(), tile.getRole())).collect(Collectors.toList());
-    }
+//    public List<RoleAssignment> getAssignments() {
+//        return roleAssignmentGrid1.getTiles().stream().map(tile -> new RoleAssignment(tile.getAssignedPerson().getId(), tile.getRole().getId())).collect(Collectors.toList());
+//    }
 
     public void updateDisplay() {
         personListView1.setData(controller.getSessionController().getPeople());
         try {
-            roleAssignmentGrid1.setData(controller.getSongRoles(performance.getSong().getId()), controller.getSessionController().getPerformanceAssignments(performance));//controller.getSessionController().getPerformanceAssignments(performance));
+            roleAssignmentGrid1.setData(controller, performance, controller.getSongRoles(performance.getSong().getId()), controller.getSessionController().getPerformanceAssignments(performance));//controller.getSessionController().getPerformanceAssignments(performance));
         } catch (InvalidIDException e) {
             e.printStackTrace();
         }

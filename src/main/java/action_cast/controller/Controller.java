@@ -69,6 +69,11 @@ public class Controller {
         return results;
     }
 
+    public Person getPerson(int id) throws InvalidIDException {
+        action_cast.model.Person person = model.getPerson(id);
+        return new Person(person.getIndex(), person.getName());
+    }
+
     public List<Song> getSongs() {
         List<Song> results = model.getSongs().stream().map(song -> new Song(song.getIndex(), song.getName(), song.getDescription())).collect(Collectors.toList());
         return results;
@@ -87,6 +92,11 @@ public class Controller {
     public List<action_cast.controller.ClientObjects.Role> getRoles(int songId) throws InvalidIDException {
 
         return model.getSong(songId).getRoles().stream().map(role -> new action_cast.controller.ClientObjects.Role(role.getIndex(), role.getName(), role.getDescription(), role.getType())).collect(Collectors.toList());
+    }
+
+    public Role getRole(int songId, int roleId) throws InvalidIDException {
+        action_cast.model.Role role = model.getSong(songId).getRole(roleId);
+        return new Role(role.getIndex(), role.getName(), role.getDescription(), role.getType());
     }
 
     public Session getCurrentSession() {

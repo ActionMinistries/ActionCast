@@ -2,17 +2,18 @@ package action_cast.widgets.tiles;
 
 import action_cast.controller.ClientObjects.Person;
 import action_cast.controller.ClientObjects.Role;
-import action_cast.widgets.dragdrop.PersonTransferHandler;
 import action_cast.widgets.custom.JTileView;
 import action_cast.widgets.custom.Tile;
-import com.intellij.uiDesigner.core.GridConstraints;
-import com.intellij.uiDesigner.core.GridLayoutManager;
-import com.intellij.uiDesigner.core.Spacer;
+import action_cast.widgets.dragdrop.PersonTransferHandler;
+import action_cast.widgets.events.RoleAssignedEvent;
+import action_cast.widgets.listeners.RoleAssignmentListener;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by bmichaud on 12/14/2015.
@@ -23,6 +24,8 @@ public class RoleTile extends Tile implements ActionListener {
     Role role;
 
     JButton clearButton;
+
+    List<RoleAssignmentListener> listeners = new ArrayList<>();
 
     public RoleTile(JTileView parent, Person person, Role role) {
         super(parent);
@@ -53,6 +56,9 @@ public class RoleTile extends Tile implements ActionListener {
 
     public void assignPerson(Person p) {
         person = p;
+        for (RoleAssignmentListener listener : listeners) {
+            listener.roleAssigned(new RoleAssignedEvent(this));
+        }
         updateDisplay();
     }
 
@@ -95,5 +101,9 @@ public class RoleTile extends Tile implements ActionListener {
             person = null;
             updateDisplay();
         }
+    }
+
+    public void addRoleAssignmentListener(RoleAssignmentListener listener) {
+        this.listeners.add(listener);
     }
 }

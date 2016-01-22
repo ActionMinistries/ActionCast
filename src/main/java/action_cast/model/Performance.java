@@ -1,5 +1,7 @@
 package action_cast.model;
 
+import action_cast.widgets.events.RoleAssignedEvent;
+
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlTransient;
@@ -19,10 +21,10 @@ public class Performance extends UniqueItem {
     private Director director;
 
     @XmlTransient
-    private Map<Role, Person> assignmentMap;
+    private Map<Role, RoleAssignment> assignmentMap;
 
     @XmlElementWrapper
-    private final List<RoleAssignment> assignments = new ArrayList<>();
+    private final HashSet<RoleAssignment> assignments = new HashSet<>();
 
     private Performance() {
 
@@ -53,24 +55,38 @@ public class Performance extends UniqueItem {
         return song;
     }
 
-    public Map<Role, Person> getAssignmentMap() {
+    public Map<Role, RoleAssignment> getAssignmentMap() {
         if (assignmentMap == null) {
             assignmentMap = new HashMap<>();
             for (RoleAssignment assignment : assignments) {
-                assignmentMap.put(assignment.getRole(), assignment.getPerson());
+                assignmentMap.put(assignment.getRole(), assignment);
             }
         }
         return assignmentMap;
     }
 
-    public List<RoleAssignment> getAssignments() {
+    public HashSet<RoleAssignment> getAssignments() {
         return assignments;
     }
 
-    public void assign(Person performer, Role role) {
-        assignments.add(new RoleAssignment(performer, role));
+    public RoleAssignment assign(Person performer, Role role) {
+        RoleAssignment roleAssignment;
+        if (!assignmentMap.containsKey(role)) {
+            roleAssignment = new RoleAssignment(performer, role);
+            assignments.add(roleAssignment);
+            getAssignmentMap().put(role, roleAssignment);
 
-        getAssignmentMap().put(role, performer);
+        } else {
+            if (performer == null) {
+                assignments.remove(assignmentMap.get(role));
+                assignmentMap.remove(role);
+                return null;
+            } else {
+                getAssignmentMap().get(role).setPerson(performer);
+            }
+        }
+
+        return assignmentMap.get(role);
     }
 
     public Director getDirector() {

@@ -1,6 +1,7 @@
 package action_cast.widgets;
 
 import action_cast.widgets.events.RowSelectedEvent;
+import action_cast.widgets.listeners.RowSelectedListener;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;

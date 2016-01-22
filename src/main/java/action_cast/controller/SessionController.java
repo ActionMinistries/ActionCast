@@ -58,7 +58,7 @@ public class SessionController {
     public List<RoleAssignment> getPerformanceAssignments(Performance p) {
         List<RoleAssignment> roleAssignments = new ArrayList<>();
         for (action_cast.model.RoleAssignment assignment : session.getPerformance(p.getId()).getAssignments()) {
-            roleAssignments.add(new RoleAssignment(assignment.getIndex(), assignment.getPerson().getIndex(), assignment.getRole()));
+            roleAssignments.add(new RoleAssignment(assignment.getIndex(), assignment.getPerson().getIndex(), assignment.getRole().getIndex()));
         }
 //        Set<Map.Entry<Role, action_cast.model.Person>> entries = session.getPerformance(p.getId()).getAssignmentMap().entrySet();
 //        for (Map.Entry<Role, action_cast.model.Person> entry : entries ) {
