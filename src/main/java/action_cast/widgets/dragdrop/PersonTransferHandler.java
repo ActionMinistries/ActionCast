@@ -123,6 +123,9 @@ public class PersonTransferHandler extends TransferHandler {
                 e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
+            } catch (Throwable t) {
+                t.printStackTrace();
+                throw t;
             }
         }
         return false;

@@ -47,9 +47,10 @@ public class PerformanceTest {
 
         Performance performance = new Performance(-1, song, name, venue, new Date(time));
         Person randomGuy = new Person(-1, "randomGuy");
-        performance.assign(randomGuy, model.getSong(song.getIndex()).getRoles().get(0));
-        assertTrue(performance.getAssignmentMap().containsKey(randomGuy));
-        assertEquals(performance.getAssignmentMap().get(randomGuy), model.getSong(song.getIndex()).getRoles().get(0));
+        RoleAssignment assignment = performance.assign(randomGuy, model.getSong(song.getIndex()).getRoles().get(0));
+        assertTrue(performance.getAssignmentMap().containsKey(assignment.getRole()));
+        assertEquals(assignment.getRole(), model.getSong(song.getIndex()).getRoles().get(0));
+        assertEquals(performance.getAssignmentMap().get(assignment.getRole()).getPerson(), randomGuy);
     }
 
     @Test

@@ -23,7 +23,7 @@ public class Main {
     private JTabbedPane tabbedPane1;
     private People people1;
     private ManageSessions manageSessions1;
-    private TileViewTest tileViewTest1;
+    private Songs songs1;
 
     private Controller controller;
 
@@ -32,6 +32,7 @@ public class Main {
 
         people1.setController(controller);//.setData(store.getModel());
         manageSessions1.setController(controller);
+        songs1.setController(controller);
     }
 
     public void resetData() throws JAXBException, SAXException, InvalidIDException {

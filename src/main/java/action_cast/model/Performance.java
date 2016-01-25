@@ -71,22 +71,22 @@ public class Performance extends UniqueItem {
 
     public RoleAssignment assign(Person performer, Role role) {
         RoleAssignment roleAssignment;
-        if (!assignmentMap.containsKey(role)) {
+        if (!getAssignmentMap().containsKey(role)) {
             roleAssignment = new RoleAssignment(performer, role);
             assignments.add(roleAssignment);
             getAssignmentMap().put(role, roleAssignment);
 
         } else {
             if (performer == null) {
-                assignments.remove(assignmentMap.get(role));
-                assignmentMap.remove(role);
+                assignments.remove(getAssignmentMap().get(role));
+                getAssignmentMap().remove(role);
                 return null;
             } else {
                 getAssignmentMap().get(role).setPerson(performer);
             }
         }
 
-        return assignmentMap.get(role);
+        return getAssignmentMap().get(role);
     }
 
     public Director getDirector() {
