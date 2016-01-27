@@ -74,6 +74,16 @@ public class Controller {
         return new Person(person.getIndex(), person.getName());
     }
 
+    /*
+    *   SONGS
+    *
+     */
+
+    public Song addSong(String name, String description) {
+        action_cast.model.Song song = model.addSong(name, description);
+        return new Song(song.getIndex(), song.getName(), song.getDescription());
+    }
+
     public List<Song> getSongs() {
         List<Song> results = model.getSongs().stream().map(song -> new Song(song.getIndex(), song.getName(), song.getDescription())).collect(Collectors.toList());
         return results;
@@ -82,6 +92,11 @@ public class Controller {
     public Song getSong(int id) throws InvalidIDException {
         action_cast.model.Song song = model.getSong(id);
         return new Song(song.getIndex(), song.getName(), song.getDescription());
+    }
+
+    public void updateSong(Song song) throws InvalidIDException {
+        model.getSong(song.getId()).setName(song.getName());
+        model.getSong(song.getId()).setDescription(song.getDescription());
     }
 
     public List<Role> getSongRoles(int id) throws InvalidIDException {

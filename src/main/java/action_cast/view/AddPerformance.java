@@ -40,6 +40,7 @@ public class AddPerformance extends BaseCardClass implements ActionListener {
     public AddPerformance(BreadCrumb breadCrumb) {
         super(breadCrumb);
         createButton.addActionListener(this);
+        songSelector1.addActionListener(this);
         //TODO?
         //songs.add(new Song(-1, "500 miles", "But I would walk 500 miles..."));
         //songSelector1.setData(songs);
@@ -81,6 +82,8 @@ public class AddPerformance extends BaseCardClass implements ActionListener {
 //                    }
                 }
             }
+        } else if (e.getSource() == songSelector1) {
+            castingWidget1.setData(controller, currentPerformance);
         }
     }
 
@@ -99,7 +102,7 @@ public class AddPerformance extends BaseCardClass implements ActionListener {
         venueField.setText(currentPerformance.getVenue());
         dateField.setText(currentPerformance.getDate().toString());
         songSelector1.setData(controller.getSongs());
-        songSelector1.setSelectedIndex(0);
+        songSelector1.setSelectedIndex(currentPerformance.getSong().getId());
         castingWidget1.setData(controller, currentPerformance);
 
         //  personListView1.setData(controller.getSessionController().getPeople());

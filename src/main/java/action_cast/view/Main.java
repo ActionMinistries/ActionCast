@@ -49,7 +49,10 @@ public class Main {
 
         List<Role> roles = new ArrayList<>();
 //        roles.add(new Role("mane chericter", "The main character", RoleType.MAIN));
-        song.addRole(new Role("mane chericter", "The main character", RoleType.MAIN));
+        song.addRole("mane chericter", "The main character", RoleType.MAIN);
+        song.addRole("syde chericter", "The main character's brother", RoleType.SUPPORT);
+        song.addRole("support", "support", RoleType.SUPPORT);
+        song.addRole("background", "who?", RoleType.BACKGROUND);
         //song.setRoles(roles);
         model.getCurrentSession().addPerformance(song, "First Performance", "First Venue", new Date());
 

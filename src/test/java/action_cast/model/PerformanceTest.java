@@ -41,7 +41,7 @@ public class PerformanceTest {
         Song song = model.addSong("testSong", "with a test description");
         List<Role> roles = new ArrayList<>();
         //roles.add(new Role("TestRole", "This is merely a test role", RoleType.SUPPORT));
-        song.addRole(new Role("TestRole", "This is merely a test role", RoleType.SUPPORT));
+        song.addRole("TestRole", "This is merely a test role", RoleType.SUPPORT);
         //model.getSong(song.getIndex()).setRoles(roles);
         Long time = System.currentTimeMillis();
 

@@ -114,7 +114,7 @@ public class DataStoreTest {
         Song run = store.getModel().addSong("I just wanna run.", "throw it away");
         //List<Role> roles = new ArrayList<>();
         //roles.add(new Role("Runner", "The guy who runs", RoleType.MAIN));
-        run.addRole(new Role("Runner", "The guy who runs", RoleType.MAIN));
+        run.addRole("Runner", "The guy who runs", RoleType.MAIN);
         //store.getModel().getSong(run.getIndex()).setRoles(roles);
        // store.getModel().addSong(fiveHundredMiles);
 

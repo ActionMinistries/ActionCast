@@ -31,7 +31,7 @@ public class SongTest {
         Song song = new Song(-1, name, description);
         List<Role> roles = new ArrayList<>();
         //roles.add(new Role("SomeGuy", "A random gentleman from Colorado.", RoleType.BACKGROUND));
-        song.addRole(new Role("SomeGuy", "A random gentleman from Colorado.", RoleType.BACKGROUND));
+        song.addRole("SomeGuy", "A random gentleman from Colorado.", RoleType.BACKGROUND);
         //song.setRoles(roles);
         assertNotNull(song.getRoles());
         assertEquals(1, song.getRoles().size());

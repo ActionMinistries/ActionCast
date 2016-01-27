@@ -19,10 +19,11 @@ public class Role extends UniqueItem {
 
     }
 
-    public Role(String name, String description, RoleType type) {
+    public Role(int id, String name, String description, RoleType type) {
         this.name = name;
         this.description = description;
         this.type = type;
+        this.id = id;
     }
 
     public String getName() {
