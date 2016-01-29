@@ -46,14 +46,15 @@ public class Main {
         model.setCurrentSession(new Session("Fall 2015", new Date(), new Date(endTime)));
         //model.addSession(new Performances(new Date(startTime - 2 * 1000000000), new Date(startTime - 1000000000)));
         Song song = model.addSong("The First Song", "It goes like this na na na, na na, na na na na");
+        Song run = model.addSong("I just wanna run", "");
 
-        List<Role> roles = new ArrayList<>();
-//        roles.add(new Role("mane chericter", "The main character", RoleType.MAIN));
         song.addRole("mane chericter", "The main character", RoleType.MAIN);
         song.addRole("syde chericter", "The main character's brother", RoleType.SUPPORT);
         song.addRole("support", "support", RoleType.SUPPORT);
         song.addRole("background", "who?", RoleType.BACKGROUND);
-        //song.setRoles(roles);
+
+        run.addRole("runner", "", RoleType.MAIN);
+
         model.getCurrentSession().addPerformance(song, "First Performance", "First Venue", new Date());
 
         Person random_guy = model.addPerson("random guy");

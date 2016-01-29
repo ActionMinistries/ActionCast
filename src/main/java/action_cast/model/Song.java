@@ -45,7 +45,7 @@ public class Song extends UniqueItem {
 //    }
 
     public Role addRole(String name, String description, RoleType type) {
-        roles.add(new Role(roles.size(), name, description, type));
+        roles.add(new Role(roles.size(), name, description, type, this));
         return roles.get(roles.size()-1);
     }
 

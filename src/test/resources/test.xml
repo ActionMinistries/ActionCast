@@ -24,18 +24,19 @@
             <name>I just wanna run.</name>
             <description>throw it away</description>
             <roles>
-                <roles id="Role-0">
+                <roles id="Song-1_Role-0">
                     <name>Runner</name>
                     <description>The guy who runs</description>
                     <type>MAIN</type>
+                    <song>Song-1</song>
                 </roles>
             </roles>
         </songs>
     </songs>
     <currentSession id="Session-0">
         <name>savedSession</name>
-        <start>2016-01-13T15:33:10.227-07:00</start>
-        <end>2016-01-13T15:33:15.227-07:00</end>
+        <start>2016-01-27T15:48:53.173-07:00</start>
+        <end>2016-01-27T15:48:58.173-07:00</end>
         <people>
             <people>Person-1</people>
             <people>Person-0</people>
@@ -43,7 +44,7 @@
         <performances>
             <performances id="Performance-0">
                 <assignments/>
-                <date>2016-01-13T15:33:10.228-07:00</date>
+                <date>2016-01-27T15:48:53.174-07:00</date>
                 <name>encore</name>
                 <song>Song-0</song>
                 <venue>OTS</venue>
@@ -52,10 +53,10 @@
                 <assignments>
                     <assignments id="RoleAssignment-0">
                         <person>Person-0</person>
-                        <role>Role-0</role>
+                        <role>Song-1_Role-0</role>
                     </assignments>
                 </assignments>
-                <date>2016-01-13T15:33:10.228-07:00</date>
+                <date>2016-01-27T15:48:53.174-07:00</date>
                 <director>
                     <person>Person-1</person>
                 </director>
@@ -65,7 +66,7 @@
             </performances>
             <performances id="Performance-2">
                 <assignments/>
-                <date>2016-01-13T15:33:10.229-07:00</date>
+                <date>2016-01-27T15:48:53.176-07:00</date>
                 <name>never</name>
                 <song>Song-0</song>
                 <venue>OTS</venue>

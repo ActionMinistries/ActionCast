@@ -1,6 +1,9 @@
 package action_cast.model;
 
+import com.sun.istack.internal.NotNull;
+
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlType;
 
 /**
@@ -15,15 +18,25 @@ public class Role extends UniqueItem {
     @XmlElement
     private RoleType type;
 
+    @XmlElement
+    @XmlIDREF
+    Song song;
+
     private Role() {
 
     }
 
-    public Role(int id, String name, String description, RoleType type) {
+    @Override
+    protected String getId() {
+        return song.getId() + "_" + super.getId();
+    }
+
+    public Role(int id, String name, String description, RoleType type, @NotNull Song song) {
         this.name = name;
         this.description = description;
         this.type = type;
         this.id = id;
+        this.song = song;
     }
 
     public String getName() {

@@ -11,12 +11,12 @@ public abstract class UniqueItem {
 
     @XmlAttribute
     @XmlID
-    private String getId() {
+    protected String getId() {
         return getClass().getSimpleName() + "-" + Integer.toString(getIndex());
     }
 
     public void setId(String id) {
-        this.id = Integer.parseInt(id.substring(getClass().getSimpleName().length()+1));
+        this.id = Integer.parseInt(id.substring(id.lastIndexOf("-")+1));
     }
 
     public int getIndex() {
