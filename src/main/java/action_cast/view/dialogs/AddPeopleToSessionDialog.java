@@ -1,19 +1,12 @@
-package action_cast.view;
+package action_cast.view.dialogs;
 
 import action_cast.controller.Controller;
-import action_cast.model.DataModel;
-import action_cast.model.Session;
 import action_cast.model.exceptions.InvalidIDException;
 import action_cast.widgets.PersonListView;
 import action_cast.widgets.PersonTileView;
-import com.intellij.uiDesigner.core.GridConstraints;
-import com.intellij.uiDesigner.core.GridLayoutManager;
-import com.intellij.uiDesigner.core.Spacer;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.*;
-import java.util.Date;
 
 public class AddPeopleToSessionDialog extends JDialog {
     private JPanel contentPane;

@@ -1,7 +1,6 @@
 package action_cast.widgets;
 
 import action_cast.controller.ClientObjects.Performance;
-import action_cast.controller.ClientObjects.Person;
 import action_cast.controller.ClientObjects.Role;
 import action_cast.controller.ClientObjects.RoleAssignment;
 import action_cast.controller.Controller;
@@ -11,8 +10,8 @@ import action_cast.widgets.events.RoleAssignedEvent;
 import action_cast.widgets.listeners.RoleAssignmentListener;
 import action_cast.widgets.tiles.RoleTile;
 
-import java.awt.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -55,6 +54,7 @@ public class RoleAssignmentGrid extends JTileView<RoleTile> implements RoleAssig
                 e.printStackTrace();
             }
         }
+        updateUI();
     }
 
     @Override
@@ -68,5 +68,10 @@ public class RoleAssignmentGrid extends JTileView<RoleTile> implements RoleAssig
                 e.printStackTrace();
             }
         }
+    }
+
+    @Override
+    public void createTile() {
+
     }
 }

@@ -87,11 +87,11 @@ public class RoleTile extends Tile implements ActionListener {
     protected void paintComponent(Graphics g) {
 
         super.paintComponent(g);
-        ((Graphics2D) g).drawString(role.getType().name(), 12, 50);
+        ((Graphics2D) g).drawString(role.getType().name(), getInsets().left, JTileView.TILE_HEIGHT - getInsets().bottom);
         //((Graphics2D) g).drawString("X", 50, 15);
 
         if (person != null) {
-            ((Graphics2D) g).drawString(person.getName(), 12, 20);
+            ((Graphics2D) g).drawString(person.getName(), getInsets().left, getInsets().top + g.getFontMetrics().getHeight());
         }
     }
 

@@ -5,6 +5,7 @@ import action_cast.controller.Controller;
 import action_cast.model.exceptions.InvalidIDException;
 import action_cast.widgets.RoleTileView;
 import action_cast.widgets.SongListView;
+import action_cast.widgets.tiles.RoleCreationTile;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -42,9 +43,10 @@ public class Songs implements ListSelectionListener, ActionListener {
     public void updateDisplay() {
         try {
             if (!songListView1.isSelectionEmpty()) {
-                nameTextField.setText(controller.getSong(songListView1.getSelectedIndex()).getName());
-                descriptionTextField.setText(controller.getSong(songListView1.getSelectedIndex()).getDescription());
-                roleTileView1.setData(controller.getSongRoles(songListView1.getSelectedIndex()));
+                Song song = controller.getSong(songListView1.getSelectedIndex());
+                nameTextField.setText(song.getName());
+                descriptionTextField.setText(song.getDescription());
+                roleTileView1.setData(controller, song);
             } else {
                 clearDisplay();
             }
@@ -56,7 +58,7 @@ public class Songs implements ListSelectionListener, ActionListener {
     private void clearDisplay() {
         nameTextField.setText("");
         descriptionTextField.setText("");
-        roleTileView1.setData(new ArrayList<>());
+        roleTileView1.setData(controller, null);
     }
 
     @Override

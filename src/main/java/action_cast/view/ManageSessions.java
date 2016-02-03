@@ -2,17 +2,15 @@ package action_cast.view;
 
 import action_cast.controller.ClientObjects.Session;
 import action_cast.controller.Controller;
+import action_cast.view.dialogs.AddPeopleToSessionDialog;
 import action_cast.widgets.CardPanel;
 import action_cast.widgets.PerformanceTableView;
-import com.intellij.uiDesigner.core.GridConstraints;
-import com.intellij.uiDesigner.core.GridLayoutManager;
 import org.jdatepicker.impl.DateComponentFormatter;
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Properties;

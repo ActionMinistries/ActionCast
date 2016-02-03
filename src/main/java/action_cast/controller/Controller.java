@@ -109,6 +109,11 @@ public class Controller {
         return model.getSong(songId).getRoles().stream().map(role -> new action_cast.controller.ClientObjects.Role(role.getIndex(), role.getName(), role.getDescription(), role.getType())).collect(Collectors.toList());
     }
 
+    public Role createRole(int songId, String name, String description, RoleType type) throws InvalidIDException {
+        action_cast.model.Role role = model.getSong(songId).addRole(name, description, type);
+        return new Role(role.getIndex(), role.getName(), role.getDescription(), role.getType());
+    }
+
     public Role getRole(int songId, int roleId) throws InvalidIDException {
         action_cast.model.Role role = model.getSong(songId).getRole(roleId);
         return new Role(role.getIndex(), role.getName(), role.getDescription(), role.getType());

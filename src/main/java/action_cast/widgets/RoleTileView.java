@@ -1,10 +1,14 @@
 package action_cast.widgets;
 
 import action_cast.controller.ClientObjects.Role;
+import action_cast.controller.ClientObjects.Song;
+import action_cast.controller.Controller;
+import action_cast.model.exceptions.InvalidIDException;
+import action_cast.view.dialogs.RoleCreationDialog;
 import action_cast.widgets.custom.JTileView;
+import action_cast.widgets.tiles.RoleCreationTile;
 import action_cast.widgets.tiles.RoleTile;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,26 +18,44 @@ import java.util.List;
 public class RoleTileView extends JTileView<RoleTile> {
 
     List<Role> roles = new ArrayList<>();
+    private Song song;
+    private Controller controller;
 
-    public void setData(List<Role> roles) {
-        System.out.println("setData");
-        this.roles = roles;
-        removeAll();
-        for (Role role : roles) {
-            add(new RoleTile(this, null, role));
-        }
-        for (RoleTile tile : getTiles()) {
-            tile.updateDisplay();
-        }
+    public void setData(Controller controller, Song song) {
+        this.controller = controller;
+        this.song = song;
         updateDisplay();
+
 
     }
 
     public void updateDisplay() {
-        for (Component c : getComponents()) {
-            c.repaint();
+        removeAll();
+        if (song != null) {
+            try {
+                this.roles = controller.getSongRoles(song.getId());
+            } catch (InvalidIDException e) {
+                e.printStackTrace();
+            }
+            for (Role role : roles) {
+                add(new RoleTile(this, null, role));
+            }
+            if (song != null) {
+                setCreationTile(new RoleCreationTile(this, controller, song));
+                add(getCreationTile());
+            }
+        } else {
+            setCreationTile(null);
+            roles = null;
         }
-        repaint();
-        //this.
+        updateUI();
+    }
+
+    @Override
+    public void createTile() {
+        RoleCreationDialog dialog = new RoleCreationDialog(controller, song);
+        dialog.pack();
+        dialog.setVisible(true);
+        updateDisplay();
     }
 }
