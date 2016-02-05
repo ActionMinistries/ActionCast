@@ -5,6 +5,7 @@ import action_cast.controller.Controller;
 import action_cast.view.dialogs.AddPeopleToSessionDialog;
 import action_cast.widgets.CardPanel;
 import action_cast.widgets.PerformanceTableView;
+import action_cast.widgets.SongListView;
 import org.jdatepicker.impl.DateComponentFormatter;
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
@@ -26,6 +27,7 @@ public class ManageSessions extends BaseCardClass implements ActionListener {
     private JDatePickerImpl endDate;
     private JTextField nameTextField;
     private PerformanceTableView performanceTableView1;
+    private SongListView songListView1;
 
     private Controller controller;
 
@@ -73,6 +75,7 @@ public class ManageSessions extends BaseCardClass implements ActionListener {
         ((UtilDateModel) endDate.getModel()).setValue(controller.getCurrentSession().getEndDate());
         nameTextField.setText(controller.getCurrentSession().getName());
         performanceTableView1.setData(controller, controller.getSessionController().getPerformances());
+        songListView1.setData(controller.getSongs());
     }
 
     @Override

@@ -2,10 +2,7 @@ package action_cast.model;
 
 import action_cast.widgets.events.RoleAssignedEvent;
 
-import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlIDREF;
-import javax.xml.bind.annotation.XmlTransient;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import java.util.*;
 
 /**
@@ -14,6 +11,8 @@ import java.util.*;
 @XmlType
 public class Performance extends UniqueItem {
 
+    @XmlIDREF
+    @XmlElement
     private Song song;
     private Director director;
 
@@ -32,7 +31,6 @@ public class Performance extends UniqueItem {
         this.id = id;
     }
 
-    @XmlIDREF
     public Song getSong() {
         return song;
     }
@@ -77,9 +75,5 @@ public class Performance extends UniqueItem {
 
     public void setDirector(Director director) {
         this.director = director;
-    }
-
-    public void setSong(Song song) {
-        this.song = song;
     }
 }

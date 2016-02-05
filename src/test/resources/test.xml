@@ -35,18 +35,19 @@
     </songs>
     <currentSession id="Session-0">
         <name>savedSession</name>
-        <start>2016-02-05T15:01:38.879-07:00</start>
-        <end>2016-02-05T15:01:43.879-07:00</end>
+        <start>2016-02-05T15:26:58.421-07:00</start>
+        <end>2016-02-05T15:27:03.421-07:00</end>
         <people>
             <people>Person-1</people>
             <people>Person-0</people>
         </people>
         <performances>
             <performances id="Performance-0">
-                <assignments/>
                 <song>Song-0</song>
+                <assignments/>
             </performances>
             <performances id="Performance-1">
+                <song>Song-1</song>
                 <assignments>
                     <assignments id="RoleAssignment-0">
                         <person>Person-0</person>
@@ -56,11 +57,10 @@
                 <director>
                     <person>Person-1</person>
                 </director>
-                <song>Song-1</song>
             </performances>
             <performances id="Performance-2">
-                <assignments/>
                 <song>Song-0</song>
+                <assignments/>
             </performances>
         </performances>
     </currentSession>

@@ -25,7 +25,7 @@ public class PerformanceTableView extends DisplayTable implements MouseListener 
     private Controller controller;
 
     public PerformanceTableView(BaseCardClass card) {
-        super(new Object[]{"Name", "Venue", "Song", "Date"});
+        super(new Object[]{"Songs", "Casting Status"});
         this.card = card;
         addMouseListener(this);
     }
@@ -35,7 +35,7 @@ public class PerformanceTableView extends DisplayTable implements MouseListener 
         this.controller = controller;
         ((DefaultTableModel)getModel()).setRowCount(0);
         for (Performance performance : performanceList) {
-            ((DefaultTableModel)getModel()).addRow(new Object[]{performance.getName(), performance.getVenue(), performance.getSong().getName(), performance.getDate()});
+            ((DefaultTableModel)getModel()).addRow(new Object[]{performance.getSong().getName(), "X"});
         }
     }
 

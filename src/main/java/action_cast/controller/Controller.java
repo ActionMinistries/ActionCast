@@ -42,8 +42,12 @@ public class Controller {
         model.getCurrentSession().addPerson(model.getPerson(person.getId()));
     }
 
-    public void assignSongToPerformance(int performanceId, int songId) throws InvalidIDException {
-        model.getCurrentSession().getPerformance(performanceId).setSong(model.getSong(songId));
+//    public void assignSongToPerformance(int performanceId, int songId) throws InvalidIDException {
+//        model.getCurrentSession().getPerformance(performanceId).setSong(model.getSong(songId));
+//    }
+    public Performance assignSongToSession(Song song) throws InvalidIDException {
+        action_cast.model.Performance performance = model.getCurrentSession().addPerformance(model.getSong(song.getId()));
+        return new Performance(performance.getIndex(), performance.getDirector(), new Song(performance.getSong().getIndex(), performance.getSong().getName(), performance.getSong().getDescription()));
     }
 
     public void assignPersonToRole(Person person, Role role, Performance performance) throws InvalidIDException {

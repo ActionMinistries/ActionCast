@@ -5,47 +5,28 @@
             <name>random guy</name>
         </people>
         <people id="Person-1">
-            <name>Random Guy</name>
+            <name>odd job</name>
+        </people>
+        <people id="Person-2">
+            <name>ted</name>
+        </people>
+        <people id="Person-3">
+            <name>fred</name>
         </people>
     </people>
     <songs>
         <songs id="Song-0">
-            <name>The First Song</name>
-            <description>It goes like this na na na, na na, na na na na</description>
-            <roles>
-                <roles id="Song-0_Role-0">
-                    <name>mane chericter</name>
-                    <description>The main character</description>
-                    <type>MAIN</type>
-                    <song>Song-0</song>
-                </roles>
-                <roles id="Song-0_Role-1">
-                    <name>syde chericter</name>
-                    <description>The main character's brother</description>
-                    <type>SUPPORT</type>
-                    <song>Song-0</song>
-                </roles>
-                <roles id="Song-0_Role-2">
-                    <name>support</name>
-                    <description>support</description>
-                    <type>SUPPORT</type>
-                    <song>Song-0</song>
-                </roles>
-                <roles id="Song-0_Role-3">
-                    <name>background</name>
-                    <description>who?</description>
-                    <type>BACKGROUND</type>
-                    <song>Song-0</song>
-                </roles>
-            </roles>
+            <name>500 miles</name>
+            <description>500 more</description>
+            <roles/>
         </songs>
         <songs id="Song-1">
-            <name>I just wanna run</name>
-            <description></description>
+            <name>I just wanna run.</name>
+            <description>throw it away</description>
             <roles>
                 <roles id="Song-1_Role-0">
-                    <name>runner</name>
-                    <description></description>
+                    <name>Runner</name>
+                    <description>The guy who runs</description>
                     <type>MAIN</type>
                     <song>Song-1</song>
                 </roles>
@@ -53,19 +34,33 @@
         </songs>
     </songs>
     <currentSession id="Session-0">
-        <name>Fall 2015</name>
-        <start>2016-01-27T15:50:37.875-07:00</start>
-        <end>2016-02-08T05:37:17.874-07:00</end>
+        <name>savedSession</name>
+        <start>2016-02-05T15:26:58.421-07:00</start>
+        <end>2016-02-05T15:27:03.421-07:00</end>
         <people>
+            <people>Person-1</people>
             <people>Person-0</people>
         </people>
         <performances>
             <performances id="Performance-0">
-                <assignments/>
-                <date>2016-01-27T15:50:37.877-07:00</date>
-                <name>First Performance</name>
                 <song>Song-0</song>
-                <venue>First Venue</venue>
+                <assignments/>
+            </performances>
+            <performances id="Performance-1">
+                <song>Song-1</song>
+                <assignments>
+                    <assignments id="RoleAssignment-0">
+                        <person>Person-0</person>
+                        <role>Song-1_Role-0</role>
+                    </assignments>
+                </assignments>
+                <director>
+                    <person>Person-1</person>
+                </director>
+            </performances>
+            <performances id="Performance-2">
+                <song>Song-0</song>
+                <assignments/>
             </performances>
         </performances>
     </currentSession>

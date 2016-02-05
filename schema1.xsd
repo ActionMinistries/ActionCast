@@ -99,6 +99,7 @@
     <xs:complexContent>
       <xs:extension base="uniqueItem">
         <xs:sequence>
+          <xs:element name="song" type="xs:IDREF" minOccurs="0"/>
           <xs:element name="assignments" minOccurs="0">
             <xs:complexType>
               <xs:sequence>
@@ -107,7 +108,6 @@
             </xs:complexType>
           </xs:element>
           <xs:element name="director" type="director" minOccurs="0"/>
-          <xs:element name="song" type="xs:IDREF" minOccurs="0"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>

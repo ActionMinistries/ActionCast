@@ -17,9 +17,6 @@ import java.util.Date;
  * Created by brian on 9/11/2015.
  */
 public class AddPerformance extends BaseCardClass implements ActionListener {
-    private JTextField nameField;
-    private JTextField venueField;
-    private JTextField dateField;
     private JPanel mainPanel;
     private JButton createButton;
     private SongSelector songSelector1;
@@ -53,18 +50,13 @@ public class AddPerformance extends BaseCardClass implements ActionListener {
                 //TODO
                 if (currentPerformance == null) {
                     try {
-                        Performance performance = controller.getSessionController().addPerformance(controller.getSong(songSelector1.getSelectedIndex()));
+                        Performance performance = controller.assignSongToSession(controller.getSong(songSelector1.getSelectedIndex()));
 
                     } catch (InvalidIDException e1) {
                         e1.printStackTrace();
                     }
-                    nameField.setText("");
-                    venueField.setText("");
-                    dateField.setText("");
                     songSelector1.setSelectedIndex(0);
                 } else {
-                    currentPerformance.setName(nameField.getText());
-                    currentPerformance.setVenue(venueField.getText());
                     currentPerformance.setSong(controller.getSongs().get(songSelector1.getSelectedIndex()));
                     try {
                         controller.getSessionController().updatePerformance(currentPerformance);
@@ -98,9 +90,6 @@ public class AddPerformance extends BaseCardClass implements ActionListener {
     }
 
     public void updateDisplay() {
-        nameField.setText(currentPerformance.getName());
-        venueField.setText(currentPerformance.getVenue());
-        dateField.setText(currentPerformance.getDate().toString());
         songSelector1.setData(controller.getSongs());
         songSelector1.setSelectedIndex(currentPerformance.getSong().getId());
         castingWidget1.setData(controller, currentPerformance);

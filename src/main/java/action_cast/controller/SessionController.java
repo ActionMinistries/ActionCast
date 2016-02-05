@@ -35,16 +35,15 @@ public class SessionController {
         }
     }
 
-    public Performance addPerformance(Song song) throws InvalidIDException {
-        action_cast.model.Performance performance = session.addPerformance(null);
-        controller.assignSongToPerformance(performance.getIndex(), song.getId());
-        return new Performance(performance.getIndex(),performance.getDirector(), new Song(performance.getSong().getIndex(), performance.getSong().getName(), performance.getSong().getDescription()));
-    }
+//    public Performance addPerformance(Song song) throws InvalidIDException {
+//        action_cast.model.Performance performance = session.addPerformance(null);
+//        controller.assignSongToPerformance(performance.getIndex(), song.getId());
+//        return new Performance(performance.getIndex(),performance.getDirector(), new Song(performance.getSong().getIndex(), performance.getSong().getName(), performance.getSong().getDescription()));
+//    }
 
     public void updatePerformance(Performance performance) throws InvalidIDException {
         action_cast.model.Performance performanceData = session.getPerformance(performance.getId());
         performanceData.setDirector(performance.getDirector());
-        controller.assignSongToPerformance(performance.getId(), performance.getSong().getId());
     }
 
     public List<Performance> getPerformances() {
