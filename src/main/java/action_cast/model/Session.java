@@ -55,8 +55,8 @@ public class Session extends UniqueItem {
         return performances;
     }
 
-    public Performance addPerformance(Song song, String name, String venue, Date date) throws InvalidIDException {
-        performances.add(new Performance(performances.size(), song, name, venue, date));
+    public Performance addPerformance(Song song) throws InvalidIDException {
+        performances.add(new Performance(performances.size(), song));
         return performances.get(performances.size() - 1);
     }
 

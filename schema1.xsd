@@ -106,11 +106,8 @@
               </xs:sequence>
             </xs:complexType>
           </xs:element>
-          <xs:element name="date" type="xs:dateTime" minOccurs="0"/>
           <xs:element name="director" type="director" minOccurs="0"/>
-          <xs:element name="name" type="xs:string" minOccurs="0"/>
           <xs:element name="song" type="xs:IDREF" minOccurs="0"/>
-          <xs:element name="venue" type="xs:string" minOccurs="0"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -141,9 +138,9 @@
 
   <xs:simpleType name="roleType">
     <xs:restriction base="xs:string">
+      <xs:enumeration value="MAIN"/>
       <xs:enumeration value="SUPPORT"/>
       <xs:enumeration value="BACKGROUND"/>
-      <xs:enumeration value="MAIN"/>
     </xs:restriction>
   </xs:simpleType>
 </xs:schema>

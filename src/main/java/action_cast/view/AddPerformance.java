@@ -53,7 +53,7 @@ public class AddPerformance extends BaseCardClass implements ActionListener {
                 //TODO
                 if (currentPerformance == null) {
                     try {
-                        Performance performance = controller.getSessionController().addPerformance(controller.getSong(songSelector1.getSelectedIndex()), nameField.getText(), venueField.getText(), new Date());
+                        Performance performance = controller.getSessionController().addPerformance(controller.getSong(songSelector1.getSelectedIndex()));
 
                     } catch (InvalidIDException e1) {
                         e1.printStackTrace();

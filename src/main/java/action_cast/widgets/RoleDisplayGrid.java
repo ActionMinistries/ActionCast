@@ -27,18 +27,6 @@ public class RoleDisplayGrid extends DisplayTable {
 
     public void updateDisplay() {
         int size = assignments.values().size();
-        size =(int)Math.round(Math.ceil(Math.sqrt(size)));
-        /*for (int row = 0; row < size/2; row++) {
-            for (int col = 0; col < size/2; col++) {
-                int index = getColumnCount() * row + col;
-                if (index < assignments.values().size()) {
-                    ((UneditableTableModel) getModel()).setValueAt(assignments.v, row, col);
-                }
-                else {
-                    ((UneditableTableModel) getModel()).setValueAt("", row, col);
-                }
-            }
-        }*/
     }
 
 }

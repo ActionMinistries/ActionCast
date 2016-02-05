@@ -129,14 +129,14 @@ public class DataStoreTest {
 
         //session.addPerformer(new Performer(randomGuy));
 
-        session.addPerformance(fiveHundredMiles, "encore", "OTS", new Date());
+        session.addPerformance(fiveHundredMiles);
 
-        Performance runPerformance = session.addPerformance(run, "primary", "OTS", new Date());
+        Performance runPerformance = session.addPerformance(run);
         runPerformance.setDirector(new Director(store.getModel().getPerson(oddJob.getIndex())));
         runPerformance.assign(randomGuy, run.getRoles().get(0));
 
 
-        session.addPerformance(fiveHundredMiles, "never", "OTS", new Date());
+        session.addPerformance(fiveHundredMiles);
 
         store.getModel().setCurrentSession(session);
         store.save();

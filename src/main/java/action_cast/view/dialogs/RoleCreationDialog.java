@@ -1,6 +1,5 @@
 package action_cast.view.dialogs;
 
-import action_cast.controller.ClientObjects.Role;
 import action_cast.controller.ClientObjects.Song;
 import action_cast.controller.Controller;
 import action_cast.model.RoleType;

@@ -16,7 +16,7 @@ public class Performance {
     private Director director;
     private int id;
 
-    public Performance(int id, String name, Director director, Song song, String venue, Date date) {
+    public Performance(int id, Director director, Song song) {
         this.id = id;
         this.date = date;
         this.director = director;
