@@ -99,7 +99,7 @@
             <properties/>
             <border type="none"/>
             <children>
-              <component id="c1a0f" class="action_cast.widgets.PerformanceTableView" binding="performanceTableView1" custom-create="true" default-binding="true">
+              <component id="c1a0f" class="action_cast.widgets.SongTableView" binding="songTableView1" custom-create="true" default-binding="true">
                 <constraints/>
                 <properties/>
               </component>

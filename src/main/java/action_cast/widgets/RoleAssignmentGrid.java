@@ -1,8 +1,8 @@
 package action_cast.widgets;
 
-import action_cast.controller.ClientObjects.Performance;
 import action_cast.controller.ClientObjects.Role;
 import action_cast.controller.ClientObjects.RoleAssignment;
+import action_cast.controller.ClientObjects.Song;
 import action_cast.controller.Controller;
 import action_cast.model.exceptions.InvalidIDException;
 import action_cast.widgets.custom.JTileView;
@@ -22,16 +22,26 @@ public class RoleAssignmentGrid extends JTileView<RoleTile> implements RoleAssig
     private HashMap<Integer, Integer> assignments = new HashMap<>();
     private List<Role> roles = new ArrayList<>();
     private Controller controller;
-    private Performance performance;
+    private Song song;
 
-    public void setData(Controller controller, Performance performance, List<Role> roles, List<RoleAssignment> roleAssignments) {
+    public void setData(Controller controller, Song song) {
      //   this.assignments = assignments;
-        this.performance = performance;
+        this.song = song;
         this.controller = controller;
         assignments.clear();
-        this.roles = roles;
+        List<RoleAssignment> roleAssignments = null;
+        try {
+            roleAssignments = controller.getRoleAssignmentsForSong(song);
+        } catch (InvalidIDException e) {
+            e.printStackTrace();
+        }
         for (RoleAssignment roleAssignment : roleAssignments) {
             assignments.put(roleAssignment.getRoleId(), roleAssignment.getPersonId());
+        }
+        try {
+            roles = controller.getSongRoles(song.getId());
+        } catch (InvalidIDException e) {
+            e.printStackTrace();
         }
         updateDisplay();
     }
@@ -63,7 +73,7 @@ public class RoleAssignmentGrid extends JTileView<RoleTile> implements RoleAssig
             RoleTile source = (RoleTile)event.getSource();
             try {
                 System.out.println("Assigning person");
-                controller.assignPersonToRole(source.getAssignedPerson(), source.getRole(), performance);
+                controller.assignPersonToRole(source.getAssignedPerson(), source.getRole(), song);
             } catch (InvalidIDException e) {
                 e.printStackTrace();
             }

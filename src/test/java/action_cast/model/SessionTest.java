@@ -32,28 +32,6 @@ public class SessionTest {
     }
 
     @Test
-    public void testPerformanceList() throws InvalidIDException {
-        Date start = new Date();
-        Date end = new Date();
-
-        Session s = new Session("sessionName", start, end);
-
-       // List<Performance> performances = new ArrayList<>();
-        DataModel model = new DataModel();
-        Song first = model.addSong("Cool song", "Na na, nanana!");
-        Song second = model.addSong("Whatever.", "Naaaaa! :'( ");
-        assertEquals(0, s.getPerformances().size());
-        s.addPerformance(first);
-        assertEquals(1, s.getPerformances().size());
-
-        s.addPerformance(second);
-        //s.setPerformanceList(performances);
-
-        assertEquals(2, s.getPerformances().size());
-    }
-
-
-    @Test
     public void testPeopleList() throws InvalidIDException {
         Date start = new Date();
         Date end = new Date();

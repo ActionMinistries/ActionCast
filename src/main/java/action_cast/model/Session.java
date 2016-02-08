@@ -1,21 +1,13 @@
 package action_cast.model;
 
-import action_cast.model.exceptions.InvalidIDException;
-
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlIDREF;
-import javax.xml.bind.annotation.XmlType;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
+import javax.xml.bind.annotation.*;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
  * Created by bmichaud on 9/10/2015.
  */
-@XmlType(propOrder = {"name", "start", "end", "people", "performances"})
+@XmlType(propOrder = {"name", "start", "end", "people", "casts"})
 public class Session extends UniqueItem {
 
     private String name;
@@ -27,7 +19,10 @@ public class Session extends UniqueItem {
     private Date end;
 
     @XmlElementWrapper
-    private List<Performance> performances = new ArrayList<>();
+    private List<SongCast> casts = new ArrayList<>();
+
+    @XmlTransient
+    private Map<Song, SongCast> castMap;
 
     @XmlElementWrapper
     @XmlIDREF
@@ -51,17 +46,12 @@ public class Session extends UniqueItem {
         return end;
     }
 
-    public List<Performance> getPerformances() {
-        return performances;
+    public List<Song> getSongs() {
+        return new ArrayList<>(getCastMap().keySet());
     }
 
-    public Performance addPerformance(Song song) throws InvalidIDException {
-        performances.add(new Performance(performances.size(), song));
-        return performances.get(performances.size() - 1);
-    }
-
-    public Performance getPerformance(int id) {
-        return performances.get(id);
+    public void addSong(Song song) {
+        casts.add(new SongCast(casts.size(), song));
     }
 
     public List<Person> getPeople() {
@@ -74,6 +64,10 @@ public class Session extends UniqueItem {
 
     public boolean hasPerson(Person person) {
         return people.contains(person);
+    }
+
+    public boolean hasSong(Song song) {
+        return getCastMap().containsKey(song);
     }
 
     public void clearPeople() {
@@ -94,5 +88,23 @@ public class Session extends UniqueItem {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public SongCast getSongCast(Song song) {
+        if (getCastMap().containsKey(song)) {
+            return getCastMap().get(song);
+        } else {
+            return null;
+        }
+    }
+
+    private Map<Song, SongCast> getCastMap() {
+        if (castMap == null) {
+            castMap = new HashMap<>();
+            for (SongCast cast : casts) {
+                castMap.put(cast.getSong(), cast);
+            }
+        }
+        return castMap;
     }
 }

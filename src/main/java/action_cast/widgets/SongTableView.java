@@ -1,10 +1,8 @@
 package action_cast.widgets;
 
-import action_cast.controller.ClientObjects.Performance;
-import action_cast.controller.ClientObjects.Session;
+import action_cast.controller.ClientObjects.Song;
 import action_cast.controller.Controller;
-import action_cast.controller.SessionController;
-import action_cast.view.AddPerformance;
+import action_cast.view.EditSessionSong;
 import action_cast.view.BaseCardClass;
 
 import javax.swing.*;
@@ -18,24 +16,24 @@ import java.util.List;
 /**
  * Created by bmichaud on 9/2/2015.
  */
-public class PerformanceTableView extends DisplayTable implements MouseListener {
+public class SongTableView extends DisplayTable implements MouseListener {
 
-    private List<Performance> performanceList = new ArrayList<>();
+    private List<Song> songList = new ArrayList<>();
     private BaseCardClass card;
     private Controller controller;
 
-    public PerformanceTableView(BaseCardClass card) {
+    public SongTableView(BaseCardClass card) {
         super(new Object[]{"Songs", "Casting Status"});
         this.card = card;
         addMouseListener(this);
     }
 
-    public void setData(Controller controller, List<Performance> data) {
-        performanceList = data;
+    public void setData(Controller controller, List<Song> data) {
+        songList = data;
         this.controller = controller;
         ((DefaultTableModel)getModel()).setRowCount(0);
-        for (Performance performance : performanceList) {
-            ((DefaultTableModel)getModel()).addRow(new Object[]{performance.getSong().getName(), "X"});
+        for (Song song : songList) {
+            ((DefaultTableModel)getModel()).addRow(new Object[]{song.getName(), "X"});
         }
     }
 
@@ -49,10 +47,10 @@ public class PerformanceTableView extends DisplayTable implements MouseListener 
         Point p = me.getPoint();
         int row = table.rowAtPoint(p);
         if (me.getClickCount() == 2) {
-            if (row < performanceList.size()) {
-                AddPerformance newAddPerformance = new AddPerformance(card.getBreadCrumb());
-                newAddPerformance.setData(controller, performanceList.get(row));
-                card.addCard(newAddPerformance);
+            if (row < songList.size()) {
+                EditSessionSong newEditSessionSong = new EditSessionSong(card.getBreadCrumb());
+                newEditSessionSong.setData(controller, songList.get(row));
+                card.addCard(newEditSessionSong);
             }
         }
     }

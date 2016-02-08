@@ -4,7 +4,7 @@ import action_cast.controller.ClientObjects.Session;
 import action_cast.controller.Controller;
 import action_cast.view.dialogs.AddPeopleToSessionDialog;
 import action_cast.widgets.CardPanel;
-import action_cast.widgets.PerformanceTableView;
+import action_cast.widgets.SongTableView;
 import action_cast.widgets.SongListView;
 import org.jdatepicker.impl.DateComponentFormatter;
 import org.jdatepicker.impl.JDatePanelImpl;
@@ -26,7 +26,7 @@ public class ManageSessions extends BaseCardClass implements ActionListener {
     private JDatePickerImpl startDate;
     private JDatePickerImpl endDate;
     private JTextField nameTextField;
-    private PerformanceTableView performanceTableView1;
+    private SongTableView songTableView1;
     private SongListView songListView1;
 
     private Controller controller;
@@ -74,8 +74,8 @@ public class ManageSessions extends BaseCardClass implements ActionListener {
         ((UtilDateModel) startDate.getModel()).setValue(controller.getCurrentSession().getStartDate());
         ((UtilDateModel) endDate.getModel()).setValue(controller.getCurrentSession().getEndDate());
         nameTextField.setText(controller.getCurrentSession().getName());
-        performanceTableView1.setData(controller, controller.getSessionController().getPerformances());
-        songListView1.setData(controller.getSongs());
+        songTableView1.setData(controller, controller.getSessionController().getSongs());
+        songListView1.setData(controller.getSongsNotInCurrentSession());
     }
 
     @Override
@@ -112,7 +112,7 @@ public class ManageSessions extends BaseCardClass implements ActionListener {
         JDatePanelImpl endDatePanel = new JDatePanelImpl(new UtilDateModel(), new Properties());
         startDate = new JDatePickerImpl(startDatePanel, new DateComponentFormatter());
         endDate = new JDatePickerImpl(endDatePanel, new DateComponentFormatter());
-        performanceTableView1 = new PerformanceTableView(this);
+        songTableView1 = new SongTableView(this);
     }
 
 }

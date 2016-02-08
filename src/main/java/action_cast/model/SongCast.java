@@ -1,20 +1,19 @@
 package action_cast.model;
 
-import action_cast.widgets.events.RoleAssignedEvent;
-
 import javax.xml.bind.annotation.*;
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
 
 /**
  * Created by bmichaud on 8/31/2015.
  */
 @XmlType
-public class Performance extends UniqueItem {
+public class SongCast extends UniqueItem {
 
     @XmlIDREF
     @XmlElement
     private Song song;
-    private Director director;
 
     @XmlTransient
     private Map<Role, RoleAssignment> assignmentMap;
@@ -22,11 +21,11 @@ public class Performance extends UniqueItem {
     @XmlElementWrapper
     private final HashSet<RoleAssignment> assignments = new HashSet<>();
 
-    private Performance() {
+    private SongCast() {
 
     }
 
-    public Performance(int id, Song song) {
+    public SongCast(int id, Song song) {
         this.song = song;
         this.id = id;
     }
@@ -67,13 +66,5 @@ public class Performance extends UniqueItem {
         }
 
         return getAssignmentMap().get(role);
-    }
-
-    public Director getDirector() {
-        return director;
-    }
-
-    public void setDirector(Director director) {
-        this.director = director;
     }
 }

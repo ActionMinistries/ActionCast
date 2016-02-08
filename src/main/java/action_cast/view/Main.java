@@ -55,7 +55,7 @@ public class Main {
 
         run.addRole("runner", "", RoleType.MAIN);
 
-        model.getCurrentSession().addPerformance(song);
+        model.getCurrentSession().addSong(song);
 
         Person random_guy = model.addPerson("random guy");
         model.getCurrentSession().addPerson(random_guy);

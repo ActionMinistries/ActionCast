@@ -1,16 +1,14 @@
 package action_cast.controller;
 
-import action_cast.controller.ClientObjects.Performance;
-import action_cast.controller.ClientObjects.Person;
-import action_cast.controller.ClientObjects.Role;
-import action_cast.controller.ClientObjects.Session;
-import action_cast.controller.ClientObjects.Song;
+import action_cast.controller.ClientObjects.*;
 import action_cast.data_store.DataStore;
-import action_cast.model.*;
+import action_cast.model.DataModel;
+import action_cast.model.RoleType;
 import action_cast.model.exceptions.InvalidIDException;
 import org.xml.sax.SAXException;
 
 import javax.xml.bind.JAXBException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -38,28 +36,26 @@ public class Controller {
         }
     }
 
-    public void assignPersonToCurrentSession(Person person) throws InvalidIDException {
-        model.getCurrentSession().addPerson(model.getPerson(person.getId()));
-    }
+    /*
+    *   PEOPLE
+    *
+     */
 
-//    public void assignSongToPerformance(int performanceId, int songId) throws InvalidIDException {
-//        model.getCurrentSession().getPerformance(performanceId).setSong(model.getSong(songId));
-//    }
-    public Performance assignSongToSession(Song song) throws InvalidIDException {
-        action_cast.model.Performance performance = model.getCurrentSession().addPerformance(model.getSong(song.getId()));
-        return new Performance(performance.getIndex(), performance.getDirector(), new Song(performance.getSong().getIndex(), performance.getSong().getName(), performance.getSong().getDescription()));
-    }
-
-    public void assignPersonToRole(Person person, Role role, Performance performance) throws InvalidIDException {
+    public void assignPersonToRole(Person person, Role role, Song song) throws InvalidIDException {
+        action_cast.model.Song modelSong = model.getSong(song.getId());
         if (person != null) {
-            model.getCurrentSession().getPerformance(performance.getId()).assign(model.getPerson(person.getId()), model.getSong(performance.getSong().getId()).getRole(role.getId()));
+            model.getCurrentSession().getSongCast(modelSong).assign(model.getPerson(person.getId()), modelSong.getRole(role.getId()));
         } else {
-            model.getCurrentSession().getPerformance(performance.getId()).assign(null, model.getSong(performance.getSong().getId()).getRole(role.getId()));
+            model.getCurrentSession().getSongCast(modelSong).assign(null, modelSong.getRole(role.getId()));
         }
     }
 
     public void addPerson(String name) {
         model.addPerson(name);
+    }
+
+    public void assignPersonToCurrentSession(Person person) throws InvalidIDException {
+        model.getCurrentSession().addPerson(model.getPerson(person.getId()));
     }
 
     public List<Person> getPeopleNotInCurrentSession() {
@@ -83,6 +79,11 @@ public class Controller {
     *
      */
 
+    public void assignSongToSession(Song song) throws InvalidIDException {
+        model.getCurrentSession().addSong(model.getSong(song.getId()));
+        //return new SongCast(performance.getIndex(), performance.getDirector(), new Song(performance.getSong().getIndex(), performance.getSong().getName(), performance.getSong().getDescription()));
+    }
+
     public Song addSong(String name, String description) {
         action_cast.model.Song song = model.addSong(name, description);
         return new Song(song.getIndex(), song.getName(), song.getDescription());
@@ -90,6 +91,12 @@ public class Controller {
 
     public List<Song> getSongs() {
         List<Song> results = model.getSongs().stream().map(song -> new Song(song.getIndex(), song.getName(), song.getDescription())).collect(Collectors.toList());
+        return results;
+    }
+
+    public List<Song> getSongsNotInCurrentSession() {
+        List<Song> results = model.getSongs().stream().filter(song -> !model.getCurrentSession().hasSong(song)).map(song -> new Song(song.getIndex(), song.getName(), song.getDescription())).collect(Collectors.toList());
+        //= model.getPeople().stream().map(person -> new Person(person.getIndex(), person.getName())).collect(Collectors.toList());
         return results;
     }
 
@@ -102,6 +109,11 @@ public class Controller {
         model.getSong(song.getId()).setName(song.getName());
         model.getSong(song.getId()).setDescription(song.getDescription());
     }
+
+    /*
+    *   ROLES
+    *
+     */
 
     public List<Role> getSongRoles(int id) throws InvalidIDException {
         action_cast.model.Song song = model.getSong(id);
@@ -122,6 +134,16 @@ public class Controller {
         action_cast.model.Role role = model.getSong(songId).getRole(roleId);
         return new Role(role.getIndex(), role.getName(), role.getDescription(), role.getType());
     }
+
+    public List<action_cast.controller.ClientObjects.RoleAssignment> getRoleAssignmentsForSong(action_cast.controller.ClientObjects.Song song) throws InvalidIDException {
+        List<action_cast.controller.ClientObjects.RoleAssignment> roleAssignments = model.getCurrentSession().getSongCast(model.getSong(song.getId())).getAssignments().stream().map(assignment -> new RoleAssignment(assignment.getIndex(), assignment.getPerson().getIndex(), assignment.getRole().getIndex())).collect(Collectors.toList());
+        return roleAssignments;
+    }
+
+    /*
+    *   SESSION
+    *
+     */
 
     public Session getCurrentSession() {
         return new Session(model.getCurrentSession().getName(), model.getCurrentSession().getStartDate(), model.getCurrentSession().getEndDate());

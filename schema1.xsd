@@ -83,10 +83,10 @@
               </xs:sequence>
             </xs:complexType>
           </xs:element>
-          <xs:element name="performances" minOccurs="0">
+          <xs:element name="casts" minOccurs="0">
             <xs:complexType>
               <xs:sequence>
-                <xs:element name="performances" type="performance" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="casts" type="songCast" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
               </xs:sequence>
             </xs:complexType>
           </xs:element>
@@ -95,7 +95,7 @@
     </xs:complexContent>
   </xs:complexType>
 
-  <xs:complexType name="performance">
+  <xs:complexType name="songCast">
     <xs:complexContent>
       <xs:extension base="uniqueItem">
         <xs:sequence>
@@ -107,7 +107,6 @@
               </xs:sequence>
             </xs:complexType>
           </xs:element>
-          <xs:element name="director" type="director" minOccurs="0"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
