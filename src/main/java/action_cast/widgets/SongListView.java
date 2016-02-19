@@ -1,6 +1,7 @@
 package action_cast.widgets;
 
 import action_cast.controller.ClientObjects.Song;
+import action_cast.widgets.dragdrop.SongTransferHandler;
 
 import javax.swing.*;
 import java.util.List;
@@ -14,6 +15,9 @@ public class SongListView extends JList {
 
     public SongListView() {
         super(new DefaultListModel());
+        setTransferHandler(new SongTransferHandler());
+        setDragEnabled(true);
+        setDropMode(DropMode.INSERT);
     }
 
     public void setData(List<Song> songs ) {
@@ -29,4 +33,19 @@ public class SongListView extends JList {
             }
         }
     }
+
+    public Song getSelectedSong() {
+        return songs.get(getSelectedIndex());
+    }
+
+    public void addSong(Song song) {
+        songs.add(song);
+        updateDisplay();
+    }
+
+    public void removeSong(Song song) {
+        songs.remove(song);
+        updateDisplay();
+    }
+
 }

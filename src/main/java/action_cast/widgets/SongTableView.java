@@ -2,8 +2,10 @@ package action_cast.widgets;
 
 import action_cast.controller.ClientObjects.Song;
 import action_cast.controller.Controller;
+import action_cast.model.exceptions.InvalidIDException;
 import action_cast.view.EditSessionSong;
 import action_cast.view.BaseCardClass;
+import action_cast.widgets.dragdrop.SongTransferHandler;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -26,15 +28,51 @@ public class SongTableView extends DisplayTable implements MouseListener {
         super(new Object[]{"Songs", "Casting Status"});
         this.card = card;
         addMouseListener(this);
+        setDragEnabled(true);
+        setTransferHandler(new SongTransferHandler());
+        setDropMode(DropMode.INSERT);
+        setRowSelectionAllowed(false);
+        this.setCellSelectionEnabled(true);
+        this.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        this.getColumnModel().getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        this.setFillsViewportHeight(true);
     }
 
-    public void setData(Controller controller, List<Song> data) {
-        songList = data;
+    public void setData(Controller controller) {
+        songList = controller.getSessionController().getSongs();
         this.controller = controller;
+        updateDisplay();
+    }
+
+    public void addSong(Song song) {
+        //songList.add(song);
+        try {
+            controller.assignSongToSession(song);
+        } catch (InvalidIDException e) {
+            e.printStackTrace();
+        }
+        updateDisplay();
+    }
+
+    public void removeSong(Song song) {
+        try {
+            controller.removeSongFromSession(song);
+        } catch (InvalidIDException e) {
+            e.printStackTrace();
+        }
+        updateDisplay();
+    }
+
+    public void updateDisplay() {
         ((DefaultTableModel)getModel()).setRowCount(0);
+        songList = controller.getSessionController().getSongs();
         for (Song song : songList) {
             ((DefaultTableModel)getModel()).addRow(new Object[]{song.getName(), "X"});
         }
+    }
+
+    public Song getSelectedSong() {
+        return songList.get(getSelectedRow());
     }
 
     @Override

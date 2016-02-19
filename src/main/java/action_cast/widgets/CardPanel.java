@@ -145,7 +145,6 @@ public class CardPanel extends JPanel implements ActionListener {
         }
         else if (constraints instanceof com.intellij.uiDesigner.core.GridConstraints) {
             for (int i = 0; i < componentList.size(); ++i) {
-                System.out.println("add toolbar");
                 super.add(componentList.get(i), constraintsList.get(i));
 
             }

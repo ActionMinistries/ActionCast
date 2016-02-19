@@ -8,7 +8,6 @@ import action_cast.model.exceptions.InvalidIDException;
 import org.xml.sax.SAXException;
 
 import javax.xml.bind.JAXBException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -82,6 +81,10 @@ public class Controller {
     public void assignSongToSession(Song song) throws InvalidIDException {
         model.getCurrentSession().addSong(model.getSong(song.getId()));
         //return new SongCast(performance.getIndex(), performance.getDirector(), new Song(performance.getSong().getIndex(), performance.getSong().getName(), performance.getSong().getDescription()));
+    }
+
+    public void removeSongFromSession(Song song) throws InvalidIDException {
+        model.getCurrentSession().removeSong(model.getSong(song.getId()));
     }
 
     public Song addSong(String name, String description) {
@@ -167,4 +170,6 @@ public class Controller {
             e.printStackTrace();
         }
     }
+
+
 }
