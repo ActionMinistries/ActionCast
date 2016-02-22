@@ -1,13 +1,9 @@
 package action_cast.controller;
 
 import action_cast.controller.ClientObjects.*;
-import action_cast.controller.ClientObjects.Person;
-import action_cast.controller.ClientObjects.Role;
-import action_cast.controller.ClientObjects.RoleAssignment;
-import action_cast.controller.ClientObjects.Session;
-import action_cast.controller.ClientObjects.Song;
 import action_cast.data_store.DataStore;
-import action_cast.model.*;
+import action_cast.model.DataModel;
+import action_cast.model.RoleType;
 import action_cast.model.exceptions.InvalidIDException;
 import org.xml.sax.SAXException;
 
@@ -181,6 +177,4 @@ public class Controller {
             e.printStackTrace();
         }
     }
-
-
 }

@@ -1,17 +1,12 @@
 package action_cast.widgets;
 
-import action_cast.controller.ClientObjects.Performance;
-import action_cast.controller.ClientObjects.RoleAssignment;
 import action_cast.controller.ClientObjects.Song;
 import action_cast.controller.Controller;
-import action_cast.model.exceptions.InvalidIDException;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Created by bmichaud on 1/7/2016

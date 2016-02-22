@@ -44,7 +44,7 @@ public class Main {
         endTime += 1000000000;
         DataModel model = store.getModel();
         model.setCurrentSession(new Session("Fall 2015", new Date(), new Date(endTime)));
-        //model.addSession(new Performances(new Date(startTime - 2 * 1000000000), new Date(startTime - 1000000000)));
+
         Song song = model.addSong("The First Song", "It goes like this na na na, na na, na na na na");
         Song run = model.addSong("I just wanna run", "");
 
