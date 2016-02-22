@@ -18,7 +18,6 @@ public class SongTransferHandler extends TransferHandler {
 
     private final DataFlavor songFlavor;
 
-
     public SongTransferHandler() {
         songFlavor = new DataFlavor(Song.class, "Person");
     }
@@ -46,17 +45,6 @@ public class SongTransferHandler extends TransferHandler {
         }
     }
 
-    public boolean canImport(TransferSupport support) {
-
-        try {
-            return support.getTransferable().getTransferData(songFlavor) != null;
-        } catch (UnsupportedFlavorException e) {
-            return false;
-        } catch (IOException e) {
-            return false;
-        }
-    }
-
     protected void exportDone(JComponent c, Transferable t, int action) {
         if (action == MOVE) {
             if (c instanceof SongListView) {
@@ -81,6 +69,17 @@ public class SongTransferHandler extends TransferHandler {
         }
     }
 
+    public boolean canImport(TransferSupport support) {
+
+        try {
+            return support.getTransferable().getTransferData(songFlavor) != null;
+        } catch (UnsupportedFlavorException e) {
+            return false;
+        } catch (IOException e) {
+            return false;
+        }
+    }
+
     public boolean importData(TransferSupport support) {
         if(!canImport(support)) return false;
         if (!support.isDrop()) {
@@ -102,6 +101,7 @@ public class SongTransferHandler extends TransferHandler {
             SongListView view = (SongListView)support.getComponent();
             try {
                 view.addSong((Song) support.getTransferable().getTransferData(songFlavor));
+                return true;
             } catch (UnsupportedFlavorException e) {
                 e.printStackTrace();
             } catch (IOException e) {

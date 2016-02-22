@@ -51,7 +51,7 @@ public class SongCast extends UniqueItem {
     public RoleAssignment assign(Person performer, Role role) {
         RoleAssignment roleAssignment;
         if (!getAssignmentMap().containsKey(role)) {
-            roleAssignment = new RoleAssignment(performer, role);
+            roleAssignment = new RoleAssignment(assignments.size(), performer, role, this);
             assignments.add(roleAssignment);
             getAssignmentMap().put(role, roleAssignment);
 

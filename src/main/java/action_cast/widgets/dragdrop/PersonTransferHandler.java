@@ -35,8 +35,7 @@ public class PersonTransferHandler extends TransferHandler {
         if (c instanceof PersonListView) {
             toMove = ((PersonListView)c).getSelectedPerson();
 
-        }
-        else if (c instanceof PersonDisplayGrid) {
+        } else if (c instanceof PersonDisplayGrid) {
             toMove = ((PersonDisplayGrid)c).getSelectedPerson();
         } else if (c instanceof PersonTile)
             toMove = ((PersonTile)(c)).getPerson();
@@ -59,7 +58,6 @@ public class PersonTransferHandler extends TransferHandler {
                 PersonDisplayGrid view = (PersonDisplayGrid) c;
                 view.removeSelectedPerson();
             } else if (c instanceof  PersonTile) {
-                PersonTile view = (PersonTile)c;
                 ((PersonTile) c).removeTile();
             }
         }

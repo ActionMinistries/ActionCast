@@ -19,13 +19,24 @@ public class RoleAssignment extends UniqueItem{
     @XmlIDREF
     private Role role;
 
+    @XmlElement
+    @XmlIDREF
+    private SongCast cast;
+
     private RoleAssignment() {
 
     }
 
-    public RoleAssignment(Person person, Role role) {
+    public RoleAssignment(int id, Person person, Role role, SongCast cast) {
         this.person = person;
         this.role = role;
+        this.id = id;
+        this.cast = cast;
+    }
+
+    @Override
+    protected String getId() {
+        return cast.getId() + "_" + super.getId();
     }
 
     @XmlTransient
