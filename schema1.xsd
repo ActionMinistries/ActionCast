@@ -28,6 +28,8 @@
       <xs:extension base="uniqueItem">
         <xs:sequence>
           <xs:element name="name" type="xs:string" minOccurs="0"/>
+          <xs:element name="phoneNumber" type="xs:string" minOccurs="0"/>
+          <xs:element name="email" type="xs:string" minOccurs="0"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -118,18 +120,13 @@
         <xs:sequence>
           <xs:element name="person" type="xs:IDREF" minOccurs="0"/>
           <xs:element name="role" type="xs:IDREF" minOccurs="0"/>
+          <xs:element name="cast" type="xs:IDREF" minOccurs="0"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
 
   <xs:complexType name="director">
-    <xs:sequence>
-      <xs:element name="person" type="xs:IDREF" minOccurs="0"/>
-    </xs:sequence>
-  </xs:complexType>
-
-  <xs:complexType name="performer">
     <xs:sequence>
       <xs:element name="person" type="xs:IDREF" minOccurs="0"/>
     </xs:sequence>

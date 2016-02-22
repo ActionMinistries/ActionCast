@@ -38,9 +38,8 @@ public class SessionTest {
 
         Session s = new Session("someName", start, end);
 
-        //List<Performer> performers = new ArrayList<>();
         DataModel model = new DataModel();
-        Person person = model.addPerson("SomeGuy");
+        Person person = model.addPerson("SomeGuy","","");
         assertEquals(0, s.getPeople().size());
         s.addPerson(model.getPerson(person.getIndex()));
         assertEquals(1, s.getPeople().size());
@@ -55,11 +54,9 @@ public class SessionTest {
 
         Session s = new Session("someName", start, end);
 
-        //List<Performer> performers = new ArrayList<>();
-
         assertEquals(0, s.getPeople().size());
         boolean thrown = false;
-        s.addPerson(new Person(-1, "guy"));
+        s.addPerson(new Person(-1, "guy","",""));
 
         assertTrue(thrown);
         assertEquals(0, s.getPeople().size());

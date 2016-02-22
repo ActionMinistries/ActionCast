@@ -3,15 +3,23 @@
     <people>
         <people id="Person-0">
             <name>random guy</name>
+            <phoneNumber>29358</phoneNumber>
+            <email></email>
         </people>
         <people id="Person-1">
             <name>odd job</name>
+            <phoneNumber></phoneNumber>
+            <email>whatever@...</email>
         </people>
         <people id="Person-2">
             <name>ted</name>
+            <phoneNumber></phoneNumber>
+            <email></email>
         </people>
         <people id="Person-3">
             <name>fred</name>
+            <phoneNumber></phoneNumber>
+            <email></email>
         </people>
     </people>
     <songs>
@@ -35,8 +43,8 @@
     </songs>
     <currentSession id="Session-0">
         <name>savedSession</name>
-        <start>2016-02-08T16:04:21.404-07:00</start>
-        <end>2016-02-08T16:04:26.404-07:00</end>
+        <start>2016-02-22T14:55:51.111-07:00</start>
+        <end>2016-02-22T14:55:56.111-07:00</end>
         <people>
             <people>Person-1</people>
             <people>Person-0</people>
@@ -49,9 +57,10 @@
             <casts id="SongCast-1">
                 <song>Song-1</song>
                 <assignments>
-                    <assignments id="RoleAssignment-0">
+                    <assignments id="SongCast-1_RoleAssignment-0">
                         <person>Person-0</person>
                         <role>Song-1_Role-0</role>
+                        <cast>SongCast-1</cast>
                     </assignments>
                 </assignments>
             </casts>

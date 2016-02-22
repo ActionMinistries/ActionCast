@@ -22,7 +22,7 @@ public class SessionController {
     }
 
     public List<Person> getPeople() {
-        List<Person> results = session.getPeople().stream().map(person -> new Person(person.getIndex(), person.getName())).collect(Collectors.toList());
+        List<Person> results = session.getPeople().stream().map(person -> new Person(person.getIndex(), person.getName(), person.getPhoneNumber(), person.getEmail())).collect(Collectors.toList());
         return results;
     }
 

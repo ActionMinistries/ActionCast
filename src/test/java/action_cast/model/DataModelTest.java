@@ -51,8 +51,10 @@ public class DataModelTest {
         model.setCurrentSession(session);
         List<Person> people = model.getPeople();
         assertEquals(0, people.size());
-        Person person = model.addPerson("random guy");
+        Person person = model.addPerson("random guy", "34534", "whate@gas.asd");
         assertEquals(1, model.getPeople().size());
         assertEquals("random guy", person.getName());
+        assertEquals("34534", person.getPhoneNumber());
+        assertEquals("whate@gas.asd", person.getEmail());
     }
 }

@@ -13,8 +13,10 @@ public class PersonTest {
     public void testCreate() {
         String name = "randomGuy";
 
-        Person randomGuy = new Person(-1, name);
+        Person randomGuy = new Person(-1, name, "phoneNumber", "email");
         assertEquals("randomGuy", randomGuy.getName());
+        assertEquals("phoneNumber", randomGuy.getPhoneNumber());
+        assertEquals("email", randomGuy.getEmail());
     }
 
 }

@@ -52,7 +52,7 @@ public class Session extends UniqueItem {
 
     public void addSong(Song song) {
         casts.add(new SongCast(casts.size(), song));
-        castMap.put(song, casts.get(casts.size()-1));
+        getCastMap().put(song, casts.get(casts.size()-1));
     }
 
     public List<Person> getPeople() {

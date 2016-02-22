@@ -1,6 +1,6 @@
 package action_cast.widgets;
 
-import action_cast.model.Performer;
+import action_cast.controller.ClientObjects.Person;
 import action_cast.model.Role;
 
 import java.util.Map;
@@ -10,7 +10,7 @@ import java.util.Map;
  */
 public class RoleDisplayGrid extends DisplayTable {
 
-    private Map<Performer, Role> assignments;
+    private Map<Person, Role> assignments;
 
     public RoleDisplayGrid(Object[] colNames) {
         super(colNames);
@@ -20,7 +20,7 @@ public class RoleDisplayGrid extends DisplayTable {
         super(numRows, numCols);
     }
 
-    public void setData(Map<Performer, Role> assignments) {
+    public void setData(Map<Person, Role> assignments) {
         this.assignments = assignments;
         updateDisplay();
     }

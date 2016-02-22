@@ -58,6 +58,9 @@ public class DataStoreTest {
         assertEquals("odd job", dataModel.getPerson(1).getName());
         assertEquals("ted", dataModel.getPerson(2).getName());
         assertEquals("fred", dataModel.getPerson(3).getName());
+        assertEquals("29358", dataModel.getPerson(0).getPhoneNumber());
+        assertEquals("whatever@...", dataModel.getPerson(1).getEmail());
+
         boolean thrown = false;
         try {
 
@@ -99,10 +102,10 @@ public class DataStoreTest {
     public void testSaveSession_extended() throws JAXBException, SAXException, InvalidIDException {
         DataStore store = new DataStore(new DataModel());
 
-        Person randomGuy = store.getModel().addPerson("random guy");
-        Person oddJob = store.getModel().addPerson("odd job");
-        store.getModel().addPerson("ted");
-        store.getModel().addPerson("fred");
+        Person randomGuy = store.getModel().addPerson("random guy", "29358", "");
+        Person oddJob = store.getModel().addPerson("odd job", "", "whatever@...");
+        store.getModel().addPerson("ted", "", "");
+        store.getModel().addPerson("fred", "", "");
 
        // Song fiveHundredMiles = new Song();
         //Song run = new Song("I just wanna run.", "throw it away");
@@ -142,14 +145,15 @@ public class DataStoreTest {
         assertEquals(date2, store2.getModel().getCurrentSession().getEndDate());
         assertEquals(session.getPeople().size(), store2.getModel().getCurrentSession().getPeople().size());
         assertEquals(session.getSongs().size(), store2.getModel().getCurrentSession().getSongs().size());
+        assertEquals(store2.getModel().getPerson(randomGuy.getIndex()).getPhoneNumber(), "29358");
     }
 
     @Test
     public void testSavePeople() throws JAXBException, SAXException, InvalidIDException {
         DataStore store = new DataStore(new DataModel());
-        Person bob = store.getModel().addPerson("bob");
-        Person ted = store.getModel().addPerson("ted");
-        Person fred = store.getModel().addPerson("fred");
+        Person bob = store.getModel().addPerson("bob", "","");
+        Person ted = store.getModel().addPerson("ted","","");
+        Person fred = store.getModel().addPerson("fred","","");
         store.save();
 
         DataStore store2 = new DataStore("file.xml");

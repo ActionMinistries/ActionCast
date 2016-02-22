@@ -57,10 +57,10 @@ public class Main {
 
         model.getCurrentSession().addSong(song);
 
-        Person random_guy = model.addPerson("random guy");
+        Person random_guy = model.addPerson("random guy", "", "");
         model.getCurrentSession().addPerson(random_guy);
 
-        model.addPerson("Random Guy");
+        model.addPerson("Random Guy", "", "");
 
         store.save();
     }

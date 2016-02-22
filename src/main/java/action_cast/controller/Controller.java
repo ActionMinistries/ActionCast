@@ -1,9 +1,13 @@
 package action_cast.controller;
 
 import action_cast.controller.ClientObjects.*;
+import action_cast.controller.ClientObjects.Person;
+import action_cast.controller.ClientObjects.Role;
+import action_cast.controller.ClientObjects.RoleAssignment;
+import action_cast.controller.ClientObjects.Session;
+import action_cast.controller.ClientObjects.Song;
 import action_cast.data_store.DataStore;
-import action_cast.model.DataModel;
-import action_cast.model.RoleType;
+import action_cast.model.*;
 import action_cast.model.exceptions.InvalidIDException;
 import org.xml.sax.SAXException;
 
@@ -49,8 +53,15 @@ public class Controller {
         }
     }
 
-    public void addPerson(String name) {
-        model.addPerson(name);
+    public void addPerson(String name, String phoneNumber, String email) {
+        model.addPerson(name, phoneNumber, email);
+    }
+
+    public void updatePerson(Person person) throws InvalidIDException {
+        action_cast.model.Person modelPerson = model.getPerson(person.getId());
+        modelPerson.setName(person.getName());
+        modelPerson.setEmail(person.getEmail());
+        modelPerson.setPhoneNumber(person.getPhoneNumber());
     }
 
     public void assignPersonToCurrentSession(Person person) throws InvalidIDException {
@@ -58,19 +69,19 @@ public class Controller {
     }
 
     public List<Person> getPeopleNotInCurrentSession() {
-        List<Person> results = model.getPeople().stream().filter(person -> !model.getCurrentSession().hasPerson(person)).map(person -> new Person(person.getIndex(), person.getName())).collect(Collectors.toList());
+        List<Person> results = model.getPeople().stream().filter(person -> !model.getCurrentSession().hasPerson(person)).map(person -> new Person(person.getIndex(), person.getName(), person.getPhoneNumber(), person.getEmail())).collect(Collectors.toList());
         //= model.getPeople().stream().map(person -> new Person(person.getIndex(), person.getName())).collect(Collectors.toList());
         return results;
     }
 
     public List<Person> getPeople() {
-        List<Person> results = model.getPeople().stream().map(person -> new Person(person.getIndex(), person.getName())).collect(Collectors.toList());
+        List<Person> results = model.getPeople().stream().map(person -> new Person(person.getIndex(), person.getName(), person.getPhoneNumber(), person.getEmail())).collect(Collectors.toList());
         return results;
     }
 
     public Person getPerson(int id) throws InvalidIDException {
         action_cast.model.Person person = model.getPerson(id);
-        return new Person(person.getIndex(), person.getName());
+        return new Person(person.getIndex(), person.getName(), person.getPhoneNumber(), person.getEmail());
     }
 
     /*
