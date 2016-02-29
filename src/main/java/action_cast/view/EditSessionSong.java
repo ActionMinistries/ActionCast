@@ -13,17 +13,12 @@ import java.awt.event.ActionListener;
 /**
  * Created by brian on 9/11/2015.
  */
-public class EditSessionSong extends BaseCardClass implements ActionListener {
+public class EditSessionSong extends BaseCardClass {
     private JPanel mainPanel;
-    private JButton createButton;
     private CastingWidget castingWidget1;
-   // private PersonListView personListView1;
-   // private RoleAssignmentGrid roleAssignmentGrid1;
 
     private Controller controller;
     private Song song;
-    //TODO
-    // private List<Song> songs = new ArrayList<>();
 
     public EditSessionSong() {
         this(new BreadCrumb());
@@ -31,26 +26,6 @@ public class EditSessionSong extends BaseCardClass implements ActionListener {
 
     public EditSessionSong(BreadCrumb breadCrumb) {
         super(breadCrumb);
-        createButton.addActionListener(this);
-        //TODO?
-        //songs.add(new Song(-1, "500 miles", "But I would walk 500 miles..."));
-        //songSelector1.setData(songs);
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == createButton) {
-            if (controller != null) {
-                //TODO
-                //if (currentPerformance == null) {
-//                    try {
-//                        //controller.assignSongToSession(controller.getSong(songSelector1.getSelectedIndex()));
-//
-//                    } catch (InvalidIDException e1) {
-//                        e1.printStackTrace();
-//                    }
-            }
-        }
     }
 
     public void setController(Controller controller) {
@@ -75,8 +50,6 @@ public class EditSessionSong extends BaseCardClass implements ActionListener {
 
     @Override
     public String getName() {
-        //TODO
-        // return currentPerformance == null ? "Add performance" : currentPerformance.getName();
         return "Add performance";
     }
 

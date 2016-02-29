@@ -183,10 +183,9 @@ public class Controller {
         model.getCurrentSession().setName(session.getName());
         model.getCurrentSession().setEnd(session.getEndDate());
         model.getCurrentSession().setStart(session.getStartDate());
-        save();
     }
 
-    private void save() {
+    public void save() {
         try {
             store.save();
         } catch (JAXBException e) {

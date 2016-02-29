@@ -11,6 +11,8 @@ import org.xml.sax.SAXException;
 import javax.swing.*;
 import javax.xml.bind.JAXBException;
 import java.awt.*;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -18,7 +20,7 @@ import java.util.List;
 /**
  * Created by bmichaud on 9/2/2015.
  */
-public class Main {
+public class Main implements WindowListener {
     private JPanel panel1;
     private JTabbedPane tabbedPane1;
     private People people1;
@@ -69,10 +71,46 @@ public class Main {
         JFrame frame = new JFrame("Action Cast");
         Main main = new Main();
 
+        frame.addWindowListener(main);
+
         frame.setContentPane(main.panel1);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
     }
 
+    @Override
+    public void windowOpened(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowClosing(WindowEvent e) {
+        controller.save();
+    }
+
+    @Override
+    public void windowClosed(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowIconified(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowDeiconified(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowActivated(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowDeactivated(WindowEvent e) {
+
+    }
 }
