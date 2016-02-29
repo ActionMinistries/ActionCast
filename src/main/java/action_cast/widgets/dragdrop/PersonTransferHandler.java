@@ -40,7 +40,6 @@ public class PersonTransferHandler extends TransferHandler {
         } else if (c instanceof PersonTile)
             toMove = ((PersonTile)(c)).getPerson();
         if (toMove == null) {
-            System.out.println("null");
 
             return dh;
         }

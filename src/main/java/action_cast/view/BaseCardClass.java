@@ -11,11 +11,8 @@ public abstract class BaseCardClass {
     protected BreadCrumb breadCrumb = null;
 
     public BaseCardClass(BreadCrumb breadCrumb) {
-        //Random random = new Random(System.currentTimeMillis());
-        //name = Integer.toString(random.nextInt());
         this.breadCrumb = breadCrumb;
         breadCrumb.addCrumb(getName());
-//        System.out.println("new name" + name);
     }
 
     public void addCard(BaseCardClass card) {

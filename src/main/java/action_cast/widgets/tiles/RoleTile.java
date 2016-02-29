@@ -68,7 +68,6 @@ public class RoleTile extends Tile implements ActionListener {
     }
 
     @Subscribe public void handleRoleAssignment(RoleAssignmentEvent event) {
-        System.out.println("Event Received");
         updateDisplay();
     }
 
@@ -85,7 +84,6 @@ public class RoleTile extends Tile implements ActionListener {
             backgroundCount.setVisible(true);
 
             try {
-                System.out.println("Setting text");
                 mainCount.setText(Integer.toString(controller.getRoleTypeCountFor(person, RoleType.MAIN)));
                 supportCount.setText(Integer.toString(controller.getRoleTypeCountFor(person, RoleType.SUPPORT)));
                 backgroundCount.setText(Integer.toString(controller.getRoleTypeCountFor(person, RoleType.BACKGROUND)));

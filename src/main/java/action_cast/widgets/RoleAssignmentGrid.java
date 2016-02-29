@@ -72,7 +72,6 @@ public class RoleAssignmentGrid extends JTileView<RoleTile> implements RoleAssig
         if (event.getSource() instanceof RoleTile) {
             RoleTile source = (RoleTile)event.getSource();
             try {
-                System.out.println("Assigning person");
                 controller.assignPersonToRole(source.getAssignedPerson(), source.getRole(), song);
             } catch (InvalidIDException e) {
                 e.printStackTrace();

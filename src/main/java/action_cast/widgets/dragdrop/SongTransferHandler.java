@@ -36,7 +36,6 @@ public class SongTransferHandler extends TransferHandler {
             toMove = ((SongTableView)c).getSelectedSong();
         }
         if (toMove == null) {
-            System.out.println("null");
 
             return dh;
         }
