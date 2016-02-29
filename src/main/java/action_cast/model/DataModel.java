@@ -32,8 +32,8 @@ public class DataModel {
         return people.get(id);
     }
 
-    public Person addPerson(String name) {
-        Person person = new Person(people.size(), name);
+    public Person addPerson(String name, String phoneNumber, String email) {
+        Person person = new Person(people.size(), name, phoneNumber, email);
         people.add(person);
         return person;
     }

@@ -26,8 +26,8 @@ public class PersonListView extends JList{
     }
 
     public void updateDisplay() {
+        ((DefaultListModel) getModel()).clear();
         if (people != null) {
-            ((DefaultListModel) getModel()).clear();
             for (Person person : people) {
                 ((DefaultListModel) getModel()).addElement(person.getName());
             }

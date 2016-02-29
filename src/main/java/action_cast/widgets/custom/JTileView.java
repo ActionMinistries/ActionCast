@@ -1,6 +1,7 @@
 package action_cast.widgets.custom;
 
 import action_cast.widgets.dragdrop.PersonTransferHandler;
+import action_cast.widgets.tiles.CreationTile;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,13 +11,14 @@ import java.util.List;
 /**
  * Created by bmichaud on 10/20/2015.
  */
-public class JTileView<T extends Tile> extends JPanel {
+public abstract class JTileView<T extends Tile> extends JPanel {
 
     private static final String uiClassID = "TileView";
 
     public static final int TILE_WIDTH = 80;
     public static final int TILE_HEIGHT = 80;
     public static final int PADDING = 4;
+    private CreationTile creationTile;
 
     public JTileView() {
         super();
@@ -71,4 +73,14 @@ public class JTileView<T extends Tile> extends JPanel {
         }
         return tileList;
     }
+
+    public void setCreationTile(CreationTile tile) {
+        this.creationTile = tile;
+    }
+
+    public CreationTile getCreationTile() {
+        return creationTile;
+    }
+
+    public abstract void createTile();
 }

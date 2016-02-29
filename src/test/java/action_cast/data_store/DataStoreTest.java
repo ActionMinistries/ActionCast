@@ -7,9 +7,7 @@ import org.junit.Test;
 import org.xml.sax.SAXException;
 
 import javax.xml.bind.JAXBException;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -60,6 +58,9 @@ public class DataStoreTest {
         assertEquals("odd job", dataModel.getPerson(1).getName());
         assertEquals("ted", dataModel.getPerson(2).getName());
         assertEquals("fred", dataModel.getPerson(3).getName());
+        assertEquals("29358", dataModel.getPerson(0).getPhoneNumber());
+        assertEquals("whatever@...", dataModel.getPerson(1).getEmail());
+
         boolean thrown = false;
         try {
 
@@ -75,7 +76,7 @@ public class DataStoreTest {
         assertEquals(dataModel.getPerson(currentSession.getPeople().get(0).getIndex()).getName(), currentSession.getPeople().get(0).getName());
         assertEquals(dataModel.getPerson(currentSession.getPeople().get(1).getIndex()).getName(), currentSession.getPeople().get(1).getName());
 
-        assertEquals(3, currentSession.getPerformances().size());
+        assertEquals(2, currentSession.getSongs().size());
         //assertEquals(1, currentSession.getPerformers().size());
         //assertEquals("random guy", currentSession.getPerformers().get(0).getName());
     }
@@ -92,9 +93,8 @@ public class DataStoreTest {
     public void testLoad_DataCorrelation_Songs() throws InvalidIDException {
         DataModel dataModel = dataStore.getModel();
         Session currentSession = dataModel.getCurrentSession();
-        assertTrue(dataModel.getSong(1) == currentSession.getPerformances().get(1).getSong());
-        assertTrue(dataModel.getSong(0) == currentSession.getPerformances().get(0).getSong());
-        assertTrue(dataModel.getSong(0) == currentSession.getPerformances().get(2).getSong());
+        assertTrue(dataModel.getSongs().contains(currentSession.getSongs().get(1)));
+        assertTrue(dataModel.getSongs().contains(currentSession.getSongs().get(0)));
     }
 
 
@@ -102,10 +102,10 @@ public class DataStoreTest {
     public void testSaveSession_extended() throws JAXBException, SAXException, InvalidIDException {
         DataStore store = new DataStore(new DataModel());
 
-        Person randomGuy = store.getModel().addPerson("random guy");
-        Person oddJob = store.getModel().addPerson("odd job");
-        store.getModel().addPerson("ted");
-        store.getModel().addPerson("fred");
+        Person randomGuy = store.getModel().addPerson("random guy", "29358", "");
+        Person oddJob = store.getModel().addPerson("odd job", "", "whatever@...");
+        store.getModel().addPerson("ted", "", "");
+        store.getModel().addPerson("fred", "", "");
 
        // Song fiveHundredMiles = new Song();
         //Song run = new Song("I just wanna run.", "throw it away");
@@ -114,7 +114,7 @@ public class DataStoreTest {
         Song run = store.getModel().addSong("I just wanna run.", "throw it away");
         //List<Role> roles = new ArrayList<>();
         //roles.add(new Role("Runner", "The guy who runs", RoleType.MAIN));
-        run.addRole(new Role("Runner", "The guy who runs", RoleType.MAIN));
+        run.addRole("Runner", "The guy who runs", RoleType.MAIN);
         //store.getModel().getSong(run.getIndex()).setRoles(roles);
        // store.getModel().addSong(fiveHundredMiles);
 
@@ -127,17 +127,15 @@ public class DataStoreTest {
         session.addPerson(store.getModel().getPerson(randomGuy.getIndex()));
         session.addPerson(store.getModel().getPerson(oddJob.getIndex()));
 
-        //session.addPerformer(new Performer(randomGuy));
 
-        session.addPerformance(fiveHundredMiles, "encore", "OTS", new Date());
+        session.addSong(fiveHundredMiles);
 
-        Performance runPerformance = session.addPerformance(run, "primary", "OTS", new Date());
-        runPerformance.setDirector(new Director(store.getModel().getPerson(oddJob.getIndex())));
-        runPerformance.assign(randomGuy, run.getRoles().get(0));
-
-
-        session.addPerformance(fiveHundredMiles, "never", "OTS", new Date());
-
+        session.addSong(run);
+        session.getSongCast(run).assign(randomGuy, run.getRole(0));
+        //fail();
+//        runSongCast.assign(randomGuy, run.getRoles().get(0));
+//
+//
         store.getModel().setCurrentSession(session);
         store.save();
         DataStore store2 = new DataStore("file.xml");
@@ -146,16 +144,16 @@ public class DataStoreTest {
         assertEquals(date1, store2.getModel().getCurrentSession().getStartDate());
         assertEquals(date2, store2.getModel().getCurrentSession().getEndDate());
         assertEquals(session.getPeople().size(), store2.getModel().getCurrentSession().getPeople().size());
-        assertEquals(session.getPerformances().size(), store2.getModel().getCurrentSession().getPerformances().size());
-        //assertEquals(session.getPerformers().size(), store2.getModel().getCurrentSession().getPerformers().size());
+        assertEquals(session.getSongs().size(), store2.getModel().getCurrentSession().getSongs().size());
+        assertEquals(store2.getModel().getPerson(randomGuy.getIndex()).getPhoneNumber(), "29358");
     }
 
     @Test
     public void testSavePeople() throws JAXBException, SAXException, InvalidIDException {
         DataStore store = new DataStore(new DataModel());
-        Person bob = store.getModel().addPerson("bob");
-        Person ted = store.getModel().addPerson("ted");
-        Person fred = store.getModel().addPerson("fred");
+        Person bob = store.getModel().addPerson("bob", "","");
+        Person ted = store.getModel().addPerson("ted","","");
+        Person fred = store.getModel().addPerson("fred","","");
         store.save();
 
         DataStore store2 = new DataStore("file.xml");

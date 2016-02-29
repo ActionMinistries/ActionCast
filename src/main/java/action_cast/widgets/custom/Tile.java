@@ -56,13 +56,13 @@ public abstract class Tile extends JPanel implements MouseMotionListener {
     }
 
 
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        Graphics2D g2 = ((Graphics2D)g);
-
-        Ellipse2D ellipse = new Ellipse2D.Float(getInsets().left, getInsets().top, JTileView.TILE_WIDTH -(10 + getInsets().right), JTileView.TILE_HEIGHT - (10 + getInsets().bottom));
-        g2.draw(ellipse);
-    }
+//    protected void paintComponent(Graphics g) {
+//        super.paintComponent(g);
+//        Graphics2D g2 = ((Graphics2D)g);
+//
+//        Ellipse2D ellipse = new Ellipse2D.Float(getInsets().left, getInsets().top, JTileView.TILE_WIDTH -(10 + getInsets().right), JTileView.TILE_HEIGHT - (10 + getInsets().bottom));
+//        g2.draw(ellipse);
+//    }
 
     public String getUIClassID() {
         return uiClassID;
@@ -82,6 +82,10 @@ public abstract class Tile extends JPanel implements MouseMotionListener {
 
     public void removeTile() {
         parent.remove(this);
+    }
+
+    public JTileView getTileView() {
+        return parent;
     }
 
 }

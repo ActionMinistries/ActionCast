@@ -2,17 +2,16 @@ package action_cast.view;
 
 import action_cast.controller.ClientObjects.Session;
 import action_cast.controller.Controller;
+import action_cast.view.dialogs.AddPeopleToSessionDialog;
 import action_cast.widgets.CardPanel;
-import action_cast.widgets.PerformanceTableView;
-import com.intellij.uiDesigner.core.GridConstraints;
-import com.intellij.uiDesigner.core.GridLayoutManager;
+import action_cast.widgets.SongTableView;
+import action_cast.widgets.SongListView;
 import org.jdatepicker.impl.DateComponentFormatter;
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Properties;
@@ -24,10 +23,11 @@ public class ManageSessions extends BaseCardClass implements ActionListener {
     private JPanel mainPanel;
     private JButton saveButton;
     private JButton assignPeopleButton;
-    private JDatePickerImpl startDate;
-    private JDatePickerImpl endDate;
+//    private JDatePickerImpl startDate;
+//    private JDatePickerImpl endDate;
     private JTextField nameTextField;
-    private PerformanceTableView performanceTableView1;
+    private SongTableView songTableView1;
+    private SongListView songListView1;
 
     private Controller controller;
 
@@ -71,10 +71,11 @@ public class ManageSessions extends BaseCardClass implements ActionListener {
     protected void updateDisplay() {
         // List<Session> sessionList = new ArrayList<>();
         //sessionList.add(controller.getCurrentSession());
-        ((UtilDateModel) startDate.getModel()).setValue(controller.getCurrentSession().getStartDate());
-        ((UtilDateModel) endDate.getModel()).setValue(controller.getCurrentSession().getEndDate());
+//        ((UtilDateModel) startDate.getModel()).setValue(controller.getCurrentSession().getStartDate());
+//        ((UtilDateModel) endDate.getModel()).setValue(controller.getCurrentSession().getEndDate());
         nameTextField.setText(controller.getCurrentSession().getName());
-        performanceTableView1.setData(controller, controller.getSessionController().getPerformances());
+        songTableView1.setData(controller);
+        songListView1.setData(controller.getSongsNotInCurrentSession());
     }
 
     @Override
@@ -82,8 +83,8 @@ public class ManageSessions extends BaseCardClass implements ActionListener {
         if (e.getSource() == saveButton) {
             Session currentSession = controller.getCurrentSession();
             currentSession.setName(nameTextField.getText());
-            currentSession.setStartDate(((UtilDateModel) startDate.getModel()).getValue());
-            currentSession.setEndDate(((UtilDateModel) startDate.getModel()).getValue());
+//            currentSession.setStartDate(((UtilDateModel) startDate.getModel()).getValue());
+//            currentSession.setEndDate(((UtilDateModel) startDate.getModel()).getValue());
             controller.updateCurrentSession(currentSession);
         } else if (e.getSource() == assignPeopleButton) {
             AddPeopleToSessionDialog peopleToSessionDialog = new AddPeopleToSessionDialog(controller);
@@ -107,11 +108,11 @@ public class ManageSessions extends BaseCardClass implements ActionListener {
             mainPanel = new CardPanel(this, breadCrumb);
         }
         getMainPanel().setIsProtected(true);
-        JDatePanelImpl startDatePanel = new JDatePanelImpl(new UtilDateModel(), new Properties());
-        JDatePanelImpl endDatePanel = new JDatePanelImpl(new UtilDateModel(), new Properties());
-        startDate = new JDatePickerImpl(startDatePanel, new DateComponentFormatter());
-        endDate = new JDatePickerImpl(endDatePanel, new DateComponentFormatter());
-        performanceTableView1 = new PerformanceTableView(this);
+//        JDatePanelImpl startDatePanel = new JDatePanelImpl(new UtilDateModel(), new Properties());
+//        JDatePanelImpl endDatePanel = new JDatePanelImpl(new UtilDateModel(), new Properties());
+//        startDate = new JDatePickerImpl(startDatePanel, new DateComponentFormatter());
+//        endDate = new JDatePickerImpl(endDatePanel, new DateComponentFormatter());
+        songTableView1 = new SongTableView(this);
     }
 
 }

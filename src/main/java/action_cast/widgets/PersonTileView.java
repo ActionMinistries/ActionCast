@@ -35,6 +35,11 @@ public class PersonTileView extends JTileView {
         repaint();
     }
 
+    @Override
+    public void createTile() {
+
+    }
+
     public List<Person> getPeople() {
         return people;
     }

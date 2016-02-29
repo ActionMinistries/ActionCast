@@ -3,15 +3,23 @@
     <people>
         <people id="Person-0">
             <name>random guy</name>
+            <phoneNumber>29358</phoneNumber>
+            <email></email>
         </people>
         <people id="Person-1">
             <name>odd job</name>
+            <phoneNumber></phoneNumber>
+            <email>whatever@...</email>
         </people>
         <people id="Person-2">
             <name>ted</name>
+            <phoneNumber></phoneNumber>
+            <email></email>
         </people>
         <people id="Person-3">
             <name>fred</name>
+            <phoneNumber></phoneNumber>
+            <email></email>
         </people>
     </people>
     <songs>
@@ -24,52 +32,38 @@
             <name>I just wanna run.</name>
             <description>throw it away</description>
             <roles>
-                <roles id="Role-0">
+                <roles id="Song-1_Role-0">
                     <name>Runner</name>
                     <description>The guy who runs</description>
                     <type>MAIN</type>
+                    <song>Song-1</song>
                 </roles>
             </roles>
         </songs>
     </songs>
     <currentSession id="Session-0">
         <name>savedSession</name>
-        <start>2016-01-13T15:33:10.227-07:00</start>
-        <end>2016-01-13T15:33:15.227-07:00</end>
+        <start>2016-02-22T14:55:51.111-07:00</start>
+        <end>2016-02-22T14:55:56.111-07:00</end>
         <people>
             <people>Person-1</people>
             <people>Person-0</people>
         </people>
-        <performances>
-            <performances id="Performance-0">
-                <assignments/>
-                <date>2016-01-13T15:33:10.228-07:00</date>
-                <name>encore</name>
+        <casts>
+            <casts id="SongCast-0">
                 <song>Song-0</song>
-                <venue>OTS</venue>
-            </performances>
-            <performances id="Performance-1">
+                <assignments/>
+            </casts>
+            <casts id="SongCast-1">
+                <song>Song-1</song>
                 <assignments>
-                    <assignments id="RoleAssignment-0">
+                    <assignments id="SongCast-1_RoleAssignment-0">
                         <person>Person-0</person>
-                        <role>Role-0</role>
+                        <role>Song-1_Role-0</role>
+                        <cast>SongCast-1</cast>
                     </assignments>
                 </assignments>
-                <date>2016-01-13T15:33:10.228-07:00</date>
-                <director>
-                    <person>Person-1</person>
-                </director>
-                <name>primary</name>
-                <song>Song-1</song>
-                <venue>OTS</venue>
-            </performances>
-            <performances id="Performance-2">
-                <assignments/>
-                <date>2016-01-13T15:33:10.229-07:00</date>
-                <name>never</name>
-                <song>Song-0</song>
-                <venue>OTS</venue>
-            </performances>
-        </performances>
+            </casts>
+        </casts>
     </currentSession>
 </dataModel>

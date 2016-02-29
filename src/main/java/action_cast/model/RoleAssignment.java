@@ -2,6 +2,7 @@ package action_cast.model;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlIDREF;
+import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
 /**
@@ -18,20 +19,36 @@ public class RoleAssignment extends UniqueItem{
     @XmlIDREF
     private Role role;
 
+    @XmlElement
+    @XmlIDREF
+    private SongCast cast;
+
     private RoleAssignment() {
 
     }
 
-    public RoleAssignment(Person person, Role role) {
+    public RoleAssignment(int id, Person person, Role role, SongCast cast) {
         this.person = person;
         this.role = role;
+        this.id = id;
+        this.cast = cast;
     }
 
+    @Override
+    protected String getId() {
+        return cast.getId() + "_" + super.getId();
+    }
+
+    @XmlTransient
     public Person getPerson() {
         return person;
     }
 
     public Role getRole() {
         return role;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
     }
 }

@@ -2,6 +2,7 @@ package action_cast.model;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,10 +30,12 @@ public class Song extends UniqueItem {
         this.id = id;
     }
 
+    @XmlTransient
     public String getName() {
         return name;
     }
 
+    @XmlTransient
     public String getDescription() {
         return description;
     }
@@ -41,8 +44,9 @@ public class Song extends UniqueItem {
 //        this.roles = roles;
 //    }
 
-    public void addRole(Role role) {
-        roles.add(role);
+    public Role addRole(String name, String description, RoleType type) {
+        roles.add(new Role(roles.size(), name, description, type, this));
+        return roles.get(roles.size()-1);
     }
 
     public List<Role> getRoles() {
@@ -51,5 +55,13 @@ public class Song extends UniqueItem {
 
     public Role getRole(int roleID) {
         return roles.get(roleID);
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
