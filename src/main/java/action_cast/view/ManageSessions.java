@@ -23,8 +23,8 @@ public class ManageSessions extends BaseCardClass implements ActionListener {
     private JPanel mainPanel;
     private JButton saveButton;
     private JButton assignPeopleButton;
-    private JDatePickerImpl startDate;
-    private JDatePickerImpl endDate;
+//    private JDatePickerImpl startDate;
+//    private JDatePickerImpl endDate;
     private JTextField nameTextField;
     private SongTableView songTableView1;
     private SongListView songListView1;
@@ -71,8 +71,8 @@ public class ManageSessions extends BaseCardClass implements ActionListener {
     protected void updateDisplay() {
         // List<Session> sessionList = new ArrayList<>();
         //sessionList.add(controller.getCurrentSession());
-        ((UtilDateModel) startDate.getModel()).setValue(controller.getCurrentSession().getStartDate());
-        ((UtilDateModel) endDate.getModel()).setValue(controller.getCurrentSession().getEndDate());
+//        ((UtilDateModel) startDate.getModel()).setValue(controller.getCurrentSession().getStartDate());
+//        ((UtilDateModel) endDate.getModel()).setValue(controller.getCurrentSession().getEndDate());
         nameTextField.setText(controller.getCurrentSession().getName());
         songTableView1.setData(controller);
         songListView1.setData(controller.getSongsNotInCurrentSession());
@@ -83,8 +83,8 @@ public class ManageSessions extends BaseCardClass implements ActionListener {
         if (e.getSource() == saveButton) {
             Session currentSession = controller.getCurrentSession();
             currentSession.setName(nameTextField.getText());
-            currentSession.setStartDate(((UtilDateModel) startDate.getModel()).getValue());
-            currentSession.setEndDate(((UtilDateModel) startDate.getModel()).getValue());
+//            currentSession.setStartDate(((UtilDateModel) startDate.getModel()).getValue());
+//            currentSession.setEndDate(((UtilDateModel) startDate.getModel()).getValue());
             controller.updateCurrentSession(currentSession);
         } else if (e.getSource() == assignPeopleButton) {
             AddPeopleToSessionDialog peopleToSessionDialog = new AddPeopleToSessionDialog(controller);
@@ -108,10 +108,10 @@ public class ManageSessions extends BaseCardClass implements ActionListener {
             mainPanel = new CardPanel(this, breadCrumb);
         }
         getMainPanel().setIsProtected(true);
-        JDatePanelImpl startDatePanel = new JDatePanelImpl(new UtilDateModel(), new Properties());
-        JDatePanelImpl endDatePanel = new JDatePanelImpl(new UtilDateModel(), new Properties());
-        startDate = new JDatePickerImpl(startDatePanel, new DateComponentFormatter());
-        endDate = new JDatePickerImpl(endDatePanel, new DateComponentFormatter());
+//        JDatePanelImpl startDatePanel = new JDatePanelImpl(new UtilDateModel(), new Properties());
+//        JDatePanelImpl endDatePanel = new JDatePanelImpl(new UtilDateModel(), new Properties());
+//        startDate = new JDatePickerImpl(startDatePanel, new DateComponentFormatter());
+//        endDate = new JDatePickerImpl(endDatePanel, new DateComponentFormatter());
         songTableView1 = new SongTableView(this);
     }
 

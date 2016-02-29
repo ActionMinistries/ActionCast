@@ -54,9 +54,9 @@ public class RoleAssignmentGrid extends JTileView<RoleTile> implements RoleAssig
 
                 RoleTile tile;
                 if (assignments.containsKey(role.getId())) {
-                        tile = new RoleTile(this, controller.getPerson(assignments.get(role.getId())), role);
+                        tile = new RoleTile(this, controller, controller.getPerson(assignments.get(role.getId())), role);
                 } else {
-                    tile = new RoleTile(this, null, role);
+                    tile = new RoleTile(this, controller, null, role);
                 }
                 tile.addRoleAssignmentListener(this);
                 add(tile);

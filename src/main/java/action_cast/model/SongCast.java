@@ -3,6 +3,7 @@ package action_cast.model;
 import javax.xml.bind.annotation.*;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -66,5 +67,14 @@ public class SongCast extends UniqueItem {
         }
 
         return getAssignmentMap().get(role);
+    }
+
+    public boolean isFullyCast() {
+        for (Role role : song.getRoles()) {
+            if (!getAssignmentMap().containsKey(role) || getAssignmentMap().get(role) == null) {
+                return false;
+            }
+        }
+        return true;
     }
 }

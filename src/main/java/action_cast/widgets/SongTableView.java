@@ -67,7 +67,13 @@ public class SongTableView extends DisplayTable implements MouseListener {
         ((DefaultTableModel)getModel()).setRowCount(0);
         songList = controller.getSessionController().getSongs();
         for (Song song : songList) {
-            ((DefaultTableModel)getModel()).addRow(new Object[]{song.getName(), "X"});
+            String castingStatus = null;
+            try {
+                castingStatus = (controller.isSongCast(song)) ? "✓" : "✗";
+            } catch (InvalidIDException e) {
+                e.printStackTrace();
+            }
+            ((DefaultTableModel)getModel()).addRow(new Object[]{song.getName(), castingStatus});
         }
     }
 

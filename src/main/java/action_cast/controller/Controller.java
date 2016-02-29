@@ -1,10 +1,12 @@
 package action_cast.controller;
 
 import action_cast.controller.ClientObjects.*;
+import action_cast.controller.events.RoleAssignmentEvent;
 import action_cast.data_store.DataStore;
 import action_cast.model.DataModel;
 import action_cast.model.RoleType;
 import action_cast.model.exceptions.InvalidIDException;
+import com.google.common.eventbus.EventBus;
 import org.xml.sax.SAXException;
 
 import javax.xml.bind.JAXBException;
@@ -21,6 +23,8 @@ public class Controller {
 
     SessionController sessionController;
 
+    private EventBus eventBus = new EventBus();
+
     public Controller() {
         ClassLoader classLoader = getClass().getClassLoader();
         store = new DataStore(classLoader.getResource("main.xml").getFile());
@@ -28,11 +32,13 @@ public class Controller {
             store.load();
             model = store.getModel();
             sessionController = new SessionController(model.getCurrentSession(), this);
-        } catch (JAXBException e) {
-            e.printStackTrace();
-        } catch (SAXException e) {
+        } catch (JAXBException | SAXException e) {
             e.printStackTrace();
         }
+    }
+
+    public EventBus getEventBus() {
+        return eventBus;
     }
 
     /*
@@ -47,6 +53,7 @@ public class Controller {
         } else {
             model.getCurrentSession().getSongCast(modelSong).assign(null, modelSong.getRole(role.getId()));
         }
+        eventBus.post(new RoleAssignmentEvent());
     }
 
     public void addPerson(String name, String phoneNumber, String email) {
@@ -65,19 +72,29 @@ public class Controller {
     }
 
     public List<Person> getPeopleNotInCurrentSession() {
-        List<Person> results = model.getPeople().stream().filter(person -> !model.getCurrentSession().hasPerson(person)).map(person -> new Person(person.getIndex(), person.getName(), person.getPhoneNumber(), person.getEmail())).collect(Collectors.toList());
-        //= model.getPeople().stream().map(person -> new Person(person.getIndex(), person.getName())).collect(Collectors.toList());
-        return results;
+        return model.getPeople().stream().filter(person -> !model.getCurrentSession().hasPerson(person)).map(person -> new Person(person.getIndex(), person.getName(), person.getPhoneNumber(), person.getEmail())).collect(Collectors.toList());
     }
 
     public List<Person> getPeople() {
-        List<Person> results = model.getPeople().stream().map(person -> new Person(person.getIndex(), person.getName(), person.getPhoneNumber(), person.getEmail())).collect(Collectors.toList());
-        return results;
+        return model.getPeople().stream().map(person -> new Person(person.getIndex(), person.getName(), person.getPhoneNumber(), person.getEmail())).collect(Collectors.toList());
     }
 
     public Person getPerson(int id) throws InvalidIDException {
         action_cast.model.Person person = model.getPerson(id);
         return new Person(person.getIndex(), person.getName(), person.getPhoneNumber(), person.getEmail());
+    }
+
+    public int getRoleTypeCountFor(Person person, RoleType type) throws InvalidIDException {
+        int result = 0;
+        action_cast.model.Person modelPerson = model.getPerson(person.getId());
+        for (action_cast.model.Song song : model.getCurrentSession().getSongs()) {
+            for (action_cast.model.RoleAssignment assignment : model.getCurrentSession().getSongCast(song).getAssignments()) {
+                if (assignment.getPerson() == modelPerson && assignment.getRole().getType() == type) {
+                    ++result;
+                }
+            }
+        }
+        return result;
     }
 
     /*
@@ -87,7 +104,6 @@ public class Controller {
 
     public void assignSongToSession(Song song) throws InvalidIDException {
         model.getCurrentSession().addSong(model.getSong(song.getId()));
-        //return new SongCast(performance.getIndex(), performance.getDirector(), new Song(performance.getSong().getIndex(), performance.getSong().getName(), performance.getSong().getDescription()));
     }
 
     public void removeSongFromSession(Song song) throws InvalidIDException {
@@ -100,14 +116,11 @@ public class Controller {
     }
 
     public List<Song> getSongs() {
-        List<Song> results = model.getSongs().stream().map(song -> new Song(song.getIndex(), song.getName(), song.getDescription())).collect(Collectors.toList());
-        return results;
+        return model.getSongs().stream().map(song -> new Song(song.getIndex(), song.getName(), song.getDescription())).collect(Collectors.toList());
     }
 
     public List<Song> getSongsNotInCurrentSession() {
-        List<Song> results = model.getSongs().stream().filter(song -> !model.getCurrentSession().hasSong(song)).map(song -> new Song(song.getIndex(), song.getName(), song.getDescription())).collect(Collectors.toList());
-        //= model.getPeople().stream().map(person -> new Person(person.getIndex(), person.getName())).collect(Collectors.toList());
-        return results;
+        return model.getSongs().stream().filter(song -> !model.getCurrentSession().hasSong(song)).map(song -> new Song(song.getIndex(), song.getName(), song.getDescription())).collect(Collectors.toList());
     }
 
     public Song getSong(int id) throws InvalidIDException {
@@ -118,6 +131,10 @@ public class Controller {
     public void updateSong(Song song) throws InvalidIDException {
         model.getSong(song.getId()).setName(song.getName());
         model.getSong(song.getId()).setDescription(song.getDescription());
+    }
+
+    public boolean isSongCast(Song song) throws InvalidIDException {
+        return model.getCurrentSession().getSongCast(model.getSong(song.getId())).isFullyCast();
     }
 
     /*
@@ -146,8 +163,7 @@ public class Controller {
     }
 
     public List<action_cast.controller.ClientObjects.RoleAssignment> getRoleAssignmentsForSong(action_cast.controller.ClientObjects.Song song) throws InvalidIDException {
-        List<action_cast.controller.ClientObjects.RoleAssignment> roleAssignments = model.getCurrentSession().getSongCast(model.getSong(song.getId())).getAssignments().stream().map(assignment -> new RoleAssignment(assignment.getIndex(), assignment.getPerson().getIndex(), assignment.getRole().getIndex())).collect(Collectors.toList());
-        return roleAssignments;
+        return model.getCurrentSession().getSongCast(model.getSong(song.getId())).getAssignments().stream().map(assignment -> new RoleAssignment(assignment.getIndex(), assignment.getPerson().getIndex(), assignment.getRole().getIndex())).collect(Collectors.toList());
     }
 
     /*
