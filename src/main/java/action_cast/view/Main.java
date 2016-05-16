@@ -4,18 +4,13 @@ import action_cast.controller.Controller;
 import action_cast.data_store.DataStore;
 import action_cast.model.*;
 import action_cast.model.exceptions.InvalidIDException;
-import com.intellij.uiDesigner.core.GridConstraints;
-import com.intellij.uiDesigner.core.GridLayoutManager;
 import org.xml.sax.SAXException;
 
 import javax.swing.*;
 import javax.xml.bind.JAXBException;
-import java.awt.*;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created by bmichaud on 9/2/2015.

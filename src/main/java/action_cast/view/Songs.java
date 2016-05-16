@@ -5,14 +5,12 @@ import action_cast.controller.Controller;
 import action_cast.model.exceptions.InvalidIDException;
 import action_cast.widgets.RoleTileView;
 import action_cast.widgets.SongListView;
-import action_cast.widgets.tiles.RoleCreationTile;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.List;
 
 /**

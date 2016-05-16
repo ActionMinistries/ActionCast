@@ -4,17 +4,12 @@ import action_cast.controller.ClientObjects.Session;
 import action_cast.controller.Controller;
 import action_cast.view.dialogs.AddPeopleToSessionDialog;
 import action_cast.widgets.CardPanel;
-import action_cast.widgets.SongTableView;
 import action_cast.widgets.SongListView;
-import org.jdatepicker.impl.DateComponentFormatter;
-import org.jdatepicker.impl.JDatePanelImpl;
-import org.jdatepicker.impl.JDatePickerImpl;
-import org.jdatepicker.impl.UtilDateModel;
+import action_cast.widgets.SongTableView;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Properties;
 
 /**
  * Created by bmichaud on 9/15/2015.
