@@ -95,6 +95,8 @@ public class SongTransferHandler extends TransferHandler {
                 e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
+            } catch (Throwable t) {
+                t.printStackTrace();
             }
         } else if (support.getComponent() instanceof SongListView) {
             SongListView view = (SongListView)support.getComponent();
@@ -105,6 +107,8 @@ public class SongTransferHandler extends TransferHandler {
                 e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
+            } catch (Throwable t) {
+                t.printStackTrace();
             }
         }
         return false;
