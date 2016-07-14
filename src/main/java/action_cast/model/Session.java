@@ -28,6 +28,9 @@ public class Session extends UniqueItem {
     @XmlIDREF
     private HashSet<Person> people = new HashSet<>();
 
+    @XmlAttribute
+    private int songCastIndex;
+
     private Session () {
 
     }
@@ -51,7 +54,8 @@ public class Session extends UniqueItem {
     }
 
     public void addSong(Song song) {
-        casts.add(new SongCast(casts.size(), song));
+        casts.add(new SongCast(songCastIndex, song));
+        songCastIndex++;
         getCastMap().put(song, casts.get(casts.size()-1));
     }
 
