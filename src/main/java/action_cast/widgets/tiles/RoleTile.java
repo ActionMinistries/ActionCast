@@ -13,10 +13,13 @@ import action_cast.widgets.events.RoleAssignedEvent;
 import action_cast.widgets.listeners.RoleAssignmentListener;
 import com.google.common.eventbus.Subscribe;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -37,8 +40,17 @@ public class RoleTile extends Tile implements ActionListener {
 
     List<RoleAssignmentListener> listeners = new ArrayList<>();
 
+    private static BufferedImage defaultProfileImage;
+
     public RoleTile(JTileView parent, Controller controller, Person person, Role role) {
         super(parent);
+        if (defaultProfileImage == null) {
+            try {
+                defaultProfileImage = ImageIO.read(getClass().getClassLoader().getResource("images/profile.png"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         this.controller = controller;
         this.person = person;
         this.role = role;
@@ -108,6 +120,7 @@ public class RoleTile extends Tile implements ActionListener {
         if (person != null) {
             ((Graphics2D) g).drawString(person.getName(), getInsets().left, getInsets().top + g.getFontMetrics().getHeight());
         }
+        addProfileImage(g);
     }
 
     @Override
@@ -120,6 +133,15 @@ public class RoleTile extends Tile implements ActionListener {
 
     public void addRoleAssignmentListener(RoleAssignmentListener listener) {
         this.listeners.add(listener);
+    }
+
+    private void addProfileImage(Graphics g) {
+        if (person == null) {
+            g.drawImage(defaultProfileImage, getInsets().left, getInsets().top, null);
+        } else {
+            //TODO use an actual profile image
+            g.drawImage(defaultProfileImage, getInsets().left, getInsets().top, null);
+        }
     }
 
     private void addRoleTypeCountLabels() {
