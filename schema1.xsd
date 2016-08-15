@@ -21,6 +21,7 @@
       </xs:element>
       <xs:element name="currentSession" type="session" minOccurs="0"/>
     </xs:sequence>
+    <xs:attribute name="peopleIndex" type="xs:int" use="required"/>
   </xs:complexType>
 
   <xs:complexType name="person">
@@ -93,6 +94,7 @@
             </xs:complexType>
           </xs:element>
         </xs:sequence>
+        <xs:attribute name="songCastIndex" type="xs:int" use="required"/>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>

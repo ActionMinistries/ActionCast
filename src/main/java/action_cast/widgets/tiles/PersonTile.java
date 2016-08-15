@@ -26,7 +26,7 @@ public class PersonTile extends Tile {
     protected void paintComponent(Graphics g) {
 
         super.paintComponent(g);
-        ((Graphics2D)g).drawString(person.getName(), 12, 20);
+        ((Graphics2D) g).drawString(person.getName(), getInsets().left, getInsets().top + g.getFontMetrics().getHeight());
 
     }
 

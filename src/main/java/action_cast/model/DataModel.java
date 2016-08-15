@@ -2,6 +2,8 @@ package action_cast.model;
 
 import action_cast.model.exceptions.InvalidIDException;
 
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
@@ -21,6 +23,9 @@ public class DataModel {
 
     private Session currentSession = null;
 
+    @XmlAttribute
+    private int peopleIndex;
+
     public DataModel() {
 
     }
@@ -33,7 +38,8 @@ public class DataModel {
     }
 
     public Person addPerson(String name, String phoneNumber, String email) {
-        Person person = new Person(people.size(), name, phoneNumber, email);
+        Person person = new Person(peopleIndex, name, phoneNumber, email);
+        peopleIndex++;
         people.add(person);
         return person;
     }
@@ -65,4 +71,5 @@ public class DataModel {
     public List<Person> getPeople() {
         return people;
     }
+
 }
