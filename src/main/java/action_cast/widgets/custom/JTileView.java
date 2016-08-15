@@ -15,8 +15,8 @@ public abstract class JTileView<T extends Tile> extends JPanel {
 
     private static final String uiClassID = "TileView";
 
-    public static final int TILE_WIDTH = 80;
-    public static final int TILE_HEIGHT = 80;
+    public static final int TILE_WIDTH = 128;
+    public static final int TILE_HEIGHT = 128;
     public static final int PADDING = 4;
     private CreationTile creationTile;
 
@@ -44,10 +44,12 @@ public abstract class JTileView<T extends Tile> extends JPanel {
         return (JTileViewUI) ui;
     }
 
+    @Override
     public Dimension getPreferredSize() {
         return new Dimension((TILE_WIDTH+PADDING)*2, (PADDING+TILE_HEIGHT)*(getComponents().length/2));
     }
 
+    @Override
     public Dimension getMinimumSize() {
         return new Dimension((TILE_WIDTH+PADDING)*2, (PADDING+TILE_HEIGHT)*(getComponents().length/2));
     }

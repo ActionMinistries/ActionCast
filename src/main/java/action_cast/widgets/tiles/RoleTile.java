@@ -27,16 +27,16 @@ import java.util.ResourceBundle;
 /**
  * Created by bmichaud on 12/14/2015.
  */
-public class RoleTile extends Tile implements ActionListener {
+public class RoleTile extends Tile {
 
     private final Controller controller;
     Person person;
     Role role;
 
-    JButton clearButton;
     JLabel mainCount;
     JLabel supportCount;
     JLabel backgroundCount;
+    private RoleTileHeader header;
 
     List<RoleAssignmentListener> listeners = new ArrayList<>();
 
@@ -44,6 +44,17 @@ public class RoleTile extends Tile implements ActionListener {
 
     public RoleTile(JTileView parent, Controller controller, Person person, Role role) {
         super(parent);
+        header = new RoleTileHeader(this);
+        GridBagConstraints headerConstraints = new GridBagConstraints(0, 2, this.getHeight()/3, this.getWidth()/3,
+                1,
+                1,
+                GridBagConstraints.NORTH,
+                GridBagConstraints.NONE,
+                new Insets(1, 1, 1, 1),
+                1,
+                1
+        );
+
         if (defaultProfileImage == null) {
             try {
                 defaultProfileImage = ImageIO.read(getClass().getClassLoader().getResource("images/profile.png"));
@@ -58,7 +69,7 @@ public class RoleTile extends Tile implements ActionListener {
         GridBagLayout layoutManager = new GridBagLayout();
         setLayout(layoutManager);
 
-        this.addClearButton();
+        this.add(header);
         this.addRoleTypeCountLabels();
         controller.getEventBus().register(this);
     }
@@ -85,12 +96,10 @@ public class RoleTile extends Tile implements ActionListener {
 
     public void updateDisplay() {
         if (person == null) {
-            clearButton.setVisible(false);
             mainCount.setVisible(false);
             supportCount.setVisible(false);
             backgroundCount.setVisible(false);
         } else {
-            clearButton.setVisible(true);
             mainCount.setVisible(true);
             supportCount.setVisible(true);
             backgroundCount.setVisible(true);
@@ -114,22 +123,16 @@ public class RoleTile extends Tile implements ActionListener {
     protected void paintComponent(Graphics g) {
 
         super.paintComponent(g);
+        addProfileImage(g);
         ((Graphics2D) g).drawString(role.getType().name(), getInsets().left, JTileView.TILE_HEIGHT - getInsets().bottom);
         //((Graphics2D) g).drawString("X", 50, 15);
 
         if (person != null) {
-            ((Graphics2D) g).drawString(person.getName(), getInsets().left, getInsets().top + g.getFontMetrics().getHeight());
+            ((Graphics2D) g).drawString(person.getName(), getInsets().left, getInsets().top + defaultProfileImage.getHeight() + g.getFontMetrics().getHeight());
         }
-        addProfileImage(g);
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == clearButton) {
-            assignPerson(null);
-            updateDisplay();
-        }
-    }
+
 
     public void addRoleAssignmentListener(RoleAssignmentListener listener) {
         this.listeners.add(listener);
@@ -198,25 +201,5 @@ public class RoleTile extends Tile implements ActionListener {
         this.add(mainCount, constraints);
         this.add(supportCount, constraints1);
         this.add(backgroundCount, constraints2);
-    }
-
-    private void addClearButton() {
-        GridBagConstraints constraints = new GridBagConstraints(0, 2, this.getHeight()/3, this.getWidth()/3,
-                1,
-                1,
-                GridBagConstraints.FIRST_LINE_END,
-                GridBagConstraints.NONE,
-                new Insets(1, 1, 1, 1),
-                1,
-                1
-        );
-
-        clearButton = new JButton("X");
-        clearButton.setMargin(new Insets(1,1,1,1));
-        if (person == null) {
-            clearButton.setVisible(false);
-        }
-        clearButton.addActionListener(this);
-        this.add(clearButton, constraints);
     }
 }
