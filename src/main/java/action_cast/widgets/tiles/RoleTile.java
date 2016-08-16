@@ -15,6 +15,7 @@ import com.google.common.eventbus.Subscribe;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -30,12 +31,13 @@ import java.util.ResourceBundle;
 public class RoleTile extends Tile {
 
     private final Controller controller;
-    Person person;
+    Person person = null;
     Role role;
 
     JLabel mainCount;
     JLabel supportCount;
     JLabel backgroundCount;
+    JPanel roleCountPanel;
     private RoleTileHeader header;
 
     List<RoleAssignmentListener> listeners = new ArrayList<>();
@@ -44,7 +46,6 @@ public class RoleTile extends Tile {
 
     public RoleTile(JTileView parent, Controller controller, Person person, Role role) {
         super(parent);
-        header = new RoleTileHeader(this);
         GridBagConstraints headerConstraints = new GridBagConstraints(0, 2, this.getHeight()/3, this.getWidth()/3,
                 1,
                 1,
@@ -68,8 +69,8 @@ public class RoleTile extends Tile {
         this.setTransferHandler(new PersonTransferHandler());
         GridBagLayout layoutManager = new GridBagLayout();
         setLayout(layoutManager);
-
-        this.add(header);
+        header = new RoleTileHeader(this);
+        this.add(header, headerConstraints);
         this.addRoleTypeCountLabels();
         controller.getEventBus().register(this);
     }
@@ -112,6 +113,7 @@ public class RoleTile extends Tile {
                 e.printStackTrace();
             }
         }
+        header.updateDisplay();
         repaint();
     }
 
@@ -124,11 +126,11 @@ public class RoleTile extends Tile {
 
         super.paintComponent(g);
         addProfileImage(g);
-        ((Graphics2D) g).drawString(role.getType().name(), getInsets().left, JTileView.TILE_HEIGHT - getInsets().bottom);
+
         //((Graphics2D) g).drawString("X", 50, 15);
 
         if (person != null) {
-            ((Graphics2D) g).drawString(person.getName(), getInsets().left, getInsets().top + defaultProfileImage.getHeight() + g.getFontMetrics().getHeight());
+            ((Graphics2D) g).drawString(person.getName(), getInsets().left, getInsets().top + header.getHeight() + defaultProfileImage.getHeight() + g.getFontMetrics().getHeight());
         }
     }
 
@@ -140,25 +142,31 @@ public class RoleTile extends Tile {
 
     private void addProfileImage(Graphics g) {
         if (person == null) {
-            g.drawImage(defaultProfileImage, getInsets().left, getInsets().top, null);
+            g.drawImage(defaultProfileImage, getInsets().left, getInsets().top + header.getHeight(), null);
         } else {
             //TODO use an actual profile image
-            g.drawImage(defaultProfileImage, getInsets().left, getInsets().top, null);
+            g.drawImage(defaultProfileImage, getInsets().left, getInsets().top + header.getHeight(), null);
         }
     }
 
     private void addRoleTypeCountLabels() {
-        GridBagConstraints constraints = new GridBagConstraints(0, 2, this.getHeight()/3, this.getWidth()/3,
+
+        roleCountPanel = new JPanel();
+        GridBagLayout mgr = new GridBagLayout();
+        roleCountPanel.setLayout(mgr);
+        roleCountPanel.setBorder(new LineBorder(Color.black, 2));
+
+        GridBagConstraints constraints = new GridBagConstraints(0, 0, this.getHeight()/3, this.getWidth()/3,
                 1,
                 1,
-                GridBagConstraints.WEST,
+                GridBagConstraints.NORTH,
                 GridBagConstraints.NONE,
                 new Insets(1, 1, 1, 1),
                 1,
                 1
         );
 
-        GridBagConstraints constraints1 = new GridBagConstraints(0, 2, this.getHeight()/3, this.getWidth()/3,
+        GridBagConstraints constraints1 = new GridBagConstraints(0, 0, this.getHeight()/3, this.getWidth()/3,
                 1,
                 1,
                 GridBagConstraints.CENTER,
@@ -168,7 +176,17 @@ public class RoleTile extends Tile {
                 1
         );
 
-        GridBagConstraints constraints2 = new GridBagConstraints(0, 2, this.getHeight()/3, this.getWidth()/3,
+        GridBagConstraints constraints2 = new GridBagConstraints(0, 0, this.getHeight()/3, this.getWidth()/3,
+                1,
+                1,
+                GridBagConstraints.SOUTH,
+                GridBagConstraints.NONE,
+                new Insets(1, 1, 1, 1),
+                1,
+                1
+        );
+
+        GridBagConstraints constraints3 = new GridBagConstraints(0, 2, this.getHeight()/3, this.getWidth()/3,
                 1,
                 1,
                 GridBagConstraints.EAST,
@@ -177,6 +195,8 @@ public class RoleTile extends Tile {
                 1,
                 1
         );
+
+
 
         mainCount = new JLabel("0");
         supportCount = new JLabel("0");
@@ -198,8 +218,9 @@ public class RoleTile extends Tile {
             }
         }
 
-        this.add(mainCount, constraints);
-        this.add(supportCount, constraints1);
-        this.add(backgroundCount, constraints2);
+        roleCountPanel.add(mainCount, constraints);
+        roleCountPanel.add(supportCount, constraints1);
+        roleCountPanel.add(backgroundCount, constraints2);
+        this.add(roleCountPanel, constraints3);
     }
 }
