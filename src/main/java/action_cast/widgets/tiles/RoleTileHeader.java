@@ -3,6 +3,7 @@ package action_cast.widgets.tiles;
 import action_cast.widgets.custom.JTileView;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,7 +19,7 @@ public class RoleTileHeader extends JPanel implements ActionListener {
 
     public RoleTileHeader(RoleTile tile) {
         parent = tile;
-        //this.setBorder(new LineBorder(Color.black, 2));
+        this.setBorder(new LineBorder(Color.blue, 2));
         this.setLayout(new GridBagLayout());
         addClearButton();
         addRoleTypeLabel();
@@ -42,12 +43,12 @@ public class RoleTileHeader extends JPanel implements ActionListener {
 
     @Override
     public Dimension getPreferredSize() {
-        return new Dimension(parent.getWidth(), parent.getHeight() / 3);
+        return new Dimension(parent.getWidth() - parent.getInsets().right - parent.getInsets().left, parent.getHeight() / 3);
     }
 
     @Override
     public Dimension getMinimumSize() {
-        return new Dimension(parent.getWidth(), parent.getHeight() / 4);
+        return new Dimension(parent.getWidth() - parent.getInsets().right - parent.getInsets().left, parent.getHeight() / 4);
     }
 
 /*    protected void paintComponent(Graphics g) {
