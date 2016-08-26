@@ -19,7 +19,7 @@ public class RoleTileHeader extends JPanel implements ActionListener {
 
     public RoleTileHeader(RoleTile tile) {
         parent = tile;
-        this.setBorder(new LineBorder(Color.blue, 2));
+        //this.setBorder(new LineBorder(Color.blue, 2));
         this.setLayout(new GridBagLayout());
         addClearButton();
         addRoleTypeLabel();
@@ -43,7 +43,7 @@ public class RoleTileHeader extends JPanel implements ActionListener {
 
     @Override
     public Dimension getPreferredSize() {
-        return new Dimension(parent.getWidth() - parent.getInsets().right - parent.getInsets().left, parent.getHeight() / 3);
+        return new Dimension(parent.getWidth() - parent.getInsets().right - parent.getInsets().left, parent.getHeight() / 4);
     }
 
     @Override
