@@ -1,7 +1,8 @@
 plugins {
-    id 'java'
+    id 'application'
 }
 
+mainClassName = "action_cast.view.Main"
 group 'org.aim'
 version '1.0-SNAPSHOT'
 
@@ -16,5 +17,10 @@ dependencies {
     compile group: 'org.jdatepicker', name: 'jdatepicker', version: '1.3.4'
     compile 'com.intellij:forms_rt:7.0.3'
     compile 'com.google.guava:guava:10.0.1'
+}
 
+jar {
+    manifest {
+        attributes 'Main-Class': "action_cast.view.Main"
+    }
 }
