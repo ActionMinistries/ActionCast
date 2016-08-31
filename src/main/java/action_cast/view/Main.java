@@ -4,10 +4,13 @@ import action_cast.controller.Controller;
 import action_cast.data_store.DataStore;
 import action_cast.model.*;
 import action_cast.model.exceptions.InvalidIDException;
+import com.intellij.uiDesigner.core.GridConstraints;
+import com.intellij.uiDesigner.core.GridLayoutManager;
 import org.xml.sax.SAXException;
 
 import javax.swing.*;
 import javax.xml.bind.JAXBException;
+import java.awt.*;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.util.Date;
@@ -25,6 +28,7 @@ public class Main implements WindowListener {
     private Controller controller;
 
     public Main() {
+        setupUI();
         controller = new Controller();
 
         people1.setController(controller);//.setData(store.getModel());
@@ -108,4 +112,31 @@ public class Main implements WindowListener {
     public void windowDeactivated(WindowEvent e) {
 
     }
+
+    private void setupUI() {
+        panel1 = new JPanel();
+        panel1.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
+        tabbedPane1 = new JTabbedPane();
+        panel1.add(tabbedPane1, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(200, 200), null, 0, false));
+        final JPanel panel2 = new JPanel();
+        panel2.setLayout(new CardLayout(0, 0));
+        tabbedPane1.addTab("Session", panel2);
+        manageSessions1 = new ManageSessions();
+        panel2.add(manageSessions1.getRootComponent(), "Card1");
+        final JPanel panel3 = new JPanel();
+        panel3.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
+        tabbedPane1.addTab("People", panel3);
+        people1 = new People();
+        panel3.add(people1.getRootComponent(), new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_VERTICAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+        final JPanel panel4 = new JPanel();
+        panel4.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
+        tabbedPane1.addTab("Songs", panel4);
+        songs1 = new Songs();
+        panel4.add(songs1.getRootComponent(), new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+    }
+
+    public JComponent getRootComponent() {
+        return panel1;
+    }
+
 }
