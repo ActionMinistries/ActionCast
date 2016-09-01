@@ -35,58 +35,23 @@ public class RoleTileBody extends JPanel {
                 e.printStackTrace();
             }
         }
-        parent = tile;
-        //this.setBorder(new LineBorder(Color.green, 2));
         this.setLayout(new GridBagLayout());
-        profileImageDisplay = new JLabel(new ImageIcon(defaultProfileImage));
+        parent = tile;
+
+        //this.setBorder(new LineBorder(Color.green, 2));
         //profileImageDisplay.setBorder(new LineBorder(Color.red, 2));
-        name = new JLabel();
         //name.setBorder(new LineBorder(Color.orange, 2));
-        GridBagConstraints profileImageConstraints = new GridBagConstraints(0, 0, this.getHeight()/3, this.getWidth()/3,
-                1,
-                1,
-                GridBagConstraints.NORTHWEST,
-                0,
-                new Insets(1, 1, 1, 1),
-                1,
-                1
-        );
 
-        GridBagConstraints nameLabelConstraints = new GridBagConstraints(0, 0, this.getHeight()/3, this.getWidth()/3,
-                1,
-                1,
-                GridBagConstraints.SOUTHWEST,
-                0,
-                new Insets(1, 1, 1, 1),
-                1,
-                1
-        );
-
-        add(profileImageDisplay, profileImageConstraints);
+        addProfileImage();
         addRoleTypeCountLabels();
-        add(name, nameLabelConstraints);
-
-
+        addNameLabel();
     }
 
     public void updateDisplay() {
+        updateRoleCounts();
         if (parent.getAssignedPerson() == null) {
-            mainCount.setVisible(false);
-            supportCount.setVisible(false);
-            backgroundCount.setVisible(false);
             name.setText("");
         } else {
-            mainCount.setVisible(true);
-            supportCount.setVisible(true);
-            backgroundCount.setVisible(true);
-
-            try {
-                mainCount.setText("I:   "+Integer.toString(parent.getController().getRoleTypeCountFor(parent.getAssignedPerson(), RoleType.MAIN)));
-                supportCount.setText("II:  "+Integer.toString(parent.getController().getRoleTypeCountFor(parent.getAssignedPerson(), RoleType.SUPPORT)));
-                backgroundCount.setText("III: "+Integer.toString(parent.getController().getRoleTypeCountFor(parent.getAssignedPerson(), RoleType.BACKGROUND)));
-            } catch (InvalidIDException e) {
-                e.printStackTrace();
-            }
             name.setText(parent.getAssignedPerson().getName());
         }
     }
@@ -101,13 +66,57 @@ public class RoleTileBody extends JPanel {
         return new Dimension(parent.getWidth() - parent.getInsets().right - parent.getInsets().left, (2*parent.getHeight()) / 3);
     }
 
-    private void addProfileImage(Graphics g) {
+    private void updateRoleCounts() {
         if (parent.getAssignedPerson() == null) {
-            g.drawImage(defaultProfileImage, getInsets().left, getInsets().top + parent.getHeight()/3, null);
+            mainCount.setVisible(false);
+            supportCount.setVisible(false);
+            backgroundCount.setVisible(false);
         } else {
-            //TODO use an actual profile image
-            g.drawImage(defaultProfileImage, getInsets().left, getInsets().top + parent.getHeight()/3, null);
+            mainCount.setVisible(true);
+            supportCount.setVisible(true);
+            backgroundCount.setVisible(true);
+
+            try {
+                mainCount.setText("I:   " + Integer.toString(parent.getController().getRoleTypeCountFor(parent.getAssignedPerson(), RoleType.MAIN)));
+                supportCount.setText("II:  " + Integer.toString(parent.getController().getRoleTypeCountFor(parent.getAssignedPerson(), RoleType.SUPPORT)));
+                backgroundCount.setText("III: " + Integer.toString(parent.getController().getRoleTypeCountFor(parent.getAssignedPerson(), RoleType.BACKGROUND)));
+            } catch (InvalidIDException e) {
+                e.printStackTrace();
+            }
         }
+    }
+
+    private void addProfileImage() {
+        GridBagConstraints profileImageConstraints = new GridBagConstraints(0, 0, this.getHeight()/3, this.getWidth()/3,
+                1,
+                1,
+                GridBagConstraints.NORTHWEST,
+                0,
+                new Insets(1, 1, 1, 1),
+                1,
+                1
+        );
+
+        profileImageDisplay = new JLabel(new ImageIcon(defaultProfileImage));
+        add(profileImageDisplay, profileImageConstraints);
+    }
+
+    private void addNameLabel() {
+        GridBagConstraints nameLabelConstraints = new GridBagConstraints(0, 0, this.getHeight()/3, this.getWidth()/3,
+                1,
+                1,
+                GridBagConstraints.SOUTHWEST,
+                0,
+                new Insets(1, 1, 1, 1),
+                1,
+                1
+        );
+
+        name = new JLabel();
+        if (parent.getAssignedPerson() != null) {
+            name.setText(parent.getAssignedPerson().getName());
+        }
+        add(name, nameLabelConstraints);
     }
 
     private void addRoleTypeCountLabels() {
@@ -147,43 +156,14 @@ public class RoleTileBody extends JPanel {
                 1
         );
 
-        GridBagConstraints constraints3 = new GridBagConstraints(1, 0, this.getHeight(), this.getWidth()/3,
-                1,
-                1,
-                GridBagConstraints.NORTHEAST,
-                1,
-                new Insets(1, 1, 1, 1),
-                1,
-                1
-        );
+        mainCount = new JLabel();
+        supportCount = new JLabel();
+        backgroundCount = new JLabel();
 
-
-
-        mainCount = new JLabel("0");
-        supportCount = new JLabel("0");
-        backgroundCount = new JLabel("0");
-
-
-
-        if (parent.getAssignedPerson() == null) {
-            mainCount.setVisible(false);
-            supportCount.setVisible(false);
-            backgroundCount.setVisible(false);
-        } else {
-            try {
-                mainCount.setText(Integer.toString(parent.getController().getRoleTypeCountFor(parent.getAssignedPerson(), RoleType.MAIN)));
-                supportCount.setText(Integer.toString(parent.getController().getRoleTypeCountFor(parent.getAssignedPerson(), RoleType.SUPPORT)));
-                backgroundCount.setText(Integer.toString(parent.getController().getRoleTypeCountFor(parent.getAssignedPerson(), RoleType.BACKGROUND)));
-            } catch (InvalidIDException e) {
-                e.printStackTrace();
-            }
-        }
+        updateRoleCounts();
 
         add(mainCount, constraints);
         add(supportCount, constraints1);
         add(backgroundCount, constraints2);
-        //roleCountPanel.setMaximumSize(new Dimension(20, getHeight()));
-        //add(roleCountPanel, constraints3);
     }
-
 }
