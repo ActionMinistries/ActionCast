@@ -99,7 +99,6 @@ public class RoleTile extends Tile {
 
         header.updateDisplay();
         lowerPanel.updateDisplay();
-        repaint();
     }
 
     public Controller getController() {
