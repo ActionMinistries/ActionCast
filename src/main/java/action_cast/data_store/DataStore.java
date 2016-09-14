@@ -42,11 +42,23 @@ public class DataStore {
         jaxbMarshaller.marshal(model, file);
     }
 
-    public void load() throws JAXBException, SAXException {
+    public void load() throws JAXBException {
+        File file = new File(filename);
+        if (file.exists()) {
+            JAXBContext jaxbContext = JAXBContext.newInstance(DataModel.class);
+            Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+            model = (DataModel) jaxbUnmarshaller.unmarshal(file);
+        } else {
+            model = new DataModel();
+        }
+    }
+
+    public void loadWithValidation() throws JAXBException, SAXException {
         File file = new File(filename);
         if (file.exists()) {
             SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-            Schema schema = sf.newSchema(new File("schema1.xsd"));
+            ClassLoader classLoader = getClass().getClassLoader();
+            Schema schema = sf.newSchema(new File(classLoader.getResource("schema1.xsd").getFile()));
 
             JAXBContext jaxbContext = JAXBContext.newInstance(DataModel.class);
             Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
@@ -54,8 +66,7 @@ public class DataStore {
             jaxbUnmarshaller.setEventHandler(new ValidationEventHandler());
 
             model = (DataModel) jaxbUnmarshaller.unmarshal(file);
-        }
-        else {
+        } else {
             model = new DataModel();
         }
     }

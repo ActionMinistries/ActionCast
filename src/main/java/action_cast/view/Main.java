@@ -39,7 +39,7 @@ public class Main implements WindowListener {
     public void resetData() throws JAXBException, SAXException, InvalidIDException {
         ClassLoader classLoader = getClass().getClassLoader();
         DataStore store = new DataStore(new DataModel());//new DataStore(classLoader.getResource("main.xml").getFile());
-        //store.load();
+        //store.loadWithValidation();
         Long startTime = System.currentTimeMillis();
         Long endTime = System.currentTimeMillis();
         endTime += 1000000000;
