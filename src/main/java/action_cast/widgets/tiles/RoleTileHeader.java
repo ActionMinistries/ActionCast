@@ -16,13 +16,30 @@ public class RoleTileHeader extends JPanel implements ActionListener {
     private final RoleTile parent;
     private JButton clearButton;
     private JLabel roleTypeLabel;
+    private JLabel roleNameLabel;
+    private JPanel labelPanel;
 
     public RoleTileHeader(RoleTile tile) {
         parent = tile;
         //this.setBorder(new LineBorder(Color.blue, 2));
         this.setLayout(new GridBagLayout());
+
+        GridBagConstraints constraints = new GridBagConstraints(0, 2, this.getHeight() / 3, this.getWidth() / 3,
+                1,
+                1,
+                GridBagConstraints.FIRST_LINE_START,
+                GridBagConstraints.NONE,
+                new Insets(1, 1, 1, 1),
+                1,
+                1
+        );
+
+        labelPanel = new JPanel();
+        add(labelPanel, constraints);
+
         addClearButton();
         addRoleTypeLabel();
+        addRoleNameLabel();
     }
 
     public void updateDisplay() {
@@ -80,16 +97,6 @@ public class RoleTileHeader extends JPanel implements ActionListener {
     }
 
     private void addRoleTypeLabel() {
-        GridBagConstraints constraints = new GridBagConstraints(0, 2, this.getHeight() / 3, this.getWidth() / 3,
-                1,
-                1,
-                GridBagConstraints.FIRST_LINE_START,
-                GridBagConstraints.NONE,
-                new Insets(1, 1, 1, 1),
-                1,
-                1
-        );
-
         roleTypeLabel = new JLabel();
         switch (parent.getRole().getType()) {
             case MAIN:
@@ -102,6 +109,13 @@ public class RoleTileHeader extends JPanel implements ActionListener {
                 roleTypeLabel.setText("III");
                 break;
         }
-        this.add(roleTypeLabel, constraints);
+        labelPanel.add(roleTypeLabel);//, constraints);
+    }
+
+
+    private void addRoleNameLabel() {
+        roleNameLabel = new JLabel(parent.getRole().getName());
+
+        labelPanel.add(roleNameLabel);//, constraints);
     }
 }
