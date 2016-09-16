@@ -22,7 +22,7 @@ public class DataStoreTest {
     public void setUp() throws JAXBException, SAXException {
         ClassLoader classLoader = getClass().getClassLoader();
         dataStore = new DataStore(classLoader.getResource("test.xml").getFile());
-        dataStore.load();
+        dataStore.loadWithValidation();
     }
 
     @Test
@@ -41,7 +41,7 @@ public class DataStoreTest {
         store.getModel().setCurrentSession(new Session("savedSession", date1, date2));
         store.save();
         DataStore store2 = new DataStore("file.xml");
-        store2.load();
+        store2.loadWithValidation();
         assertEquals("savedSession", store2.getModel().getCurrentSession().getName());
         assertEquals(date1, store2.getModel().getCurrentSession().getStartDate());
         assertEquals(date2, store2.getModel().getCurrentSession().getEndDate());
@@ -139,7 +139,7 @@ public class DataStoreTest {
         store.getModel().setCurrentSession(session);
         store.save();
         DataStore store2 = new DataStore("file.xml");
-        store2.load();
+        store2.loadWithValidation();
         assertEquals("savedSession", store2.getModel().getCurrentSession().getName());
         assertEquals(date1, store2.getModel().getCurrentSession().getStartDate());
         assertEquals(date2, store2.getModel().getCurrentSession().getEndDate());
@@ -157,7 +157,7 @@ public class DataStoreTest {
         store.save();
 
         DataStore store2 = new DataStore("file.xml");
-        store2.load();
+        store2.loadWithValidation();
         assertEquals("bob", store.getModel().getPerson(bob.getIndex()).getName());
         assertEquals("ted", store.getModel().getPerson(ted.getIndex()).getName());
         assertEquals("fred", store.getModel().getPerson(fred.getIndex()).getName());

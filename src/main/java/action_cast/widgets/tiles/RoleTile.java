@@ -13,41 +13,63 @@ import action_cast.widgets.events.RoleAssignedEvent;
 import action_cast.widgets.listeners.RoleAssignmentListener;
 import com.google.common.eventbus.Subscribe;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ResourceBundle;
 
 /**
  * Created by bmichaud on 12/14/2015.
  */
-public class RoleTile extends Tile implements ActionListener {
+public class RoleTile extends Tile {
 
     private final Controller controller;
-    Person person;
+    Person person = null;
     Role role;
 
-    JButton clearButton;
-    JLabel mainCount;
-    JLabel supportCount;
-    JLabel backgroundCount;
+    RoleTileBody lowerPanel;
+
+    private RoleTileHeader header;
 
     List<RoleAssignmentListener> listeners = new ArrayList<>();
 
     public RoleTile(JTileView parent, Controller controller, Person person, Role role) {
         super(parent);
+//        GridBagConstraints headerConstraints = new GridBagConstraints(0, 0, this.getHeight()/3, this.getWidth()/3,
+//                1,
+//                1,
+//                GridBagConstraints.NORTH,
+//                GridBagConstraints.NONE,
+//                new Insets(1, 1, 1, 1),
+//                1,
+//                1
+//        );
+//
         this.controller = controller;
         this.person = person;
         this.role = role;
         this.setTransferHandler(new PersonTransferHandler());
-        GridBagLayout layoutManager = new GridBagLayout();
-        setLayout(layoutManager);
+        //GridBagLayout layoutManager = new GridBagLayout();
+        //setLayout(layoutManager);
+        ((FlowLayout)this.getLayout()).setHgap(0);
+        ((FlowLayout)this.getLayout()).setVgap(0);
+        ((FlowLayout)this.getLayout()).setAlignment(FlowLayout.LEFT);
+        header = new RoleTileHeader(this);
+        lowerPanel = new RoleTileBody(this);
+       // lowerPanel.setLayout(new GridBagLayout());
+       // lowerPanel.setBorder(new LineBorder(Color.green, 2));
+        //System.out.println("Width: " + JTileView.TILE_WIDTH);
+       // lowerPanel.setMinimumSize(new Dimension(JTileView.TILE_WIDTH, getHeight()-getInsets().top - header.getHeight()));
+        //lowerPanel.setPreferredSize(new Dimension(JTileView.TILE_WIDTH, getHeight()-getInsets().top - header.getHeight()));
+        //lowerPanel.setPreferredSize(new Dimension(getWidth(), getHeight()-getInsets().top - header.getHeight()));
+        //this.setBorder(new LineBorder(Color.MAGENTA, 2));
+        this.add(header);//, headerConstraints);
+        this.add(lowerPanel);
 
-        this.addClearButton();
-        this.addRoleTypeCountLabels();
         controller.getEventBus().register(this);
     }
 
@@ -72,26 +94,15 @@ public class RoleTile extends Tile implements ActionListener {
     }
 
     public void updateDisplay() {
-        if (person == null) {
-            clearButton.setVisible(false);
-            mainCount.setVisible(false);
-            supportCount.setVisible(false);
-            backgroundCount.setVisible(false);
-        } else {
-            clearButton.setVisible(true);
-            mainCount.setVisible(true);
-            supportCount.setVisible(true);
-            backgroundCount.setVisible(true);
+        System.out.println(this.getHeight());
+        System.out.println(this.getWidth());
 
-            try {
-                mainCount.setText(Integer.toString(controller.getRoleTypeCountFor(person, RoleType.MAIN)));
-                supportCount.setText(Integer.toString(controller.getRoleTypeCountFor(person, RoleType.SUPPORT)));
-                backgroundCount.setText(Integer.toString(controller.getRoleTypeCountFor(person, RoleType.BACKGROUND)));
-            } catch (InvalidIDException e) {
-                e.printStackTrace();
-            }
-        }
-        repaint();
+        header.updateDisplay();
+        lowerPanel.updateDisplay();
+    }
+
+    public Controller getController() {
+        return controller;
     }
 
     @Override
@@ -99,102 +110,21 @@ public class RoleTile extends Tile implements ActionListener {
         return new PersonTransferHandler();
     }
 
-    protected void paintComponent(Graphics g) {
-
-        super.paintComponent(g);
-        ((Graphics2D) g).drawString(role.getType().name(), getInsets().left, JTileView.TILE_HEIGHT - getInsets().bottom);
-        //((Graphics2D) g).drawString("X", 50, 15);
-
-        if (person != null) {
-            ((Graphics2D) g).drawString(person.getName(), getInsets().left, getInsets().top + g.getFontMetrics().getHeight());
-        }
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == clearButton) {
-            assignPerson(null);
-            updateDisplay();
-        }
-    }
+//    protected void paintComponent(Graphics g) {
+//
+//        super.paintComponent(g);
+//        //addProfileImage(g);
+//
+//        //((Graphics2D) g).drawString("X", 50, 15);
+//
+//        if (person != null) {
+//            ((Graphics2D) g).drawString(person.getName(), getInsets().left, getInsets().top + header.getHeight() + defaultProfileImage.getHeight() + g.getFontMetrics().getHeight());
+//        }
+//    }
 
     public void addRoleAssignmentListener(RoleAssignmentListener listener) {
         this.listeners.add(listener);
     }
 
-    private void addRoleTypeCountLabels() {
-        GridBagConstraints constraints = new GridBagConstraints(0, 2, this.getHeight()/3, this.getWidth()/3,
-                1,
-                1,
-                GridBagConstraints.WEST,
-                GridBagConstraints.NONE,
-                new Insets(1, 1, 1, 1),
-                1,
-                1
-        );
 
-        GridBagConstraints constraints1 = new GridBagConstraints(0, 2, this.getHeight()/3, this.getWidth()/3,
-                1,
-                1,
-                GridBagConstraints.CENTER,
-                GridBagConstraints.NONE,
-                new Insets(1, 1, 1, 1),
-                1,
-                1
-        );
-
-        GridBagConstraints constraints2 = new GridBagConstraints(0, 2, this.getHeight()/3, this.getWidth()/3,
-                1,
-                1,
-                GridBagConstraints.EAST,
-                GridBagConstraints.NONE,
-                new Insets(1, 1, 1, 1),
-                1,
-                1
-        );
-
-        mainCount = new JLabel("0");
-        supportCount = new JLabel("0");
-        backgroundCount = new JLabel("0");
-
-
-
-        if (person == null) {
-            mainCount.setVisible(false);
-            supportCount.setVisible(false);
-            backgroundCount.setVisible(false);
-        } else {
-            try {
-                mainCount.setText(Integer.toString(controller.getRoleTypeCountFor(person, RoleType.MAIN)));
-                supportCount.setText(Integer.toString(controller.getRoleTypeCountFor(person, RoleType.SUPPORT)));
-                backgroundCount.setText(Integer.toString(controller.getRoleTypeCountFor(person, RoleType.BACKGROUND)));
-            } catch (InvalidIDException e) {
-                e.printStackTrace();
-            }
-        }
-
-        this.add(mainCount, constraints);
-        this.add(supportCount, constraints1);
-        this.add(backgroundCount, constraints2);
-    }
-
-    private void addClearButton() {
-        GridBagConstraints constraints = new GridBagConstraints(0, 2, this.getHeight()/3, this.getWidth()/3,
-                1,
-                1,
-                GridBagConstraints.FIRST_LINE_END,
-                GridBagConstraints.NONE,
-                new Insets(1, 1, 1, 1),
-                1,
-                1
-        );
-
-        clearButton = new JButton("X");
-        clearButton.setMargin(new Insets(1,1,1,1));
-        if (person == null) {
-            clearButton.setVisible(false);
-        }
-        clearButton.addActionListener(this);
-        this.add(clearButton, constraints);
-    }
 }

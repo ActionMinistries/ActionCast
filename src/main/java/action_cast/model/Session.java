@@ -35,6 +35,10 @@ public class Session extends UniqueItem {
 
     }
 
+    public Session(String name) {
+        this.name = name;
+    }
+
     public Session(String name, Date start, Date end) {
         this.name = name;
         this.start = start;

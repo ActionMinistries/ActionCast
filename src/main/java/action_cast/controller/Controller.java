@@ -10,6 +10,8 @@ import com.google.common.eventbus.EventBus;
 import org.xml.sax.SAXException;
 
 import javax.xml.bind.JAXBException;
+import java.io.*;
+import java.net.URISyntaxException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,13 +28,36 @@ public class Controller {
     private EventBus eventBus = new EventBus();
 
     public Controller() {
+        String path = null;
+        try {
+            path = Controller.class.getProtectionDomain().getCodeSource().getLocation().toURI().resolve("..").getPath();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
         ClassLoader classLoader = getClass().getClassLoader();
-        store = new DataStore(classLoader.getResource("main.xml").getFile());
+        File dataFile = new File(path + "/main.xml");//classLoader.getResource("./main.xml").getFile());
+        if (!dataFile.exists()) {
+            InputStream initialStream = classLoader.getResourceAsStream("main.xml");
+            try {
+                System.out.println(dataFile.getAbsolutePath());
+                if (dataFile.createNewFile()) {
+                    byte[] buffer = new byte[initialStream.available()];
+                    initialStream.read(buffer);
+                    OutputStream outStream = new FileOutputStream(dataFile);
+                    outStream.write(buffer);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+        store = new DataStore(dataFile.getAbsolutePath());
         try {
             store.load();
             model = store.getModel();
             sessionController = new SessionController(model.getCurrentSession(), this);
-        } catch (JAXBException | SAXException e) {
+        } catch (JAXBException e) {
             e.printStackTrace();
         }
     }
