@@ -37,7 +37,6 @@ public class Main implements WindowListener {
     }
 
     public void resetData() throws JAXBException, SAXException, InvalidIDException {
-        ClassLoader classLoader = getClass().getClassLoader();
         DataStore store = new DataStore(new DataModel());//new DataStore(classLoader.getResource("main.xml").getFile());
         //store.loadWithValidation();
         Long startTime = System.currentTimeMillis();
@@ -63,6 +62,11 @@ public class Main implements WindowListener {
 
         model.addPerson("Random Guy", "", "");
 
+        store.save();
+    }
+
+    public void resetDataClean() throws JAXBException {
+        DataStore store = new DataStore(new DataModel());
         store.save();
     }
 
