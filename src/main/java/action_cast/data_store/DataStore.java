@@ -58,7 +58,7 @@ public class DataStore {
         if (file.exists()) {
             SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
             ClassLoader classLoader = getClass().getClassLoader();
-            Schema schema = sf.newSchema(new File(classLoader.getResource("schema1.xsd").getFile()));
+            Schema schema = sf.newSchema(new File("schema1.xsd"));
 
             JAXBContext jaxbContext = JAXBContext.newInstance(DataModel.class);
             Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
