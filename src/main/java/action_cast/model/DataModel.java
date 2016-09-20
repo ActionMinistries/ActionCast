@@ -18,7 +18,7 @@ public class DataModel {
     @XmlElementWrapper
     private final List<Person> people = new ArrayList<>();
 
-    @XmlElementWrapper
+    @XmlElementWrapper (nillable = true)
     private final List<Song> songs = new ArrayList<>();
 
     private Session currentSession = null;
