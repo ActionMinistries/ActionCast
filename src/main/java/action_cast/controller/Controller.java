@@ -2,12 +2,12 @@ package action_cast.controller;
 
 import action_cast.controller.ClientObjects.*;
 import action_cast.controller.events.RoleAssignmentEvent;
+import action_cast.controller.events.SongsUpdateEvent;
 import action_cast.data_store.DataStore;
 import action_cast.model.DataModel;
 import action_cast.model.RoleType;
 import action_cast.model.exceptions.InvalidIDException;
 import com.google.common.eventbus.EventBus;
-import org.xml.sax.SAXException;
 
 import javax.xml.bind.JAXBException;
 import java.io.*;
@@ -39,7 +39,6 @@ public class Controller {
         if (!dataFile.exists()) {
             InputStream initialStream = classLoader.getResourceAsStream("main.xml");
             try {
-                System.out.println(dataFile.getAbsolutePath());
                 if (dataFile.createNewFile()) {
                     byte[] buffer = new byte[initialStream.available()];
                     initialStream.read(buffer);
@@ -51,7 +50,7 @@ public class Controller {
             }
 
         }
-
+        //System.out.println("Using file: " + dataFile.getAbsolutePath());
         store = new DataStore(dataFile.getAbsolutePath());
         try {
             store.load();
@@ -137,6 +136,7 @@ public class Controller {
 
     public Song addSong(String name, String description) {
         action_cast.model.Song song = model.addSong(name, description);
+        getEventBus().post(new SongsUpdateEvent());
         return new Song(song.getIndex(), song.getName(), song.getDescription());
     }
 
@@ -156,6 +156,7 @@ public class Controller {
     public void updateSong(Song song) throws InvalidIDException {
         model.getSong(song.getId()).setName(song.getName());
         model.getSong(song.getId()).setDescription(song.getDescription());
+        getEventBus().post(new SongsUpdateEvent());
     }
 
     public boolean isSongCast(Song song) throws InvalidIDException {
@@ -179,6 +180,7 @@ public class Controller {
 
     public Role createRole(int songId, String name, String description, RoleType type) throws InvalidIDException {
         action_cast.model.Role role = model.getSong(songId).addRole(name, description, type);
+        getEventBus().post(new SongsUpdateEvent());
         return new Role(role.getIndex(), role.getName(), role.getDescription(), role.getType());
     }
 

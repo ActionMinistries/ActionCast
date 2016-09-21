@@ -75,7 +75,6 @@ public class Main implements WindowListener {
         Main main = new Main();
 
         frame.addWindowListener(main);
-
         frame.setContentPane(main.panel1);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();

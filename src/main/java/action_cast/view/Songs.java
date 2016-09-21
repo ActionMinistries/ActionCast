@@ -2,6 +2,7 @@ package action_cast.view;
 
 import action_cast.controller.ClientObjects.Song;
 import action_cast.controller.Controller;
+import action_cast.controller.events.SongsUpdateEvent;
 import action_cast.model.exceptions.InvalidIDException;
 import action_cast.widgets.RoleTileView;
 import action_cast.widgets.SongListView;
@@ -39,7 +40,7 @@ public class Songs implements ListSelectionListener, ActionListener {
 
     public void setController(Controller controller) {
         this.controller = controller;
-        songListView1.setData(controller.getSongs());
+        songListView1.setController(controller);
         updateDisplay();
     }
 
@@ -79,7 +80,6 @@ public class Songs implements ListSelectionListener, ActionListener {
             try {
                 controller.updateSong(song);
                 int selectedIndex = songListView1.getSelectedIndex();
-                songListView1.setData(controller.getSongs());
                 songListView1.setSelectedIndex(selectedIndex);
                 updateDisplay();
             } catch (InvalidIDException e1) {
@@ -88,7 +88,6 @@ public class Songs implements ListSelectionListener, ActionListener {
         } else if (e.getSource() == newButton) {
             controller.addSong("Untitled", "");
             List<Song> songs = controller.getSongs();
-            songListView1.setData(songs);
             songListView1.setSelectedIndex(songs.size() - 1);
             updateDisplay();
         }

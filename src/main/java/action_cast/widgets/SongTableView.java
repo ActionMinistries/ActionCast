@@ -2,10 +2,12 @@ package action_cast.widgets;
 
 import action_cast.controller.ClientObjects.Song;
 import action_cast.controller.Controller;
+import action_cast.controller.events.SongsUpdateEvent;
 import action_cast.model.exceptions.InvalidIDException;
 import action_cast.view.EditSessionSong;
 import action_cast.view.BaseCardClass;
 import action_cast.widgets.dragdrop.SongTransferHandler;
+import com.google.common.eventbus.Subscribe;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -41,6 +43,7 @@ public class SongTableView extends DisplayTable implements MouseListener {
     public void setData(Controller controller) {
         songList = controller.getSessionController().getSongs();
         this.controller = controller;
+        this.controller.getEventBus().register(this);
         updateDisplay();
     }
 
@@ -79,6 +82,11 @@ public class SongTableView extends DisplayTable implements MouseListener {
 
     public Song getSelectedSong() {
         return songList.get(getSelectedRow());
+    }
+
+    @Subscribe
+    public void handleSongChanges(SongsUpdateEvent event) {
+        updateDisplay();
     }
 
     @Override

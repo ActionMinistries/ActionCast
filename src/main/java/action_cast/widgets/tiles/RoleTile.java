@@ -94,9 +94,6 @@ public class RoleTile extends Tile {
     }
 
     public void updateDisplay() {
-        System.out.println(this.getHeight());
-        System.out.println(this.getWidth());
-
         header.updateDisplay();
         lowerPanel.updateDisplay();
     }

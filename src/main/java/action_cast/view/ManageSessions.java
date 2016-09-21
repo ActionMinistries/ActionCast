@@ -56,6 +56,7 @@ public class ManageSessions extends BaseCardClass implements ActionListener {
 
     public void setController(Controller controller) {
         this.controller = controller;
+        songListView1.setController(controller);
         updateDisplay();
     }
 
@@ -74,7 +75,7 @@ public class ManageSessions extends BaseCardClass implements ActionListener {
 //        ((UtilDateModel) endDate.getModel()).setValue(controller.getCurrentSession().getEndDate());
         nameTextField.setText(controller.getCurrentSession().getName());
         songTableView1.setData(controller);
-        songListView1.setData(controller.getSongsNotInCurrentSession());
+        songListView1.updateDisplay();
     }
 
     @Override
