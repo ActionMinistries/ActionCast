@@ -1,5 +1,6 @@
 package action_cast.view;
 
+import action_cast.config.ApplicationConfiguration;
 import action_cast.controller.Controller;
 import action_cast.data_store.DataStore;
 import action_cast.model.*;
@@ -13,6 +14,9 @@ import javax.xml.bind.JAXBException;
 import java.awt.*;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.File;
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.Date;
 
 /**
@@ -28,8 +32,24 @@ public class Main implements WindowListener {
     private Controller controller;
 
     public Main() {
-        setupUI();
+        String path = "";
+        try {
+            path = Controller.class.getProtectionDomain().getCodeSource().getLocation().toURI().resolve("..").getPath();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+        File file = new File(path + "/config.xml");
+        if (!file.exists()) {
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        ApplicationConfiguration.load(file.getAbsolutePath());
         controller = new Controller();
+        setupUI();
 
         people1.setController(controller);//.setData(store.getModel());
         manageSessions1.setController(controller);
