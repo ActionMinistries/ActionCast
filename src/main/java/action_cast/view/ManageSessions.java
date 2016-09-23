@@ -88,8 +88,7 @@ public class ManageSessions extends BaseCardClass implements ActionListener {
             controller.updateCurrentSession(currentSession);
         } else if (e.getSource() == assignPeopleButton) {
             AddPeopleToSessionDialog peopleToSessionDialog = new AddPeopleToSessionDialog(controller);
-            peopleToSessionDialog.pack();
-            peopleToSessionDialog.setVisible(true);
+            peopleToSessionDialog.showDialog();
         }
 //        else if(e.getSource() == newButton) {
 //            CreateSessionDialog sessionDialog = new CreateSessionDialog();

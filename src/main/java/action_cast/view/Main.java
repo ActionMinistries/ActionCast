@@ -1,6 +1,7 @@
 package action_cast.view;
 
 import action_cast.config.ApplicationConfiguration;
+import action_cast.config.WindowConfiguration;
 import action_cast.controller.Controller;
 import action_cast.data_store.DataStore;
 import action_cast.model.*;
@@ -14,15 +15,13 @@ import javax.xml.bind.JAXBException;
 import java.awt.*;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
-import java.io.File;
-import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.Date;
 
 /**
  * Created by bmichaud on 9/2/2015.
  */
-public class Main implements WindowListener {
+public class Main implements WindowListener, INamedWindow{
+    private final ApplicationConfiguration configuration;
     private JPanel panel1;
     private JTabbedPane tabbedPane1;
     private People people1;
@@ -32,22 +31,16 @@ public class Main implements WindowListener {
     private Controller controller;
 
     public Main() {
-        String path = "";
-        try {
-            path = Controller.class.getProtectionDomain().getCodeSource().getLocation().toURI().resolve("..").getPath();
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        }
-        File file = new File(path + "/config.xml");
-        if (!file.exists()) {
-            try {
-                file.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
 
-        ApplicationConfiguration.load(file.getAbsolutePath());
+//        if (!file.exists()) {
+//            try {
+//                file.createNewFile();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
+
+        this.configuration = ApplicationConfiguration.load(ApplicationConfiguration.getConfigurationFilePath());
         controller = new Controller();
         setupUI();
 
@@ -97,7 +90,12 @@ public class Main implements WindowListener {
         frame.addWindowListener(main);
         frame.setContentPane(main.panel1);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        WindowConfiguration mainConfig = ApplicationConfiguration.getInstance().getWindowConfiguration(main.getName());
         frame.pack();
+
+        if (mainConfig != null) {
+            frame.setSize(mainConfig.getWidth(), mainConfig.getHeight());
+        }
         frame.setVisible(true);
     }
 
@@ -108,7 +106,16 @@ public class Main implements WindowListener {
 
     @Override
     public void windowClosing(WindowEvent e) {
+        WindowConfiguration mainConfig = new WindowConfiguration(getName());
+        mainConfig.setHeight(e.getWindow().getHeight());
+        mainConfig.setWidth(e.getWindow().getWidth());
+        ApplicationConfiguration.getInstance().addWindowConfiguration(mainConfig);
         controller.save();
+        try {
+            configuration.save(ApplicationConfiguration.getConfigurationFilePath());
+        } catch (JAXBException e1) {
+            e1.printStackTrace();
+        }
     }
 
     @Override
@@ -162,4 +169,8 @@ public class Main implements WindowListener {
         return panel1;
     }
 
+    @Override
+    public String getName() {
+        return "main";
+    }
 }

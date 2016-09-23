@@ -1,6 +1,6 @@
 package action_cast.config;
 
-import action_cast.model.DataModel;
+import action_cast.controller.Controller;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -10,6 +10,7 @@ import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import java.io.File;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -52,6 +53,16 @@ public class ApplicationConfiguration {
         return instance;
     }
 
+    public static String getConfigurationFilePath() {
+        String path = "";
+        try {
+            path = Controller.class.getProtectionDomain().getCodeSource().getLocation().toURI().resolve("..").getPath();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+        return path + "/config.xml";
+    }
+
     public void save(String filename) throws JAXBException {
         File file = new File(filename);
 
@@ -62,6 +73,25 @@ public class ApplicationConfiguration {
         jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
         jaxbMarshaller.marshal(this, file);
+    }
+
+    public void addWindowConfiguration(WindowConfiguration winConfig) {
+        if (!getWindowConfigurationMap().containsKey(winConfig.getKey())) {
+            windows.add(winConfig);
+        } else {
+            windows.remove(getWindowConfiguration(winConfig.getKey()));
+            windows.add(winConfig);
+            getWindowConfigurationMap().put(winConfig.getKey(), winConfig);
+        }
+        getWindowConfigurationMap().put(winConfig.getKey(), winConfig);
+    }
+
+    public WindowConfiguration getWindowConfiguration(String key) {
+        WindowConfiguration result = null;
+        if (getWindowConfigurationMap().containsKey(key)) {
+            result = getWindowConfigurationMap().get(key);
+        }
+        return result;
     }
 
     private Map<String, WindowConfiguration> getWindowConfigurationMap() {

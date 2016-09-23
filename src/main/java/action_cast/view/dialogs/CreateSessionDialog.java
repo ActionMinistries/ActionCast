@@ -12,7 +12,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.Date;
 
-public class CreateSessionDialog extends JDialog {
+public class CreateSessionDialog extends ActionCastDialog {
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
@@ -55,12 +55,7 @@ public class CreateSessionDialog extends JDialog {
                 onCancel();
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
-    }
 
-    public Session showDialog() {
-        pack();
-        setVisible(true);
-        return createdSession;
     }
 
     private void onOK() {
@@ -80,8 +75,7 @@ public class CreateSessionDialog extends JDialog {
 
     public static void main(String[] args) {
         CreateSessionDialog dialog = new CreateSessionDialog();
-        dialog.pack();
-        dialog.setVisible(true);
+        dialog.showDialog();
         System.exit(0);
     }
 

@@ -12,7 +12,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class RoleCreationDialog extends JDialog {
+public class RoleCreationDialog extends ActionCastDialog {
     private final Controller controller;
     private final Song song;
     private JPanel contentPane;
@@ -61,6 +61,7 @@ public class RoleCreationDialog extends JDialog {
                 onCancel();
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+        pack();
     }
 
     private void onOK() {
@@ -79,10 +80,9 @@ public class RoleCreationDialog extends JDialog {
     }
 
     public static void main(String[] args) {
-        /*RoleCreationDialog dialog = new RoleCreationDialog();
-        dialog.pack();
-        dialog.setVisible(true);
-        System.exit(0);*/
+//        RoleCreationDialog dialog = new RoleCreationDialog();
+//        dialog.showDialog();
+//        System.exit(0);
     }
 
     private void setupUI() {

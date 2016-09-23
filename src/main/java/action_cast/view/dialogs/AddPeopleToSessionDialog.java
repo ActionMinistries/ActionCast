@@ -12,7 +12,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class AddPeopleToSessionDialog extends JDialog {
+public class AddPeopleToSessionDialog extends ActionCastDialog {
     private JPanel contentPane;
     private JButton buttonOK;
     private PersonListView personListView1;
@@ -74,8 +74,7 @@ public class AddPeopleToSessionDialog extends JDialog {
 //        model.addPerson("myself");
 //        model.addPerson("I");
         AddPeopleToSessionDialog dialog = new AddPeopleToSessionDialog(null);
-        dialog.pack();
-        dialog.setVisible(true);
+        dialog.showDialog();
         System.exit(0);
     }
 
