@@ -54,8 +54,7 @@ public class RoleTileView extends JTileView<RoleTile> {
     @Override
     public void createTile() {
         RoleCreationDialog dialog = new RoleCreationDialog(controller, song);
-        dialog.pack();
-        dialog.setVisible(true);
+        dialog.showDialog();
         updateDisplay();
     }
 }

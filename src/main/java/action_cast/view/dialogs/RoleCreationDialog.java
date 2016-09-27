@@ -12,7 +12,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class RoleCreationDialog extends JDialog {
+public class RoleCreationDialog extends ActionCastDialog {
     private final Controller controller;
     private final Song song;
     private JPanel contentPane;
@@ -79,10 +79,9 @@ public class RoleCreationDialog extends JDialog {
     }
 
     public static void main(String[] args) {
-        /*RoleCreationDialog dialog = new RoleCreationDialog();
-        dialog.pack();
-        dialog.setVisible(true);
-        System.exit(0);*/
+//        RoleCreationDialog dialog = new RoleCreationDialog();
+//        dialog.showDialog();
+//        System.exit(0);
     }
 
     private void setupUI() {
