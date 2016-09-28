@@ -31,7 +31,7 @@ public class Main implements WindowListener, INamedWindow{
     private Controller controller;
 
     public Main() {
-        this.configuration = ApplicationConfiguration.load(ApplicationConfiguration.getConfigurationFilePath());
+        this.configuration = ApplicationConfiguration.load();
         controller = new Controller();
         setupUI();
 

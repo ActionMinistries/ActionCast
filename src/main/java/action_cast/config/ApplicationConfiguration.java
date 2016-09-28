@@ -9,7 +9,7 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
-import java.io.File;
+import java.io.*;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,20 +30,31 @@ public class ApplicationConfiguration {
     @XmlTransient
     Map<String, WindowConfiguration> windowConfigurationMap;
 
-    public static ApplicationConfiguration load(String filename) {
-        System.out.println("loading file: " + filename);
+    public static ApplicationConfiguration load() {
+        //System.out.println("loading file: " + filename);
         ApplicationConfiguration configuration = null;
-        File file = new File(filename);
-        if (file.exists()) {
+
+        File file = new File(getConfigurationFilePath());
+        if (!file.exists()) {
+            ClassLoader classLoader = ApplicationConfiguration.class.getClassLoader();
+            InputStream initialStream = classLoader.getResourceAsStream("config.xml");
             try {
-                JAXBContext jaxbContext = JAXBContext.newInstance(ApplicationConfiguration.class);
-                Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-                configuration = (ApplicationConfiguration) jaxbUnmarshaller.unmarshal(file);
-            } catch (JAXBException e) {
+                if (file.createNewFile()) {
+                    byte[] buffer = new byte[initialStream.available()];
+                    initialStream.read(buffer);
+                    OutputStream outStream = new FileOutputStream(file);
+                    outStream.write(buffer);
+                }
+            } catch (IOException e) {
                 e.printStackTrace();
             }
-        } else {
-            configuration = new ApplicationConfiguration();
+        }
+        try {
+            JAXBContext jaxbContext = JAXBContext.newInstance(ApplicationConfiguration.class);
+            Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+            configuration = (ApplicationConfiguration) jaxbUnmarshaller.unmarshal(file);
+        } catch (JAXBException e) {
+            e.printStackTrace();
         }
         instance = configuration;
         return configuration;

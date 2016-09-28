@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<applicationConfiguration>
+    <windows>
+        <windows>
+            <id>action_cast.view.dialogs.AddPeopleToSessionDialog</id>
+            <height>425</height>
+            <width>690</width>
+            <x>190</x>
+            <y>230</y>
+        </windows>
+        <windows>
+            <id>action_cast.view.dialogs.RoleCreationDialog</id>
+            <height>165</height>
+            <width>260</width>
+            <x>505</x>
+            <y>250</y>
+        </windows>
+        <windows>
+            <id>main</id>
+            <height>545</height>
+            <width>815</width>
+            <x>105</x>
+            <y>75</y>
+        </windows>
+    </windows>
+</applicationConfiguration>
