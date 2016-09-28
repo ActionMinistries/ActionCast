@@ -25,7 +25,7 @@ public abstract class ActionCastDialog extends JDialog implements WindowListener
 
     @Override
     public void windowClosing(WindowEvent e) {
-        saveWindowConfiguration();
+        WindowConfiguration.saveWindowConfiguration(this, getName());
     }
 
     @Override
@@ -55,26 +55,13 @@ public abstract class ActionCastDialog extends JDialog implements WindowListener
 
     @Override
     public void dispose() {
-        saveWindowConfiguration();
+        WindowConfiguration.saveWindowConfiguration(this, getName());
         super.dispose();
     }
 
     public void showDialog() {
         pack();
-        WindowConfiguration winConfig = ApplicationConfiguration.getInstance().getWindowConfiguration(getName());
-        if (winConfig != null) {
-            setSize(winConfig.getWidth(), winConfig.getHeight());
-            this.setLocation(winConfig.getX(), winConfig.getY());
-        }
+        WindowConfiguration.restoreWindowConfiguration(this, getName());
         setVisible(true);
-    }
-
-    private void saveWindowConfiguration() {
-        WindowConfiguration config = new WindowConfiguration(getName());
-        config.setHeight(getHeight());
-        config.setWidth(getWidth());
-        config.setX(getX());
-        config.setY(getY());
-        ApplicationConfiguration.getInstance().addWindowConfiguration(config);
     }
 }

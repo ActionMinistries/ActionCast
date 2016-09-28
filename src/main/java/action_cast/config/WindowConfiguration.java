@@ -1,6 +1,9 @@
 package action_cast.config;
 
+import action_cast.view.INamedWindow;
+
 import javax.xml.bind.annotation.XmlID;
+import java.awt.*;
 
 /**
  * Created by bmichaud on 9/21/2016.
@@ -55,5 +58,35 @@ public class WindowConfiguration {
 
     public void setY(int y) {
         this.y = y;
+    }
+
+    public static void restoreWindowConfiguration(Window window, String name) {
+        WindowConfiguration mainConfig = ApplicationConfiguration.getInstance().getWindowConfiguration(name);
+        if (mainConfig != null) {
+            window.setSize(mainConfig.getWidth(), mainConfig.getHeight());
+            window.setLocation(mainConfig.getX(), mainConfig.getY());
+            if (!getVirtualBounds().contains(window.getBounds())) {
+               window.setLocation(0, 0);
+            }
+        }
+    }
+
+    public static void saveWindowConfiguration(Window window, String name) {
+        WindowConfiguration config = new WindowConfiguration(name);
+        config.setHeight(window.getHeight());
+        config.setWidth(window.getWidth());
+        config.setX(window.getX());
+        config.setY(window.getY());
+        ApplicationConfiguration.getInstance().addWindowConfiguration(config);
+    }
+
+    private static Rectangle getVirtualBounds() {
+        Rectangle bounds = new Rectangle(0, 0, 0, 0);
+        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        GraphicsDevice lstGDs[] = ge.getScreenDevices();
+        for (GraphicsDevice gd : lstGDs) {
+            bounds.add(gd.getDefaultConfiguration().getBounds());
+        }
+        return bounds;
     }
 }

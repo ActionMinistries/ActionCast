@@ -81,13 +81,10 @@ public class Main implements WindowListener, INamedWindow{
         frame.addWindowListener(main);
         frame.setContentPane(main.panel1);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        WindowConfiguration mainConfig = ApplicationConfiguration.getInstance().getWindowConfiguration(main.getName());
         frame.pack();
 
-        if (mainConfig != null) {
-            frame.setSize(mainConfig.getWidth(), mainConfig.getHeight());
-            frame.setLocation(mainConfig.getX(), mainConfig.getY());
-        }
+        WindowConfiguration.restoreWindowConfiguration(frame, main.getName());
+
         frame.setVisible(true);
     }
 
@@ -98,7 +95,7 @@ public class Main implements WindowListener, INamedWindow{
 
     @Override
     public void windowClosing(WindowEvent e) {
-        saveWindowConfiguration(e.getWindow());
+        WindowConfiguration.saveWindowConfiguration(e.getWindow(), getName());
         controller.save();
         try {
             configuration.save(ApplicationConfiguration.getConfigurationFilePath());
@@ -161,14 +158,5 @@ public class Main implements WindowListener, INamedWindow{
     @Override
     public String getName() {
         return "main";
-    }
-
-    private void saveWindowConfiguration(Window window) {
-        WindowConfiguration config = new WindowConfiguration(getName());
-        config.setHeight(window.getHeight());
-        config.setWidth(window.getWidth());
-        config.setX(window.getX());
-        config.setY(window.getY());
-        ApplicationConfiguration.getInstance().addWindowConfiguration(config);
     }
 }
