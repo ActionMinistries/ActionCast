@@ -10,8 +10,8 @@
         </windows>
         <windows>
             <id>action_cast.view.dialogs.RoleCreationDialog</id>
-            <height>165</height>
-            <width>260</width>
+            <height>245</height>
+            <width>350</width>
             <x>505</x>
             <y>250</y>
         </windows>
