@@ -1,7 +1,5 @@
 package action_cast.config;
 
-import action_cast.view.INamedWindow;
-
 import javax.xml.bind.annotation.XmlID;
 import java.awt.*;
 

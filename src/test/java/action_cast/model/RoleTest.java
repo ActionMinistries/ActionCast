@@ -16,7 +16,7 @@ public class RoleTest {
         String description = "partDescription";
         RoleType type = RoleType.MAIN;
 
-        Role role = new Role(-1, name, description, type, null);
+        Role role = new Role(-1, name, description, type, null, 0, 0, false);
         assertNotNull(role);
         assertEquals("partName", role.getName());
         assertEquals(RoleType.MAIN, role.getType());

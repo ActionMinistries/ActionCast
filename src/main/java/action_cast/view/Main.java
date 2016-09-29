@@ -52,12 +52,13 @@ public class Main implements WindowListener, INamedWindow{
         Song song = model.addSong("The First Song", "It goes like this na na na, na na, na na na na");
         Song run = model.addSong("I just wanna run", "");
 
-        song.addRole("mane chericter", "The main character", RoleType.MAIN);
-        song.addRole("syde chericter", "The main character's brother", RoleType.SUPPORT);
-        song.addRole("support", "support", RoleType.SUPPORT);
-        song.addRole("background", "who?", RoleType.BACKGROUND);
+        song.addRole("mane chericter", "The main character", RoleType.MAIN, 1, 1, false);
+        song.addRole("syde chericter", "The main character's brother", RoleType.SUPPORT, 1, 1, false);
+        song.addRole("support", "support", RoleType.SUPPORT, 2, 4, false);
+        song.addRole("background", "who?", RoleType.BACKGROUND, 1, 0, false);
+        song.addRole("optional", "optional", RoleType.BACKGROUND, 1, 0, true);
 
-        run.addRole("runner", "", RoleType.MAIN);
+        run.addRole("runner", "", RoleType.MAIN, 1, 1, false);
 
         model.getCurrentSession().addSong(song);
 

@@ -11,11 +11,18 @@ public class Role {
     private String description;
     private RoleType type;
 
-    public Role(int id, String name, String description, RoleType type) {
+    private int minAssignments;
+    private int maxAssignments;
+    private boolean optional;
+
+    public Role(int id, String name, String description, RoleType type, int min, int max, boolean optional) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.type = type;
+        this.minAssignments = min;
+        this.maxAssignments = max;
+        this.optional = optional;
     }
 
     public String getName() {
@@ -32,5 +39,29 @@ public class Role {
 
     public int getId() {
         return id;
+    }
+
+    public void setMaxAssignments(int maxAssignments) {
+        this.maxAssignments = maxAssignments;
+    }
+
+    public void setMinAssignments(int minAssignments) {
+        this.minAssignments = minAssignments;
+    }
+
+    public void setOptional(boolean optional) {
+        this.optional = optional;
+    }
+
+    public int getMaxAssignments() {
+        return maxAssignments;
+    }
+
+    public int getMinAssignments() {
+        return minAssignments;
+    }
+
+    public boolean isOptional() {
+        return optional;
     }
 }

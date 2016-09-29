@@ -170,23 +170,35 @@ public class Controller {
 
     public List<Role> getSongRoles(int id) throws InvalidIDException {
         action_cast.model.Song song = model.getSong(id);
-        return song.getRoles().stream().map(role -> new Role(role.getIndex(), role.getName(), role.getDescription(), role.getType())).collect(Collectors.toList());
+        return song.getRoles().stream().map(role -> new Role(role.getIndex(), role.getName(), role.getDescription(), role.getType(), role.getMinAssignments(), role.getMaxAssignments(), role.isOptional())).collect(Collectors.toList());
     }
 
     public List<action_cast.controller.ClientObjects.Role> getRoles(int songId) throws InvalidIDException {
 
-        return model.getSong(songId).getRoles().stream().map(role -> new action_cast.controller.ClientObjects.Role(role.getIndex(), role.getName(), role.getDescription(), role.getType())).collect(Collectors.toList());
+        return model.getSong(songId).getRoles().stream().map(role -> new action_cast.controller.ClientObjects.Role(role.getIndex(), role.getName(), role.getDescription(), role.getType(), role.getMinAssignments(), role.getMaxAssignments(), role.isOptional())).collect(Collectors.toList());
     }
 
-    public Role createRole(int songId, String name, String description, RoleType type) throws InvalidIDException {
-        action_cast.model.Role role = model.getSong(songId).addRole(name, description, type);
+    public Role createMainRole(int songId, String name, String description) throws InvalidIDException {
+        action_cast.model.Role role = model.getSong(songId).addRole(name, description, RoleType.MAIN, 1, 1, false);
         getEventBus().post(new SongsUpdateEvent());
-        return new Role(role.getIndex(), role.getName(), role.getDescription(), role.getType());
+        return new Role(role.getIndex(), role.getName(), role.getDescription(), role.getType(), role.getMinAssignments(), role.getMaxAssignments(), role.isOptional());
+    }
+
+    public Role createSupportRole(int songId, String name, String description, int minAssignments, int maxAssignments) throws InvalidIDException {
+        action_cast.model.Role role = model.getSong(songId).addRole(name, description, RoleType.SUPPORT, minAssignments, maxAssignments, false);
+        getEventBus().post(new SongsUpdateEvent());
+        return new Role(role.getIndex(), role.getName(), role.getDescription(), role.getType(), role.getMinAssignments(), role.getMaxAssignments(), role.isOptional());
+    }
+
+    public Role createBackgroundRole(int songId, String name, String description, int minAssignments, boolean optional) throws InvalidIDException {
+        action_cast.model.Role role = model.getSong(songId).addRole(name, description, RoleType.BACKGROUND, minAssignments, 0, optional);
+        getEventBus().post(new SongsUpdateEvent());
+        return new Role(role.getIndex(), role.getName(), role.getDescription(), role.getType(), role.getMinAssignments(), role.getMaxAssignments(), role.isOptional());
     }
 
     public Role getRole(int songId, int roleId) throws InvalidIDException {
         action_cast.model.Role role = model.getSong(songId).getRole(roleId);
-        return new Role(role.getIndex(), role.getName(), role.getDescription(), role.getType());
+        return new Role(role.getIndex(), role.getName(), role.getDescription(), role.getType(), role.getMinAssignments(), role.getMaxAssignments(), role.isOptional());
     }
 
     public List<action_cast.controller.ClientObjects.RoleAssignment> getRoleAssignmentsForSong(action_cast.controller.ClientObjects.Song song) throws InvalidIDException {

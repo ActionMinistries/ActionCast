@@ -29,7 +29,7 @@ public class SongCastTest {
         Song song = model.addSong("testSong", "with a test description");
         //List<Role> roles = new ArrayList<>();
         //roles.add(new Role("TestRole", "This is merely a test role", RoleType.SUPPORT));
-        song.addRole("TestRole", "This is merely a test role", RoleType.SUPPORT);
+        song.addRole("TestRole", "This is merely a test role", RoleType.SUPPORT, 1, 2, false);
         //model.getSong(song.getIndex()).setRoles(roles);
 
         SongCast songCast = new SongCast(-1, song);
