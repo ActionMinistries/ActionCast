@@ -67,6 +67,9 @@
           <xs:element name="description" type="xs:string" minOccurs="0"/>
           <xs:element name="type" type="roleType" minOccurs="0"/>
           <xs:element name="song" type="xs:IDREF" minOccurs="0"/>
+          <xs:element name="maxAssignments" type="xs:int"/>
+          <xs:element name="minAssignments" type="xs:int"/>
+          <xs:element name="optional" type="xs:boolean"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
