@@ -1,5 +1,7 @@
 package action_cast.model;
 
+import action_cast.model.exceptions.InvalidIDException;
+
 import javax.xml.bind.annotation.*;
 import java.util.*;
 
@@ -52,8 +54,24 @@ public class SongCast extends UniqueItem {
         return assignments;
     }
 
-    public RoleAssignment assign(Person performer, Role role, int roleAssignmentId) {
-        RoleAssignment roleAssignment;
+    public RoleAssignment assign(Person performer, Role role, int roleAssignmentId) throws InvalidIDException {
+        RoleAssignment roleAssignment = null;
+        for (RoleAssignment assignment : getAssignmentMap().get(role)) {
+            if (assignment.getIndex() == roleAssignmentId) {
+                assignment.setPerson(performer);
+                roleAssignment = assignment;
+                break;
+            }
+        }
+        if (roleAssignment == null) {
+            throw new InvalidIDException();
+        }
+        return roleAssignment;
+    }
+
+    public RoleAssignment assign(Person performer, Role role) throws InvalidIDException {
+        RoleAssignment roleAssignment = null;
+
         if (!getAssignmentMap().containsKey(role)) {
             List<RoleAssignment> assignmentList = new ArrayList<>();
             roleAssignment = new RoleAssignment(assignments.size(), performer, role, this);
@@ -63,17 +81,25 @@ public class SongCast extends UniqueItem {
             getAssignmentMap().put(role, assignmentList);
 
         } else {
-            if (performer == null) {
-                assignments.remove(getAssignmentMap().get(role));
-                getAssignmentMap().remove(role);
-                return null;
-            } else {
+            roleAssignment = new RoleAssignment(assignments.size(), performer, role, this);
 
-                getAssignmentMap().get(role).setPerson(performer);
+            assignments.add(roleAssignment);
+            getAssignmentMap().get(role).add(roleAssignment);
+        }
+        return roleAssignment;
+    }
+
+        public void unassign(int roleAssignmentId) {
+        RoleAssignment selected = null;
+        for (RoleAssignment assignment : assignments) {
+            if (assignment.getIndex() == roleAssignmentId) {
+                selected = assignment;
+                assignments.remove(assignment);
+                break;
             }
         }
 
-        return getAssignmentMap().get(role);
+        getAssignmentMap().remove(selected.getRole()).remove(selected);
     }
 
     public boolean isFullyCast() {

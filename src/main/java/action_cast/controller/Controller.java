@@ -1,11 +1,15 @@
 package action_cast.controller;
 
 import action_cast.controller.ClientObjects.*;
+import action_cast.controller.ClientObjects.Person;
+import action_cast.controller.ClientObjects.Role;
+import action_cast.controller.ClientObjects.RoleAssignment;
+import action_cast.controller.ClientObjects.Session;
+import action_cast.controller.ClientObjects.Song;
 import action_cast.controller.events.RoleAssignmentEvent;
 import action_cast.controller.events.SongsUpdateEvent;
 import action_cast.data_store.DataStore;
-import action_cast.model.DataModel;
-import action_cast.model.RoleType;
+import action_cast.model.*;
 import action_cast.model.exceptions.InvalidIDException;
 import com.google.common.eventbus.EventBus;
 
@@ -78,6 +82,12 @@ public class Controller {
             model.getCurrentSession().getSongCast(modelSong).assign(null, modelSong.getRole(role.getId()));
         }
         eventBus.post(new RoleAssignmentEvent());
+    }
+
+    public void unassign(Song song, RoleAssignment assignment) throws InvalidIDException {
+        action_cast.model.Song modelSong = model.getSong(song.getId());
+        SongCast modelSongCast = model.getCurrentSession().getSongCast(modelSong);
+        modelSongCast.unassign(assignment.getId());
     }
 
     public void addPerson(String name, String phoneNumber, String email) {
