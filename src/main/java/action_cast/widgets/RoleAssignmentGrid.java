@@ -4,6 +4,7 @@ import action_cast.controller.ClientObjects.Role;
 import action_cast.controller.ClientObjects.RoleAssignment;
 import action_cast.controller.ClientObjects.Song;
 import action_cast.controller.Controller;
+import action_cast.model.RoleType;
 import action_cast.model.exceptions.InvalidIDException;
 import action_cast.widgets.custom.JTileView;
 import action_cast.widgets.events.RoleAssignedEvent;
@@ -19,7 +20,7 @@ import java.util.List;
  */
 public class RoleAssignmentGrid extends JTileView<RoleTile> implements RoleAssignmentListener {
 
-    private HashMap<Integer, Integer> assignments = new HashMap<>();
+    private HashMap<Integer, RoleAssignment> assignments = new HashMap<>();
     private List<Role> roles = new ArrayList<>();
     private Controller controller;
     private Song song;
@@ -36,7 +37,7 @@ public class RoleAssignmentGrid extends JTileView<RoleTile> implements RoleAssig
             e.printStackTrace();
         }
         for (RoleAssignment roleAssignment : roleAssignments) {
-            assignments.put(roleAssignment.getRoleId(), roleAssignment.getPersonId());
+            assignments.put(roleAssignment.getRoleId(), roleAssignment);
         }
         try {
             roles = controller.getSongRoles(song.getId());
@@ -54,9 +55,9 @@ public class RoleAssignmentGrid extends JTileView<RoleTile> implements RoleAssig
 
                 RoleTile tile;
                 if (assignments.containsKey(role.getId())) {
-                        tile = new RoleTile(this, controller, controller.getPerson(assignments.get(role.getId())), role);
+                        tile = new RoleTile(this, controller, controller.getPerson(assignments.get(role.getId()).getPersonId()), role, assignments.get(role.getId()));
                 } else {
-                    tile = new RoleTile(this, controller, null, role);
+                    tile = new RoleTile(this, controller, null, role, null);
                 }
                 tile.addRoleAssignmentListener(this);
                 add(tile);
@@ -76,6 +77,14 @@ public class RoleAssignmentGrid extends JTileView<RoleTile> implements RoleAssig
             } catch (InvalidIDException e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    @Override
+    public void roleUnassigned(RoleAssignedEvent event) {
+        if (event.getSource() instanceof RoleTile) {
+            RoleTile source = (RoleTile) event.getSource();
+            controller.unassign(song, source.);
         }
     }
 

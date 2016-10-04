@@ -37,6 +37,6 @@ public class SongCastTest {
         RoleAssignment assignment = songCast.assign(randomGuy, model.getSong(song.getIndex()).getRoles().get(0));
         assertTrue(songCast.getAssignmentMap().containsKey(assignment.getRole()));
         assertEquals(assignment.getRole(), model.getSong(song.getIndex()).getRoles().get(0));
-        assertEquals(songCast.getAssignmentMap().get(assignment.getRole()).getPerson(), randomGuy);
+        assertEquals(songCast.getAssignmentMap().get(assignment.getRole()).get(0).getPerson(), randomGuy);
     }
 }

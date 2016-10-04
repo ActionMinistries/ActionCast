@@ -2,6 +2,7 @@ package action_cast.widgets.tiles;
 
 import action_cast.controller.ClientObjects.Person;
 import action_cast.controller.ClientObjects.Role;
+import action_cast.controller.ClientObjects.RoleAssignment;
 import action_cast.controller.Controller;
 import action_cast.controller.events.RoleAssignmentEvent;
 import action_cast.model.RoleType;
@@ -28,8 +29,9 @@ import java.util.List;
 public class RoleTile extends Tile {
 
     private final Controller controller;
-    Person person = null;
-    Role role;
+    private Person person = null;
+    private Role role;
+    private RoleAssignment roleAssignment = null;
 
     RoleTileBody lowerPanel;
 
@@ -37,7 +39,7 @@ public class RoleTile extends Tile {
 
     List<RoleAssignmentListener> listeners = new ArrayList<>();
 
-    public RoleTile(JTileView parent, Controller controller, Person person, Role role) {
+    public RoleTile(JTileView parent, Controller controller, Person person, Role role, RoleAssignment roleAssignment) {
         super(parent);
 //        GridBagConstraints headerConstraints = new GridBagConstraints(0, 0, this.getHeight()/3, this.getWidth()/3,
 //                1,
@@ -52,6 +54,7 @@ public class RoleTile extends Tile {
         this.controller = controller;
         this.person = person;
         this.role = role;
+        this.roleAssignment = roleAssignment;
         this.setTransferHandler(new PersonTransferHandler());
         //GridBagLayout layoutManager = new GridBagLayout();
         //setLayout(layoutManager);

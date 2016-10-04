@@ -11,4 +11,6 @@ public interface RoleAssignmentListener extends EventListener {
 
     void roleAssigned(RoleAssignedEvent event);
 
+    void roleUnassigned(RoleAssignedEvent event);
+
 }

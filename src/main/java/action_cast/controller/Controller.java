@@ -78,9 +78,10 @@ public class Controller {
         action_cast.model.Song modelSong = model.getSong(song.getId());
         if (person != null) {
             model.getCurrentSession().getSongCast(modelSong).assign(model.getPerson(person.getId()), modelSong.getRole(role.getId()));
-        } else {
-            model.getCurrentSession().getSongCast(modelSong).assign(null, modelSong.getRole(role.getId()));
         }
+//        else {
+//            model.getCurrentSession().getSongCast(modelSong).assign(null, modelSong.getRole(role.getId()));
+//        }
         eventBus.post(new RoleAssignmentEvent());
     }
 
