@@ -79,13 +79,21 @@ public class RoleTile extends Tile {
     public void assignPerson(Person p) {
         person = p;
         for (RoleAssignmentListener listener : listeners) {
-            listener.roleAssigned(new RoleAssignedEvent(this));
+            if (person != null) {
+                listener.roleAssigned(new RoleAssignedEvent(this));
+            } else {
+                listener.roleUnassigned(new RoleAssignedEvent(this));
+            }
         }
         updateDisplay();
     }
 
     public Person getAssignedPerson() {
         return person;
+    }
+
+    public RoleAssignment getRoleAssignment() {
+        return roleAssignment;
     }
 
     public Role getRole() {

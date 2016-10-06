@@ -16,7 +16,9 @@ public class SongCast extends UniqueItem {
     private Song song;
 
     @XmlTransient
-    private Map<Role, List<RoleAssignment>> assignmentMap;
+    private Map<Role, List<RoleAssignment>> assignmentMap = null;
+    @XmlTransient
+    private Map<Role, Integer> roleCountMap = null;
 
     @XmlElementWrapper
     private final HashSet<RoleAssignment> assignments = new HashSet<>();
@@ -38,16 +40,20 @@ public class SongCast extends UniqueItem {
         if (assignmentMap == null) {
             assignmentMap = new HashMap<>();
             for (RoleAssignment assignment : assignments) {
-                if (assignmentMap.containsKey(assignment.getRole())) {
-                    assignmentMap.get(assignment.getRole()).add(assignment);
-                } else {
-                    List<RoleAssignment> assignmentList = new ArrayList<>();
-                    assignmentList.add(assignment);
-                    assignmentMap.put(assignment.getRole(), assignmentList);
-                }
+                recordAssignment(assignment);
             }
         }
         return assignmentMap;
+    }
+
+    private Map<Role, Integer> getRoleCountMap() {
+        if (roleCountMap == null) {
+            roleCountMap = new HashMap<>();
+            for (Role role : song.getRoles()) {
+                roleCountMap.put(role, 0);
+            }
+        }
+        return roleCountMap;
     }
 
     public HashSet<RoleAssignment> getAssignments() {
@@ -70,36 +76,19 @@ public class SongCast extends UniqueItem {
     }
 
     public RoleAssignment assign(Person performer, Role role) throws InvalidIDException {
-        RoleAssignment roleAssignment = null;
-
-        if (!getAssignmentMap().containsKey(role)) {
-            List<RoleAssignment> assignmentList = new ArrayList<>();
-            roleAssignment = new RoleAssignment(assignments.size(), performer, role, this);
-            assignmentList.add(roleAssignment);
-
-            assignments.add(roleAssignment);
-            getAssignmentMap().put(role, assignmentList);
-
-        } else {
-            roleAssignment = new RoleAssignment(assignments.size(), performer, role, this);
-
-            assignments.add(roleAssignment);
-            getAssignmentMap().get(role).add(roleAssignment);
-        }
+        RoleAssignment roleAssignment = new RoleAssignment(assignments.size(), performer, role, this);
+        addAssignment(roleAssignment);
         return roleAssignment;
     }
 
-        public void unassign(int roleAssignmentId) {
-        RoleAssignment selected = null;
+    public void unassign(int roleAssignmentId) {
         for (RoleAssignment assignment : assignments) {
             if (assignment.getIndex() == roleAssignmentId) {
-                selected = assignment;
-                assignments.remove(assignment);
+                removeAssignment(assignment);
                 break;
             }
         }
 
-        getAssignmentMap().remove(selected.getRole()).remove(selected);
     }
 
     public boolean isFullyCast() {
@@ -109,5 +98,31 @@ public class SongCast extends UniqueItem {
             }
         }
         return true;
+    }
+
+    private void addAssignment(RoleAssignment assignment) {
+        recordAssignment(assignment);
+        assignments.add(assignment);
+    }
+
+    private void removeAssignment(RoleAssignment assignment) {
+        assignments.remove(assignment);
+        getAssignmentMap().remove(assignment.getRole()).remove(assignment);
+        getRoleCountMap().put(assignment.getRole(), roleCountMap.get(assignment.getRole()) - 1);
+    }
+
+    private void recordAssignment(RoleAssignment assignment) {
+        if (assignmentMap.containsKey(assignment.getRole())) {
+            assignmentMap.get(assignment.getRole()).add(assignment);
+        } else {
+            List<RoleAssignment> assignmentList = new ArrayList<>();
+            assignmentList.add(assignment);
+            assignmentMap.put(assignment.getRole(), assignmentList);
+        }
+        if (getRoleCountMap().containsKey(assignment.getRole())) {
+            getRoleCountMap().put(assignment.getRole(), getRoleCountMap().get(assignment.getRole()) + 1);
+        } else {
+            getRoleCountMap().put(assignment.getRole(), 1);
+        }
     }
 }

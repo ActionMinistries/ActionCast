@@ -84,7 +84,11 @@ public class RoleAssignmentGrid extends JTileView<RoleTile> implements RoleAssig
     public void roleUnassigned(RoleAssignedEvent event) {
         if (event.getSource() instanceof RoleTile) {
             RoleTile source = (RoleTile) event.getSource();
-            controller.unassign(song, source.);
+            try {
+                controller.unassign(song, source.getRoleAssignment());
+            } catch (InvalidIDException e) {
+                e.printStackTrace();
+            }
         }
     }
 

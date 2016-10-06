@@ -38,7 +38,7 @@ public class RoleTileView extends JTileView<RoleTile> {
                 e.printStackTrace();
             }
             for (Role role : roles) {
-                add(new RoleTile(this, controller, null, role));
+                add(new RoleTile(this, controller, null, role, null));
             }
             if (song != null) {
                 setCreationTile(new RoleCreationTile(this, controller, song));
