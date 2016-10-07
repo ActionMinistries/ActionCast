@@ -108,16 +108,16 @@ public class SongCast extends UniqueItem {
     private void removeAssignment(RoleAssignment assignment) {
         assignments.remove(assignment);
         getAssignmentMap().remove(assignment.getRole()).remove(assignment);
-        getRoleCountMap().put(assignment.getRole(), roleCountMap.get(assignment.getRole()) - 1);
+        getRoleCountMap().put(assignment.getRole(), getRoleCountMap().get(assignment.getRole()) - 1);
     }
 
     private void recordAssignment(RoleAssignment assignment) {
-        if (assignmentMap.containsKey(assignment.getRole())) {
-            assignmentMap.get(assignment.getRole()).add(assignment);
+        if (getAssignmentMap().containsKey(assignment.getRole())) {
+            getAssignmentMap().get(assignment.getRole()).add(assignment);
         } else {
             List<RoleAssignment> assignmentList = new ArrayList<>();
             assignmentList.add(assignment);
-            assignmentMap.put(assignment.getRole(), assignmentList);
+            getAssignmentMap().put(assignment.getRole(), assignmentList);
         }
         if (getRoleCountMap().containsKey(assignment.getRole())) {
             getRoleCountMap().put(assignment.getRole(), getRoleCountMap().get(assignment.getRole()) + 1);
