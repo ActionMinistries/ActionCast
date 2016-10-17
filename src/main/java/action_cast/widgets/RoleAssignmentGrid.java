@@ -2,9 +2,9 @@ package action_cast.widgets;
 
 import action_cast.controller.ClientObjects.Role;
 import action_cast.controller.ClientObjects.RoleAssignment;
+import action_cast.controller.ClientObjects.CastingSlot;
 import action_cast.controller.ClientObjects.Song;
 import action_cast.controller.Controller;
-import action_cast.model.RoleType;
 import action_cast.model.exceptions.InvalidIDException;
 import action_cast.widgets.custom.JTileView;
 import action_cast.widgets.events.RoleAssignedEvent;
@@ -20,8 +20,9 @@ import java.util.List;
  */
 public class RoleAssignmentGrid extends JTileView<RoleTile> implements RoleAssignmentListener {
 
-    private HashMap<Integer, RoleAssignment> assignments = new HashMap<>();
-    private List<Role> roles = new ArrayList<>();
+    private List<CastingSlot> castingSlots;
+    //private HashMap<Integer, RoleAssignment> assignments = new HashMap<>();
+    //private List<Role> roles = new ArrayList<>();
     private Controller controller;
     private Song song;
 
@@ -29,7 +30,8 @@ public class RoleAssignmentGrid extends JTileView<RoleTile> implements RoleAssig
      //   this.assignments = assignments;
         this.song = song;
         this.controller = controller;
-        assignments.clear();
+        //assignments.clear();
+        castingSlots = null;
         List<RoleAssignment> roleAssignments = null;
         try {
             roleAssignments = controller.getRoleAssignmentsForSong(song);
