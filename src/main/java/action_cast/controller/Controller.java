@@ -1,6 +1,5 @@
 package action_cast.controller;
 
-import action_cast.controller.ClientObjects.*;
 import action_cast.controller.ClientObjects.Person;
 import action_cast.controller.ClientObjects.Role;
 import action_cast.controller.ClientObjects.RoleAssignment;
