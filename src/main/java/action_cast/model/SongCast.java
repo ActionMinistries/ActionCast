@@ -20,7 +20,7 @@ public class SongCast extends UniqueItem {
     @XmlTransient
     private Map<Role, Integer> roleCountMap = null;
 
-    @XmlElementWrapper
+    @XmlElementWrapper (nillable = true)
     private final HashSet<RoleAssignment> assignments = new HashSet<>();
 
     private SongCast() {
@@ -89,6 +89,10 @@ public class SongCast extends UniqueItem {
             }
         }
 
+    }
+
+    public boolean isRoleFilled(Role role) {
+        return assignmentMap.containsKey(role) && role.getType() != RoleType.BACKGROUND && assignmentMap.get(role).size() >= role.getMaxAssignments();
     }
 
     public boolean isFullyCast() {

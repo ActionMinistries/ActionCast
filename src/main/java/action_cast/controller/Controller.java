@@ -215,6 +215,10 @@ public class Controller {
         return model.getCurrentSession().getSongCast(model.getSong(song.getId())).getAssignments().stream().map(assignment -> new RoleAssignment(assignment.getIndex(), assignment.getPerson().getIndex(), assignment.getRole().getIndex())).collect(Collectors.toList());
     }
 
+    public boolean isRoleFilled(Song song, Role role) throws InvalidIDException {
+        return model.getCurrentSession().getSongCast(model.getSong(song.getId())).isRoleFilled(model.getSong(song.getId()).getRole(role.getId()));
+    }
+
     /*
     *   SESSION
     *

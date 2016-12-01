@@ -31,18 +31,24 @@ public class RoleAssignmentGrid extends JTileView<RoleTile> implements RoleAssig
         this.song = song;
         this.controller = controller;
         //assignments.clear();
-        castingSlots = null;
-        List<RoleAssignment> roleAssignments = null;
+        castingSlots = new ArrayList<>();
+        List<RoleAssignment> roleAssignments = new ArrayList<>();
         try {
             roleAssignments = controller.getRoleAssignmentsForSong(song);
         } catch (InvalidIDException e) {
             e.printStackTrace();
         }
         for (RoleAssignment roleAssignment : roleAssignments) {
-            assignments.put(roleAssignment.getRoleId(), roleAssignment);
+            castingSlots.add(new CastingSlot(roleAssignment));
+            //assignments.put(roleAssignment.getRoleId(), roleAssignment);
         }
         try {
-            roles = controller.getSongRoles(song.getId());
+            List<Role> roles = controller.getSongRoles(song.getId());
+            for(Role role : roles) {
+                if (!controller.isRoleFilled(song, role)) {
+                    castingSlots.add(new CastingSlot(role));
+                }
+            }
         } catch (InvalidIDException e) {
             e.printStackTrace();
         }
@@ -52,14 +58,14 @@ public class RoleAssignmentGrid extends JTileView<RoleTile> implements RoleAssig
     public void updateDisplay() {
         removeAll();
 
-        for(Role role : roles) {
+        for(CastingSlot slot : castingSlots) {
             try {
 
                 RoleTile tile;
-                if (assignments.containsKey(role.getId())) {
-                        tile = new RoleTile(this, controller, controller.getPerson(assignments.get(role.getId()).getPersonId()), role, assignments.get(role.getId()));
+                if (slot.getRoleAssignment() != null) {
+                        tile = new RoleTile(this, controller, controller.getPerson(slot.getRoleAssignment().getPersonId()), controller.getRole(song.getId(), slot.getRoleAssignment().getRoleId()), slot.getRoleAssignment());
                 } else {
-                    tile = new RoleTile(this, controller, null, role, null);
+                    tile = new RoleTile(this, controller, null, slot.getRole(), null);
                 }
                 tile.addRoleAssignmentListener(this);
                 add(tile);
@@ -76,6 +82,9 @@ public class RoleAssignmentGrid extends JTileView<RoleTile> implements RoleAssig
             RoleTile source = (RoleTile)event.getSource();
             try {
                 controller.assignPersonToRole(source.getAssignedPerson(), source.getRole(), song);
+                if (!controller.isRoleFilled(song, source.getRole())) {
+                    castingSlots.add(new CastingSlot(source.getRole()));
+                }
             } catch (InvalidIDException e) {
                 e.printStackTrace();
             }
@@ -87,6 +96,9 @@ public class RoleAssignmentGrid extends JTileView<RoleTile> implements RoleAssig
         if (event.getSource() instanceof RoleTile) {
             RoleTile source = (RoleTile) event.getSource();
             try {
+                if (controller.isRoleFilled(song, source.getRole())) {
+
+                }
                 controller.unassign(song, source.getRoleAssignment());
             } catch (InvalidIDException e) {
                 e.printStackTrace();
