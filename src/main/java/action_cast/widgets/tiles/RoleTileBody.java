@@ -38,10 +38,6 @@ public class RoleTileBody extends JPanel {
         this.setLayout(new GridBagLayout());
         parent = tile;
 
-        //this.setBorder(new LineBorder(Color.green, 2));
-        //profileImageDisplay.setBorder(new LineBorder(Color.red, 2));
-        //name.setBorder(new LineBorder(Color.orange, 2));
-
         addProfileImage();
         addRoleTypeCountLabels();
         addNameLabel();

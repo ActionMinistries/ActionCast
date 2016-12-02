@@ -1,36 +1,32 @@
 package action_cast.widgets;
 
+import action_cast.controller.ClientObjects.CastingSlot;
 import action_cast.controller.ClientObjects.Role;
 import action_cast.controller.ClientObjects.RoleAssignment;
-import action_cast.controller.ClientObjects.CastingSlot;
 import action_cast.controller.ClientObjects.Song;
 import action_cast.controller.Controller;
 import action_cast.model.exceptions.InvalidIDException;
 import action_cast.widgets.custom.JTileView;
 import action_cast.widgets.events.RoleAssignedEvent;
-import action_cast.widgets.listeners.RoleAssignmentListener;
+import action_cast.widgets.events.RoleUnassignedEvent;
 import action_cast.widgets.tiles.RoleTile;
+import com.google.common.eventbus.Subscribe;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 /**
  * Created by bmichaud on 12/14/2015.
  */
-public class RoleAssignmentGrid extends JTileView<RoleTile> implements RoleAssignmentListener {
+public class RoleAssignmentGrid extends JTileView<RoleTile> {
 
     private List<CastingSlot> castingSlots;
-    //private HashMap<Integer, RoleAssignment> assignments = new HashMap<>();
-    //private List<Role> roles = new ArrayList<>();
     private Controller controller;
     private Song song;
 
     public void setData(Controller controller, Song song) {
-     //   this.assignments = assignments;
         this.song = song;
         this.controller = controller;
-        //assignments.clear();
         castingSlots = new ArrayList<>();
         List<RoleAssignment> roleAssignments = new ArrayList<>();
         try {
@@ -40,7 +36,6 @@ public class RoleAssignmentGrid extends JTileView<RoleTile> implements RoleAssig
         }
         for (RoleAssignment roleAssignment : roleAssignments) {
             castingSlots.add(new CastingSlot(roleAssignment));
-            //assignments.put(roleAssignment.getRoleId(), roleAssignment);
         }
         try {
             List<Role> roles = controller.getSongRoles(song.getId());
@@ -67,7 +62,6 @@ public class RoleAssignmentGrid extends JTileView<RoleTile> implements RoleAssig
                 } else {
                     tile = new RoleTile(this, controller, null, slot.getRole(), null);
                 }
-                tile.addRoleAssignmentListener(this);
                 add(tile);
             } catch (InvalidIDException e) {
                 e.printStackTrace();
@@ -76,33 +70,28 @@ public class RoleAssignmentGrid extends JTileView<RoleTile> implements RoleAssig
         updateUI();
     }
 
-    @Override
+    @Subscribe
     public void roleAssigned(RoleAssignedEvent event) {
-        if (event.getSource() instanceof RoleTile) {
-            RoleTile source = (RoleTile)event.getSource();
-            try {
-                controller.assignPersonToRole(source.getAssignedPerson(), source.getRole(), song);
-                if (!controller.isRoleFilled(song, source.getRole())) {
-                    castingSlots.add(new CastingSlot(source.getRole()));
-                }
-            } catch (InvalidIDException e) {
-                e.printStackTrace();
+        try {
+            controller.assignPersonToRole(event.getPerson(), event.getRole(), song);
+            if (!controller.isRoleFilled(song, event.getRole())) {
+                castingSlots.add(new CastingSlot(event.getRole()));
             }
+        } catch (InvalidIDException e) {
+            e.printStackTrace();
         }
+        updateDisplay();
     }
 
-    @Override
-    public void roleUnassigned(RoleAssignedEvent event) {
-        if (event.getSource() instanceof RoleTile) {
-            RoleTile source = (RoleTile) event.getSource();
-            try {
-                if (controller.isRoleFilled(song, source.getRole())) {
+    @Subscribe
+    public void roleUnassigned(RoleUnassignedEvent event) {
+        try {
+            if (controller.isRoleFilled(song, controller.getRole(song.getId(), event.getRoleAssignment().getRoleId()))) {
 
-                }
-                controller.unassign(song, source.getRoleAssignment());
-            } catch (InvalidIDException e) {
-                e.printStackTrace();
             }
+            controller.unassign(song, event.getRoleAssignment());
+        } catch (InvalidIDException e) {
+            e.printStackTrace();
         }
     }
 
