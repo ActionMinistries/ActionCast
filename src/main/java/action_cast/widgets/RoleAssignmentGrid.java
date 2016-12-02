@@ -27,6 +27,7 @@ public class RoleAssignmentGrid extends JTileView<RoleTile> {
     public void setData(Controller controller, Song song) {
         this.song = song;
         this.controller = controller;
+        controller.getEventBus().register(this);
         castingSlots = new ArrayList<>();
         List<RoleAssignment> roleAssignments = new ArrayList<>();
         try {

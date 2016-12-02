@@ -52,7 +52,7 @@ public class RoleTile extends Tile {
         if (person != null) {
             controller.getEventBus().post(new RoleAssignedEvent(person, role));
         } else {
-            controller.getEventBus().post(new RoleUnassignedEvent(role));
+            controller.getEventBus().post(new RoleUnassignedEvent(roleAssignment));
         }
         updateDisplay();
     }
