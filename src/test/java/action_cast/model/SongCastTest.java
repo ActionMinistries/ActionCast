@@ -39,4 +39,22 @@ public class SongCastTest {
         assertEquals(assignment.getRole(), model.getSong(song.getIndex()).getRoles().get(0));
         assertEquals(songCast.getAssignmentMap().get(assignment.getRole()).get(0).getPerson(), randomGuy);
     }
+
+    @Test
+    public void testRemoveAssignment() throws InvalidIDException {
+        DataModel model = new DataModel();
+
+        Song song = model.addSong("testSong", "with a test description");
+        //List<Role> roles = new ArrayList<>();
+        //roles.add(new Role("TestRole", "This is merely a test role", RoleType.SUPPORT));
+        song.addRole("TestRole", "This is merely a test role", RoleType.SUPPORT, 1, 2, false);
+        //model.getSong(song.getIndex()).setRoles(roles);
+
+        SongCast songCast = new SongCast(-1, song);
+        Person randomGuy = new Person(-1, "randomGuy", "", "");
+        RoleAssignment assignment = songCast.assign(randomGuy, model.getSong(song.getIndex()).getRoles().get(0));
+        assertTrue(songCast.getAssignmentMap().containsKey(assignment.getRole()));
+        assertEquals(assignment.getRole(), model.getSong(song.getIndex()).getRoles().get(0));
+        assertEquals(songCast.getAssignmentMap().get(assignment.getRole()).get(0).getPerson(), randomGuy);
+    }
 }
