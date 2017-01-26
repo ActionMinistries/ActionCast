@@ -14,6 +14,7 @@ import com.google.common.eventbus.Subscribe;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by bmichaud on 12/14/2015.
@@ -28,6 +29,11 @@ public class RoleAssignmentGrid extends JTileView<RoleTile> {
         this.song = song;
         this.controller = controller;
         controller.getEventBus().register(this);
+        updateDisplay();
+    }
+
+    public void updateDisplay() {
+        removeAll();
         castingSlots = new ArrayList<>();
         List<RoleAssignment> roleAssignments = new ArrayList<>();
         try {
@@ -35,9 +41,7 @@ public class RoleAssignmentGrid extends JTileView<RoleTile> {
         } catch (InvalidIDException e) {
             e.printStackTrace();
         }
-        for (RoleAssignment roleAssignment : roleAssignments) {
-            castingSlots.add(new CastingSlot(roleAssignment));
-        }
+        castingSlots.addAll(roleAssignments.stream().map(CastingSlot::new).collect(Collectors.toList()));
         try {
             List<Role> roles = controller.getSongRoles(song.getId());
             for(Role role : roles) {
@@ -48,12 +52,6 @@ public class RoleAssignmentGrid extends JTileView<RoleTile> {
         } catch (InvalidIDException e) {
             e.printStackTrace();
         }
-        updateDisplay();
-    }
-
-    public void updateDisplay() {
-        removeAll();
-
         for(CastingSlot slot : castingSlots) {
             try {
 
