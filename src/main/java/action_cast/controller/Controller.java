@@ -6,6 +6,7 @@ import action_cast.controller.ClientObjects.RoleAssignment;
 import action_cast.controller.ClientObjects.Session;
 import action_cast.controller.ClientObjects.Song;
 import action_cast.controller.events.RoleAssignmentEvent;
+import action_cast.controller.events.RoleCreationEvent;
 import action_cast.controller.events.SongsUpdateEvent;
 import action_cast.data_store.DataStore;
 import action_cast.model.*;
@@ -190,19 +191,19 @@ public class Controller {
 
     public Role createMainRole(int songId, String name, String description) throws InvalidIDException {
         action_cast.model.Role role = model.getSong(songId).addRole(name, description, RoleType.MAIN, 1, 1, false);
-        getEventBus().post(new SongsUpdateEvent());
+        getEventBus().post(new RoleCreationEvent());
         return new Role(role.getIndex(), role.getName(), role.getDescription(), role.getType(), role.getMinAssignments(), role.getMaxAssignments(), role.isOptional());
     }
 
     public Role createSupportRole(int songId, String name, String description, int minAssignments, int maxAssignments) throws InvalidIDException {
         action_cast.model.Role role = model.getSong(songId).addRole(name, description, RoleType.SUPPORT, minAssignments, maxAssignments, false);
-        getEventBus().post(new SongsUpdateEvent());
+        getEventBus().post(new RoleCreationEvent());
         return new Role(role.getIndex(), role.getName(), role.getDescription(), role.getType(), role.getMinAssignments(), role.getMaxAssignments(), role.isOptional());
     }
 
     public Role createBackgroundRole(int songId, String name, String description, int minAssignments, boolean optional) throws InvalidIDException {
         action_cast.model.Role role = model.getSong(songId).addRole(name, description, RoleType.BACKGROUND, minAssignments, 0, optional);
-        getEventBus().post(new SongsUpdateEvent());
+        getEventBus().post(new RoleCreationEvent());
         return new Role(role.getIndex(), role.getName(), role.getDescription(), role.getType(), role.getMinAssignments(), role.getMaxAssignments(), role.isOptional());
     }
 

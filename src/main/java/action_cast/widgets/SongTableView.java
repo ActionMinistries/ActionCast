@@ -2,6 +2,7 @@ package action_cast.widgets;
 
 import action_cast.controller.ClientObjects.Song;
 import action_cast.controller.Controller;
+import action_cast.controller.events.RoleCreationEvent;
 import action_cast.controller.events.SongsUpdateEvent;
 import action_cast.model.exceptions.InvalidIDException;
 import action_cast.view.EditSessionSong;
@@ -86,6 +87,11 @@ public class SongTableView extends DisplayTable implements MouseListener {
 
     @Subscribe
     public void handleSongChanges(SongsUpdateEvent event) {
+        updateDisplay();
+    }
+
+    @Subscribe
+    public void handleRoleCreation(RoleCreationEvent event) {
         updateDisplay();
     }
 
