@@ -72,7 +72,9 @@ public abstract class Tile extends JPanel implements MouseMotionListener {
     public void mouseDragged(MouseEvent e) {
         JComponent c = (JComponent) e.getSource();
         TransferHandler handler = c.getTransferHandler();
-        handler.exportAsDrag(c, e, TransferHandler.MOVE);
+        if (handler != null) {
+            handler.exportAsDrag(c, e, TransferHandler.MOVE);
+        }
     }
 
     @Override
