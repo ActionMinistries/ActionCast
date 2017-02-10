@@ -16,9 +16,8 @@ public class Song extends UniqueItem {
     private String name;
     @XmlElement
     private String description;
-    @XmlElementWrapper
+    @XmlElementWrapper (nillable = true)
     private final List<Role> roles = new ArrayList<>();
-    private Role role;
 
     private Song() {
 
@@ -40,10 +39,6 @@ public class Song extends UniqueItem {
         return description;
     }
 
-//    public void setRoles(List<Role> roles) {
-//        this.roles = roles;
-//    }
-
     public Role addRole(String name, String description, RoleType type, int minAssignments, int maxAssignments, boolean optional) {
         roles.add(new Role(roles.size(), name, description, type, this, minAssignments, maxAssignments, optional));
         return roles.get(roles.size()-1);
@@ -55,6 +50,10 @@ public class Song extends UniqueItem {
 
     public Role getRole(int roleID) {
         return roles.get(roleID);
+    }
+
+    public void deleteRole(int roleID) {
+        roles.remove(roleID);
     }
 
     public void setDescription(String description) {

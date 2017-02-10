@@ -47,7 +47,7 @@
         <xs:sequence>
           <xs:element name="name" type="xs:string" minOccurs="0"/>
           <xs:element name="description" type="xs:string" minOccurs="0"/>
-          <xs:element name="roles" minOccurs="0">
+          <xs:element name="roles" nillable="true" minOccurs="0">
             <xs:complexType>
               <xs:sequence>
                 <xs:element name="roles" type="role" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
@@ -107,7 +107,7 @@
       <xs:extension base="uniqueItem">
         <xs:sequence>
           <xs:element name="song" type="xs:IDREF" minOccurs="0"/>
-          <xs:element name="assignments" minOccurs="0">
+          <xs:element name="assignments" nillable="true" minOccurs="0">
             <xs:complexType>
               <xs:sequence>
                 <xs:element name="assignments" type="roleAssignment" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
